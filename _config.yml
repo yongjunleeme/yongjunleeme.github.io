@@ -1,6 +1,6 @@
 # Site settings
 title: 기계인간 John Grib
-url: "https://yongjunleeme.github.io"
+url: "https://johngrib.github.io"
 baseurl: ""
 description: >
     기계인간 블로그
@@ -17,7 +17,6 @@ comment-support: utterances
 plugins:
   - jekyll-paginate
   - jekyll-gist
-  
 
 permalink: /blog/:year/:month/:day/:title/
 
