@@ -2,8 +2,8 @@
 layout  : wiki
 title   : 2019년 독서록
 summary : 
-date    : 2020-01-04 
-updated : 2020-01-04 
+date    : 2020-01-04 00:00:00 +0900
+updated : 2020-01-07 23:26:26 +0900
 tag     : book
 toc     : true
 public  : true
