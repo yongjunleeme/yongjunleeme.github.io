@@ -1,8 +1,864 @@
+math:
+    - {fileName: 17-EQUATIONS-THAT-CHANGED-THE-WORLD}
+    - {fileName: Binomial-Theorem}
+    - {fileName: c-m-01-Recurrent-Problems-01}
+    - {fileName: c-m-01-Recurrent-Problems-02}
+    - {fileName: c-m-01-Recurrent-Problems-03}
+    - {fileName: c-m-01-Recurrent-Problems-Exercises}
+    - {fileName: c-m-02-Sums-01}
+    - {fileName: c-m-02-Sums-02}
+    - {fileName: c-m-02-Sums-03}
+    - {fileName: c-m-02-Sums-04}
+    - {fileName: c-m-02-Sums-05}
+    - {fileName: c-m-02-Sums-06}
+    - {fileName: c-m-02-Sums-07}
+    - {fileName: c-m-02-Sums-Exercises}
+    - {fileName: c-m-03-Integer-Functions-01}
+    - {fileName: c-m-03-Integer-Functions-02}
+    - {fileName: c-m-05-Binomial-Coefficients-04}
+    - {fileName: Cromwell-s-rule}
+    - {fileName: discrete-math-functions}
+    - {fileName: discrete-math-inference-rules}
+    - {fileName: discrete-math-linear-congruences}
+    - {fileName: discrete-math-matrices}
+    - {fileName: discrete-math-modular}
+    - {fileName: discrete-math-proofs}
+    - {fileName: discrete-math-propositional-logic}
+    - {fileName: discrete-math-quantifiers}
+    - {fileName: discrete-math-sequences}
+    - {fileName: discrete-math-sets}
+    - {fileName: discrete-math-summations}
+    - {fileName: Fermat-s-little-theorem}
+    - {fileName: fibonacci}
+    - {fileName: frac1e}
+    - {fileName: gcd}
+    - {fileName: graph}
+    - {fileName: math}
+    - {fileName: mathdict}
+    - {fileName: p-np}
+    - {fileName: primitive-roots}
+    - {fileName: relations}
+    - {fileName: rule-of-succession}
+    - {fileName: secretary-problem}
+    - {fileName: study-concrete-math}
+    - {fileName: study-discrete-mathematics}
+    - {fileName: tower-of-hanoi}
+    - {fileName: two-eggs-100-floor}
+jekyll:
+    - {fileName: 2017-01-21-create-jekyll-blog}
+    - {fileName: 2017-01-22-jekyll-category-tag}
+    - {fileName: my-wiki}
+    - {fileName: rouge-supported-languages}
+ideavim:
+    - {fileName: 2017-01-30-ideavim-build}
+open-source:
+    - {fileName: 2017-01-30-ideavim-build}
+jetBrains:
+    - {fileName: 2017-01-30-ideavim-build}
+intelliJ:
+    - {fileName: 2017-01-30-ideavim-build}
+삽질:
+    - {fileName: 2017-01-30-ideavim-build}
+node-js:
+    - {fileName: 2017-03-12-telegram-bot}
+telegram:
+    - {fileName: 2017-03-12-telegram-bot}
+heroku:
+    - {fileName: 2017-03-12-telegram-bot}
+chatbot:
+    - {fileName: 2017-03-12-telegram-bot}
+bot:
+    - {fileName: 2017-03-12-telegram-bot}
+study:
+    - {fileName: 2017-04-02-jwp-00-prepare}
+    - {fileName: 2017-04-03-jwp-01}
+    - {fileName: 2017-04-08-jwp-02}
+    - {fileName: 2017-04-10-jwp-03}
+    - {fileName: 2017-04-13-jwp-04}
+    - {fileName: 2017-04-17-jwp-05}
+    - {fileName: 2017-04-20-jwp-06}
+    - {fileName: 2017-04-25-jwp-07}
+    - {fileName: 2017-05-01-jwp-08}
+    - {fileName: 2017-05-09-jwp-09}
+    - {fileName: 2017-05-14-jwp-10}
+    - {fileName: 2017-05-16-jwp-11}
+    - {fileName: 2017-05-20-jwp-12}
+    - {fileName: 2017-05-23-jwp-13}
+    - {fileName: 2017-05-27-jwp-14}
+    - {fileName: 2017-05-29-jwp-15}
+    - {fileName: 2017-06-01-jwp-16}
+    - {fileName: grow-together}
+    - {fileName: my-mac-os-terminal}
+    - {fileName: my-study-method}
+    - {fileName: study}
+jwp:
+    - {fileName: 2017-04-02-jwp-00-prepare}
+    - {fileName: 2017-04-03-jwp-01}
+    - {fileName: 2017-04-08-jwp-02}
+    - {fileName: 2017-04-10-jwp-03}
+    - {fileName: 2017-04-13-jwp-04}
+    - {fileName: 2017-04-17-jwp-05}
+    - {fileName: 2017-04-20-jwp-06}
+    - {fileName: 2017-04-25-jwp-07}
+    - {fileName: 2017-05-01-jwp-08}
+    - {fileName: 2017-05-09-jwp-09}
+    - {fileName: 2017-05-14-jwp-10}
+    - {fileName: 2017-05-16-jwp-11}
+    - {fileName: 2017-05-20-jwp-12}
+    - {fileName: 2017-05-23-jwp-13}
+    - {fileName: 2017-05-27-jwp-14}
+    - {fileName: 2017-05-29-jwp-15}
+    - {fileName: 2017-06-01-jwp-16}
+aws:
+    - {fileName: 2017-04-02-jwp-00-prepare}
+    - {fileName: Amazon-Route-53}
+    - {fileName: aws}
+    - {fileName: AWS-Auto-Scaling}
+    - {fileName: billing-aws}
+    - {fileName: CodeDeploy}
+    - {fileName: Elastic-Load-Balancing}
+emacs:
+    - {fileName: 2017-04-03-emacs-start}
+evil:
+    - {fileName: 2017-04-03-emacs-start}
+소트웍스-앤솔러지:
+    - {fileName: 2017-04-08-jwp-02}
+Martin-Fowler:
+    - {fileName: 2017-04-08-jwp-02}
+OOP:
+    - {fileName: 2017-04-08-jwp-02}
+개발자:
+    - {fileName: 2017-04-10-jwp-03}
+프로그래밍-심리학:
+    - {fileName: 2017-04-10-jwp-03}
+Gerald-Weinberg:
+    - {fileName: 2017-04-10-jwp-03}
+    - {fileName: Edsel-edict}
+    - {fileName: gerald-weinberg-language-king}
+    - {fileName: orange-juice-test}
+    - {fileName: secret-of-consulting}
+AWS:
+    - {fileName: 2017-04-13-jwp-04}
+vim:
+    - {fileName: 2017-05-04-input-source}
+    - {fileName: 2017-07-09-vim-game-code-break}
+    - {fileName: config-ideavim}
+    - {fileName: ctags}
+    - {fileName: my-mac-os-terminal}
+    - {fileName: start-rust-with-vim}
+    - {fileName: two-views-of-vim}
+    - {fileName: ultisnips}
+    - {fileName: Vim}
+    - {fileName: vim-auto-completion}
+    - {fileName: vim-coc}
+    - {fileName: vim-conceallevel}
+    - {fileName: vim-f-hangul}
+    - {fileName: vim-go-auto-import}
+    - {fileName: vim-go-env}
+    - {fileName: vim-go-with-ultisnips}
+    - {fileName: vim-persistent-undo}
+    - {fileName: vim-rest-console}
+    - {fileName: vim-tagbar-with-markdown}
+    - {fileName: vim-tmux-t-ut}
+    - {fileName: vim-update-book-progress}
+    - {fileName: vim-with-space-char}
+    - {fileName: vim-ycm-python3}
+    - {fileName: vimium}
+    - {fileName: vimwiki}
+구름입력기:
+    - {fileName: 2017-05-04-input-source}
+hammerspoon:
+    - {fileName: 2017-05-04-input-source}
+    - {fileName: hammerspoon}
+    - {fileName: hammerspoon-inputsource-aurora}
+    - {fileName: hammerspoon-luarocks}
+    - {fileName: hammerspoon-tutorial-00}
+    - {fileName: hammerspoon-tutorial-01}
+    - {fileName: hammerspoon-tutorial-02}
+    - {fileName: hammerspoon-tutorial-03}
+    - {fileName: hammerspoon-tutorial-04}
+    - {fileName: hammerspoon-tutorial-05}
+karabiner:
+    - {fileName: 2017-05-04-input-source}
+input-source:
+    - {fileName: 2017-05-04-input-source}
+mockito:
+    - {fileName: 2017-05-16-jwp-11}
+DI:
+    - {fileName: 2017-05-16-jwp-11}
+game:
+    - {fileName: 2017-07-09-vim-game-code-break}
+    - {fileName: TETRIS-EFFECT}
+aheui:
+    - {fileName: 2017-07-14-aheui-explained}
+TIL:
+    - {fileName: 2017-08-23-0.30000000000000004}
+design-pattern:
+    - {fileName: abstract-factory-pattern}
+    - {fileName: adapter-pattern}
+    - {fileName: builder-pattern}
+    - {fileName: decorator-pattern}
+    - {fileName: factory-method-pattern}
+    - {fileName: GoF-Design-Pattern}
+    - {fileName: null-object-pattern}
+    - {fileName: observer-pattern}
+    - {fileName: static-factory-method-pattern}
+    - {fileName: strategy-pattern}
+    - {fileName: template-method-pattern}
+db:
+    - {fileName: ACID}
+    - {fileName: b-tree}
+    - {fileName: locking}
+    - {fileName: sharding}
+    - {fileName: sql-char-comparison}
+bash:
+    - {fileName: ag}
+    - {fileName: basename}
+    - {fileName: bash-history}
+    - {fileName: bat-cmd}
+    - {fileName: bc}
+    - {fileName: brew}
+    - {fileName: cal}
+    - {fileName: csplit}
+    - {fileName: ctags}
+    - {fileName: curl}
+    - {fileName: cut}
+    - {fileName: date-cmd}
+    - {fileName: df}
+    - {fileName: diff}
+    - {fileName: docker}
+    - {fileName: du}
+    - {fileName: fc}
+    - {fileName: fd-cmd}
+    - {fileName: find}
+    - {fileName: fortune-cmd}
+    - {fileName: git-alias}
+    - {fileName: gpg}
+    - {fileName: grep}
+    - {fileName: java_home}
+    - {fileName: lsof}
+    - {fileName: my-bash-cheatsheet}
+    - {fileName: openssl}
+    - {fileName: pwgen-cmd}
+    - {fileName: random-lunch}
+    - {fileName: rig-cmd}
+    - {fileName: ripgrep}
+    - {fileName: sdkman}
+    - {fileName: sed}
+    - {fileName: sha256sum}
+    - {fileName: sort}
+    - {fileName: strfile-cmd}
+    - {fileName: sw_vers-cmd}
+    - {fileName: tail}
+    - {fileName: top}
+    - {fileName: touch}
+    - {fileName: tr-cmd}
+    - {fileName: uptime}
+    - {fileName: yes}
+    - {fileName: ykman}
+command:
+    - {fileName: ag}
+    - {fileName: awk}
+    - {fileName: basename}
+    - {fileName: bash-history}
+    - {fileName: bat-cmd}
+    - {fileName: bc}
+    - {fileName: brew}
+    - {fileName: cal}
+    - {fileName: composer}
+    - {fileName: csplit}
+    - {fileName: ctags}
+    - {fileName: curl}
+    - {fileName: cut}
+    - {fileName: date-cmd}
+    - {fileName: df}
+    - {fileName: diff}
+    - {fileName: docker}
+    - {fileName: du}
+    - {fileName: fc}
+    - {fileName: fd-cmd}
+    - {fileName: find}
+    - {fileName: fortune-cmd}
+    - {fileName: git}
+    - {fileName: gpg}
+    - {fileName: grep}
+    - {fileName: java_home}
+    - {fileName: lsof}
+    - {fileName: openssl}
+    - {fileName: phpbrew}
+    - {fileName: pwgen-cmd}
+    - {fileName: rig-cmd}
+    - {fileName: ripgrep}
+    - {fileName: say}
+    - {fileName: sdkman}
+    - {fileName: sed}
+    - {fileName: sha256sum}
+    - {fileName: sort}
+    - {fileName: strfile-cmd}
+    - {fileName: sw_vers-cmd}
+    - {fileName: tail}
+    - {fileName: top}
+    - {fileName: touch}
+    - {fileName: tr-cmd}
+    - {fileName: uptime}
+    - {fileName: yes}
+    - {fileName: ykman}
+agile:
+    - {fileName: agile}
+    - {fileName: grow-together}
+    - {fileName: kanban-scrum}
+    - {fileName: Tompson-s-rule-for-first-time-telescope-makers}
+complexity:
+    - {fileName: airplain-rule}
+law:
+    - {fileName: airplain-rule}
+    - {fileName: Brooks-s-law}
+    - {fileName: Conway-s-law}
+    - {fileName: Lubarsky-s-Law-of-Cybernetic-Entomology}
+    - {fileName: Postel-s-law}
+    - {fileName: Zipf-s-law}
+algorithm:
+    - {fileName: algorithm}
+    - {fileName: average-complexity}
+    - {fileName: big-O-notation}
+    - {fileName: gray-code}
+book:
+    - {fileName: Algorithms-to-Live-By}
+    - {fileName: book}
+    - {fileName: book-log-2019}
+    - {fileName: book-log-2020}
+    - {fileName: Clean-Code}
+    - {fileName: Code-Complete-2}
+    - {fileName: CONCRETE-MATH}
+    - {fileName: Design-for-Hackers}
+    - {fileName: Effective-Java}
+    - {fileName: Geek-Atlas}
+    - {fileName: GoF-Design-Pattern}
+    - {fileName: HTTP-THE-DEFINITIVE-GUIDE}
+    - {fileName: Mythical-Man-Month}
+    - {fileName: PROFESSIONAL-SOFTWARE-DEVELOPMENT}
+    - {fileName: SCIENTIFIC-AMERICAN-The-Secrets-Of-Consciousness}
+    - {fileName: The-Jargon-File}
+algirithm:
+    - {fileName: Algorithms-to-Live-By}
+devops:
+    - {fileName: Amazon-Route-53}
+    - {fileName: AWS-Auto-Scaling}
+    - {fileName: Elastic-Load-Balancing}
+    - {fileName: vagrant-docker-get-start}
+network:
+    - {fileName: bandwidth}
+    - {fileName: IP}
+    - {fileName: latency}
+    - {fileName: osi-model}
+    - {fileName: port}
+performance:
+    - {fileName: bandwidth}
+    - {fileName: latency}
+    - {fileName: use-java-primitive-type-for-performance}
+bayes:
+    - {fileName: Bayes-theorem}
+    - {fileName: cookie-problem}
+    - {fileName: Copernican-Principle}
+    - {fileName: dice-problem}
+    - {fileName: euro-problem}
+    - {fileName: locomotive-problem}
+    - {fileName: MnM-problem}
+    - {fileName: Monty-Hall-problem}
+    - {fileName: Oliver-s-blood}
+    - {fileName: rule-of-succession}
+    - {fileName: study-think-bayes}
+    - {fileName: Think-Bayes}
+story:
+    - {fileName: Bill-Atkinson-productivity}
+    - {fileName: gerald-weinberg-language-king}
+    - {fileName: Grote-Reber-home-made-radio-astronomy}
+    - {fileName: James-Gosling-super-programmer}
+    - {fileName: John-W-Backus}
+    - {fileName: Las-chicas-del-cable}
+    - {fileName: legend}
+Bill-Atkinson:
+    - {fileName: Bill-Atkinson-productivity}
+Steve-Jobs:
+    - {fileName: Bill-Atkinson-productivity}
+money:
+    - {fileName: billing-aws}
+rule:
+    - {fileName: Boy-Scout-Rule}
+    - {fileName: Tompson-s-rule-for-first-time-telescope-makers}
+Uncle-Bob:
+    - {fileName: Boy-Scout-Rule}
+    - {fileName: Clean-Code}
+special-chars:
+    - {fileName: braille-pattern-chars}
+    - {fileName: special-chars}
+mac:
+    - {fileName: brew}
+    - {fileName: java_home}
+    - {fileName: mac-keyboard-shortcuts}
+Fred-Brooks:
+    - {fileName: Brooks-s-law}
+    - {fileName: Mythical-Man-Month}
+    - {fileName: No-Silver-Bullet}
+programming:
+    - {fileName: builder-pattern}
+    - {fileName: Java}
+    - {fileName: programming-language}
+    - {fileName: static-factory-method-pattern}
+lombok:
+    - {fileName: builder-pattern}
+effective-java:
+    - {fileName: builder-pattern}
+    - {fileName: Effective-Java}
+    - {fileName: static-factory-method-pattern}
+encryption:
+    - {fileName: Caesar-cipher}
+    - {fileName: encryption}
+    - {fileName: gpg}
+    - {fileName: Kerckhoffs-s-principle}
+    - {fileName: openssl}
+    - {fileName: pwgen-cmd}
+    - {fileName: rsa-encryption}
+    - {fileName: sha256sum}
+스크랩:
+    - {fileName: clipping}
+tldr:
+    - {fileName: clipping}
+jolt-award:
+    - {fileName: Code-Complete-2}
+font:
+    - {fileName: coding-font}
+config:
+    - {fileName: coding-font}
+linux:
+    - {fileName: command-line}
+command-line:
+    - {fileName: command-line}
+golang:
+    - {fileName: commit-go-mod-go-sum}
+    - {fileName: ctags}
+    - {fileName: ginkgo}
+    - {fileName: Go-Blog-translation}
+    - {fileName: Golang}
+    - {fileName: golang-cheatsheet}
+    - {fileName: golang-debugging-what-you-deploy}
+    - {fileName: golang-dependency-manager}
+    - {fileName: golang-mod}
+    - {fileName: golang-reflect}
+    - {fileName: golang-struct-padding}
+    - {fileName: golang-subtests}
+    - {fileName: golang-the-laws-of-reflection}
+    - {fileName: golang-types}
+    - {fileName: vim-go-auto-import}
+    - {fileName: vim-go-env}
+    - {fileName: vim-go-with-ultisnips}
+git:
+    - {fileName: commit-go-mod-go-sum}
+    - {fileName: git}
+    - {fileName: git-alias}
+    - {fileName: git-checkout-specific-files}
+    - {fileName: git-log}
+    - {fileName: githud}
+php:
+    - {fileName: composer}
+    - {fileName: email-validation}
+    - {fileName: php}
+    - {fileName: phpbrew}
+computer-science:
+    - {fileName: Computer-Science-Distilled}
+proverb:
+    - {fileName: Conway-s-law}
+    - {fileName: Edsel-edict}
+    - {fileName: Lubarsky-s-Law-of-Cybernetic-Entomology}
+    - {fileName: Naming-Principle}
+    - {fileName: No-Silver-Bullet}
+    - {fileName: orange-juice-test}
+    - {fileName: Postel-s-law}
+    - {fileName: proverb}
+Think-Bayes:
+    - {fileName: cookie-problem}
+    - {fileName: dice-problem}
+    - {fileName: euro-problem}
+    - {fileName: locomotive-problem}
+    - {fileName: MnM-problem}
+    - {fileName: Monty-Hall-problem}
+    - {fileName: Oliver-s-blood}
+    - {fileName: Think-Bayes}
+추정:
+    - {fileName: Copernican-Principle}
+history:
+    - {fileName: Cromwell-s-rule}
+    - {fileName: geacron}
+    - {fileName: TETRIS-EFFECT}
+ctags:
+    - {fileName: ctags}
+design:
+    - {fileName: Design-for-Hackers}
+pattern:
+    - {fileName: design-pattern-quotes}
+quotes:
+    - {fileName: design-pattern-quotes}
+diary:
+    - {fileName: diary}
+container:
+    - {fileName: docker}
+java:
+    - {fileName: Effective-Java}
+    - {fileName: groupId-artifactId}
+    - {fileName: Java}
+    - {fileName: java_home}
+    - {fileName: java-abstract-class}
+    - {fileName: java-enhancements}
+    - {fileName: java-enum}
+    - {fileName: java-g1gc}
+    - {fileName: java-gc-eden-to-survivor}
+    - {fileName: java-gc-parallel-collector}
+    - {fileName: java-gc-serial-collector}
+    - {fileName: java-gc-tuning}
+    - {fileName: java-gc-zgc}
+    - {fileName: java-interface}
+    - {fileName: java-jigsaw-quick-start}
+    - {fileName: java-remainder-operator}
+    - {fileName: java-switch-expression}
+    - {fileName: java10-var}
+    - {fileName: java8}
+    - {fileName: java8-performance-improvement-for-hashmap}
+    - {fileName: java8-why-permgen-removed}
+    - {fileName: jdk13}
+    - {fileName: junit5-nested}
+    - {fileName: jvm}
+    - {fileName: jvm-memory}
+    - {fileName: jvm-stack}
+    - {fileName: Object-equals}
+    - {fileName: Object-hashCode}
+    - {fileName: Object-toString}
+    - {fileName: private-constructor}
+    - {fileName: spring-versions}
+    - {fileName: summary-The-Pauseless-GC-Algorithm}
+    - {fileName: use-java-primitive-type-for-performance}
+email:
+    - {fileName: email-validation}
+regex:
+    - {fileName: email-validation}
+    - {fileName: regex-prime}
+blockchain:
+    - {fileName: ethereum-white-paper}
+ms:
+    - {fileName: Excel}
+excel:
+    - {fileName: excel-hot-keys}
+    - {fileName: excel-remove-circular-reference}
+    - {fileName: excel-sumifs}
+    - {fileName: excel-transpos}
+    - {fileName: excel-vba-setting}
+hotkey:
+    - {fileName: excel-hot-keys}
+vba:
+    - {fileName: excel-transpos}
+    - {fileName: excel-vba-setting}
+cs:
+    - {fileName: f-l-a-00-preface}
+    - {fileName: f-l-a-01-00}
+    - {fileName: f-l-a-01-01}
+    - {fileName: f-l-a-01-02}
+    - {fileName: f-l-a-02-01}
+    - {fileName: f-l-a-02-02}
+    - {fileName: f-l-a-02-03}
+    - {fileName: f-l-a-02-04}
+    - {fileName: f-l-a-03-01}
+    - {fileName: f-l-a-03-02}
+    - {fileName: halting-problem}
+    - {fileName: p-np}
+    - {fileName: study-formal-languages-and-automata}
+tools:
+    - {fileName: fine-dust}
+    - {fileName: labs-strava-com-heatmap}
+    - {fileName: tools}
+    - {fileName: utterances}
+미세먼지:
+    - {fileName: fine-dust}
+fish:
+    - {fileName: fish-shell}
+terminal:
+    - {fileName: fish-shell}
+    - {fileName: my-mac-os-terminal}
+    - {fileName: tmux-c-dash}
+binary:
+    - {fileName: floating-point}
+    - {fileName: gray-code}
+확률:
+    - {fileName: frac1e}
+    - {fileName: rule-of-succession}
+gc:
+    - {fileName: garbage-collection}
+    - {fileName: gc-death-spiral}
+    - {fileName: java-g1gc}
+    - {fileName: java-gc-eden-to-survivor}
+    - {fileName: java-gc-parallel-collector}
+    - {fileName: java-gc-serial-collector}
+    - {fileName: java-gc-tuning}
+    - {fileName: java-gc-zgc}
+    - {fileName: summary-The-Pauseless-GC-Algorithm}
+map:
+    - {fileName: geacron}
+    - {fileName: Geek-Atlas}
+    - {fileName: labs-strava-com-heatmap}
+o-reilly:
+    - {fileName: Geek-Atlas}
+science:
+    - {fileName: Geek-Atlas}
+    - {fileName: Grote-Reber-home-made-radio-astronomy}
+    - {fileName: SCIENTIFIC-AMERICAN-The-Secrets-Of-Consciousness}
+test:
+    - {fileName: ginkgo}
+    - {fileName: junit5-nested}
+    - {fileName: test-double}
+fzf:
+    - {fileName: git-alias}
+til:
+    - {fileName: git-checkout-specific-files}
+    - {fileName: til}
+번역:
+    - {fileName: Go-Blog-translation}
+    - {fileName: golang-debugging-what-you-deploy}
+    - {fileName: golang-mod}
+    - {fileName: golang-subtests}
+    - {fileName: golang-the-laws-of-reflection}
+    - {fileName: java-jigsaw-quick-start}
+    - {fileName: java-remainder-operator}
+    - {fileName: King-O-The-Cats}
+    - {fileName: mathdict}
+    - {fileName: Object-equals}
+    - {fileName: Object-hashCode}
+    - {fileName: Object-toString}
+    - {fileName: Software-Engineering-Code-of-Ethics}
+    - {fileName: THE-NEXT-BIG-BLUE-COLLAR-JOB-IS-CODING}
+the-go-blog:
+    - {fileName: Go-Blog-translation}
+    - {fileName: golang-debugging-what-you-deploy}
+    - {fileName: golang-mod}
+    - {fileName: golang-subtests}
+    - {fileName: golang-the-laws-of-reflection}
+language:
+    - {fileName: Golang}
+    - {fileName: Groovy}
+    - {fileName: Java}
+    - {fileName: programming-language}
+    - {fileName: Python3}
+    - {fileName: rust}
+cheatsheet:
+    - {fileName: golang-cheatsheet}
+reflect:
+    - {fileName: golang-reflect}
+padding:
+    - {fileName: golang-struct-padding}
+alignment:
+    - {fileName: golang-struct-padding}
+testing:
+    - {fileName: golang-subtests}
+reflection:
+    - {fileName: golang-the-laws-of-reflection}
+type:
+    - {fileName: golang-types}
+gloang:
+    - {fileName: golang-waitgroup-add}
+goroutine:
+    - {fileName: golang-waitgroup-add}
+google:
+    - {fileName: google-search-console-remove-outdated-content}
+    - {fileName: googling}
+twitter:
+    - {fileName: googling}
+    - {fileName: labs-strava-com-heatmap}
+facebook:
+    - {fileName: googling}
+GNU:
+    - {fileName: gpg}
+gradle:
+    - {fileName: Gradle}
+tool:
+    - {fileName: Gradle}
+jvm-lang:
+    - {fileName: Groovy}
+groovy:
+    - {fileName: Groovy}
+lua:
+    - {fileName: hammerspoon-luarocks}
+keyboard:
+    - {fileName: hhkb-jp-tmk}
+    - {fileName: my-keyboard}
+how-to:
+    - {fileName: how-to}
+http:
+    - {fileName: http}
+    - {fileName: HTTP-THE-DEFINITIVE-GUIDE}
+    - {fileName: httpbin.org}
+    - {fileName: URI}
+    - {fileName: vim-rest-console}
+    - {fileName: why-http-80-https-443}
+James-Gosling:
+    - {fileName: James-Gosling-super-programmer}
+von-neumann:
+    - {fileName: John-von-Neumann}
+sort:
+    - {fileName: John-von-Neumann}
+    - {fileName: sort}
+보안:
+    - {fileName: labs-strava-com-heatmap}
+letter:
+    - {fileName: letter-case}
+case:
+    - {fileName: letter-case}
+transaction:
+    - {fileName: locking}
+bug:
+    - {fileName: Lubarsky-s-Law-of-Cybernetic-Entomology}
+단축키:
+    - {fileName: mac-keyboard-shortcuts}
+latex:
+    - {fileName: mathjax-latex}
+media:
+    - {fileName: media}
 wiki:
     - {fileName: my-wiki}
+    - {fileName: vimwiki}
 vimwiki:
-    - {fileName: my-wiki}
-jekyll:
     - {fileName: my-wiki}
 blog:
     - {fileName: my-wiki}
+    - {fileName: utterances}
+principle:
+    - {fileName: Naming-Principle}
+naming:
+    - {fileName: Naming-Principle}
+소수:
+    - {fileName: Object-hashCode}
+oop:
+    - {fileName: OOP-to-me-Alan-Kay}
+    - {fileName: SOLID}
+    - {fileName: summary-Data-Abstraction-and-Hierarchy}
+soft-skill:
+    - {fileName: orange-juice-test}
+    - {fileName: Take-the-Bully-by-the-Horns}
+방법론:
+    - {fileName: persona}
+health:
+    - {fileName: preserve-brain}
+tip:
+    - {fileName: private-constructor}
+    - {fileName: use-java-primitive-type-for-performance}
+culture:
+    - {fileName: proverb}
+python:
+    - {fileName: python3-simple-file-sharing}
+    - {fileName: vim-ycm-python3}
+ip:
+    - {fileName: python3-simple-file-sharing}
+curl:
+    - {fileName: python3-simple-file-sharing}
+perl:
+    - {fileName: regex-prime}
+web:
+    - {fileName: REST-paper-summary}
+review:
+    - {fileName: review}
+    - {fileName: review-2017}
+    - {fileName: review-2018}
+    - {fileName: review-2019}
+    - {fileName: review-2020}
+    - {fileName: secret-of-consulting}
+    - {fileName: Shunsho-juwa}
+    - {fileName: Software-Craftsman}
+    - {fileName: Take-the-Bully-by-the-Horns}
+    - {fileName: TETRIS-EFFECT}
+rfc:
+    - {fileName: RFC}
+    - {fileName: why-http-80-https-443}
+github:
+    - {fileName: rouge-supported-languages}
+    - {fileName: utterances}
+sf:
+    - {fileName: Schrodinger-s-goyang-Hee}
+consulting:
+    - {fileName: secret-of-consulting}
+교육:
+    - {fileName: Shunsho-juwa}
+장인정신:
+    - {fileName: Software-Craftsman}
+괴담:
+    - {fileName: Software-Craftsman}
+ACM:
+    - {fileName: Software-Engineering-Code-of-Ethics}
+IEEE:
+    - {fileName: Software-Engineering-Code-of-Ethics}
+ethics:
+    - {fileName: Software-Engineering-Code-of-Ethics}
+spring:
+    - {fileName: spring}
+    - {fileName: spring-bean-config-configuration}
+    - {fileName: spring-bean-config-xml}
+    - {fileName: spring-ioc}
+xml:
+    - {fileName: spring-bean-config-configuration}
+    - {fileName: spring-bean-config-xml}
+rust:
+    - {fileName: start-rust-with-vim}
+hacker:
+    - {fileName: The-Jargon-File}
+trouble-shooting:
+    - {fileName: til}
+    - {fileName: trouble-shooting-node-7-install}
+    - {fileName: vim-conceallevel}
+tmux:
+    - {fileName: tmux-c-dash}
+    - {fileName: vim-tmux-t-ut}
+toml:
+    - {fileName: TOML}
+data-format:
+    - {fileName: TOML}
+    - {fileName: YAML}
+completion:
+    - {fileName: ultisnips}
+    - {fileName: vim-auto-completion}
+unit:
+    - {fileName: units}
+vagrant:
+    - {fileName: vagrant-docker-get-start}
+docker:
+    - {fileName: vagrant-docker-get-start}
+centos:
+    - {fileName: vagrant-docker-get-start}
+ubuntu:
+    - {fileName: vagrant-docker-get-start}
+vm:
+    - {fileName: vagrant-docker-get-start}
+plugin:
+    - {fileName: vim-f-hangul}
+ultisnips:
+    - {fileName: vim-go-with-ultisnips}
+tagbar:
+    - {fileName: vim-tagbar-with-markdown}
+markdown:
+    - {fileName: vim-tagbar-with-markdown}
+fix:
+    - {fileName: vim-tmux-t-ut}
+awk:
+    - {fileName: vim-update-book-progress}
+chrome:
+    - {fileName: vimium}
+firefox:
+    - {fileName: vimium}
+Von-Neumann:
+    - {fileName: von-neumann-extractor}
+random:
+    - {fileName: von-neumann-extractor}
+what:
+    - {fileName: what}
+why:
+    - {fileName: why}
+yaml:
+    - {fileName: YAML}
+공부:
+    - {fileName: You-and-Your-Research}
+stat:
+    - {fileName: Zipf-s-law}

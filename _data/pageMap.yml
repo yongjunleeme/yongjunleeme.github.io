@@ -22,14 +22,6 @@
     url: /blog/2017/01/30/ideavim-build
     updated: '2017-01-30 21:22:53 +0900'
     children: []
-2017-03-08-til-indent-style:
-    type: blog
-    title: '중괄호 인덴트 스타일을 조사해 보았다.'
-    summary: 'K&R style, Allman style.'
-    parent: null
-    url: /blog/2017/03/08/til-indent-style
-    updated: '2017-03-08 23:00:00 +0900'
-    children: []
 2017-03-12-telegram-bot:
     type: blog
     title: '텔레그램 봇 스켈레톤 만들기.'
@@ -37,22 +29,6 @@
     parent: null
     url: /blog/2017/03/12/telegram-bot
     updated: '2017-03-12 21:08:16 +0900'
-    children: []
-2017-03-13-uri-url:
-    type: blog
-    title: 'URI와 URL 의미가 헷갈려서 조사해 보았다.'
-    summary: '"결론: URL은 URI의 부분집합."'
-    parent: null
-    url: /blog/2017/03/13/uri-url
-    updated: '2017-03-13 21:30:46 +0900'
-    children: []
-2017-03-27-tmux-ascii-control:
-    type: blog
-    title: 'tmux 키 조합에서 C--가 불가능한 이유.'
-    summary: '"결론: ascii 코드값 때문."'
-    parent: null
-    url: /blog/2017/03/27/tmux-ascii-control
-    updated: '2017-03-27 22:57:52 +0900'
     children: []
 2017-04-02-jwp-00-prepare:
     type: blog
@@ -69,14 +45,6 @@
     parent: null
     url: /blog/2017/04/03/emacs-start
     updated: '2017-04-03 16:33:24 +0900'
-    children: []
-2017-04-03-vim-tmux-t-ut:
-    type: blog
-    title: 'tmux vim에서 나타나는 배경색 번짐 문제 해결'
-    summary: '"`set t_ut=`로 한 방에 해결"'
-    parent: null
-    url: /blog/2017/04/03/vim-tmux-t-ut
-    updated: '2017-04-03 07:33:49 +0900'
     children: []
 2017-04-03-jwp-01:
     type: blog
@@ -158,14 +126,6 @@
     url: /blog/2017/05/09/jwp-09
     updated: '2017-05-09 10:45:58 +0900'
     children: []
-2017-05-14-hhkb-jp-tmk:
-    type: blog
-    title: 'HHKB jp 컨트롤 보드를 tmk로 교체해 보았다.'
-    summary: '해피해킹을 더욱 해피하게'
-    parent: null
-    url: /blog/2017/05/14/hhkb-jp-tmk
-    updated: '2017-05-14 15:50:31 +0900'
-    children: []
 2017-05-14-jwp-10:
     type: blog
     title: 'Next JWP Study 10'
@@ -238,62 +198,6 @@
     url: /blog/2017/07/14/aheui-explained
     updated: '2017-07-14 23:00:17 +0900'
     children: []
-2017-07-30-luarocks:
-    type: blog
-    title: 'luarocks로 Hammerspoon 패키지 관리하기'
-    summary: '유한락스가 아니라 루아락스로 깨끗하게'
-    parent: null
-    url: /blog/2017/07/30/luarocks
-    updated: '2017-07-30 16:32:25 +0900'
-    children: []
-2017-07-31-hammerspoon-tutorial-00-start:
-    type: blog
-    title: 'Hammerspoon 튜토리얼 00 - 시작하기'
-    summary: '일단 맥이 있어야 한다'
-    parent: null
-    url: /blog/2017/07/31/hammerspoon-tutorial-00-start
-    updated: '2017-07-31 21:57:27 +0900'
-    children: []
-2017-08-01-hammerspoon-tutorial-01:
-    type: blog
-    title: 'Hammerspoon 튜토리얼 01 - 윈도우 힌트와 이동'
-    summary: '윈도우즈에는 있으나 맥에는 없는 그것'
-    parent: null
-    url: /blog/2017/08/01/hammerspoon-tutorial-01
-    updated: '2017-08-01 22:47:08 +0900'
-    children: []
-2017-08-04-hammerspoon-tutorial-02:
-    type: blog
-    title: 'Hammerspoon 튜토리얼 02 - 클립보드 확장 기능을 만들어 봅시다'
-    summary: '복붙을 편하게!'
-    parent: null
-    url: /blog/2017/08/04/hammerspoon-tutorial-02
-    updated: '2017-08-04 21:32:22 +0900'
-    children: []
-2017-08-05-hammerspoon-tutorial-03:
-    type: blog
-    title: 'Hammerspoon 튜토리얼 03 - 한영 전환 키를 만들어 봅시다'
-    summary: 'Esc - 영문전환도 만들어 봅시다'
-    parent: null
-    url: /blog/2017/08/05/hammerspoon-tutorial-03
-    updated: '2017-08-05 12:11:00 +0900'
-    children: []
-2017-08-06-hammerspoon-tutorial-04:
-    type: blog
-    title: 'Hammerspoon 튜토리얼 04 - 웹뷰와 urlevent 기능을 사용해 봅시다'
-    summary: '결론은 터미널'
-    parent: null
-    url: /blog/2017/08/06/hammerspoon-tutorial-04
-    updated: '2017-08-06 13:35:00 +0900'
-    children: []
-2017-08-07-hammerspoon-tutorial-05:
-    type: blog
-    title: 'Hammerspoon 튜토리얼 05 - chooser를 사용해 봅시다'
-    summary: '클립보드 히스토리도 만들어 봅시다'
-    parent: null
-    url: /blog/2017/08/07/hammerspoon-tutorial-05
-    updated: '2017-08-07 09:33:00 +0900'
-    children: []
 2017-08-23-0.30000000000000004:
     type: blog
     title: '0.1 + 0.2 == 0.30000000000000004'
@@ -302,21 +206,1373 @@
     url: /blog/2017/08/23/0.30000000000000004
     updated: '2017-08-23 18:15:32 +0900'
     children: []
-2017-09-20-regex-prime:
-    type: blog
-    title: '소수를 판별하는 정규식'
-    summary: '1진법을 사용해 소수를 판별하자!'
-    parent: null
-    url: /blog/2017/09/20/regex-prime
-    updated: '2017-09-20 20:56:55 +0900'
+17-EQUATIONS-THAT-CHANGED-THE-WORLD:
+    type: wiki
+    title: '(책) 세계를 바꾼 17가지 방정식'
+    summary: '쉽고 재미있는, 훌륭한 교양 수학책'
+    parent: book
+    url: /wiki/17-EQUATIONS-THAT-CHANGED-THE-WORLD
+    updated: '2018-04-18 20:44:02 +0900'
     children: []
-2018-02-26-sql-char-comparison:
-    type: blog
-    title: 'MySQL에서 ''a'' = ''a ''가 true로 평가된다?'
-    summary: 'DB알못의 어떤 리서치'
-    parent: null
-    url: /blog/2018/02/26/sql-char-comparison
-    updated: '2018-02-26 21:09:03 +0900'
+20-percent-project:
+    type: wiki
+    title: '20% project'
+    summary: ""
+    parent: index
+    url: /wiki/20-percent-project
+    updated: '2019-12-30 23:50:20 +0900'
+    children: []
+abbr:
+    type: wiki
+    title: '약어 모음'
+    summary: ""
+    parent: index
+    url: /wiki/abbr
+    updated: '2019-10-16 21:45:10 +0900'
+    children: []
+abstract-factory-pattern:
+    type: wiki
+    title: '추상 팩토리 패턴 (Abstract Factory Pattern)'
+    summary: '서로 관련성이 있는 다양한 객체를 생성하기 위한 인터페이스를 제공한다'
+    parent: design-pattern
+    url: /wiki/abstract-factory-pattern
+    updated: '2019-10-24 12:19:51 +0900'
+    children: []
+ACID:
+    type: wiki
+    title: ACID
+    summary: '트랜잭션의 중요한 네 가지 속성'
+    parent: proverb
+    url: /wiki/ACID
+    updated: '2019-10-03 22:36:29 +0900'
+    children: []
+adapter-pattern:
+    type: wiki
+    title: '어댑터 패턴 (Adapter Pattern)'
+    summary: '서로 일치하지 않는 인터페이스를 가진 클래스를 함께 동작시킨다'
+    parent: design-pattern
+    url: /wiki/adapter-pattern
+    updated: '2019-10-29 15:20:41 +0900'
+    children: []
+ag:
+    type: wiki
+    title: ag
+    summary: 'the silver searcher'
+    parent: command-line
+    url: /wiki/ag
+    updated: '2019-11-29 14:02:44 +0900'
+    children: []
+agile:
+    type: wiki
+    title: '애자일(agile)에 대한 토막글 모음'
+    summary: ""
+    parent: what
+    url: /wiki/agile
+    updated: '2020-01-02 20:16:01 +0900'
+    children: []
+airplain-rule:
+    type: wiki
+    title: '비행기 법칙'
+    summary: '복잡성은 실패할 확률을 높인다'
+    parent: proverb
+    url: /wiki/airplain-rule
+    updated: '2017-12-25 13:07:43 +0900'
+    children: []
+algorithm:
+    type: wiki
+    title: 알고리즘
+    summary: null
+    parent: index
+    url: /wiki/algorithm
+    updated: '2019-02-05 22:53:48 +0900'
+    children: [average-complexity, b-tree, big-O-notation, egyptian-multiplication, p-np, regex-prime, tower-of-hanoi, von-neumann-extractor]
+Algorithms-to-Live-By:
+    type: wiki
+    title: '(책) 알고리즘, 인생을 계산하다'
+    summary: null
+    parent: book
+    url: /wiki/Algorithms-to-Live-By
+    updated: '2018-04-12 12:30:46 +0900'
+    children: []
+Amazon-Route-53:
+    type: wiki
+    title: 'Amazon Route 53'
+    summary: ""
+    parent: aws
+    url: /wiki/Amazon-Route-53
+    updated: '2019-11-18 21:31:29 +0900'
+    children: []
+availability:
+    type: wiki
+    title: 가용성(Availability)
+    summary: '시스템이 다운되지 않고 정상 운영되는 시간의 비율'
+    parent: what
+    url: /wiki/availability
+    updated: '2019-10-18 11:13:30 +0900'
+    children: []
+average-complexity:
+    type: wiki
+    title: '평균 계산 복잡도 구하기'
+    summary: 'Average Case Computational Complexity'
+    parent: algorithm
+    url: /wiki/average-complexity
+    updated: '2019-05-27 14:08:24 +0900'
+    children: []
+awk:
+    type: wiki
+    title: awk
+    summary: 'pattern-directed scanning and processing language'
+    parent: programming-language
+    url: /wiki/awk
+    updated: '2019-12-01 08:04:20 +0900'
+    children: []
+aws:
+    type: wiki
+    title: AWS
+    summary: 'Amazon Web Services 관련'
+    parent: tools
+    url: /wiki/aws
+    updated: '2018-09-16 09:35:54 +0900'
+    children: [Amazon-Route-53, AWS-Auto-Scaling, billing-aws, CodeDeploy, Elastic-Load-Balancing]
+AWS-Auto-Scaling:
+    type: wiki
+    title: 'AWS Auto Scaling'
+    summary: ""
+    parent: aws
+    url: /wiki/AWS-Auto-Scaling
+    updated: '2018-09-16 22:06:33 +0900'
+    children: []
+b-tree:
+    type: wiki
+    title: B-Tree
+    summary: '보편적인 색인 구조'
+    parent: algorithm
+    url: /wiki/b-tree
+    updated: '2019-10-16 11:06:49 +0900'
+    children: []
+bandwidth:
+    type: wiki
+    title: 대역폭(Bandwidth)
+    summary: '단위 시간 동안 전달 가능한 최대 데이터 양'
+    parent: what
+    url: /wiki/bandwidth
+    updated: '2019-07-09 16:35:19 +0900'
+    children: []
+basename:
+    type: wiki
+    title: 'basename 명령어'
+    summary: ""
+    parent: command-line
+    url: /wiki/basename
+    updated: '2019-12-30 23:07:23 +0900'
+    children: []
+bash-history:
+    type: wiki
+    title: 'bash history 다루기'
+    summary: '사용법 및 잡다한 팁 요약'
+    parent: command-line
+    url: /wiki/bash-history
+    updated: '2019-12-21 10:26:31 +0900'
+    children: []
+bat-cmd:
+    type: wiki
+    title: 'bat 명령어'
+    summary: 'A cat clone with syntax highlighting and Git integration'
+    parent: command-line
+    url: /wiki/bat-cmd
+    updated: '2019-11-16 10:45:33 +0900'
+    children: []
+Bayes-theorem:
+    type: wiki
+    title: '베이즈 정리(Bayes'' theorem)'
+    summary: 'p(A|B) = p(A) * p(B|A) / p(B)'
+    parent: math
+    url: /wiki/Bayes-theorem
+    updated: '2018-04-22 18:56:03 +0900'
+    children: []
+bc:
+    type: wiki
+    title: bc
+    summary: 'An arbitrary precision calculator language'
+    parent: programming-language
+    url: /wiki/bc
+    updated: '2019-11-19 10:06:32 +0900'
+    children: []
+big-numbers:
+    type: wiki
+    title: '좀 큰 숫자들'
+    summary: ""
+    parent: index
+    url: /wiki/big-numbers
+    updated: '2019-07-19 15:00:25 +0900'
+    children: []
+big-O-notation:
+    type: wiki
+    title: '빅 오 표기법(Big O notation)'
+    summary: '알고리즘의 효율성을 나타내는 표기법이다'
+    parent: algorithm
+    url: /wiki/big-O-notation
+    updated: '2019-04-15 22:29:16 +0900'
+    children: []
+Bill-Atkinson-productivity:
+    type: wiki
+    title: '빌 앳킨슨(Bill Atkinson)의 생산성'
+    summary: '프로그램을 6배 빠르게 하고, 보고서에 -2000 줄을 작성했다고 써내다'
+    parent: legend
+    url: /wiki/Bill-Atkinson-productivity
+    updated: '2019-11-05 03:14:16 +0900'
+    children: []
+billing-aws:
+    type: wiki
+    title: 'AWS 요금'
+    summary: '가랑비에 옷이 젖지 않도록 하자'
+    parent: aws
+    url: /wiki/billing-aws
+    updated: '2019-11-15 07:59:24 +0900'
+    children: []
+Binomial-Theorem:
+    type: wiki
+    title: '이항 정리(Binomial Theorem)'
+    summary: ""
+    parent: math
+    url: /wiki/Binomial-Theorem
+    updated: '2019-06-04 21:18:43 +0900'
+    children: []
+book:
+    type: wiki
+    title: 도서
+    summary: null
+    parent: media
+    url: /wiki/book
+    updated: '2018-02-07 21:47:12 +0900'
+    children: [17-EQUATIONS-THAT-CHANGED-THE-WORLD, Algorithms-to-Live-By, Clean-Code, Code-Complete-2, Computer-Science-Distilled, CONCRETE-MATH, Design-for-Hackers, Designing-Data-Intensive-Applications, Effective-Java, Geek-Atlas, GoF-Design-Pattern, grow-together, HTTP-THE-DEFINITIVE-GUIDE, Mythical-Man-Month, PATTERN-ON-THE-STONE, PROFESSIONAL-SOFTWARE-DEVELOPMENT, Schrodinger-s-goyang-Hee, SCIENTIFIC-AMERICAN-The-Secrets-Of-Consciousness, secret-of-consulting, Shunsho-juwa, Software-Craftsman, Take-the-Bully-by-the-Horns, TETRIS-EFFECT, The-Jargon-File, Think-Bayes]
+book-log-2019:
+    type: wiki
+    title: '2019년 독서록'
+    summary: ""
+    parent: diary
+    url: /wiki/book-log-2019
+    updated: '2019-11-19 22:17:55 +0900'
+    children: []
+book-log-2020:
+    type: wiki
+    title: '2019년 독서록'
+    summary: ""
+    parent: diary
+    url: /wiki/book-log-2020
+    updated: '2020-01-06 19:37:09 +0900'
+    children: []
+bootstrapping:
+    type: wiki
+    title: '부트스트래핑 (bootstrapping)의 어원'
+    summary: ""
+    parent: what
+    url: /wiki/bootstrapping
+    updated: '2019-11-18 22:42:56 +0900'
+    children: []
+Boy-Scout-Rule:
+    type: wiki
+    title: '보이 스카웃 규칙'
+    summary: '캠프장은 처음 왔을 때보다 더 깨끗하게 해놓고 떠나라'
+    parent: proverb
+    url: /wiki/Boy-Scout-Rule
+    updated: '2019-12-21 07:55:04 +0900'
+    children: []
+braille-pattern-chars:
+    type: wiki
+    title: '점자 패턴 문자(Braille pattern)'
+    summary: null
+    parent: what
+    url: /wiki/braille-pattern-chars
+    updated: '2018-04-04 09:05:19 +0900'
+    children: []
+brew:
+    type: wiki
+    title: Homebrew
+    summary: 'macOS 용 패키지 관리자. 이름은 Homebrew지만, 명령어는 brew.'
+    parent: command-line
+    url: /wiki/brew
+    updated: '2019-01-11 16:36:10 +0900'
+    children: []
+Brooks-s-law:
+    type: wiki
+    title: '브룩스의 법칙'
+    summary: '늦어진 소프트웨어 프로젝트에 인력을 추가로 투입하면 더 늦어지게 된다'
+    parent: proverb
+    url: /wiki/Brooks-s-law
+    updated: '2018-02-21 20:59:54 +0900'
+    children: []
+builder-pattern:
+    type: wiki
+    title: '빌더 패턴(Builder Pattern)'
+    summary: '객체의 생성 방법과 표현 방법을 분리한다'
+    parent: design-pattern
+    url: /wiki/builder-pattern
+    updated: '2018-02-18 00:20:50 +0900'
+    children: []
+Byzantine-failure:
+    type: wiki
+    title: '비잔틴 오류(Byzantine failure)'
+    summary: ""
+    parent: index
+    url: /wiki/Byzantine-failure
+    updated: '2019-10-17 17:04:34 +0900'
+    children: []
+c-m-01-Recurrent-Problems-01:
+    type: wiki
+    title: '구체수학 01.재귀적인 문제들.01.하노이의 탑'
+    summary: '01.RECURRENT PROBLEMS'
+    parent: study-concrete-math
+    url: /wiki/c-m-01-Recurrent-Problems-01
+    updated: '2019-12-16 22:12:13 +0900'
+    children: []
+c-m-01-Recurrent-Problems-02:
+    type: wiki
+    title: '구체수학 01.재귀적인 문제들.02.평면의 선들'
+    summary: '01.RECURRENT PROBLEMS'
+    parent: study-concrete-math
+    url: /wiki/c-m-01-Recurrent-Problems-02
+    updated: '2018-05-18 07:04:14 +0900'
+    children: []
+c-m-01-Recurrent-Problems-03:
+    type: wiki
+    title: '구체수학 01.재귀적인 문제들.03.요세푸스 문제'
+    summary: '01.RECURRENT PROBLEMS'
+    parent: study-concrete-math
+    url: /wiki/c-m-01-Recurrent-Problems-03
+    updated: '2018-05-21 20:20:37 +0900'
+    children: []
+c-m-01-Recurrent-Problems-Exercises:
+    type: wiki
+    title: '구체수학 01.재귀적인 문제들.연습문제'
+    summary: '01.RECURRENT PROBLEMS.Exercises'
+    parent: study-concrete-math
+    url: /wiki/c-m-01-Recurrent-Problems-Exercises
+    updated: '2018-06-02 09:44:05 +0900'
+    children: []
+c-m-02-Sums-01:
+    type: wiki
+    title: '구체수학 02.합.01.표기법'
+    summary: 02.SUMS.01.NOTATION
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-01
+    updated: '2018-05-18 13:32:39 +0900'
+    children: []
+c-m-02-Sums-02:
+    type: wiki
+    title: '구체수학 02.합.02.합과 점화식'
+    summary: '02.SUMS.02.SUMS AND RECURRENCES'
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-02
+    updated: '2018-05-21 21:25:46 +0900'
+    children: []
+c-m-02-Sums-03:
+    type: wiki
+    title: '구체수학 02.합.03.합의 조작'
+    summary: '02.SUMS.03.MANIPULATION OF SUMS'
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-03
+    updated: '2018-05-19 10:34:12 +0900'
+    children: []
+c-m-02-Sums-04:
+    type: wiki
+    title: '구체수학 02.합.04.다중합'
+    summary: '02.SUMS.03.MULTIPLE SUMS'
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-04
+    updated: '2018-05-19 10:34:45 +0900'
+    children: []
+c-m-02-Sums-05:
+    type: wiki
+    title: '구체수학 02.합.05.일반적인 방법들'
+    summary: '02.SUMS.05.GENERAL METHODS'
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-05
+    updated: '2018-05-22 18:50:35 +0900'
+    children: []
+c-m-02-Sums-06:
+    type: wiki
+    title: '구체수학 02.합.06.유한-무한 미적분'
+    summary: '02.SUMS.06.FINITE AND INFINITE CALCULUS'
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-06
+    updated: '2018-05-27 16:37:36 +0900'
+    children: []
+c-m-02-Sums-07:
+    type: wiki
+    title: '구체수학 02.합.07.무한합'
+    summary: '02.SUMS.06.INFINITE SUMS'
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-07
+    updated: '2018-05-30 23:21:21 +0900'
+    children: []
+c-m-02-Sums-Exercises:
+    type: wiki
+    title: '구체수학 02.합.Exercises'
+    summary: 02.SUMS.Exercises
+    parent: study-concrete-math
+    url: /wiki/c-m-02-Sums-Exercises
+    updated: '2018-06-01 21:28:43 +0900'
+    children: []
+c-m-03-Integer-Functions-01:
+    type: wiki
+    title: '구체수학 03.정수 함수.01.바닥과 천장'
+    summary: '03.Integer Functions.01.FLOORS AND CEILINGS'
+    parent: study-concrete-math
+    url: /wiki/c-m-03-Integer-Functions-01
+    updated: '2018-06-03 14:10:47 +0900'
+    children: []
+c-m-03-Integer-Functions-02:
+    type: wiki
+    title: '구체수학 03.정수 함수.02.바닥 천장 함수의 응용'
+    summary: '03.Integer Functions.01.FLOOR/CEILING APPLICATIONS'
+    parent: study-concrete-math
+    url: /wiki/c-m-03-Integer-Functions-02
+    updated: '2018-06-20 22:21:35 +0900'
+    children: []
+c-m-05-Binomial-Coefficients-04:
+    type: wiki
+    title: '구체수학 05.이항계수.04.생성함수'
+    summary: '02.SUMS.06.FINITE AND INFINITE CALCULUS'
+    parent: study-concrete-math
+    url: /wiki/c-m-05-Binomial-Coefficients-04
+    updated: '2018-05-22 18:43:06 +0900'
+    children: []
+Caesar-cipher:
+    type: wiki
+    title: '카이사르 암호(Caesar cipher)'
+    summary: '자리이동식 암호법'
+    parent: what
+    url: /wiki/Caesar-cipher
+    updated: '2019-12-04 22:56:48 +0900'
+    children: []
+cal:
+    type: wiki
+    title: 'cal, ncal'
+    summary: 'displays a calendar and the date of Easter'
+    parent: command-line
+    url: /wiki/cal
+    updated: '2019-01-07 13:05:08 +0900'
+    children: []
+CAP-theorem:
+    type: wiki
+    title: 'CAP 정리'
+    summary: ""
+    parent: proverb
+    url: /wiki/CAP-theorem
+    updated: '2019-11-03 00:12:22 +0900'
+    children: []
+Clean-Code:
+    type: wiki
+    title: '(책) 클린 코드 - 로버트 C. 마틴'
+    summary: '애자일 소프트웨어 장인 정신'
+    parent: book
+    url: /wiki/Clean-Code
+    updated: '2018-02-04 16:25:41 +0900'
+    children: []
+cleaning-tile-cycle:
+    type: wiki
+    title: '물때를 언제 청소할 것인가?'
+    summary: '매일 샤워할 때 가장 더러운 타일 하나를 닦는다'
+    parent: my-lifehack
+    url: /wiki/cleaning-tile-cycle
+    updated: '2019-10-29 12:05:22 +0900'
+    children: []
+clipping:
+    type: wiki
+    title: '글 모음 및 요약'
+    summary: null
+    parent: index
+    url: /wiki/clipping
+    updated: '2018-02-07 21:34:09 +0900'
+    children: [King-O-The-Cats, legend, Software-Engineering-Code-of-Ethics, THE-NEXT-BIG-BLUE-COLLAR-JOB-IS-CODING, You-and-Your-Research]
+Code-Complete-2:
+    type: wiki
+    title: '(책) 코드 컴플리트 - 스티브 맥코넬'
+    summary: 'Code Complete 2nd Edition by Steve McConnell'
+    parent: book
+    url: /wiki/Code-Complete-2
+    updated: '2018-01-26 21:35:22 +0900'
+    children: []
+CodeDeploy:
+    type: wiki
+    title: 'AWS CodeDeploy'
+    summary: 'AWS 배포 서비스'
+    parent: aws
+    url: /wiki/CodeDeploy
+    updated: '2019-09-09 16:48:16 +0900'
+    children: []
+coding-font:
+    type: wiki
+    title: '코딩 폰트'
+    summary: '내가 선호하는 코딩 폰트를 기록한다'
+    parent: index
+    url: /wiki/coding-font
+    updated: '2017-12-01 06:02:30 +0900'
+    children: []
+command-line:
+    type: wiki
+    title: '커맨드 라인 명령어 및 사용법 모음'
+    summary: ""
+    parent: tools
+    url: /wiki/command-line
+    updated: '2018-02-12 10:15:29 +0900'
+    children: [ag, basename, bash-history, bat-cmd, brew, cal, csplit, ctags, curl, cut, date-cmd, df, diff, du, fc, fd-cmd, find, fish-shell, fortune-cmd, gpg, grep, java_home, lsof, my-bash-cheatsheet, openssl, phpbrew, pwgen-cmd, rig-cmd, ripgrep, say, sdkman, sed, sha256sum, sort, strfile-cmd, sw_vers-cmd, tail, top, touch, tr-cmd, uptime, yes, ykman]
+command-pattern:
+    type: wiki
+    title: '커맨드 패턴 (Command Pattern)'
+    summary: '요구 사항을 객체로 캡슐화한다'
+    parent: ""
+    url: /wiki/command-pattern
+    updated: '2019-10-24 18:04:54 +0900'
+    children: []
+commit-go-mod-go-sum:
+    type: wiki
+    title: 'go.mod와 go.sum 도 커밋해야 할까?'
+    summary: 커밋하자
+    parent: Golang
+    url: /wiki/commit-go-mod-go-sum
+    updated: '2019-06-04 21:17:56 +0900'
+    children: []
+composer:
+    type: wiki
+    title: composer
+    summary: 'Dependency Manager for PHP'
+    parent: php
+    url: /wiki/composer
+    updated: '2019-01-13 22:54:23 +0900'
+    children: []
+Computer-Science-Distilled:
+    type: wiki
+    title: '(책) 한 권으로 그리는 컴퓨터 과학 로드맵'
+    summary: ""
+    parent: book
+    url: /wiki/Computer-Science-Distilled
+    updated: '2018-04-19 21:07:04 +0900'
+    children: []
+CONCRETE-MATH:
+    type: wiki
+    title: '(책) CONCRETE MATHEMATICS(구체수학)'
+    summary: '로널드 그레이엄과 도널드 커누스, 오렌 파타슈닉의 Stanford 강의 교재'
+    parent: book
+    url: /wiki/CONCRETE-MATH
+    updated: '2018-10-19 08:31:49 +0900'
+    children: []
+config-ideavim:
+    type: wiki
+    title: 'IdeaVim 설정하기'
+    summary: '이거라도 쓰는 수 밖에 없다'
+    parent: Vim
+    url: /wiki/config-ideavim
+    updated: '2019-11-22 17:13:29 +0900'
+    children: []
+Continuous-Integration:
+    type: wiki
+    title: 'Continuous Integration(지속적 통합)'
+    summary: ""
+    parent: what
+    url: /wiki/Continuous-Integration
+    updated: '2019-07-06 23:26:37 +0900'
+    children: []
+Conway-s-law:
+    type: wiki
+    title: '콘웨이의 법칙(Conway''s law)'
+    summary: '소프트웨어 구조는 개발 조직의 커뮤니케이션 구조를 닮는다.'
+    parent: proverb
+    url: /wiki/Conway-s-law
+    updated: '2019-11-16 23:19:08 +0900'
+    children: []
+cookie-problem:
+    type: wiki
+    title: '쿠키 문제(The cookie problem)'
+    summary: '베이즈 이론 연습문제'
+    parent: study-think-bayes
+    url: /wiki/cookie-problem
+    updated: '2018-04-24 20:48:48 +0900'
+    children: []
+Copernican-Principle:
+    type: wiki
+    title: '코페르니쿠스 원리 (Copernican Principle)'
+    summary: '아무런 정보가 없을 때 종말을 추정하는 방법'
+    parent: proverb
+    url: /wiki/Copernican-Principle
+    updated: '2019-12-07 08:12:29 +0900'
+    children: []
+Cromwell-s-rule:
+    type: wiki
+    title: '크롬웰의 법칙(Cromwell''s rule)'
+    summary: '논리적으로 참 거짓이 명확하지 않은 사건에 대하여 0, 1의 확률을 주면 안 된다는 법칙'
+    parent: math
+    url: /wiki/Cromwell-s-rule
+    updated: '2018-04-08 20:39:13 +0900'
+    children: []
+csplit:
+    type: wiki
+    title: 'csplit 명령어'
+    summary: '주어진 조건에 따라 파일을 분할한다'
+    parent: command-line
+    url: /wiki/csplit
+    updated: '2018-09-28 08:16:20 +0900'
+    children: []
+ctags:
+    type: wiki
+    title: 'ctags 명령어'
+    summary: '소스코드를 분석해 인덱싱 파일을 만든다'
+    parent: command-line
+    url: /wiki/ctags
+    updated: '2018-10-03 23:48:53 +0900'
+    children: []
+curl:
+    type: wiki
+    title: 'curl 명령어'
+    summary: 'transfer a URL'
+    parent: command-line
+    url: /wiki/curl
+    updated: '2019-11-22 16:37:31 +0900'
+    children: []
+cut:
+    type: wiki
+    title: 'cut 명령어'
+    summary: 'cut out selected portions of each line of a file'
+    parent: command-line
+    url: /wiki/cut
+    updated: '2019-11-10 12:18:12 +0900'
+    children: []
+d-i-a-01-reliable-scalable-maintainable:
+    type: wiki
+    title: '데이터 중심 애플리케이션 설계.01.신뢰성,확장성,유지보수성.'
+    summary: '01.Reliable, Scalable, and Maintainable Applications'
+    parent: study-data-intensive-application
+    url: /wiki/d-i-a-01-reliable-scalable-maintainable
+    updated: '2018-07-07 05:12:42 +0900'
+    children: []
+d-i-a-02-data-models-and-query-languages:
+    type: wiki
+    title: '데이터 중심 애플리케이션 설계.02.데이터 모델과 질의 언어'
+    summary: '02.Data Models and Query Languages'
+    parent: study-data-intensive-application
+    url: /wiki/d-i-a-02-data-models-and-query-languages
+    updated: '2018-07-08 18:44:27 +0900'
+    children: []
+d-i-a-03-storage-and-retrieval:
+    type: wiki
+    title: '데이터 중심 애플리케이션 설계.03.저장소와 검색'
+    summary: '03.Storage and Retrieval'
+    parent: study-data-intensive-application
+    url: /wiki/d-i-a-03-storage-and-retrieval
+    updated: '2018-07-08 18:44:58 +0900'
+    children: []
+d-i-a-04-encoding-and-evolution:
+    type: wiki
+    title: '데이터 중심 애플리케이션 설계.04.부호화와 발전'
+    summary: '04.Encoding and Evolution'
+    parent: study-data-intensive-application
+    url: /wiki/d-i-a-04-encoding-and-evolution
+    updated: '2018-07-08 18:45:06 +0900'
+    children: []
+d-i-a-05-replication:
+    type: wiki
+    title: '데이터 중심 애플리케이션 설계.05.복제'
+    summary: 05.Replication
+    parent: study-data-intensive-application
+    url: /wiki/d-i-a-05-replication
+    updated: '2018-07-09 23:05:05 +0900'
+    children: []
+database:
+    type: wiki
+    title: Database
+    summary: ""
+    parent: index
+    url: /wiki/database
+    updated: '2019-09-26 21:49:29 +0900'
+    children: [sharding]
+date-cmd:
+    type: wiki
+    title: 'date 명령어'
+    summary: '날짜나 시간을 출력하거나 설정한다'
+    parent: command-line
+    url: /wiki/date-cmd
+    updated: '2019-12-07 13:29:45 +0900'
+    children: []
+decorator-pattern:
+    type: wiki
+    title: '데코레이터 패턴 (Decorator Pattern)'
+    summary: '객체에 동적으로 새로운 책임을 추가한다'
+    parent: design-pattern
+    url: /wiki/decorator-pattern
+    updated: '2019-10-05 23:21:44 +0900'
+    children: []
+Design-for-Hackers:
+    type: wiki
+    title: '(책) 해커를 위한 디자인 레슨'
+    summary: '디자인을 이해하는 공학적 사고방식'
+    parent: book
+    url: /wiki/Design-for-Hackers
+    updated: '2018-03-01 17:42:18 +0900'
+    children: []
+design-pattern:
+    type: wiki
+    title: '디자인 패턴'
+    summary: null
+    parent: index
+    url: /wiki/design-pattern
+    updated: '2019-11-20 21:30:40 +0900'
+    children: [abstract-factory-pattern, adapter-pattern, builder-pattern, decorator-pattern, design-pattern-quotes, factory-method-pattern, null-object-pattern, observer-pattern, static-factory-method-pattern, strategy-pattern, template-method-pattern]
+design-pattern-quotes:
+    type: wiki
+    title: '디자인 패턴 토막글 모음'
+    summary: ""
+    parent: design-pattern
+    url: /wiki/design-pattern-quotes
+    updated: '2019-11-21 09:25:58 +0900'
+    children: []
+Designing-Data-Intensive-Applications:
+    type: wiki
+    title: '(책) 데이터 중심 애플리케이션 설계'
+    summary: ""
+    parent: book
+    url: /wiki/Designing-Data-Intensive-Applications
+    updated: '2018-07-06 23:22:57 +0900'
+    children: []
+dev-schedule-quotes:
+    type: wiki
+    title: '일정 관련 인용문 모음'
+    summary: ""
+    parent: for-craftsmanship
+    url: /wiki/dev-schedule-quotes
+    updated: '2019-12-16 08:13:57 +0900'
+    children: []
+df:
+    type: wiki
+    title: 'df 명령어'
+    summary: '파일 시스템의 남은 용량을 알려준다'
+    parent: command-line
+    url: /wiki/df
+    updated: '2018-02-08 22:58:06 +0900'
+    children: []
+diary:
+    type: wiki
+    title: Diary
+    summary: null
+    parent: index
+    url: /wiki/diary
+    updated: '2019-08-13 13:50:57 +0900'
+    children: [book-log-2019, book-log-2020, memo-2019]
+dice-problem:
+    type: wiki
+    title: '주사위 문제'
+    summary: ""
+    parent: study-think-bayes
+    url: /wiki/dice-problem
+    updated: '2018-04-24 20:48:57 +0900'
+    children: []
+diff:
+    type: wiki
+    title: diff
+    summary: 'compare files line by line'
+    parent: command-line
+    url: /wiki/diff
+    updated: '2019-01-11 11:30:51 +0900'
+    children: []
+discrete-math-functions:
+    type: wiki
+    title: 함수
+    summary: Functions
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-functions
+    updated: '2019-01-25 21:22:58 +0900'
+    children: []
+discrete-math-inference-rules:
+    type: wiki
+    title: 추론규칙
+    summary: 'Rules of Inference'
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-inference-rules
+    updated: '2019-01-06 13:32:33 +0900'
+    children: []
+discrete-math-linear-congruences:
+    type: wiki
+    title: 선형합동
+    summary: 'Linear Congruences'
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-linear-congruences
+    updated: '2019-11-06 08:02:30 +0900'
+    children: []
+discrete-math-matrices:
+    type: wiki
+    title: 행렬
+    summary: Matrices
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-matrices
+    updated: '2019-02-04 20:07:14 +0900'
+    children: []
+discrete-math-modular:
+    type: wiki
+    title: '모듈러 연산(나머지 연산)'
+    summary: 'Modular Arithmetic'
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-modular
+    updated: '2019-03-16 23:25:56 +0900'
+    children: []
+discrete-math-proofs:
+    type: wiki
+    title: 증명
+    summary: Proofs
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-proofs
+    updated: '2019-01-09 18:41:01 +0900'
+    children: []
+discrete-math-propositional-logic:
+    type: wiki
+    title: '명제 논리'
+    summary: 'Propositional Logic'
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-propositional-logic
+    updated: '2019-01-06 10:27:36 +0900'
+    children: []
+discrete-math-quantifiers:
+    type: wiki
+    title: 한정기호
+    summary: Quantifiers
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-quantifiers
+    updated: '2019-01-06 11:21:04 +0900'
+    children: []
+discrete-math-sequences:
+    type: wiki
+    title: 수열
+    summary: Sequences
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-sequences
+    updated: '2019-02-16 21:29:36 +0900'
+    children: []
+discrete-math-sets:
+    type: wiki
+    title: 집합
+    summary: Sets
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-sets
+    updated: '2019-02-02 14:50:16 +0900'
+    children: []
+discrete-math-summations:
+    type: wiki
+    title: '수열의 합'
+    summary: Summations
+    parent: study-discrete-mathematics
+    url: /wiki/discrete-math-summations
+    updated: '2019-09-10 23:43:08 +0900'
+    children: []
+docker:
+    type: wiki
+    title: Docker
+    summary: ""
+    parent: how-to
+    url: /wiki/docker
+    updated: '2019-06-01 23:07:09 +0900'
+    children: []
+du:
+    type: wiki
+    title: 'du 명령어'
+    summary: 'disk usage. 디스크 사용 현황을 본다.'
+    parent: command-line
+    url: /wiki/du
+    updated: '2018-02-08 23:11:05 +0900'
+    children: []
+Edsel-edict:
+    type: wiki
+    title: '에젤 강령(Edsel edict)'
+    summary: '새것을 도입할 때에는 한 번에 하나씩 하자'
+    parent: proverb
+    url: /wiki/Edsel-edict
+    updated: '2018-01-18 22:01:04 +0900'
+    children: []
+Effective-Java:
+    type: wiki
+    title: '(책) 이펙티브 자바 2판'
+    summary: 'Effective Java 2/E by Joshua Bloch'
+    parent: book
+    url: /wiki/Effective-Java
+    updated: '2018-03-11 14:10:23 +0900'
+    children: []
+egyptian-multiplication:
+    type: wiki
+    title: '고대 이집트 곱셈법'
+    summary: 'EGYPTIAN MULTIPLICATION'
+    parent: algorithm
+    url: /wiki/egyptian-multiplication
+    updated: '2019-11-25 08:07:57 +0900'
+    children: []
+Elastic-Load-Balancing:
+    type: wiki
+    title: 'AWS ELB - Elastic Load Balancing'
+    summary: 'AWS 로드 밸런서'
+    parent: aws
+    url: /wiki/Elastic-Load-Balancing
+    updated: '2018-09-16 22:06:25 +0900'
+    children: []
+email-validation:
+    type: wiki
+    title: '이메일 주소 형식 검증하기'
+    summary: '이메일 주소 검증 코드를 짤 일이 있어 작업한 기록을 남긴다'
+    parent: index
+    url: /wiki/email-validation
+    updated: '2019-11-13 21:45:37 +0900'
+    children: []
+encryption:
+    type: wiki
+    title: Encryption
+    summary: '암호화 정보 이것저것'
+    parent: what
+    url: /wiki/encryption
+    updated: '2018-10-10 10:04:16 +0900'
+    children: []
+enterprise-application:
+    type: wiki
+    title: '엔터프라이즈 애플리케이션 (Enterprise Application)'
+    summary: '엔터프라이즈 애플리케이션이란 무엇인가?'
+    parent: what
+    url: /wiki/enterprise-application
+    updated: '2019-12-29 22:52:57 +0900'
+    children: []
+ethereum-white-paper:
+    type: wiki
+    title: '(요약) 이더리움 백서'
+    summary: 'Ethereum White Paper'
+    parent: what
+    url: /wiki/ethereum-white-paper
+    updated: '2019-02-11 15:54:54 +0900'
+    children: []
+euro-problem:
+    type: wiki
+    title: '유로 문제(euro problem)'
+    summary: '동전이 한 쪽으로 기울었다는 것을 증명하자'
+    parent: study-think-bayes
+    url: /wiki/euro-problem
+    updated: '2018-04-24 20:49:06 +0900'
+    children: []
+Excel:
+    type: wiki
+    title: Excel
+    summary: ""
+    parent: tools
+    url: /wiki/Excel
+    updated: '2018-09-17 11:13:03 +0900'
+    children: [excel-hot-keys, excel-remove-circular-reference, excel-sumifs, excel-transpos, excel-vba-setting]
+excel-hot-keys:
+    type: wiki
+    title: '엑셀 단축키 모음'
+    summary: ""
+    parent: Excel
+    url: /wiki/excel-hot-keys
+    updated: '2018-11-01 09:45:21 +0900'
+    children: []
+excel-remove-circular-reference:
+    type: wiki
+    title: '엑셀 셀 순환 참조 문제 해결하기'
+    summary: ""
+    parent: Excel
+    url: /wiki/excel-remove-circular-reference
+    updated: '2018-09-19 11:49:01 +0900'
+    children: []
+excel-sumifs:
+    type: wiki
+    title: 'SUMIFS 함수 사용법'
+    summary: '조건에 맞는 값의 sum 값을 구한다'
+    parent: Excel
+    url: /wiki/excel-sumifs
+    updated: '2018-09-17 11:13:38 +0900'
+    children: []
+excel-transpos:
+    type: wiki
+    title: 'Excel 행과 열 바꾸는 방법'
+    summary: ""
+    parent: Excel
+    url: /wiki/excel-transpos
+    updated: '2018-09-17 13:49:55 +0900'
+    children: []
+excel-vba-setting:
+    type: wiki
+    title: 'Excel VBA 셋팅하기'
+    summary: ""
+    parent: Excel
+    url: /wiki/excel-vba-setting
+    updated: '2018-09-17 12:50:46 +0900'
+    children: []
+f-l-a-00-preface:
+    type: wiki
+    title: '형식언어와 오토마타.00.서문'
+    summary: Preface
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-00-preface
+    updated: '2018-11-12 08:59:52 +0900'
+    children: []
+f-l-a-01-00:
+    type: wiki
+    title: '형식언어와 오토마타.01.00'
+    summary: 'INTRODUCTION TO THE THEORY OF COMPUTATION'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-01-00
+    updated: '2018-12-15 22:29:22 +0900'
+    children: []
+f-l-a-01-01:
+    type: wiki
+    title: '형식언어와 오토마타.01.01'
+    summary: 'MATHEMATICAL PRELIMINARIES AND NOTATION'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-01-01
+    updated: '2018-12-16 14:05:06 +0900'
+    children: []
+f-l-a-01-02:
+    type: wiki
+    title: '형식언어와 오토마타.01.02'
+    summary: 'THREE BASIC CONCEPTS'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-01-02
+    updated: '2018-12-16 14:40:27 +0900'
+    children: []
+f-l-a-02-01:
+    type: wiki
+    title: '형식언어와 오토마타.02.01'
+    summary: 'DETERMINISTIC FINITE ACCEPTERS'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-02-01
+    updated: '2018-12-16 16:32:17 +0900'
+    children: []
+f-l-a-02-02:
+    type: wiki
+    title: '형식언어와 오토마타.02.02'
+    summary: 'NONDETERMINISTIC FINITE ACCEPTERS'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-02-02
+    updated: '2018-12-16 16:59:27 +0900'
+    children: []
+f-l-a-02-03:
+    type: wiki
+    title: '형식언어와 오토마타.02.03'
+    summary: 'EQUIVALENCE OF DETERMINISTIC AND NONDETERMINISTIC FINITE ACCEPTERS'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-02-03
+    updated: '2018-12-16 18:34:41 +0900'
+    children: []
+f-l-a-02-04:
+    type: wiki
+    title: '형식언어와 오토마타.02.04'
+    summary: 'REDUCTION OF THE NUMBER OF STATES IN FINITE AUTOMATA'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-02-04
+    updated: '2018-12-20 10:36:32 +0900'
+    children: []
+f-l-a-03-01:
+    type: wiki
+    title: '형식언어와 오토마타.03.01'
+    summary: 'REGULAR EXPRESSIONS'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-03-01
+    updated: '2019-09-10 23:51:36 +0900'
+    children: []
+f-l-a-03-02:
+    type: wiki
+    title: '형식언어와 오토마타.03.02'
+    summary: 'CONNECTION BETWEEN REGULAR EXPRESSIONS AND REGULAR LANGUAGES'
+    parent: study-formal-languages-and-automata
+    url: /wiki/f-l-a-03-02
+    updated: '2018-12-30 19:21:30 +0900'
+    children: []
+factory-method-pattern:
+    type: wiki
+    title: '팩토리 메소드 패턴 (Factory Method Pattern)'
+    summary: '객체를 생성하기 위한 인터페이스를 정의하고, 인스턴스 생성은 서브클래스가 결정하게 한다'
+    parent: design-pattern
+    url: /wiki/factory-method-pattern
+    updated: '2019-11-21 09:37:23 +0900'
+    children: []
+fc:
+    type: wiki
+    title: 'fc 명령어'
+    summary: '명령어 입력/편집, 나열, 재실행 등을 할 수 있다'
+    parent: command-line
+    url: /wiki/fc
+    updated: '2019-01-29 10:50:49 +0900'
+    children: []
+fd-cmd:
+    type: wiki
+    title: 'fd 명령어'
+    summary: '이름으로 파일을 찾아준다'
+    parent: command-line
+    url: /wiki/fd-cmd
+    updated: '2019-12-28 17:07:02 +0900'
+    children: []
+Fermat-s-little-theorem:
+    type: wiki
+    title: '페르마의 소정리'
+    summary: 'Fermat''s little theorem'
+    parent: math
+    url: /wiki/Fermat-s-little-theorem
+    updated: '2019-03-03 17:42:20 +0900'
+    children: []
+fibonacci:
+    type: wiki
+    title: '피보나치 수열'
+    summary: 'Fibonacci Sequence'
+    parent: math
+    url: /wiki/fibonacci
+    updated: '2019-12-16 22:20:50 +0900'
+    children: []
+find:
+    type: wiki
+    title: 'find 명령어'
+    summary: 'walk a file hierarchy'
+    parent: command-line
+    url: /wiki/find
+    updated: '2019-11-20 21:32:50 +0900'
+    children: []
+fine-dust:
+    type: wiki
+    title: '미세먼지 정보 모음'
+    summary: '미세먼지 대응에 대한 나의 노하우를 기록한다'
+    parent: useful-site
+    url: /wiki/fine-dust
+    updated: '2018-04-02 21:13:51 +0900'
+    children: []
+fish-shell:
+    type: wiki
+    title: 'fish shell'
+    summary: '자동 완성이 편리하고 눈이 즐거운 셸'
+    parent: command-line
+    url: /wiki/fish-shell
+    updated: '2018-03-12 23:07:23 +0900'
+    children: []
+floating-point:
+    type: wiki
+    title: 'Floating Point 부동소수점'
+    summary: null
+    parent: what
+    url: /wiki/floating-point
+    updated: '2018-10-29 11:40:34 +0900'
+    children: []
+for-craftsmanship:
+    type: wiki
+    title: '장인정신을 위하여'
+    summary: ""
+    parent: index
+    url: /wiki/for-craftsmanship
+    updated: '2019-11-06 21:42:38 +0900'
+    children: [dev-schedule-quotes, precision-of-number]
+fortune-cmd:
+    type: wiki
+    title: 'fortune 명령어'
+    summary: '랜덤으로 격언/속담 등을 보여준다'
+    parent: command-line
+    url: /wiki/fortune-cmd
+    updated: '2019-12-25 19:16:46 +0900'
+    children: []
+frac1e:
+    type: wiki
+    title: 'n개의 제비뽑기에 n번 도전'
+    summary: 1/e
+    parent: math
+    url: /wiki/frac1e
+    updated: '2018-04-08 20:40:46 +0900'
+    children: []
+garbage-collection:
+    type: wiki
+    title: 'Garbage Collection'
+    summary: ""
+    parent: index
+    url: /wiki/garbage-collection
+    updated: '2019-10-29 22:23:21 +0900'
+    children: [gc-death-spiral, java-g1gc, java-gc-eden-to-survivor, java-gc-parallel-collector, java-gc-serial-collector, java-gc-tuning, java-gc-zgc]
+gc-death-spiral:
+    type: wiki
+    title: '죽음의 GC 소용돌이'
+    summary: 'GC death spiral'
+    parent: garbage-collection
+    url: /wiki/gc-death-spiral
+    updated: '2019-10-29 23:12:24 +0900'
+    children: []
+gcd:
+    type: wiki
+    title: '최대공약수와 최소공배수'
+    summary: 'Greatest Common Divisor, Least Common Multiple'
+    parent: math
+    url: /wiki/gcd
+    updated: '2019-12-07 08:02:22 +0900'
+    children: []
+geacron:
+    type: wiki
+    title: 'GeaCron, 옐로우의 세계'
+    summary: '연도별 세계 지도를 볼 수 있는 사이트'
+    parent: useful-site
+    url: /wiki/geacron
+    updated: '2018-03-10 21:09:27 +0900'
+    children: []
+Geek-Atlas:
+    type: wiki
+    title: '(책) 긱 아틀라스 - 과학과 기술의 발상지 129곳'
+    summary: 'The Geek Atlas'
+    parent: book
+    url: /wiki/Geek-Atlas
+    updated: '2018-02-13 21:38:46 +0900'
+    children: []
+gerald-weinberg-language-king:
+    type: wiki
+    title: '프로그래밍 언어를 하나도 만들지 않은 제랄드 와인버그'
+    summary: null
+    parent: legend
+    url: /wiki/gerald-weinberg-language-king
+    updated: '2018-02-08 12:04:33 +0900'
+    children: []
+ginkgo:
+    type: wiki
+    title: 'Ginkgo 사용하기'
+    summary: 'BDD Testing Framework for Go'
+    parent: Golang
+    url: /wiki/ginkgo
+    updated: '2018-10-04 16:44:56 +0900'
+    children: []
+git:
+    type: wiki
+    title: git
+    summary: ""
+    parent: tools
+    url: /wiki/git
+    updated: '2019-01-29 16:43:48 +0900'
+    children: [git-alias, git-checkout-specific-files, git-log, githud]
+git-alias:
+    type: wiki
+    title: '편리한 git alias 설정하기'
+    summary: '나만의 git alias를 만들어 보자'
+    parent: git
+    url: /wiki/git-alias
+    updated: '2019-08-31 18:54:03 +0900'
+    children: []
+git-checkout-specific-files:
+    type: wiki
+    title: 'git에서 다른 브랜치의 특정 파일만 체크아웃하기'
+    summary: 'git checkout [branch] -- [path] 로 해결'
+    parent: git
+    url: /wiki/git-checkout-specific-files
+    updated: '2018-12-02 14:32:59 +0900'
+    children: []
+git-log:
+    type: wiki
+    title: 'git log'
+    summary: ""
+    parent: git
+    url: /wiki/git-log
+    updated: '2019-12-01 19:20:57 +0900'
+    children: []
+githud:
+    type: wiki
+    title: 'gitHUD로 git prompt를 쉽게 표시하자'
+    summary: ""
+    parent: git
+    url: /wiki/githud
+    updated: '2020-01-06 20:13:30 +0900'
+    children: []
+Go-Blog-translation:
+    type: wiki
+    title: 'The Go Blog 번역글 모음'
+    summary: 'Go 언어의 공식 블로그의 글을 번역합니다'
+    parent: Golang
+    url: /wiki/Go-Blog-translation
+    updated: '2019-06-10 20:58:52 +0900'
+    children: [golang-debugging-what-you-deploy, golang-mod, golang-subtests, golang-the-laws-of-reflection]
+GoF-Design-Pattern:
+    type: wiki
+    title: '(책) GoF의 디자인 패턴'
+    summary: 'Design Patterns Elements of Reusable Object-Oriented Software'
+    parent: book
+    url: /wiki/GoF-Design-Pattern
+    updated: '2018-02-12 08:51:18 +0900'
+    children: []
+Golang:
+    type: wiki
+    title: Go
+    summary: 'Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.'
+    parent: programming-language
+    url: /wiki/Golang
+    updated: '2018-09-18 17:21:01 +0900'
+    children: [commit-go-mod-go-sum, ginkgo, Go-Blog-translation, golang-cheatsheet, golang-dependency-manager, golang-reflect, golang-struct-padding, golang-types, golang-waitgroup-add, vim-go-auto-import, vim-go-env, vim-go-with-ultisnips]
+golang-cheatsheet:
+    type: wiki
+    title: 'Go cheatsheet'
+    summary: 'golang을 배우면서 까먹기 쉬운 것들을 적어두자'
+    parent: Golang
+    url: /wiki/golang-cheatsheet
+    updated: '2018-10-19 22:21:31 +0900'
+    children: []
+golang-debugging-what-you-deploy:
+    type: wiki
+    title: '(번역) Go 1.12에서 배포한 것을 디버깅하기'
+    summary: 'Debugging what you deploy in Go 1.12'
+    parent: Go-Blog-translation
+    url: /wiki/golang-debugging-what-you-deploy
+    updated: '2019-06-10 20:57:11 +0900'
+    children: []
+golang-dependency-manager:
+    type: wiki
+    title: 'Go dependency manager'
+    summary: '사람들이 많이 쓰는 걸 쓰자'
+    parent: Golang
+    url: /wiki/golang-dependency-manager
+    updated: '2020-01-03 08:45:11 +0900'
+    children: []
+golang-mod:
+    type: wiki
+    title: '(번역) Go Modules 사용하기'
+    summary: 'Using Go Modules'
+    parent: Go-Blog-translation
+    url: /wiki/golang-mod
+    updated: '2019-06-06 18:47:44 +0900'
+    children: []
+golang-reflect:
+    type: wiki
+    title: 'Golang reflect 사용법'
+    summary: '라이브러리 만들 때에만 쓰고 남용하지 말자'
+    parent: Golang
+    url: /wiki/golang-reflect
+    updated: '2019-06-06 16:38:10 +0900'
+    children: []
+golang-struct-padding:
+    type: wiki
+    title: 'Golang struct alignment padding'
+    summary: '구조체 멤버 정렬 순서에 따라 구조체 크기가 달라진다'
+    parent: Golang
+    url: /wiki/golang-struct-padding
+    updated: '2018-10-15 10:15:05 +0900'
+    children: []
+golang-subtests:
+    type: wiki
+    title: '(번역) 서브 테스트와 서브 벤치마크 사용하기'
+    summary: 'Using Subtests and Sub-benchmarks'
+    parent: Go-Blog-translation
+    url: /wiki/golang-subtests
+    updated: '2019-06-06 23:57:33 +0900'
+    children: []
+golang-the-laws-of-reflection:
+    type: wiki
+    title: '(번역) 리플렉션의 규칙들'
+    summary: 'The Laws of Reflection'
+    parent: Go-Blog-translation
+    url: /wiki/golang-the-laws-of-reflection
+    updated: '2019-06-06 18:47:59 +0900'
+    children: []
+golang-types:
+    type: wiki
+    title: 'Go type'
+    summary: 'Golang의 타입'
+    parent: Golang
+    url: /wiki/golang-types
+    updated: '2019-11-14 23:59:58 +0900'
+    children: []
+golang-waitgroup-add:
+    type: wiki
+    title: 'Go WaitGroup에 1외에 다른 값을 Add 하면?'
+    summary: '더하는 숫자가 중요한 게 아니라 0을 맞추는 게 중요'
+    parent: Golang
+    url: /wiki/golang-waitgroup-add
+    updated: '2018-11-29 11:11:32 +0900'
     children: []
 google-search-console-remove-outdated-content:
     type: wiki
@@ -326,6 +1582,54 @@ google-search-console-remove-outdated-content:
     url: /wiki/google-search-console-remove-outdated-content
     updated: '2018-02-07 21:31:00 +0900'
     children: []
+googling:
+    type: wiki
+    title: '구글링하는 방법'
+    summary: '구글 및 여러 검색 서비스 사용법'
+    parent: how-to
+    url: /wiki/googling
+    updated: '2018-12-09 21:57:55 +0900'
+    children: []
+gpg:
+    type: wiki
+    title: 'GnuPG 사용법'
+    summary: 'GnuPG, the GNU Privacy Guard'
+    parent: command-line
+    url: /wiki/gpg
+    updated: '2019-12-13 22:52:55 +0900'
+    children: []
+Gradle:
+    type: wiki
+    title: Gradle
+    summary: 'Gradle Build Tool'
+    parent: tools
+    url: /wiki/Gradle
+    updated: '2019-09-10 23:59:33 +0900'
+    children: []
+graph:
+    type: wiki
+    title: 그래프(Graph)
+    summary: ""
+    parent: math
+    url: /wiki/graph
+    updated: '2019-06-04 21:22:08 +0900'
+    children: []
+gray-code:
+    type: wiki
+    title: '그레이 코드(Gray code)'
+    summary: 'reflected binary Gray code'
+    parent: what
+    url: /wiki/gray-code
+    updated: '2019-11-15 08:00:15 +0900'
+    children: []
+grep:
+    type: wiki
+    title: 'grep, egrep 명령어'
+    summary: 'file pattern searcher'
+    parent: command-line
+    url: /wiki/grep
+    updated: '2019-11-21 17:48:46 +0900'
+    children: []
 Groovy:
     type: wiki
     title: Groovy
@@ -334,6 +1638,126 @@ Groovy:
     url: /wiki/Groovy
     updated: '2017-12-03 15:01:36 +0900'
     children: []
+Grote-Reber-home-made-radio-astronomy:
+    type: wiki
+    title: '집에서 전파망원경을 만든 그로트 레버(Grote Reber)'
+    summary: '10년간 세계 유일의 전파천문학자'
+    parent: legend
+    url: /wiki/Grote-Reber-home-made-radio-astronomy
+    updated: '2018-02-08 13:19:30 +0900'
+    children: []
+groupId-artifactId:
+    type: wiki
+    title: 'Maven의 groupId 와 artifactId, 그리고 version'
+    summary: ""
+    parent: what
+    url: /wiki/groupId-artifactId
+    updated: '2019-11-20 22:29:28 +0900'
+    children: []
+grow-together:
+    type: wiki
+    title: '(책) 함께 자라기'
+    summary: '애자일 철학을 삶에 적용해 다른 사람들과 함께 성장하기'
+    parent: book
+    url: /wiki/grow-together
+    updated: '2019-12-19 23:03:58 +0900'
+    children: []
+halting-problem:
+    type: wiki
+    title: '정지 문제'
+    summary: 'The Halting Problem'
+    parent: math
+    url: /wiki/halting-problem
+    updated: '2019-02-16 21:34:30 +0900'
+    children: []
+hammerspoon:
+    type: wiki
+    title: Hammerspoon
+    summary: 'macOS용 자동화 도구'
+    parent: mac-apps
+    url: /wiki/hammerspoon
+    updated: '2018-04-21 11:29:38 +0900'
+    children: [hammerspoon-inputsource-aurora, hammerspoon-luarocks, hammerspoon-tutorial-00, hammerspoon-tutorial-01, hammerspoon-tutorial-02, hammerspoon-tutorial-03, hammerspoon-tutorial-04, hammerspoon-tutorial-05]
+hammerspoon-inputsource-aurora:
+    type: wiki
+    title: '해머스푼으로 한/영 전환 오로라를 만들자'
+    summary: '지금 선택된 입력기가 한글인지 영어인지 쉽게 알아보자'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-inputsource-aurora
+    updated: '2019-12-25 18:53:46 +0900'
+    children: []
+hammerspoon-luarocks:
+    type: wiki
+    title: 'luarocks로 Hammerspoon 패키지 관리하기'
+    summary: '유한락스가 아니라 루아락스로 깨끗하게'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-luarocks
+    updated: '2018-04-21 11:48:11 +0900'
+    children: []
+hammerspoon-tutorial-00:
+    type: wiki
+    title: 'Hammerspoon 튜토리얼 00 - 시작하기'
+    summary: '일단 맥이 있어야 한다'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-tutorial-00
+    updated: '2018-04-21 11:24:48 +0900'
+    children: []
+hammerspoon-tutorial-01:
+    type: wiki
+    title: 'Hammerspoon 튜토리얼 01 - 윈도우 힌트와 이동'
+    summary: '윈도우즈에는 있으나 맥에는 없는 그것'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-tutorial-01
+    updated: '2018-04-21 11:31:44 +0900'
+    children: []
+hammerspoon-tutorial-02:
+    type: wiki
+    title: 'Hammerspoon 튜토리얼 02 - 클립보드 확장 기능을 만들어 봅시다'
+    summary: '복붙을 편하게!'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-tutorial-02
+    updated: '2018-04-21 11:37:42 +0900'
+    children: []
+hammerspoon-tutorial-03:
+    type: wiki
+    title: 'Hammerspoon 튜토리얼 03 - 한영 전환 키를 만들어 봅시다'
+    summary: 'Esc - 영문전환도 만들어 봅시다'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-tutorial-03
+    updated: '2018-04-21 11:39:59 +0900'
+    children: []
+hammerspoon-tutorial-04:
+    type: wiki
+    title: 'Hammerspoon 튜토리얼 04 - 웹뷰와 urlevent 기능을 사용해 봅시다'
+    summary: '결론은 터미널'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-tutorial-04
+    updated: '2018-04-21 11:41:57 +0900'
+    children: []
+hammerspoon-tutorial-05:
+    type: wiki
+    title: 'Hammerspoon 튜토리얼 05 - chooser를 사용해 봅시다'
+    summary: '클립보드 히스토리도 만들어 봅시다'
+    parent: hammerspoon
+    url: /wiki/hammerspoon-tutorial-05
+    updated: '2018-04-21 11:44:18 +0900'
+    children: []
+hhkb-jp-tmk:
+    type: wiki
+    title: 'HHKB jp 컨트롤 보드를 tmk로 교체해 보았다.'
+    summary: '해피해킹을 더욱 해피하게'
+    parent: my-lifehack
+    url: /wiki/hhkb-jp-tmk
+    updated: '2018-04-21 11:37:09 +0900'
+    children: []
+hollywood-principle:
+    type: wiki
+    title: '헐리우드 원칙(Hollywood Principle)'
+    summary: '"Do not call us, we call You."'
+    parent: proverb
+    url: /wiki/hollywood-principle
+    updated: '2019-11-04 23:54:58 +0900'
+    children: []
 how-to:
     type: wiki
     title: 'HOW TO'
@@ -341,14 +1765,438 @@ how-to:
     parent: index
     url: /wiki/how-to
     updated: '2018-02-04 15:57:05 +0900'
-    children: [mathjax-latex]
+    children: [docker, googling, mathjax-latex]
+http:
+    type: wiki
+    title: HTTP
+    summary: null
+    parent: what
+    url: /wiki/http
+    updated: '2019-08-13 00:14:04 +0900'
+    children: []
+HTTP-THE-DEFINITIVE-GUIDE:
+    type: wiki
+    title: '(책) HTTP 완벽 가이드 - 웹은 어떻게 동작하는가'
+    summary: 'HTTP - THE DEFINITIVE GUIDE'
+    parent: book
+    url: /wiki/HTTP-THE-DEFINITIVE-GUIDE
+    updated: '2018-02-05 22:51:00 +0900'
+    children: []
+httpbin.org:
+    type: wiki
+    title: 'httpbin(1) HTTP Request & Response Service'
+    summary: 'mock 데이터가 필요할 때 사용하기 좋다'
+    parent: useful-site
+    url: /wiki/httpbin.org
+    updated: '2018-04-22 21:28:11 +0900'
+    children: []
+indent-style:
+    type: wiki
+    title: '중괄호 인덴트 스타일'
+    summary: 'K&R style, Allman style'
+    parent: what
+    url: /wiki/indent-style
+    updated: '2019-01-14 21:41:31 +0900'
+    children: []
 index:
     type: wiki
     title: wiki
     summary: null
     parent: null
     url: /wiki/index
-    updated: '2019-10-30 08:36:56 +0900'
+    updated: null
+    children: []
+integer:
+    type: wiki
+    title: 'Integer 이것저것'
+    summary: ""
+    parent: index
+    url: /wiki/integer
+    updated: '2019-12-08 18:51:17 +0900'
+    children: []
+intellij:
+    type: wiki
+    title: 'IntelliJ IDEA'
+    summary: ""
+    parent: tools
+    url: /wiki/intellij
+    updated: '2020-01-03 13:26:40 +0900'
+    children: []
+IP:
+    type: wiki
+    title: IP
+    summary: 'Internet Protocol'
+    parent: what
+    url: /wiki/IP
+    updated: '2019-07-22 23:18:51 +0900'
+    children: []
+James-Gosling-super-programmer:
+    type: wiki
+    title: '무협지 주인공 제임스 고슬링(James Gosling)'
+    summary: '중학생 때 전산학과에 침입해 독학으로 프로그래밍을 터득'
+    parent: legend
+    url: /wiki/James-Gosling-super-programmer
+    updated: '2018-02-08 12:13:57 +0900'
+    children: []
+Java:
+    type: wiki
+    title: Java
+    summary: null
+    parent: programming-language
+    url: /wiki/Java
+    updated: '2018-03-05 16:14:12 +0900'
+    children: [java-abstract-class, java-enhancements, java-enum, java-interface, java-jigsaw-quick-start, java-remainder-operator, java-switch-expression, java10-var, java8, java8-performance-improvement-for-hashmap, java8-why-permgen-removed, jdk13, jvm, Object-equals, Object-hashCode, Object-toString, private-constructor, use-java-primitive-type-for-performance]
+java_home:
+    type: wiki
+    title: 'java_home 명령어'
+    summary: 'return a value for $JAVA_HOME'
+    parent: command-line
+    url: /wiki/java_home
+    updated: '2018-02-06 12:33:34 +0900'
+    children: []
+java-abstract-class:
+    type: wiki
+    title: 'Java Abstract Class'
+    summary: '자바 추상 클래스'
+    parent: Java
+    url: /wiki/java-abstract-class
+    updated: '2019-11-14 22:24:15 +0900'
+    children: []
+java-enhancements:
+    type: wiki
+    title: 'Java 버전별 변경점'
+    summary: '1996년 1.0 부터 2019년 12 까지'
+    parent: Java
+    url: /wiki/java-enhancements
+    updated: '2019-11-12 23:23:41 +0900'
+    children: []
+java-enum:
+    type: wiki
+    title: 'Java enum의 사용'
+    summary: ""
+    parent: Java
+    url: /wiki/java-enum
+    updated: '2020-01-05 22:33:57 +0900'
+    children: []
+java-g1gc:
+    type: wiki
+    title: 'Java HotSpot VM G1GC'
+    summary: 'Java9 ~ 12 디폴트 GC'
+    parent: garbage-collection
+    url: /wiki/java-g1gc
+    updated: '2019-09-29 09:28:22 +0900'
+    children: []
+java-gc-eden-to-survivor:
+    type: wiki
+    title: 'Minor GC - Eden에서 Survivor 영역으로'
+    summary: ""
+    parent: garbage-collection
+    url: /wiki/java-gc-eden-to-survivor
+    updated: '2019-09-29 09:28:37 +0900'
+    children: []
+java-gc-parallel-collector:
+    type: wiki
+    title: 'Java HotSpot VM Parallel Collector'
+    summary: 'Java8 디폴트 GC'
+    parent: garbage-collection
+    url: /wiki/java-gc-parallel-collector
+    updated: '2019-09-29 09:28:57 +0900'
+    children: []
+java-gc-serial-collector:
+    type: wiki
+    title: 'Java HotSpot VM Serial Collector'
+    summary: null
+    parent: garbage-collection
+    url: /wiki/java-gc-serial-collector
+    updated: '2019-09-29 15:23:35 +0900'
+    children: []
+java-gc-tuning:
+    type: wiki
+    title: 'Java GC 튜닝'
+    summary: 'Oracle의 튜닝 가이드를 읽고 정리해 보자'
+    parent: garbage-collection
+    url: /wiki/java-gc-tuning
+    updated: '2019-10-04 12:56:34 +0900'
+    children: []
+java-gc-zgc:
+    type: wiki
+    title: 'ZGC, The Z Garbage Collector'
+    summary: '작성중인 문서'
+    parent: garbage-collection
+    url: /wiki/java-gc-zgc
+    updated: '2019-10-15 17:31:28 +0900'
+    children: []
+java-interface:
+    type: wiki
+    title: 'Java Interface'
+    summary: '자바 인터페이스'
+    parent: Java
+    url: /wiki/java-interface
+    updated: '2019-09-29 21:01:13 +0900'
+    children: []
+java-jigsaw-quick-start:
+    type: wiki
+    title: '(번역) 프로젝트 Jigsaw - 모듈 시스템 빠른 시작 가이드'
+    summary: 'Project Jigsaw; Module System Quick-Start Guide'
+    parent: Java
+    url: /wiki/java-jigsaw-quick-start
+    updated: '2019-09-12 21:00:10 +0900'
+    children: []
+java-remainder-operator:
+    type: wiki
+    title: 'Java 나머지 연산자 % 주의점'
+    summary: '(a / b) * b + ( a % b ) == a'
+    parent: Java
+    url: /wiki/java-remainder-operator
+    updated: '2019-10-13 22:16:07 +0900'
+    children: []
+java-switch-expression:
+    type: wiki
+    title: 'Java switch 문'
+    summary: ""
+    parent: Java
+    url: /wiki/java-switch-expression
+    updated: '2019-12-27 21:18:25 +0900'
+    children: []
+java10-var:
+    type: wiki
+    title: 'Java의 var'
+    summary: ""
+    parent: Java
+    url: /wiki/java10-var
+    updated: '2019-09-12 22:01:56 +0900'
+    children: []
+java8:
+    type: wiki
+    title: 'Java 8'
+    summary: ""
+    parent: Java
+    url: /wiki/java8
+    updated: '2018-07-25 17:09:16 +0900'
+    children: []
+java8-performance-improvement-for-hashmap:
+    type: wiki
+    title: 'Java 8 HashMap 퍼포먼스 향상'
+    summary: '균형 트리를 도입해 O(n) 에서 O(log n)으로 향상됐다'
+    parent: Java
+    url: /wiki/java8-performance-improvement-for-hashmap
+    updated: '2019-10-28 17:32:42 +0900'
+    children: []
+java8-why-permgen-removed:
+    type: wiki
+    title: 'JDK 8에서 Perm 영역은 왜 삭제됐을까'
+    summary: ""
+    parent: Java
+    url: /wiki/java8-why-permgen-removed
+    updated: '2019-09-12 18:45:58 +0900'
+    children: []
+jdk13:
+    type: wiki
+    title: 'JDK 13 둘러보기'
+    summary: ""
+    parent: Java
+    url: /wiki/jdk13
+    updated: '2019-09-19 12:23:31 +0900'
+    children: []
+John-von-Neumann:
+    type: wiki
+    title: '존 폰 노이만(John von Neumann)'
+    summary: '천재는 오직 폰 노이만 뿐이다(von Neumann was the only genius)'
+    parent: legend
+    url: /wiki/John-von-Neumann
+    updated: '2018-04-03 22:57:19 +0900'
+    children: []
+John-W-Backus:
+    type: wiki
+    title: '존 베커스, 문제 해결사 팀을 만들다'
+    summary: '포트란의 탄생'
+    parent: legend
+    url: /wiki/John-W-Backus
+    updated: '2019-03-01 17:01:12 +0900'
+    children: []
+junit5-nested:
+    type: wiki
+    title: 'JUnit5로 계층 구조의 테스트 코드를 작성하기'
+    summary: '5의 @Nested 어노테이션을 쓰면 된다'
+    parent: index
+    url: /wiki/junit5-nested
+    updated: '2019-12-22 19:53:40 +0900'
+    children: []
+jvm:
+    type: wiki
+    title: JVM
+    summary: 'Java Virtual Machine'
+    parent: Java
+    url: /wiki/jvm
+    updated: '2019-08-30 10:06:13 +0900'
+    children: [jvm-memory, jvm-stack]
+jvm-memory:
+    type: wiki
+    title: 'JVM 메모리 구조와 GC'
+    summary: '작성중인 문서'
+    parent: jvm
+    url: /wiki/jvm-memory
+    updated: '2019-09-15 15:06:24 +0900'
+    children: []
+jvm-stack:
+    type: wiki
+    title: 'JVM stack과 frame'
+    summary: ""
+    parent: jvm
+    url: /wiki/jvm-stack
+    updated: '2019-08-30 12:18:19 +0900'
+    children: []
+kanban-scrum:
+    type: wiki
+    title: 'Kanban, Scrum'
+    summary: '칸반, 스크럼'
+    parent: what
+    url: /wiki/kanban-scrum
+    updated: '2019-01-04 23:09:27 +0900'
+    children: []
+Kerckhoffs-s-principle:
+    type: wiki
+    title: '커코프의 원칙(Kerckhoffs''s principle)'
+    summary: '암호의 안전성은 알고리즘이 아니라 키의 비밀성에만 의존해야 한다'
+    parent: proverb
+    url: /wiki/Kerckhoffs-s-principle
+    updated: '2019-12-11 10:41:43 +0900'
+    children: []
+King-O-The-Cats:
+    type: wiki
+    title: '고양이의 왕(The King O'' Cats)'
+    summary: ""
+    parent: clipping
+    url: /wiki/King-O-The-Cats
+    updated: '2018-07-29 00:13:44 +0900'
+    children: []
+labs-strava-com-heatmap:
+    type: wiki
+    title: 'STRAVA LABS HEATMAP'
+    summary: '운동 위치추적 앱 스트라바가 공개한 열 지도'
+    parent: useful-site
+    url: /wiki/labs-strava-com-heatmap
+    updated: '2018-02-07 21:30:38 +0900'
+    children: []
+Las-chicas-del-cable:
+    type: wiki
+    title: '마드리드 모던걸에서 자동 교환기가 채택되지 않은 이유'
+    summary: '교환원이 사라지면 도청을 할 수 없어'
+    parent: legend
+    url: /wiki/Las-chicas-del-cable
+    updated: '2019-09-29 20:32:04 +0900'
+    children: []
+latency:
+    type: wiki
+    title: 지연시간(Latency)
+    summary: '요청이 처리되길 기다리는 시간'
+    parent: what
+    url: /wiki/latency
+    updated: '2019-12-29 23:00:41 +0900'
+    children: []
+legend:
+    type: wiki
+    title: '이야기 모음'
+    summary: null
+    parent: clipping
+    url: /wiki/legend
+    updated: '2018-02-08 12:16:58 +0900'
+    children: [Bill-Atkinson-productivity, gerald-weinberg-language-king, Grote-Reber-home-made-radio-astronomy, James-Gosling-super-programmer, John-von-Neumann, John-W-Backus, Las-chicas-del-cable, Wordstar]
+letter-case:
+    type: wiki
+    title: '대문자를 upper case, 소문자를 lower case라 부르는 이유'
+    summary: '인쇄 식자공들이 소문자 활자를 아래쪽 상자에 담고, 대문자 활자를 위쪽 상자에 담았기 때문'
+    parent: why
+    url: /wiki/letter-case
+    updated: '2018-02-07 22:46:36 +0900'
+    children: []
+links:
+    type: wiki
+    title: Links
+    summary: '다시 읽고 싶은 기사 링크 모음'
+    parent: index
+    url: /wiki/links
+    updated: '2018-07-29 17:35:50 +0900'
+    children: [links-2018, links-2019]
+links-2018:
+    type: wiki
+    title: '2018년 링크 모음'
+    summary: '해묵은 웹 브라우저 탭 정리'
+    parent: links
+    url: /wiki/links-2018
+    updated: '2018-12-29 18:21:57 +0900'
+    children: []
+links-2019:
+    type: wiki
+    title: '2019년 링크 모음'
+    summary: ""
+    parent: links
+    url: /wiki/links-2019
+    updated: '2019-06-01 11:17:14 +0900'
+    children: []
+locking:
+    type: wiki
+    title: 잠금(Locking)
+    summary: null
+    parent: index
+    url: /wiki/locking
+    updated: '2019-10-11 10:59:15 +0900'
+    children: []
+locomotive-problem:
+    type: wiki
+    title: '기관차 문제(locomotive problem)'
+    summary: '기관차 한 대의 번호를 보고 전체 기관차 수를 추정하자'
+    parent: study-think-bayes
+    url: /wiki/locomotive-problem
+    updated: '2019-12-10 15:16:17 +0900'
+    children: []
+lsof:
+    type: wiki
+    title: 'lsof 명령어'
+    summary: 'list open files'
+    parent: command-line
+    url: /wiki/lsof
+    updated: '2019-09-10 21:53:57 +0900'
+    children: []
+Lubarsky-s-Law-of-Cybernetic-Entomology:
+    type: wiki
+    title: '루바르스키의 사이버네틱 곤충학 법칙(Lubarsky''s Law of Cybernetic Entomology)'
+    summary: '버그는 언제나 한 마리가 더 있다.'
+    parent: proverb
+    url: /wiki/Lubarsky-s-Law-of-Cybernetic-Entomology
+    updated: '2017-12-09 22:39:56 +0900'
+    children: []
+mac-apps:
+    type: wiki
+    title: '유용한 Mac 애플리케이션 모음'
+    summary: ""
+    parent: tools
+    url: /wiki/mac-apps
+    updated: '2018-03-03 19:45:04 +0900'
+    children: [hammerspoon]
+mac-keyboard-shortcuts:
+    type: wiki
+    title: '맥 키보드 단축키'
+    summary: '자주 쓰는 맥 단축키 정리'
+    parent: index
+    url: /wiki/mac-keyboard-shortcuts
+    updated: '2019-11-19 23:57:24 +0900'
+    children: []
+math:
+    type: wiki
+    title: 수학
+    summary: null
+    parent: index
+    url: /wiki/math
+    updated: '2018-04-08 20:38:32 +0900'
+    children: [Bayes-theorem, Binomial-Theorem, Cromwell-s-rule, Fermat-s-little-theorem, fibonacci, frac1e, gcd, graph, halting-problem, primitive-roots, relations, rule-of-succession, secretary-problem]
+mathdict:
+    type: wiki
+    title: '대한수학회 수학용어 사전'
+    summary: '수학용어 번역시 꼭 참고하자'
+    parent: useful-site
+    url: /wiki/mathdict
+    updated: '2018-04-25 21:06:47 +0900'
     children: []
 mathjax-latex:
     type: wiki
@@ -356,7 +2204,87 @@ mathjax-latex:
     summary: null
     parent: how-to
     url: /wiki/mathjax-latex
-    updated: '2017-12-23 18:18:43 +0900'
+    updated: '2019-11-04 22:13:47 +0900'
+    children: []
+media:
+    type: wiki
+    title: 미디어
+    summary: null
+    parent: index
+    url: /wiki/media
+    updated: '2018-01-13 11:20:36 +0900'
+    children: [book]
+memo-2019:
+    type: wiki
+    title: '2019년 메모'
+    summary: ""
+    parent: diary
+    url: /wiki/memo-2019
+    updated: '2019-11-11 00:05:01 +0900'
+    children: []
+MnM-problem:
+    type: wiki
+    title: 'M&M 문제'
+    summary: null
+    parent: study-think-bayes
+    url: /wiki/MnM-problem
+    updated: '2018-04-24 20:49:22 +0900'
+    children: []
+Monty-Hall-problem:
+    type: wiki
+    title: '몬티 홀 문제(Monty Hall problem)'
+    summary: ""
+    parent: study-think-bayes
+    url: /wiki/Monty-Hall-problem
+    updated: '2018-04-24 20:49:29 +0900'
+    children: []
+my-bash-cheatsheet:
+    type: wiki
+    title: '나의 bash cheatsheet'
+    summary: 'bash tip 모음'
+    parent: command-line
+    url: /wiki/my-bash-cheatsheet
+    updated: '2018-10-17 13:11:53 +0900'
+    children: []
+my-bookshelf:
+    type: wiki
+    title: '나의 책꽂이, 양말 서랍, 옷장 관리 방법'
+    summary: '규칙을 통해 노력을 최소화하는 물리 레이어 컬렉션 운영 방법'
+    parent: my-lifehack
+    url: /wiki/my-bookshelf
+    updated: '2019-10-12 13:53:28 +0900'
+    children: []
+my-keyboard:
+    type: wiki
+    title: '나의 키보드 히스토리'
+    summary: '역사를 정리해 보자'
+    parent: my-lifehack
+    url: /wiki/my-keyboard
+    updated: '2019-12-27 21:13:51 +0900'
+    children: []
+my-lifehack:
+    type: wiki
+    title: 'My Lifehack'
+    summary: ""
+    parent: index
+    url: /wiki/my-lifehack
+    updated: '2019-10-11 23:34:05 +0900'
+    children: [cleaning-tile-cycle, hhkb-jp-tmk, my-bookshelf, my-keyboard, my-mac-os-terminal, my-study-method, preserve-brain, random-lunch]
+my-mac-os-terminal:
+    type: wiki
+    title: 'macOS 초심자를 위한 터미널 공부 가이드'
+    summary: '편안하고 즐거운 터미널 생활'
+    parent: my-lifehack
+    url: /wiki/my-mac-os-terminal
+    updated: '2019-11-22 23:55:28 +0900'
+    children: []
+my-study-method:
+    type: wiki
+    title: '나의 공부 방법'
+    summary: null
+    parent: my-lifehack
+    url: /wiki/my-study-method
+    updated: '2019-01-19 12:03:58 +0900'
     children: []
 my-wiki:
     type: wiki
@@ -364,16 +2292,800 @@ my-wiki:
     summary: '마음에 드는 무료 위키가 없어서 만들어보았다'
     parent: Vim
     url: /wiki/my-wiki
-    updated: '2019-10-30 08:09:16 +0900'
+    updated: '2020-01-05 12:31:35 +0900'
+    children: []
+Mythical-Man-Month:
+    type: wiki
+    title: '(책) 맨먼스 미신 - 소프트웨어 공학에 관한 에세이'
+    summary: 'The Mythical Man-Month - Essays on Software Engineering'
+    parent: book
+    url: /wiki/Mythical-Man-Month
+    updated: '2018-02-21 22:38:43 +0900'
+    children: []
+Naming-Principle:
+    type: wiki
+    title: '명명 원칙(The Naming Principle)'
+    summary: ""
+    parent: proverb
+    url: /wiki/Naming-Principle
+    updated: '2018-11-18 22:31:43 +0900'
+    children: []
+No-Silver-Bullet:
+    type: wiki
+    title: '은총알은 없다(No Silver Bullet)'
+    summary: '생산성, 신뢰성, 단순성을 10배 이상 향상시킬 발전은 나타나지 않을 것이다'
+    parent: proverb
+    url: /wiki/No-Silver-Bullet
+    updated: '2018-02-21 22:34:10 +0900'
+    children: []
+null-object-pattern:
+    type: wiki
+    title: '널 오브젝트 패턴 (Null Object Pattern)'
+    summary: '인터페이스는 구현하지만 아무 일도 하지 않는 객체'
+    parent: design-pattern
+    url: /wiki/null-object-pattern
+    updated: '2019-11-14 22:46:56 +0900'
+    children: []
+Object-equals:
+    type: wiki
+    title: 'java.lang.Object.equals 메소드'
+    summary: null
+    parent: Java
+    url: /wiki/Object-equals
+    updated: '2018-03-08 23:00:25 +0900'
+    children: []
+Object-hashCode:
+    type: wiki
+    title: 'java.lang.Object.hashCode 메소드'
+    summary: null
+    parent: Java
+    url: /wiki/Object-hashCode
+    updated: '2019-11-02 14:01:44 +0900'
+    children: []
+Object-toString:
+    type: wiki
+    title: 'java.lang.Object.toString 메소드'
+    summary: null
+    parent: Java
+    url: /wiki/Object-toString
+    updated: '2018-03-11 15:12:10 +0900'
+    children: []
+observer-pattern:
+    type: wiki
+    title: '옵저버 패턴(Observer Pattern)'
+    summary: '상태 변화를 감시자에게 통지한다'
+    parent: design-pattern
+    url: /wiki/observer-pattern
+    updated: '2019-10-05 10:40:00 +0900'
+    children: []
+Oliver-s-blood:
+    type: wiki
+    title: '올리버의 혈액형 문제(Oliver''s blood)'
+    summary: '흔한 혈액형으로는 유죄로 몰 수 없지'
+    parent: study-think-bayes
+    url: /wiki/Oliver-s-blood
+    updated: '2018-04-24 20:49:44 +0900'
+    children: []
+OOP-to-me-Alan-Kay:
+    type: wiki
+    title: '앨런 케이의 심플한 OOP 정의'
+    summary: ""
+    parent: proverb
+    url: /wiki/OOP-to-me-Alan-Kay
+    updated: '2019-10-17 23:02:44 +0900'
+    children: []
+openssl:
+    type: wiki
+    title: 'openssl 명령어'
+    summary: 'cryptography toolkit'
+    parent: command-line
+    url: /wiki/openssl
+    updated: '2019-01-19 12:58:50 +0900'
+    children: []
+orange-juice-test:
+    type: wiki
+    title: '오렌지 주스 테스트'
+    summary: '항상 대안을 제시하라'
+    parent: proverb
+    url: /wiki/orange-juice-test
+    updated: '2018-01-30 23:16:57 +0900'
+    children: []
+osi-model:
+    type: wiki
+    title: 'OSI 7 계층 모형'
+    summary: '네트워킹을 여러 계층에서 동작하는 별도의 기능으로 분할한 모델'
+    parent: what
+    url: /wiki/osi-model
+    updated: '2019-12-02 23:23:18 +0900'
+    children: []
+p-np:
+    type: wiki
+    title: 'P-NP 문제'
+    summary: ""
+    parent: algorithm
+    url: /wiki/p-np
+    updated: '2019-06-12 10:05:45 +0900'
+    children: []
+PATTERN-ON-THE-STONE:
+    type: wiki
+    title: '(책) 생각하는 기계'
+    summary: ""
+    parent: book
+    url: /wiki/PATTERN-ON-THE-STONE
+    updated: '2018-05-26 22:15:42 +0900'
+    children: []
+persona:
+    type: wiki
+    title: 페르소나(persona)
+    summary: '페르소나 디자인 방법론'
+    parent: what
+    url: /wiki/persona
+    updated: '2019-07-08 16:07:45 +0900'
+    children: []
+php:
+    type: wiki
+    title: php
+    summary: ""
+    parent: programming-language
+    url: /wiki/php
+    updated: '2019-01-13 22:34:44 +0900'
+    children: [composer]
+phpbrew:
+    type: wiki
+    title: phpbrew
+    summary: 'Brew & manage PHP versions in pure PHP at HOME'
+    parent: command-line
+    url: /wiki/phpbrew
+    updated: '2019-01-08 22:43:54 +0900'
+    children: []
+polite-software:
+    type: wiki
+    title: '예의 바른 소프트웨어'
+    summary: 'Polite Software'
+    parent: what
+    url: /wiki/polite-software
+    updated: '2019-07-08 22:23:43 +0900'
+    children: []
+port:
+    type: wiki
+    title: 포트(port)
+    summary: ""
+    parent: what
+    url: /wiki/port
+    updated: '2019-07-26 20:58:45 +0900'
+    children: []
+Postel-s-law:
+    type: wiki
+    title: '포스텔의 법칙(Postel''s law)'
+    summary: '받을 때는 관대하게, 보낼 때는 엄격하게.'
+    parent: proverb
+    url: /wiki/Postel-s-law
+    updated: '2018-01-07 18:20:48 +0900'
+    children: []
+precision-of-number:
+    type: wiki
+    title: '수의 정밀도'
+    summary: '실제로 갖고 있지 않은 정보를 창조하면 안된다'
+    parent: for-craftsmanship
+    url: /wiki/precision-of-number
+    updated: '2019-11-06 21:43:23 +0900'
+    children: []
+preserve-brain:
+    type: wiki
+    title: '뇌를 건강하게 유지하는 실천 원칙'
+    summary: ""
+    parent: my-lifehack
+    url: /wiki/preserve-brain
+    updated: '2019-11-17 23:01:33 +0900'
+    children: []
+primitive-roots:
+    type: wiki
+    title: '원시근(Primitive Roots)'
+    summary: ""
+    parent: math
+    url: /wiki/primitive-roots
+    updated: '2019-12-03 22:52:33 +0900'
+    children: []
+private-constructor:
+    type: wiki
+    title: 'Java에서 객체가 생성되는 것을 막는 방법'
+    summary: 'private 생성자를 선언한다'
+    parent: Java
+    url: /wiki/private-constructor
+    updated: '2018-03-05 16:17:51 +0900'
+    children: []
+problem:
+    type: wiki
+    title: 문제
+    summary: ""
+    parent: index
+    url: /wiki/problem
+    updated: '2018-04-16 20:58:12 +0900'
+    children: [two-eggs-100-floor]
+PROFESSIONAL-SOFTWARE-DEVELOPMENT:
+    type: wiki
+    title: '(책) Professional 소프트웨어 개발'
+    summary: 'PROFESSIONAL SOFTWARE DEVELOPMENT'
+    parent: book
+    url: /wiki/PROFESSIONAL-SOFTWARE-DEVELOPMENT
+    updated: '2018-02-06 23:05:06 +0900'
     children: []
 programming-language:
     type: wiki
     title: '프로그래밍 언어'
-    summary: '샘플 카테고리'
+    summary: null
     parent: index
     url: /wiki/programming-language
-    updated: '2019-10-30 08:34:50 +0900'
-    children: [Groovy]
+    updated: '2017-12-03 15:01:36 +0900'
+    children: [awk, bc, Golang, Groovy, Java, php, Python3, rust, TOML, YAML]
+proverb:
+    type: wiki
+    title: '나의 용어 사전'
+    summary: null
+    parent: index
+    url: /wiki/proverb
+    updated: '2019-10-27 22:42:37 +0900'
+    children: [ACID, airplain-rule, Boy-Scout-Rule, Brooks-s-law, CAP-theorem, Conway-s-law, Copernican-Principle, Edsel-edict, hollywood-principle, Kerckhoffs-s-principle, Lubarsky-s-Law-of-Cybernetic-Entomology, Naming-Principle, No-Silver-Bullet, OOP-to-me-Alan-Kay, orange-juice-test, Postel-s-law, Schopenhauer-s-Law-Of-Entropy, SOLID, Tompson-s-rule-for-first-time-telescope-makers, Zipf-s-law]
+pwgen-cmd:
+    type: wiki
+    title: 'pwgen 명령어'
+    summary: '패스워드를 생성한다'
+    parent: command-line
+    url: /wiki/pwgen-cmd
+    updated: '2019-12-09 20:58:29 +0900'
+    children: []
+Python3:
+    type: wiki
+    title: Python3
+    summary: ""
+    parent: programming-language
+    url: /wiki/Python3
+    updated: '2018-09-18 20:37:27 +0900'
+    children: [python3-simple-file-sharing]
+python3-simple-file-sharing:
+    type: wiki
+    title: 'python3로 간단하게 파일 전송하기'
+    summary: '같은 사무실이면 메신저로 보내지 말고 python3 -m http.server'
+    parent: Python3
+    url: /wiki/python3-simple-file-sharing
+    updated: '2019-12-22 21:11:25 +0900'
+    children: []
+random-lunch:
+    type: wiki
+    title: '간단하게 만드는 랜덤런치 그룹 생성기'
+    summary: ""
+    parent: my-lifehack
+    url: /wiki/random-lunch
+    updated: '2019-11-08 08:40:21 +0900'
+    children: []
+regex-prime:
+    type: wiki
+    title: '소수를 판별하는 정규식'
+    summary: '1진법을 사용해 소수를 판별하자!'
+    parent: algorithm
+    url: /wiki/regex-prime
+    updated: '2019-12-27 13:15:11 +0900'
+    children: []
+relations:
+    type: wiki
+    title: 관계(Relations)
+    summary: ""
+    parent: math
+    url: /wiki/relations
+    updated: '2019-06-04 21:21:56 +0900'
+    children: []
+REST-paper-summary:
+    type: wiki
+    title: '(요약) Architectural Styles and the Design of Network-based Software Architectures by Roy Thomas Fielding, 2000'
+    summary: '로이 필딩의 아키텍처 스타일과 네트워크 기반의 소프트웨어 아키텍처 설계 요약'
+    parent: summary
+    url: /wiki/REST-paper-summary
+    updated: '2019-10-15 17:52:02 +0900'
+    children: []
+review:
+    type: wiki
+    title: '회고 모음'
+    summary: null
+    parent: index
+    url: /wiki/review
+    updated: '2019-01-01 11:47:11 +0900'
+    children: [review-2017, review-2018, review-2019, review-2020]
+review-2017:
+    type: wiki
+    title: '2017년 회고'
+    summary: '인생 최고의 1년이었다'
+    parent: review
+    url: /wiki/review-2017
+    updated: '2018-04-21 11:52:48 +0900'
+    children: []
+review-2018:
+    type: wiki
+    title: '2018년 회고'
+    summary: null
+    parent: review
+    url: /wiki/review-2018
+    updated: '2019-03-02 21:41:02 +0900'
+    children: []
+review-2019:
+    type: wiki
+    title: '2019년 회고'
+    summary: '지난 1년을 돌아보자'
+    parent: review
+    url: /wiki/review-2019
+    updated: '2019-12-28 22:52:37 +0900'
+    children: []
+review-2020:
+    type: wiki
+    title: '2020년 기록'
+    summary: '연말에 2020년 회고로 제목을 바꿀 문서'
+    parent: review
+    url: /wiki/review-2020
+    updated: '2020-01-06 19:35:15 +0900'
+    children: []
+RFC:
+    type: wiki
+    title: 'RFC(Requests For Comments)'
+    summary: '일련번호가 매겨진 인터넷 표준 문서'
+    parent: what
+    url: /wiki/RFC
+    updated: '2019-07-09 18:50:02 +0900'
+    children: []
+rig-cmd:
+    type: wiki
+    title: 'rig 명령어'
+    summary: '가짜 신원과 주소를 랜덤으로 만들어 준다'
+    parent: command-line
+    url: /wiki/rig-cmd
+    updated: '2020-01-06 10:06:43 +0900'
+    children: []
+ripgrep:
+    type: wiki
+    title: 'ripgrep, rg'
+    summary: 'recursively search current directory for lines matching a pattern'
+    parent: command-line
+    url: /wiki/ripgrep
+    updated: '2019-11-11 22:42:25 +0900'
+    children: []
+rouge-supported-languages:
+    type: wiki
+    title: 'Rouge가 지원하는 언어 목록'
+    summary: 'Github Jekyll의 syntax highlight용 언어 키워드 모음'
+    parent: what
+    url: /wiki/rouge-supported-languages
+    updated: '2018-09-17 23:51:26 +0900'
+    children: []
+router:
+    type: wiki
+    title: Router(라우터)
+    summary: ""
+    parent: what
+    url: /wiki/router
+    updated: '2019-11-26 22:16:23 +0900'
+    children: []
+rsa-encryption:
+    type: wiki
+    title: 'RSA 암호(RSA Encryption)'
+    summary: ""
+    parent: what
+    url: /wiki/rsa-encryption
+    updated: '2019-12-15 19:08:53 +0900'
+    children: []
+rule-of-succession:
+    type: wiki
+    title: '후속 규칙(Rule of succession)'
+    summary: '(s + 1) / (n + 2)'
+    parent: math
+    url: /wiki/rule-of-succession
+    updated: '2018-04-24 22:03:17 +0900'
+    children: []
+rust:
+    type: wiki
+    title: Rust
+    summary: ""
+    parent: programming-language
+    url: /wiki/rust
+    updated: '2019-12-26 22:40:46 +0900'
+    children: [start-rust-with-vim]
+say:
+    type: wiki
+    title: 'say 명령어'
+    summary: 'macOS에서 음성으로 문자열을 읽게 한다'
+    parent: command-line
+    url: /wiki/say
+    updated: '2019-11-13 22:36:32 +0900'
+    children: []
+Schopenhauer-s-Law-Of-Entropy:
+    type: wiki
+    title: '쇼펜하우어의 엔트로피 법칙 (Schopenhauer''s Law Of Entropy)'
+    summary: ""
+    parent: proverb
+    url: /wiki/Schopenhauer-s-Law-Of-Entropy
+    updated: '2019-11-01 21:33:32 +0900'
+    children: []
+Schrodinger-s-goyang-Hee:
+    type: wiki
+    title: '(책) 슈뢰딩거의 고양희'
+    summary: '반-바지. SF 단편집'
+    parent: book
+    url: /wiki/Schrodinger-s-goyang-Hee
+    updated: '2018-04-22 17:16:53 +0900'
+    children: []
+SCIENTIFIC-AMERICAN-The-Secrets-Of-Consciousness:
+    type: wiki
+    title: '(책) SCIENTIFIC AMERICAN 의식의 비밀'
+    summary: 'SECRET OF CONSCIOUSNESS'
+    parent: book
+    url: /wiki/SCIENTIFIC-AMERICAN-The-Secrets-Of-Consciousness
+    updated: '2018-02-05 22:29:54 +0900'
+    children: []
+sdkman:
+    type: wiki
+    title: 'sdk 명령어 (sdkman)'
+    summary: '다양한 소프트웨어 개발 도구의 버전을 관리한다'
+    parent: command-line
+    url: /wiki/sdkman
+    updated: '2019-12-30 22:20:27 +0900'
+    children: []
+secret-of-consulting:
+    type: wiki
+    title: '(책) 컨설팅의 비밀 - 제랄드 와인버그'
+    summary: 'The Secrets of Consulting by Gerald M. Weinberg'
+    parent: book
+    url: /wiki/secret-of-consulting
+    updated: '2018-01-30 22:42:26 +0900'
+    children: []
+secretary-problem:
+    type: wiki
+    title: '비서 문제(Secretary problem)'
+    summary: '37% 법칙'
+    parent: math
+    url: /wiki/secretary-problem
+    updated: '2019-11-09 16:37:56 +0900'
+    children: []
+sed:
+    type: wiki
+    title: sed
+    summary: 'stream editor'
+    parent: command-line
+    url: /wiki/sed
+    updated: '2019-11-29 14:07:45 +0900'
+    children: []
+sha256sum:
+    type: wiki
+    title: 'sha256sum 명령어'
+    summary: 'compute and check SHA256 message digest'
+    parent: command-line
+    url: /wiki/sha256sum
+    updated: '2018-08-24 22:12:12 +0900'
+    children: []
+sharding:
+    type: wiki
+    title: '샤딩(Sharding)과 파티셔닝'
+    summary: ""
+    parent: database
+    url: /wiki/sharding
+    updated: '2019-09-26 21:47:49 +0900'
+    children: []
+Shunsho-juwa:
+    type: wiki
+    title: '(책) 수학자의 공부'
+    summary: '수학자 오카 기요시의 일본 교육 비판'
+    parent: book
+    url: /wiki/Shunsho-juwa
+    updated: '2018-03-14 09:03:34 +0900'
+    children: []
+Software-Craftsman:
+    type: wiki
+    title: '(책) 소프트웨어 장인 - 프로페셔널리즘, 실용주의, 자부심'
+    summary: 'The Software Craftman-Professionalism, Pragmatism, Pride by Sandro Mancuso'
+    parent: book
+    url: /wiki/Software-Craftsman
+    updated: '2018-02-01 22:56:16 +0900'
+    children: []
+Software-Engineering-Code-of-Ethics:
+    type: wiki
+    title: '소프트웨어 공학 윤리 강령과 업무 규범'
+    summary: 'Software Engineering Code of Ethics'
+    parent: clipping
+    url: /wiki/Software-Engineering-Code-of-Ethics
+    updated: '2018-02-07 06:48:10 +0900'
+    children: []
+SOLID:
+    type: wiki
+    title: 'SOLID 원칙'
+    summary: '객체지향 5대 원칙'
+    parent: proverb
+    url: /wiki/SOLID
+    updated: '2019-10-06 23:25:35 +0900'
+    children: []
+sort:
+    type: wiki
+    title: 'sort 명령어'
+    summary: 정렬한다
+    parent: command-line
+    url: /wiki/sort
+    updated: '2018-08-31 09:59:37 +0900'
+    children: []
+special-chars:
+    type: wiki
+    title: '특수문자 모음'
+    summary: '특수문자 검색하다 빡쳐서 작성한 문서'
+    parent: what
+    url: /wiki/special-chars
+    updated: '2019-10-03 23:08:33 +0900'
+    children: []
+spring:
+    type: wiki
+    title: 'Spring Framework'
+    summary: '스프링 프레임워크'
+    parent: index
+    url: /wiki/spring
+    updated: '2019-08-15 16:29:07 +0900'
+    children: [spring-bean-config-configuration, spring-bean-config-xml, spring-ioc, spring-versions]
+spring-bean-config-configuration:
+    type: wiki
+    title: 'Configuration annotation을 통한 Spring Bean 설정'
+    summary: 'Springboot만 쓰다보니 잊어먹을 것 같다'
+    parent: spring
+    url: /wiki/spring-bean-config-configuration
+    updated: '2019-08-15 22:23:28 +0900'
+    children: []
+spring-bean-config-xml:
+    type: wiki
+    title: 'xml을 통한 Spring Bean 설정'
+    summary: '잊어먹고 후회말고 기록해두자'
+    parent: spring
+    url: /wiki/spring-bean-config-xml
+    updated: '2019-08-15 22:11:42 +0900'
+    children: []
+spring-ioc:
+    type: wiki
+    title: IoC
+    summary: 'Inversion of Control'
+    parent: spring
+    url: /wiki/spring-ioc
+    updated: '2019-12-25 23:44:32 +0900'
+    children: []
+spring-versions:
+    type: wiki
+    title: '스프링 버전 체크'
+    summary: ""
+    parent: spring
+    url: /wiki/spring-versions
+    updated: '2019-09-21 11:28:35 +0900'
+    children: []
+sql-char-comparison:
+    type: wiki
+    title: 'MySQL에서 ''a'' = ''a ''가 true로 평가된다?'
+    summary: 'DB알못의 어떤 리서치'
+    parent: why
+    url: /wiki/sql-char-comparison
+    updated: '2018-04-21 11:15:30 +0900'
+    children: []
+start-rust-with-vim:
+    type: wiki
+    title: 'Rust 언어를 위한 Vim 설정'
+    summary: ""
+    parent: rust
+    url: /wiki/start-rust-with-vim
+    updated: '2019-12-29 08:46:50 +0900'
+    children: []
+static-factory-method-pattern:
+    type: wiki
+    title: '정적 팩토리 메서드(static factory method)'
+    summary: 'static 메서드로 객체 생성을 캡슐화한다'
+    parent: design-pattern
+    url: /wiki/static-factory-method-pattern
+    updated: '2018-03-04 13:03:09 +0900'
+    children: []
+strategy-pattern:
+    type: wiki
+    title: '전략 패턴(strategy pattern)'
+    summary: '동일 계열의 알고리즘을 정의하고 상호교환이 가능하게 한다'
+    parent: design-pattern
+    url: /wiki/strategy-pattern
+    updated: '2019-09-22 21:23:31 +0900'
+    children: []
+strfile-cmd:
+    type: wiki
+    title: 'strfile 명령어'
+    summary: 'create a random access file for storing strings'
+    parent: command-line
+    url: /wiki/strfile-cmd
+    updated: '2019-12-25 19:00:36 +0900'
+    children: []
+study:
+    type: wiki
+    title: study
+    summary: ""
+    parent: index
+    url: /wiki/study
+    updated: '2018-04-25 22:04:58 +0900'
+    children: [study-concrete-math, study-data-intensive-application, study-discrete-mathematics, study-formal-languages-and-automata, study-note, study-think-bayes]
+study-concrete-math:
+    type: wiki
+    title: '(study) Concrete Mathematics(구체수학)'
+    summary: ""
+    parent: study
+    url: /wiki/study-concrete-math
+    updated: '2018-04-27 06:05:17 +0900'
+    children: [c-m-01-Recurrent-Problems-01, c-m-01-Recurrent-Problems-02, c-m-01-Recurrent-Problems-03, c-m-01-Recurrent-Problems-Exercises, c-m-02-Sums-01, c-m-02-Sums-02, c-m-02-Sums-03, c-m-02-Sums-04, c-m-02-Sums-05, c-m-02-Sums-06, c-m-02-Sums-07, c-m-02-Sums-Exercises, c-m-03-Integer-Functions-01, c-m-03-Integer-Functions-02, c-m-05-Binomial-Coefficients-04]
+study-data-intensive-application:
+    type: wiki
+    title: '(study) Designing Data-Intensive Applications(데이터 중심 어플리케이션 설계)'
+    summary: ""
+    parent: study
+    url: /wiki/study-data-intensive-application
+    updated: '2018-07-06 23:08:47 +0900'
+    children: [d-i-a-01-reliable-scalable-maintainable, d-i-a-02-data-models-and-query-languages, d-i-a-03-storage-and-retrieval, d-i-a-04-encoding-and-evolution, d-i-a-05-replication]
+study-discrete-mathematics:
+    type: wiki
+    title: '(study) 이산수학'
+    summary: ""
+    parent: study
+    url: /wiki/study-discrete-mathematics
+    updated: '2019-01-05 17:15:40 +0900'
+    children: [discrete-math-functions, discrete-math-inference-rules, discrete-math-linear-congruences, discrete-math-matrices, discrete-math-modular, discrete-math-proofs, discrete-math-propositional-logic, discrete-math-quantifiers, discrete-math-sequences, discrete-math-sets, discrete-math-summations]
+study-formal-languages-and-automata:
+    type: wiki
+    title: '(study) FORMAL LANGUAGES AND AUTOMATA'
+    summary: ""
+    parent: study
+    url: /wiki/study-formal-languages-and-automata
+    updated: '2018-11-12 00:08:19 +0900'
+    children: [f-l-a-00-preface, f-l-a-01-00, f-l-a-01-01, f-l-a-01-02, f-l-a-02-01, f-l-a-02-02, f-l-a-02-03, f-l-a-02-04, f-l-a-03-01, f-l-a-03-02]
+study-note:
+    type: wiki
+    title: '공부, 마음가짐'
+    summary: ""
+    parent: study
+    url: /wiki/study-note
+    updated: '2019-10-16 15:09:25 +0900'
+    children: []
+study-think-bayes:
+    type: wiki
+    title: '(study) 파이썬을 활용한 베이지안 통계'
+    summary: ""
+    parent: study
+    url: /wiki/study-think-bayes
+    updated: '2018-04-25 22:05:44 +0900'
+    children: [cookie-problem, dice-problem, euro-problem, locomotive-problem, MnM-problem, Monty-Hall-problem, Oliver-s-blood]
+summary:
+    type: wiki
+    title: 요약
+    summary: ""
+    parent: index
+    url: /wiki/summary
+    updated: '2019-10-15 17:52:45 +0900'
+    children: [REST-paper-summary, summary-Data-Abstraction-and-Hierarchy, summary-The-Pauseless-GC-Algorithm]
+summary-Data-Abstraction-and-Hierarchy:
+    type: wiki
+    title: '(요약) Data Abstraction and Hierarchy by Barbara Liskov 1988'
+    summary: '바바라 리스코프의 1988년 논문을 읽고 요약한다'
+    parent: summary
+    url: /wiki/summary-Data-Abstraction-and-Hierarchy
+    updated: '2019-11-05 22:17:00 +0900'
+    children: []
+summary-The-Pauseless-GC-Algorithm:
+    type: wiki
+    title: '(요약) The Pauseless GC Algorithm, 2005'
+    summary: 'Pauseless GC 알고리즘 논문 요약'
+    parent: summary
+    url: /wiki/summary-The-Pauseless-GC-Algorithm
+    updated: '2019-10-16 12:05:42 +0900'
+    children: []
+sw_vers-cmd:
+    type: wiki
+    title: 'sw_vers 명령어'
+    summary: 'Mac OS X 의 운영체제 버전 정보를 출력한다'
+    parent: command-line
+    url: /wiki/sw_vers-cmd
+    updated: '2020-01-03 22:24:28 +0900'
+    children: []
+tail:
+    type: wiki
+    title: 'tail 명령어'
+    summary: 'display the last part of a file'
+    parent: command-line
+    url: /wiki/tail
+    updated: '2019-01-06 23:43:13 +0900'
+    children: []
+Take-the-Bully-by-the-Horns:
+    type: wiki
+    title: '(책) 함부로 말하는 사람과 대화하는 법'
+    summary: 'Take the Bully by the Horns'
+    parent: book
+    url: /wiki/Take-the-Bully-by-the-Horns
+    updated: '2018-02-02 22:55:21 +0900'
+    children: []
+template-method-pattern:
+    type: wiki
+    title: '템플릿 메소드 패턴 (Template Method Pattern)'
+    summary: '알고리즘의 일부 단계를 서브클래스에서 정의한다'
+    parent: design-pattern
+    url: /wiki/template-method-pattern
+    updated: '2019-11-21 09:28:58 +0900'
+    children: []
+test-double:
+    type: wiki
+    title: 'Test Double(테스트 더블)'
+    summary: null
+    parent: what
+    url: /wiki/test-double
+    updated: '2019-07-13 18:37:21 +0900'
+    children: []
+TETRIS-EFFECT:
+    type: wiki
+    title: '(책) 테트리스 이펙트'
+    summary: '테트리스 개발과 저작권 분쟁 이야기'
+    parent: book
+    url: /wiki/TETRIS-EFFECT
+    updated: '2018-03-20 23:21:57 +0900'
+    children: []
+The-Jargon-File:
+    type: wiki
+    title: 'The Jargon File'
+    summary: '해커들의 은어 사전'
+    parent: book
+    url: /wiki/The-Jargon-File
+    updated: '2017-12-10 00:55:18 +0900'
+    children: []
+THE-NEXT-BIG-BLUE-COLLAR-JOB-IS-CODING:
+    type: wiki
+    title: 'THE NEXT BIG BLUE-COLLAR JOB IS CODING'
+    summary: '다음 세대 블루 칼라의 대표적인 일자리는 코딩이다'
+    parent: clipping
+    url: /wiki/THE-NEXT-BIG-BLUE-COLLAR-JOB-IS-CODING
+    updated: '2018-01-12 10:46:53 +0900'
+    children: []
+Think-Bayes:
+    type: wiki
+    title: '(책) 파이썬을 활용한 베이지안 통계'
+    summary: '동전 던지기와 하키 승률로 배우는 데이터 분석'
+    parent: book
+    url: /wiki/Think-Bayes
+    updated: '2018-04-24 20:48:05 +0900'
+    children: []
+til:
+    type: wiki
+    title: 'Today I Learned'
+    summary: '내가 오늘 배운 것들'
+    parent: index
+    url: /wiki/til
+    updated: '2018-02-13 21:00:13 +0900'
+    children: [trouble-shooting-node-7-install, vagrant-docker-get-start]
+timeline:
+    type: wiki
+    title: Timeline
+    summary: ""
+    parent: index
+    url: /wiki/timeline
+    updated: '2019-12-15 23:07:33 +0900'
+    children: []
+tmux-c-dash:
+    type: wiki
+    title: 'tmux 키 조합에서 C--가 불가능한 이유.'
+    summary: 'ascii 코드값 때문'
+    parent: why
+    url: /wiki/tmux-c-dash
+    updated: '2019-11-03 22:41:45 +0900'
+    children: []
+TOML:
+    type: wiki
+    title: TOML
+    summary: 'Tom''s Obvious, Minimal Language'
+    parent: programming-language
+    url: /wiki/TOML
+    updated: '2018-10-23 11:01:12 +0900'
+    children: []
+Tompson-s-rule-for-first-time-telescope-makers:
+    type: wiki
+    title: '망원경 규칙 (Telescope Rule)'
+    summary: '4인치 반사경을 만든 다음에 6인치 반사경을 만드는 것이, 6인치 반사경 하나 만드는 것보다 더 빠르다'
+    parent: proverb
+    url: /wiki/Tompson-s-rule-for-first-time-telescope-makers
+    updated: '2019-11-24 09:36:53 +0900'
+    children: []
 tools:
     type: wiki
     title: tools
@@ -381,7 +3093,127 @@ tools:
     parent: index
     url: /wiki/tools
     updated: '2018-02-06 07:05:19 +0900'
-    children: [useful-site]
+    children: [aws, command-line, Excel, git, Gradle, intellij, mac-apps, useful-site, web-browser-extension]
+top:
+    type: wiki
+    title: 'top 명령어'
+    summary: '시스템 프로세스 및 메모리 사용 상태를 확인한다'
+    parent: command-line
+    url: /wiki/top
+    updated: '2018-02-07 21:26:59 +0900'
+    children: []
+touch:
+    type: wiki
+    title: 'touch 명령어'
+    summary: 'change file access and modification times'
+    parent: command-line
+    url: /wiki/touch
+    updated: '2019-01-13 18:22:50 +0900'
+    children: []
+tower-of-hanoi:
+    type: wiki
+    title: '하노이의 탑 (The Tower of Hanoi)'
+    summary: ""
+    parent: algorithm
+    url: /wiki/tower-of-hanoi
+    updated: '2019-12-17 08:07:12 +0900'
+    children: []
+tr-cmd:
+    type: wiki
+    title: 'tr 명령어'
+    summary: 'translate characters'
+    parent: command-line
+    url: /wiki/tr-cmd
+    updated: '2019-11-18 21:34:14 +0900'
+    children: []
+transistor:
+    type: wiki
+    title: 트랜지스터
+    summary: '전자 신호 및 전력을 증폭하거나 스위칭하는 데 사용하는 반도체 소자'
+    parent: what
+    url: /wiki/transistor
+    updated: '2019-06-04 21:19:44 +0900'
+    children: []
+trouble-shooting-node-7-install:
+    type: wiki
+    title: '(문제해결) Mac에서 Node 7 버전으로 다운그레이드'
+    summary: 'nodejs.org에서 받아서 해결'
+    parent: til
+    url: /wiki/trouble-shooting-node-7-install
+    updated: '2018-02-12 15:09:45 +0900'
+    children: []
+Turbo-Pascal-the-first-IDE:
+    type: wiki
+    title: '최초의 IDE, 터보 파스칼 (Turbo Pascal)'
+    summary: '최초의 편집기 + 디버거 + 컴파일러'
+    parent: ""
+    url: /wiki/Turbo-Pascal-the-first-IDE
+    updated: '2019-12-09 22:55:29 +0900'
+    children: []
+two-eggs-100-floor:
+    type: wiki
+    title: '100층 건물과 2개의 계란 문제'
+    summary: ""
+    parent: problem
+    url: /wiki/two-eggs-100-floor
+    updated: '2019-11-02 14:00:11 +0900'
+    children: []
+two-views-of-vim:
+    type: wiki
+    title: 'Vim, 두 가지 관점'
+    summary: '그리고 나의 vim 사용 습관'
+    parent: Vim
+    url: /wiki/two-views-of-vim
+    updated: '2019-12-01 19:55:56 +0900'
+    children: []
+ultisnips:
+    type: wiki
+    title: Ultisnips
+    summary: '자신만의 snippet 파일을 만들어 쓰자'
+    parent: Vim
+    url: /wiki/ultisnips
+    updated: '2020-01-03 21:54:38 +0900'
+    children: []
+units:
+    type: wiki
+    title: 단위
+    summary: ""
+    parent: what
+    url: /wiki/units
+    updated: '2019-11-06 21:21:12 +0900'
+    children: []
+Unix-philosophy:
+    type: wiki
+    title: 'Unix philosophy'
+    summary: '유닉스 철학'
+    parent: what
+    url: /wiki/Unix-philosophy
+    updated: '2018-07-15 10:18:57 +0900'
+    children: []
+uptime:
+    type: wiki
+    title: 'uptime 명령어'
+    summary: '현재 시간, 시스템 부팅 후 경과된 시간, 로그인 사용자, 시스템 부하율을 보여준다.'
+    parent: command-line
+    url: /wiki/uptime
+    updated: '2019-12-22 22:25:24 +0900'
+    children: []
+URI:
+    type: wiki
+    title: URI
+    summary: 'Uniform Resource Identifier'
+    parent: what
+    url: /wiki/URI
+    updated: '2019-08-07 00:23:47 +0900'
+    children: []
+use-java-primitive-type-for-performance:
+    type: wiki
+    title: 'Java Autoboxing 자동 변환 주의점'
+    summary: 'Long, Integer보다 primitive 타입을 쓰는 쪽이 훨씬 빠르다'
+    parent: Java
+    url: /wiki/use-java-primitive-type-for-performance
+    updated: '2018-03-05 16:22:11 +0900'
+    children: []
 useful-site:
     type: wiki
     title: '유용한 웹 서비스 모음'
@@ -389,7 +3221,23 @@ useful-site:
     parent: tools
     url: /wiki/useful-site
     updated: '2018-02-20 22:07:53 +0900'
-    children: [google-search-console-remove-outdated-content]
+    children: [fine-dust, geacron, google-search-console-remove-outdated-content, httpbin.org, labs-strava-com-heatmap, mathdict, utterances]
+utterances:
+    type: wiki
+    title: utterances.es
+    summary: 'Github issue 기반의 댓글 생성기'
+    parent: useful-site
+    url: /wiki/utterances
+    updated: '2018-02-20 22:32:19 +0900'
+    children: []
+vagrant-docker-get-start:
+    type: wiki
+    title: 'Vagrant와 Docker에 CentOS, Ubuntu 설치하기'
+    summary: '간단하게 가상 환경을 꾸며보자'
+    parent: til
+    url: /wiki/vagrant-docker-get-start
+    updated: '2018-09-16 22:05:58 +0900'
+    children: []
 Vim:
     type: wiki
     title: Vim
@@ -397,7 +3245,23 @@ Vim:
     parent: index
     url: /wiki/Vim
     updated: '2017-12-20 13:13:21 +0900'
-    children: [my-wiki, vim-conceallevel]
+    children: [config-ideavim, my-wiki, two-views-of-vim, ultisnips, vim-auto-completion, vim-coc, vim-conceallevel, vim-f-hangul, vim-persistent-undo, vim-rest-console, vim-tagbar-with-markdown, vim-tmux-t-ut, vim-with-space-char, vim-ycm-python3, vimwiki]
+vim-auto-completion:
+    type: wiki
+    title: 'vim 자동완성 기능 사용하기'
+    summary: 'vim을 똑똑하게 사용하자'
+    parent: Vim
+    url: /wiki/vim-auto-completion
+    updated: '2020-01-03 21:42:41 +0900'
+    children: []
+vim-coc:
+    type: wiki
+    title: 'coc.nvim을 사용해보자'
+    summary: ""
+    parent: Vim
+    url: /wiki/vim-coc
+    updated: '2019-06-04 21:19:17 +0900'
+    children: []
 vim-conceallevel:
     type: wiki
     title: 'conceallevel (Vim)'
@@ -406,11 +3270,195 @@ vim-conceallevel:
     url: /wiki/vim-conceallevel
     updated: '2017-12-20 13:13:32 +0900'
     children: []
+vim-f-hangul:
+    type: wiki
+    title: vim-f-hangul
+    summary: 'vim에서 f로 한글을 검색하는 플러그인'
+    parent: Vim
+    url: /wiki/vim-f-hangul
+    updated: '2018-03-18 22:51:56 +0900'
+    children: []
+vim-go-auto-import:
+    type: wiki
+    title: 'vim-go auto import 설정하기'
+    summary: '그래 안 될 리가 없지'
+    parent: Golang
+    url: /wiki/vim-go-auto-import
+    updated: '2018-09-21 08:36:09 +0900'
+    children: []
+vim-go-env:
+    type: wiki
+    title: 'go를 위한 vim 환경설정'
+    summary: '사실 이 문서의 대부분은 vim-go cheatsheet라 할 수 있다'
+    parent: Golang
+    url: /wiki/vim-go-env
+    updated: '2020-01-02 21:12:15 +0900'
+    children: []
+vim-go-with-ultisnips:
+    type: wiki
+    title: 'Ultisnips와 vim-go를 같이 사용할 때 발생하는 E734 에러 해결'
+    summary: '+= 는 list 타입에만 쓰자'
+    parent: Golang
+    url: /wiki/vim-go-with-ultisnips
+    updated: '2018-09-21 08:36:26 +0900'
+    children: []
+vim-persistent-undo:
+    type: wiki
+    title: 'Vim persistent_undo 기능 사용하기'
+    summary: 'Vim을 재실행해도 undo를 쓸 수 있다'
+    parent: Vim
+    url: /wiki/vim-persistent-undo
+    updated: '2018-09-18 16:15:36 +0900'
+    children: []
+vim-rest-console:
+    type: wiki
+    title: 'vim-rest-console 사용법'
+    summary: 'vim을 cURL 클라이언트로 사용하자'
+    parent: Vim
+    url: /wiki/vim-rest-console
+    updated: '2019-11-07 22:00:01 +0900'
+    children: []
+vim-tagbar-with-markdown:
+    type: wiki
+    title: 'vim tagbar에서 markdown을 적용시키자'
+    summary: '.vimrc와 .ctags를 약간만 손보면 된다'
+    parent: Vim
+    url: /wiki/vim-tagbar-with-markdown
+    updated: '2018-09-14 16:58:16 +0900'
+    children: []
+vim-tmux-t-ut:
+    type: wiki
+    title: 'tmux vim에서 나타나는 배경색 번짐 문제 해결'
+    summary: 'set t_ut= 로 한 방에 해결'
+    parent: Vim
+    url: /wiki/vim-tmux-t-ut
+    updated: '2017-04-03 07:33:49 +0900'
+    children: []
+vim-update-book-progress:
+    type: wiki
+    title: '읽고 있는 책의 진행도를 Vim에서 자동으로 계산하자'
+    summary: 'awk 만세'
+    parent: vim
+    url: /wiki/vim-update-book-progress
+    updated: '2019-11-30 21:57:13 +0900'
+    children: []
+vim-with-space-char:
+    type: wiki
+    title: 'Vim 공백 문자 조작 설정'
+    summary: ""
+    parent: Vim
+    url: /wiki/vim-with-space-char
+    updated: '2018-10-31 10:00:21 +0900'
+    children: []
+vim-ycm-python3:
+    type: wiki
+    title: 'youcompleteme를 python3로 구동하기'
+    summary: 'python2 좀 그만 쓰자'
+    parent: Vim
+    url: /wiki/vim-ycm-python3
+    updated: '2018-03-21 23:24:50 +0900'
+    children: []
+vimium:
+    type: wiki
+    title: 'Vimium - The hacker''s browser'
+    summary: '웹 브라우저에서 Vim 키맵을 사용할 수 있다'
+    parent: web-browser-extension
+    url: /wiki/vimium
+    updated: '2018-03-04 01:15:09 +0900'
+    children: []
+vimwiki:
+    type: wiki
+    title: 'Vimwiki 사용법'
+    summary: '로컬에서 Vim으로 관리하는 나만의 위키'
+    parent: Vim
+    url: /wiki/vimwiki
+    updated: '2019-12-27 08:05:02 +0900'
+    children: []
+von-neumann-extractor:
+    type: wiki
+    title: '폰 노이만식 난수 생성법(Basic von Neumann extractor)'
+    summary: '0과 1이 발생할 확률이 다른 경우 사용하자'
+    parent: algorithm
+    url: /wiki/von-neumann-extractor
+    updated: '2018-04-08 15:12:05 +0900'
+    children: []
+web-browser-extension:
+    type: wiki
+    title: '유용한 웹 브라우저 확장 프로그램 모음'
+    summary: ""
+    parent: tools
+    url: /wiki/web-browser-extension
+    updated: '2018-09-19 10:42:09 +0900'
+    children: [vimium]
+what:
+    type: wiki
+    title: what
+    summary: null
+    parent: index
+    url: /wiki/what
+    updated: '2018-04-04 09:04:07 +0900'
+    children: [agile, availability, bandwidth, bootstrapping, braille-pattern-chars, Caesar-cipher, Continuous-Integration, encryption, enterprise-application, ethereum-white-paper, floating-point, gray-code, groupId-artifactId, http, indent-style, IP, kanban-scrum, latency, osi-model, persona, polite-software, port, RFC, rouge-supported-languages, router, rsa-encryption, special-chars, test-double, transistor, units, Unix-philosophy, URI]
+why:
+    type: wiki
+    title: why
+    summary: null
+    parent: index
+    url: /wiki/why
+    updated: '2018-02-07 21:29:47 +0900'
+    children: [letter-case, sql-char-comparison, tmux-c-dash, why-http-80-https-443]
+why-http-80-https-443:
+    type: wiki
+    title: 'http의 기본 포트가 80, https의 기본 포트가 443인 이유는 무엇일까?'
+    summary: '80은 처음부터 지정, 443은 나중에 요청을 받아 빈 공간으로 순서대로 배정'
+    parent: why
+    url: /wiki/why-http-80-https-443
+    updated: '2018-09-09 11:20:07 +0900'
+    children: []
+Wordstar:
+    type: wiki
+    title: 워드스타(Wordstar)
+    summary: '최초의 WYSIWYG 워드프로세서'
+    parent: legend
+    url: /wiki/Wordstar
+    updated: '2019-12-09 22:56:22 +0900'
+    children: []
 YAML:
     type: wiki
     title: YAML
     summary: 'YAML Ain''t Markup Language'
-    parent: index
+    parent: programming-language
     url: /wiki/YAML
-    updated: '2017-12-02 16:45:25 +0900'
+    updated: '2018-04-08 19:48:46 +0900'
+    children: []
+yes:
+    type: wiki
+    title: 'yes 명령어'
+    summary: '문자열을 반복 출력한다'
+    parent: command-line
+    url: /wiki/yes
+    updated: '2019-01-06 23:13:05 +0900'
+    children: []
+ykman:
+    type: wiki
+    title: 'ykman 명령어'
+    summary: 'yubikey를 관리한다'
+    parent: command-line
+    url: /wiki/ykman
+    updated: '2019-12-15 18:22:57 +0900'
+    children: []
+You-and-Your-Research:
+    type: wiki
+    title: '(요약) 당신과 당신의 연구'
+    summary: '남들보다 10% 더 공부하고, 중요한 문제를 연구하고, 항상 준비할 것'
+    parent: clipping
+    url: /wiki/You-and-Your-Research
+    updated: '2019-12-15 19:16:18 +0900'
+    children: []
+Zipf-s-law:
+    type: wiki
+    title: '지프의 법칙(Zipf''s law)'
+    summary: '단어의 빈도는 단어 빈도 랭킹에 반비례한다'
+    parent: proverb
+    url: /wiki/Zipf-s-law
+    updated: '2018-04-15 18:35:07 +0900'
     children: []
