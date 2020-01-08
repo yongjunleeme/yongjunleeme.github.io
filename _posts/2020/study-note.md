@@ -14,20 +14,10 @@ latex   : false
 {:toc}
 
 # 왜 Learning by doing?
-* 지난 2019년 무려 서른 중반에 호기롭게 코딩공부 시작. 방법은 코드아카데미에서 개념을 배우고 계속 보면서 복습. 왜? 외워야 하니깐. 프로젝트를 많이 하라는 소리 많이 들음. 그런데 들었던 강의는 모두 개념 이야기. 강의를 최대한 많이 들었다. 그러던 중 코드 챌린지 기회가 생겼는데 코딩 전혀 못하는 나를 발견. 낙담... 그래서 [Learning by doing]([https://www.youtube.com/watch?v=g0O6VAbnDt8](https://www.youtube.com/watch?v=g0O6VAbnDt8))에 관해 서칭.
-
-* [프로그래밍 독학할때 자주 하는 실수 5가지](https://www.youtube.com/watch?v=FF6CF8TZIhE)
-    * 내가 직접 코딩하며 만들지 않았던 시간들이 후회된다.
-        * 하루 일과에 제로베이스 코딩 작업이 들어갔어야.
-        * 너무 어렵지도 쉽지도 않은 과제 어디서 구하나?
-    * 소셜하지 못했던 지난 기간이 바닥에 버려졌다.
-        * 나는 친구는 독이요. 공부는 혼자하는 거라고 귀에 못이박이게 들어온 세대. 그러나 코딩은 혼자하는 게 아니었다.
-        * 소셜적 진보를 위해서라도 글 쓰고 댓글 달고 적극 나서자.
-        * 나아가 내가 배우고 싶은 분들과 소통할 수 있는 방법은 좋은 회사가는 수밖에 없다.
+[Learning by doing]([https://www.youtube.com/watch?v=g0O6VAbnDt8](https://www.youtube.com/watch?v=g0O6VAbnDt8))
 
 ## 가르치는 입장에서의 교육
 [듀이의 ‘행함에 의한 학습(learning by doing)’의 의미 탐구]([http://www.newnonmun.com/article=187974](http://www.newnonmun.com/article=187974))
-
 교육의 핵심은 경험 속에서 지성에 의한 사고 습관을 형성하는 일
 
 >직접경험은 초보단계에서는 필요하다고 볼 수 있으나, 이후 더 많은 교과교육에서 학습은 학습자의 이전의 경험과 새 경험을 이을 수 있도록 의사소통과 상상력을 동반한 사고에 의해 인도되어야 한다.
