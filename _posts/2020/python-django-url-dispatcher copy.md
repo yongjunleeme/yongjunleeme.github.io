@@ -22,53 +22,55 @@ latex   : false
 
 * Namespace 기입
 
-    confing.urls.py
-    '''
+    **confing.urls.py**
+    ```
     urlpatterns = [
         path("rooms/", include("rooms.urls", namespace="rooms")),
     ]
-    '''
+    ```
 
 * app_names 기입, path에 integer(정수)를 쓰는데 변수 이름은 pk다. 변수라고 표현하는 게 맞는지 모르곘다.
 * pk는 primary key(기본키)의 약자.
 
-    rooms/url.py
-    '''
+    **rooms/url.py**
+    ```
     from django.urls import path
     from . import views
 
     app_name = "rooms"
 
     urlpatterns = [path("<int:pk>", views.room_detail, name="detail")]
-    '''
+    ```
 
 * pk는 rooms/view.py 파일의 room_detail 함수에서 두 번째 인자로 받는다.
 
-    rooms/views.py
-    '''
+    **rooms/views.py**
+    ```
     from django.shortcuts import render
 
     def room_detail(request, pk):
     print(pk)
     return render(request, "rooms/detail.html")
-    '''
+    ```
 
 * html에서 pk를 아래와 같이 쓴다. 
 
-    templates/rooms/room_list.html
-    '''
+    **templates/rooms/room_list.html**
+    ```
     <h3>
         <a href="{% url "rooms:detail" room.pk %}">
             {{room.name}} / ${{room.price}}
         </a>
      </h3>
-     '''
-# 공식문서(https://docs.djangoproject.com/en/3.0/topics/http/urls/)
+    ```
 
-## Example
 
-sample URLconf
-'''
+[아래는 공식 공식문서](https://docs.djangoproject.com/en/3.0/topics/http/urls/)
+
+# Example
+
+**sample URLconf**
+```
 from django.urls import path
 
 from . import views
@@ -79,7 +81,7 @@ urlpatterns = [
     path('articles/<int:year>/<int:month>/', views.month_archive),
     path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail),
 ]
-'''
+```
 
 * Note:
     * URL 값을 캡처하기 위해 ()를 쓴다.
@@ -95,10 +97,15 @@ urlpatterns = [
     * /articles/2003/03/building-a-django-site/는 마지막 패턴과 매치된다.
     장고는 views.article_detail(request, year=2003, month=3, slug="building-a-django-site")를 호출할 것이다.
  
-## Path converters
+# Path converters
     다음의 path conveter들은 디폴트로 쓸 수 있다.
     * str - 경로를 나누는 슬래시를 제외하고 어떤 문자열도 매치된다. 표현식 converter가 없으면 strtind이 디폴트로 설정된다.
     * int - 0 내지 양의 정수가 매치된다. int를 리턴.
     * slug - 아스키 문자의 slug 문자나 숫자, 하이픈, 언더스코어가 매치된다. 예를 들어 building-your-1st-django-site.
     * uuid - 같은 페이지 내 매핑된 다중 URL들을 막기 위해 대시와 소문자로 포함된다. 예를 들어 075194d3-6885-417e-a8a8-6c931e272f00.
-    
+
+# Links
+
+* [노마드 아카데미](https://academy.nomadcoders.co/courses/637659/lectures/11906079)
+
+* [장고 공식문서](https://docs.djangoproject.com/en/3.0/topics/http/urls/)
