@@ -165,68 +165,87 @@ number_wild_books = Book.objects.filter(title__contains='wild').count()
 [Making queries](https://docs.djangoproject.com/en/2.0/topics/db/queries/)
 
 
-# LocalLibrary 모델 정의하기
+## LocalLibrary 모델 정의하기
+
+### 장르(Genre) 모델
 
 **models.py( /locallibrary/catalog/)**
 ```
 from django.db import models
 
-# Create your models here.
-```
-
-## 장르(Genre) 모델
-
-**models.py( /locallibrary/catalog/)**
-```
 class Genre(models.Model):
+
     """Model representing a book genre."""
+    
     name = models.CharField(max_length=200, help_text='Enter a book genre (e.g. Science Fiction)')
     
     def __str__(self):
+    
         """String for representing the Model object."""
+    
         return self.name
 ```
-- 책 카테고리 저장
-    - 모델의 name(CharField)가 장르 이름
+    - 모델의 name(CharField)이 장르 이름
     - __str__() 메소드는 장르 이름을 반환. 자세한 이름(verbose name)이 정의되지 않았기 때문에 폼(form)에서 name으로 호출
 
-## 책(Book) 모델
+### 책(Book) 모델
 
 **models.py( /locallibrary/catalog/)**
 ```
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
 
 class Book(models.Model):
+
     """Model representing a book (but not a specific copy of a book)."""
+    
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
     
     # Foreign Key used because book can only have one author, but authors can have multiple books
     # Author as a string rather than object because it hasn't been declared yet in the file.
+    
     summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
     isbn = models.CharField('ISBN', max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
     
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
+    
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
     
     def __str__(self):
+
         """String for representing the Model object."""
+
         return self.title
     
     def get_absolute_url(self):
+
         """Returns the url to access a detail record for this book."""
+
         return reverse('book-detail', args=[str(self.id)])
 ```
 
-## 책 인스턴스(BookInstance) 모델
+- author 
+    - ForeignKey는 저자가 지은 책이 여러 개일 수 있지만 1권 책의 저자는 1명이므로(실제 여러 작가가 쓴 1권의 책은 이번 구현에서는 제외)
+    - null=True는 저자가 선택되지 않으면 Null값 저장
+    - on_delete=models.SET_NULL는 author 레코드가 삭제되면 Null값으로 저장
+- genre
+    - 책이 여러 장르를 가질 수 있고 장르도 여러 책을 가질 수 있으르모 ManyToManyField
+    - 클래스 장르는 위에 이미 정의했고 아래 장르는 구체화
+- get_absolute_url
+    - 책의 세부 레코드에 접근하는 URL을 반환(작동하려면 book-detail URL 매핑과 뷰, 템플릿을 정의해야 함)
+
+
+### 책 인스턴스(BookInstance) 모델
 
 **models.py( /locallibrary/catalog/)**
 ```
 import uuid # Required for unique book instances
 
 class BookInstance(models.Model):
+
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular book across whole library')
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True) 
     imprint = models.CharField(max_length=200)
@@ -255,17 +274,17 @@ class BookInstance(models.Model):
         return f'{self.id} ({self.book.title})'
 ```
 
-- ForeignKey : 연관된 Book 을 식별하기 위해(각각의 책은 많은 복사본을 가질 수 있지만, 복사본은 하나의 Book만을 가질 수 있음).
-- CharField : 책의 출판사(imprint)(특정한 발간일)을 나타내기 위해.
-- UUIDField 는 id 필드가 이 모델의 primary_key 로 설정되는 데 사용됩니다. 이 타입의 필드는 각 인스턴스에 전역적으로 고유한 값을 할당합니다 (도서관에서 찾을 수 있는 모든 책 마다 하나씩).
-- DateField 는 due_back (만기일) 날짜에 사용됩니다 (책이 빌려지거나 유지 보수된 이후 사용할 수 있을 것으로 예상되는 날짜). 이 값은 blank 나 null 이 될 수 있습니다(책을 사용하 할 수 있는 경우 필요). 메타데이터 모델 (Class Meta) 은 레코드들이 쿼리에서 반환되었을 때 레코드들을 정렬하기 위해서 이 필드를 사용합니다 .
-- status 는 선택/선택 목록(choice/selection list)을 정의하는 CharField 입니다. 보시다시피, 우리는 열쇠-값(key-value) 쌍의 튜플(tuple)을 포함하는 튜플을 정의해서 choices 인자에 전달합니다. 열쇠/값(key/value) 쌍에서 값(value)은 사용자가 선택할 수 있는 표시값인 반면, 열쇠(key)는 그 옵션이 선택되었을 때 실제로 저장되는 값입니다. 또한 책이 선반에 저장되기 전에는 사용할 수 없으므로 기본값인 'm'(유지 관리, maintenanace)을 설정했습니다.
+- UUIDField는 id 필드가 이 모델의 primary_key로 설정되는 데 사용. 각 인스턴스에 전역적으로 고유한 값을 할당.
+- status에 사용된 LOAN_STATUS는는 다중 선택을 위해 선언. (choice/selection list)를 정의하는 CharField. 
+- 메타데이터 모델(Class Meta)은 레코드들이 쿼리에서 반환되었을 때 레코드들을 정렬하기 위한 용도
 
 
-## 저자(Author) 모델
+### 저자(Author) 모델
 ```
 class Author(models.Model):
+
     """Model representing an author."""
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
@@ -275,22 +294,28 @@ class Author(models.Model):
         ordering = ['last_name', 'first_name']
     
     def get_absolute_url(self):
+
         """Returns the url to access a particular author instance."""
+       
         return reverse('author-detail', args=[str(self.id)])
 
     def __str__(self):
+
         """String for representing the Model object."""
+
         return f'{self.last_name}, {self.first_name}'
 ```
 
 
-도전과제 - 언어(Language) 모델
+# 도전과제 - 언어(Language) 모델
  지역 후원자가 다른 언어로 저술된 새로운 책들을 후원한다고 생각해 보세요(아마도, 프랑스어?). 도전과제는 이것이 도서관 웹사이트에서 이것을 가장 잘 나타낼 수 있는 방법을 찾아내고, 모델에 추가하는 것입니다.
 
 고려해야 할 사항들:
 
-"언어"(language)는 Book, BookInstance, 아니면 어떤 다른 객체와 연관되어야 할까요?
- 서로 다른 언어들은 모델로 나타내어야 할까요? 아니면 자유 텍스트 필드?그것도 아니라면 하드-코딩된 선택 리스트로 나타내어야 할까요?
-결정을 내린 후에, 필드를 추가하세요. 우리가 선택한 것은 여기(here) 깃허브에서 볼 수 있습니다.
+"언어"(language)는 Book, BookInstance, 아니면 어떤 다른 객체와 연관되어야 할까요? 서로 다른 언어들은 모델로 나타내어야 할까요? 아니면 자유 텍스트 필드? 그것도 아니라면 하드-코딩된 선택 리스트로 나타내어야 할까요?
+결정을 내린 후에, 필드를 추가하세요. 우리가 선택한 것은 [깃허브](https://github.com/mdn/django-locallibrary-tutorial/blob/master/catalog/models.py)에서 볼 수 있습니다.
 
-https://github.com/mdn/django-locallibrary-tutorial/blob/master/catalog/models.py
+
+# 질문
+- class안에 정의된 항목의 명칭은 무엇이지?
+- Language를 Choices가 아니라 클래스로 선언하고 Book 클래스에서 받아오는 이유는 무엇?
