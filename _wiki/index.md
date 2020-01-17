@@ -1,1 +1,2 @@
 [[Diary]]
+Diary
