@@ -1,13 +1,13 @@
 # Site settings
-title: 기괴인간 Yongjun
+title: 펭귄다리 Yongjun
 url: "https://yongjunleeme.github.io"
 baseurl: ""
 description: >
-    기괴인간 블로그
+   인생풍요는 배움과 나눔에 
 
 # My information
 email: chesidyong@gmail.com
-author: 기괴인간 Yongjun
+author: 펭귄다리 Yongjun
 profile: 인생풍요는 배움과 나눔에
 twitter_username: 
 github_username: yongjunleeme
@@ -47,10 +47,10 @@ utterances:
   branch: master
 
 google_analytics:
-  ua: UA-110224147-1
+  ua: 
 
 google_adsense:
-  client: ca-pub-3675948545737694
+  client: 
 
 blame: "https://github.com/yongjunleeme/yongjunleeme.github.io/blame/master/_wiki"
 edit: "https://github.com/yongjunleeme/yongjunleeme.github.io/edit/master/_wiki"
