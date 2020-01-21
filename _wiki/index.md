@@ -1,2 +1,4 @@
-[[test]]
-[[book-log-2010]]
+[[diary]]
+[[media]]
+
+
