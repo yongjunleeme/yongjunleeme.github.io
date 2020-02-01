@@ -3,18 +3,14 @@ layout  : wikiindex
 title   : wiki
 toc     : true
 public  : true
-comment : false
 regenerate: true
 ---
 
-* TOC
-{:toc
 
+## [[diary]]
 
-[[test]]
+## [[til]]
 
-[[diary]]
-[[media]]
-[[programming-language]]
-[[til]]
-[[hi]]
+## [[programming-language]]
+
+## [[media]]
