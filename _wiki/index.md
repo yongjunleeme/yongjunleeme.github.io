@@ -13,4 +13,6 @@ regenerate: true
 
 ## [[programming-language]]
 
+## [[study]]
+
 ## [[media]]

@@ -1,19 +1,15 @@
 ---
 layout  : category
-title   : Diary
+title   : Python
 summary : 
-date    : 2020-02-01 21:34:48 +0900
+date    : 2020-02-01 22:05:28 +0900
 updated : 2020-02-01 22:17:33 +0900
-tags    : diary
+tags    : 
 toc     : true
 public  : true
-parent  : index
+parent  : 
 latex   : false
 ---
 * TOC
 {:toc}
-
-## [[book-log-2020]]
-
-## [[memo-2020]]
 

@@ -1,19 +1,16 @@
 ---
 layout  : category
-title   : Diary
+title   : Study
 summary : 
-date    : 2020-02-01 21:34:48 +0900
+date    : 2020-02-01 22:08:30 +0900
 updated : 2020-02-01 22:17:33 +0900
-tags    : diary
+tags    : 
 toc     : true
-public  : true
+public  : tre
 parent  : index
 latex   : false
 ---
 * TOC
 {:toc}
 
-## [[book-log-2020]]
-
-## [[memo-2020]]
-
+# [[my-study-method]]
