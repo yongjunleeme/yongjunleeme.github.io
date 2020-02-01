@@ -10,8 +10,11 @@ regenerate: true
 * TOC
 {:toc
 
+
+[[test]]
+
 [[diary]]
 [[media]]
 [[programming-language]]
 [[til]]
-
+[[hi]]
