@@ -3,11 +3,11 @@ layout  : wiki
 title   : django-mozilla-3 
 summary : 
 date    : 2020-02-02 21:57:25 +0900
-updated : 2020-02-02 22:02:38 +0900
+updated : 2020-02-03 14:33:11 +0900
 tags    : django
 toc     : true
 public  : true
-parent  : django
+parent  : python
 latex   : false
 ---
 * TOC
