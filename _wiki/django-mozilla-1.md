@@ -14,7 +14,8 @@ latex   : false
 {:toc}
 
 > [Moziila djangdo tutorial](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/Introduction) 읽으며 정리한 내용입니다. 원본을 보시길 추천드립니다. 지적과 피드백 대환영입니다.   
-개발 중에 진행이 어렵다면, 여기 [Github](https://github.com/mdn/django-locallibrary-tutorial)에 완전히 개발된 버전의 웹사이트 소스코드를 참고할 수도 있다.
+여기 [Github](https://github.com/mdn/django-locallibrary-tutorial)에 완전히 개발된 버전의 웹사이트 소스코드를 참고할 수도 있습니다.
+
 # Why
     * url, view, model, template이 무엇인지, 어떻게 작동하는지 조금이라도 알자. 
 
@@ -63,7 +64,7 @@ latex   : false
         return HttpResponse('Hello from Django!')
 ```
 
-- HttpRequest 객체를 (request)의 인자로 받고 HttpResponse 객체를 반환
+HttpRequest 객체를 (request)의 인자로 받고 HttpResponse 객체를 반환
 
 ## 데이터 모델 정의하기 (models.py)
 
@@ -111,8 +112,11 @@ latex   : false
 - 위 함수는 render() 함수를 사용해서 브라우저로 보내는 HttpResponse를 생성
 - 특정 HTML 템플릿을 결합하거나 템플릿 안에 일부 데이터를 삽입하는 HTML 파일 생성 ("context")
 
-> [context](https://stackoverflow.com/questions/20957388/what-is-a-context-in-django)는 딕셔너리.<br> 장고 템플릿을 사용할 때 변수를 <code> myvar1 </code>를 컬리브레이스 2개로 감싼 형태로 나타낸다. 예를 들어 <code> myvar1: 101, myvar2: 102 </code>(이것도 컬리브레이스 2개로 감싼 것임) 템플릿을 render 메소드에게 전달한다. 그러면 <code>myvar1</code>는 101로 바뀌고 <code>myvar2</code>는 102로 바뀌는 것이다. 그러나 이는 비단 단순한 예이고 ContextProcessor처럼 진보된 콘셉트도 있다.    
-settings.py 파일 내에 Context Processor가 HttpRequest 오브젝트를 가지고 있고 이는 딕셔너리를 리턴한다.(위의 context와 비슷함) Context Processor에 의해 리턴된 딕셔너리는 장고에 의해 context로 전달돼 통합되는 것이다. Context Processor를 쓰면 직접 코딩하지 않고 각 뷰를 삽입할 수 있다. 이는 settings.py 내 <code>TEMPLATE_CONTEXT_PROCESSORS</code>에 추가한다. 
+
+### [context](https://stackoverflow.com/questions/20957388/what-is-a-context-in-django)가 무엇?   
+context는 딕셔너리. 장고 템플릿을 사용할 때 변수 <code>myvar1</code>를 컬리브레이스 2개로 감싼 형태로 나타낸다.( 컬리 브레이스를 쓸 방법을 몰라서 텍스트로 적어 놓음 ㅠㅠ ) 예를 들어 <code> myvar1: 101, myvar2: 102 </code>(이것도 컬리브레이스 2개로 감싼 것임) 템플릿을 render 메소드에게 전달한다. 그러면 <code>myvar1</code>는 101로 바뀌고 <code>myvar2</code>는 102로 바뀌는 것이다.    
+그러나 이는 비단 단순한 예이고 ContextProcessor처럼 진보된 콘셉트도 있다. `settings.py` 파일 내에 Context Processor가 HttpRequest 오브젝트를 가지고 있고 이는 딕셔너리를 리턴한다.(위의 context와 비슷함) Context Processor에 의해 리턴된 딕셔너리는 장고에 의해 context로 전달돼 통합되는 것이다. Context Processor를 쓰면 직접 코딩하지 않고 각 뷰를 삽입할 수 있다. 이는 `settings.py` 내 `TEMPLATE_CONTEXT_PROCESSORS`에 추가한다. 
+
 
 ## 데이터 렌더링하기 (HTML 템플릿들)
 
