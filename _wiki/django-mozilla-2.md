@@ -14,7 +14,7 @@ latex   : false
 {:toc}
 
 > [Moziila djangdo tutorial](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/Introduction) 읽으며 정리한 내용입니다. 원본을 보시길 추천드립니다. 지적과 피드백 대환영입니다.
-[모질라 장고 튜토리얼2](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/skeleton_website)
+
 여기 [Github](https://github.com/mdn/django-locallibrary-tutorial)에 완전히 개발된 버전의 웹사이트 소스코드를 참고할 수도 있습니다.
 
 - [장고 개발환경 세팅](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/development_environment)
@@ -95,6 +95,8 @@ locallibrary/
 
 새로운 행은 애플리케이션 구성 객체(application configuration object) (CatalogConfig)를 지정. 애플리케이션을 생성할 때 /locallibrary/catalog/apps.py 안에 생성.
 
+> '앱 이름.apps.앱 이름+Config'
+
 ## Database 설정하기
 
 ```python
@@ -146,7 +148,7 @@ urlpatterns += [
     path('catalog/', include('catalog.urls')),
 ]
 ```
-- 요청(request)을 모듈 `catalog.urls`(관련 URL /catalog/urls.py가 있는 파일) 에  `catalog/`  패턴과 함께 전달하는 `path()` 를 포함. (번역자주: 만일 `www.xxxx.com/catalog` 로 시작되는 request 가 오면 `catalog/urls.py` 를 참조해서 관련된 파일을 mapping 하겠다는 의미. ) 
+- 요청(request)을 모듈 `catalog.urls`(관련 URL /catalog/urls.py가 있는 파일) 에  `catalog/`  패턴과 함께 전달하는 `path()`를 포함. ~~뭔 소리??~~(번역자주: 만일 `www.xxxx.com/catalog` 로 시작되는 request가 오면 `catalog/urls.py`를 참조해서 관련된 파일을 mapping 하겠다는 의미) 
 
 ```python
 urlpatterns += [
@@ -154,7 +156,7 @@ urlpatterns += [
 ]
 ```
 
-- 뷰 함수(RedirectView)는 `path()`에서 지정된 URL 패턴이 일치할 때(위의 경우에선 루트 URL) 첫 번째 인자를``(/catalog/)`로 리다이렉트할 새로운 상대 URL로 간주
+- 뷰 함수(RedirectView)는 `path()`에 지정된 URL 패턴이 일치할 때(위의 경우에선 루트 URL) 첫 번째 인자를 `(/catalog/)`로 리다이렉트
 
 ```python
 # Use static() to add url mapping to serve static files during development (only)
@@ -176,7 +178,7 @@ urlpatterns = [
 ]
 ```
 
-마지막으로 `urls.py`라는 파일을 catalog 폴더 안에 생성. 그리고 임포트된 (텅 빈(emptyt))urlpatterns를 정의하기 위해 아래 코드를 추가해야 한다. 어플리케이션을 만들면서 패턴들을 이곳에 추가할 것이다. 
+마지막으로 `urls.py`라는 파일을 catalog 폴더 안에 생성. 그리고 임포트된 텅 빈 urlpatterns를 정의하기 위해 아래 코드를 추가해야 한다. 어플리케이션을 만들면서 패턴들을 이곳에 추가할 것이다. 
 
 ## Website framework 테스트 하기
 ```
@@ -187,7 +189,7 @@ $ pythons manage.py runserver
 
 ---
 
-> url 이해가 잘 안되어서 아래는 [장고 공식문서](https://docs.djangoproject.com/en/3.0/topics/http/urls/)에서 옮겼습니다.
+> url 이해가 잘 안되어서 아래는 [장고 공식문서](https://docs.djangoproject.com/en/3.0/topics/http/urls/)에서 옮겼는데 위와 관련이 없는 내용인 것 같습니다. 스킵하셔도 좋습니다.
 
 ## Example
 
@@ -212,18 +214,20 @@ urlpatterns = [
 
 **Example requests**
 * `/articles/2005/03/`은 위 리스트이 3번째줄에 위치한 코드에 매치된다. 장고는 `views.month_archive(request, year=2005, month=3)` 함수를 호출한다.
-* `/articles/2003/`은 위 리스트 2번쨰줄이 아닌 1번째줄에 위치한 코드와 매치된다. 순서대로 테스트되는 패턴이기 때문이다.
+* `/articles/2003/`은 위 리스트 2번째줄이 아닌 1번째줄에 위치한 코드와 매치된다. 순서대로 테스트되는 패턴이기 때문이다.
 * `/articles/2003`은 이 패턴들 어떤 것과도 매치되지 않는다. 각 패턴들은 모두 URL 끝에 슬래시를 요청하는 이유다.
 * `/articles/2003/03/building-a-django-site/`는 마지막 패턴과 매치된다.장고는 `views.article_detail(request, year=2003, month=3, slug="building-a-django-site")`를 호출할 것이다.
  
-## Path converters
+### Path converters
 다음의 path conveter들은 디폴트로 쓸 수 있다.
 * **str** - 경로를 나누는 슬래시를 제외하고 어떤 문자열도 매치된다. 표현식 converter가 없으면 strtind이 디폴트로 설정된다.
 * **int** - 0 내지 양의 정수가 매치된다. int를 리턴.
 * **slug** - 아스키 문자의 slug 문자나 숫자, 하이픈, 언더스코어가 매치된다. 예를 들어 `building-your-1st-django-site`.
 * **uuid** - 같은 페이지 내 매핑된 다중 URL들을 막기 위해 대시와 소문자로 포함된다. 예를 들어 075194d3-6885-417e-a8a8-6c931e272f00.
 
+[Django Tutorial Part 3: Using models](https://yongjunleeme.github.io/wiki/django-mozilla-3/)
+
 ## Link
 [장고 튜토리얼 2]([https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/skeleton_website](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/skeleton_website))
-
+[장고 공식문서](https://docs.djangoproject.com/en/3.0/topics/http/urls/)
 

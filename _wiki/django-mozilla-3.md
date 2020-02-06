@@ -49,7 +49,7 @@ class MyModelName(models.Model):
 
 ### 필드(Fields)
 
-필드는 데이터베이스 목록(table)에 저장하길 원하는 데이터 열(column)이다. 각각의 데이터베이스 레코드(행, row)은 각 필드 값 중 하나로 구성된다.
+필드는 데이터베이스 목록(table)에 저장하길 원하는 데이터 열(column)이다. 각각의 데이터베이스 레코드(행, row)는 각 필드 값 중 하나로 구성된다.
 
 ```python
 my_field_name = models.CharField(max_length=20, help_text='Enter field documentation')
@@ -71,7 +71,7 @@ my_field_name = models.CharField(max_length=20, help_text='Enter field documenta
 #### 일반적인(common) 필드 타입
 
 - **DateField, DateTimeField**: 각각 파이썬 datetime.date 그리고 datetime.datetime 객체.
-- **auto_now=True** 1 (모델이 저장될 때 마다 필드를 현재 날짜로 설정하기 위해) 2 auto_now_add(모델이 처음 생성되었을 때만 날짜를 설정하기 위해) 3 default(사용자에 의해 변경될 수 있는 기본 날짜를 설정하기 위해) 매개 변수를 선언 가능
+- **auto_now=True**: 1모델이 저장될 때 마다 필드를 현재 날짜로 설정하기 위해 2`auto_now_add` 모델이 처음 생성되었을 때만 날짜를 설정하기 위해 3default 사용자에 의해 변경될 수 있는 기본 날짜를 설정하기 위해 매개 변수를 선언
 - **AutoField**: 자동적으로 증가하는 IntegerField의 특별한 타입. 이 타입의 primary key는 명시적으로 지정하지 않는 이상 모델에 자동적으로 추가.
 - **ForeignKey**: 다른 데이터베이스 모델과 일-대-다 관계를 지정하기 위해 사용 (예시: 차는 하나의 제조사를 갖고 있지만 제조사는 많은 차들을 만들 수 있다). 일대다에서 "일"쪽이 key를 포함하는 모델.
 - **ManyToManyField**: (예시: 책은 여러 장르를 가질 수 있고, 각각의 장르에도 많은 책들이 있다)
@@ -96,7 +96,7 @@ ordering = ['title', '-pubdate']
 verbose_name = 'BetterName'
 ```
 
-- 다른 일반적인(common) 속성은 verbose_name 이며, 단일 및 복수 형식(form)의 클래스를 위한 자세한(verbose) 이름
+- 다른 일반적인 속성은 `verbose_name`이며, 단일 및 복수 형식(form)의 클래스를 위한 자세한(verbose) 이름
 
 [더 많은 옵션](https://docs.djangoproject.com/en/2.0/ref/models/options/)
 
@@ -107,7 +107,7 @@ def __str__(self):
     return self.field_name
 ```
 
--  모든 모델마다 표준 파이썬 클래스의 메소드인 __str__()을 정의해 각각 object가 사람이 읽을 수 있는 문자열을 반환(return)
+-  모든 모델마다 표준 파이썬 클래스의 메소드인 `__str__()`을 정의해 각각 object가 사람이 읽을 수 있는 문자열을 반환
 
 
 ```python
@@ -116,9 +116,9 @@ def get_absolute_url(self):
     return reverse('model-detail-view', args=[str(self.id)])
 ```
 
-- **get_absolute_url()** - 웹사이트의 개별적인 모델 레코드를 보여주기 위한 URL을 반환하는 메소드다. 관리자 사이트 안의 모델 레코드 수정 화면에 "View on Site" 버튼을 자동적으로 추가할 것이다.
+- `**get_absolute_url()**` - 웹사이트의 개별적인 모델 레코드를 보여주기 위한 URL을 반환하는 메소드다. 관리자 사이트 안의 모델 레코드 수정 화면에 "View on Site" 버튼을 자동적으로 추가할 것이다.
 
-- 응답과 id를 "모델 디테일뷰"에 전달하기 위해 (레코드를 표시하기 위한 작업을 할) URL 매퍼를 만들 필요가 있다. 위의 `reverse()` 함수는 알맞은 포맷의 URL을 생성하기 위해서 URL 매퍼를(위 경우에선 'model-detail-view'라고 명명됨) 반전시킬 수 있음. 물론 이것이 작동하기 위해선 URL 매핑, 뷰, 그리고 탬플릿을 작성해야 함
+- 응답과 id를 "모델 디테일뷰"에 전달하기 위해 (레코드를 표시하기 위한 작업을 할) URL 매퍼를 만들 필요가 있다. 위의 `reverse()` 함수는 알맞은 포맷의 URL을 생성하기 위해서 URL 매퍼를(위 경우에선 `model-detail-view`라고 명명됨) 반전시킬 수 있음. 물론 이것이 작동하기 위해선 URL 매핑, 뷰, 그리고 탬플릿을 작성해야 함
 
 ## 모델 관리(management)
 
@@ -135,7 +135,7 @@ record = MyModelName(my_field_name="Instance #1")
 record.save()
 ```
 
-- 어떤 필드도 primary_key를 선언하지 않았다면, 새로운 레코드는 자동적으로 id라는 필드 이름을 가진 primary_key가 주어짐
+- 어떤 필드도 `primary_key`를 선언하지 않았다면, 새로운 레코드는 자동적으로 id라는 필드 이름을 가진 `primary_key`가 주어짐
 - 위의 레코드를 저장한 후 이 id 필드를 쿼리할 수 있는데, 1의 값을 가짐
 
 ```python
@@ -149,7 +149,7 @@ record.save()
 ```
 
 - 필드에 점 구문(.)을 사용해서 접근하여 값을 변경할 수 있음
-- 수정된 값들을 데이터베이스에 저장하기 위해 save()를 호출해야 함
+- 수정된 값들을 데이터베이스에 저장하기 위해 `save()`를 호출해야 함
 
 ### 레코드 검색하기
 
@@ -164,11 +164,12 @@ wild_books = Book.objects.filter(title__contains='wild')
 number_wild_books = Book.objects.filter(title__contains='wild').count()
 ```
 
-- 장고의 filter()는 반환된 QuerySet이 특정한 기준(문자 또는 숫자 필드)에 맞추어 필터링
+- 장고의 `filter()`는 반환된 QuerySet이 특정한 기준(문자 또는 숫자 필드)에 맞추어 필터링
 - 위 예제는 "wild"를 제목 안에 포함하는 책들을 필터링
-- 기준이 될 필드와 타입은 필터 매개 변수 이름에서 정의된다. `field_name__match_type` 대소문자를 구분해 title을 필터링. (예: contains(대소문자 구분 X), iexact(대소문자 구분 안하는 exact 일치), exact(대소문자 구분하는 exact 일치) 그리고 in, gt(보다 더 큰(greater than)), startswith, 등등)
+- 기준이 될 필드와 타입은 필터 매개 변수 이름에서 정의된다. `field_name__match_type` 대소문자를 구분해 title을 필터링. (예: contains(대소문자 구분 X), iexact(대소문자 구분 안하는 exact 일치), exact(대소문자 구분하는 exact 일치) 그리고 in, gt(보다 더 큰(greater than)), startswith 등)
 
-[다른 검색 일치 방법](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#field-lookups)
+[다른 검색 일치 방법](https://docs.djangoproject.com/en/2.0/ref/models/querysets/#field-lookups)        
+
 [Making queries](https://docs.djangoproject.com/en/2.0/topics/db/queries/)
 
 
@@ -189,7 +190,7 @@ class Genre(models.Model):
         """String for representing the Model object."""    
         return self.name
 ```
-- __str__() 메소드는 장르 이름을 반환. 자세한 이름(verbose name)이 정의되지 않았기 때문에 폼(form)에서 name으로 호출
+- `__str__()` 메소드는 장르 이름을 반환. 자세한 이름(verbose name)이 정의되지 않았기 때문에 폼(form)에서 name으로 호출
 
 ### 책(Book) 모델
 
@@ -305,3 +306,8 @@ class Author(models.Model):
         return f'{self.last_name}, {self.first_name}'
 ```
 기본적으로 `__str__()`는 name을 첫째로 성(last name), 그 다음 이름(first name)이 오는 순서로 반환한다. `get_absolute_url()` 메소드는 개별 저자를 나타내기 위한 URL을 가져오기 위해 `author-detail` URL 매핑을 반대로 한다.
+
+[Django Tutorial Part 4: Django admin site](https://yongjunleeme.github.io/wiki/django-mozilla-4/)
+
+## Links
+[Moziila djangdo tutorial-3](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/Models)
