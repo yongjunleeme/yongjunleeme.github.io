@@ -44,7 +44,7 @@ latex   : false
 - **urlpatterns 객체** - <code>path()</code> 또는 <code>re_path()</code> 함수의 리스트(list)
 - **path() 메소드** - 꺾쇠 괄호()를 사용해서 인수를 정의
 - **re_path() 함수** - 정규식이라는 유연한 패턴 매칭 접근
-- 두 메소드(path, re_path)의 첫 번째 인수는 1 경로, 두 번째 인수는 패턴이 일치될 떄 호출되는 2 다른 함수다. <code>views.book.detail </code>은 이 함수가 <code>book_detail()</code>이며 view 모듈 안(views.py 파일 안)에서 찾을 수 있다는 뜻
+- 메소드의 첫 번째 인수는 경로, 두 번째 인수는 패턴이 일치될 때 호출되는 다른 함수다. `views.book.detail`은 이 함수가 `book_detail()`이며 view 모듈 안(views.py 파일 안)에서 찾을 수 있다는 뜻
 
 ## 요청 처리하기 (views.py)
 
@@ -69,7 +69,7 @@ HttpRequest 객체를 (request)의 인자로 받고 HttpResponse 객체를 반�
 ## 데이터 모델 정의하기 (models.py)
 
 - models라는 파이썬 객체를 통해 데이터를 관리하고 쿼리
-- 모델의 정의는 기본 데이터베이스와는 별개. 그저 모델 구조와 코드를 작성하면 나머지는 장고가 다 알아서 처리..
+- 모델의 정의는 기본 데이터베이스와 별개. 그저 모델 구조와 코드를 작성하면 나머지는 장고가 다 알아서 처리..
 
 ```python
     ## filename: models.py
@@ -90,7 +90,7 @@ HttpRequest 객체를 (request)의 인자로 받고 HttpResponse 객체를 반�
 
 - Team 객체는 장고 클래스 <code>models.Model</code>에서 파생
 - 이 객체는 팀 이름과 팀 레벨을 캐릭터 필드로 정의하고 각각의 기록에 저장될 최대 캐릭터 숫자를 정함
-- team_level 은 랜덤으로 값이 선정되기 때문에,이를 choice 필드로 정의
+- `team_level`은 랜덤으로 값이 선정되기 때문에,이를 choice 필드로 정의
 
 ## 데이터 쿼리하기 (views.py)
 
@@ -109,13 +109,13 @@ HttpRequest 객체를 (request)의 인자로 받고 HttpResponse 객체를 반�
         return render(request, '/best/index.html', context)
 ```
 
-- 위 함수는 render() 함수를 사용해서 브라우저로 보내는 HttpResponse를 생성
+- 위 함수는 `render()` 함수를 사용해서 브라우저로 보내는 HttpResponse를 생성
 - 특정 HTML 템플릿을 결합하거나 템플릿 안에 일부 데이터를 삽입하는 HTML 파일 생성 ("context")
 
 
 ### [context](https://stackoverflow.com/questions/20957388/what-is-a-context-in-django)가 무엇?   
 context는 딕셔너리. 장고 템플릿을 사용할 때 변수 <code>myvar1</code>를 컬리브레이스 2개로 감싼 형태로 나타낸다.( 컬리 브레이스를 쓸 방법을 몰라서 텍스트로 적어 놓음 ㅠㅠ ) 예를 들어 <code> myvar1: 101, myvar2: 102 </code>(이것도 컬리브레이스 2개로 감싼 것임) 템플릿을 render 메소드에게 전달한다. 그러면 <code>myvar1</code>는 101로 바뀌고 <code>myvar2</code>는 102로 바뀌는 것이다.    
-그러나 이는 비단 단순한 예이고 ContextProcessor처럼 진보된 콘셉트도 있다. `settings.py` 파일 내에 Context Processor가 HttpRequest 오브젝트를 가지고 있고 이는 딕셔너리를 리턴한다.(위의 context와 비슷함) Context Processor에 의해 리턴된 딕셔너리는 장고에 의해 context로 전달돼 통합되는 것이다. Context Processor를 쓰면 직접 코딩하지 않고 각 뷰를 삽입할 수 있다. 이는 `settings.py` 내 `TEMPLATE_CONTEXT_PROCESSORS`에 추가한다. 
+그러나 이는 비단 단순한 예이고 ContextProcessor처럼 진보된 콘셉트도 있다. `settings.py` 파일 내에 Context Processor가 HttpRequest 오브젝트를 가지고 있고 이는 딕셔너리를 리턴한다.(위의 context와 비슷함) Context Processor에 의해 리턴된 딕셔너리는 장고에 의해 context로 전달돼 통합되는 것이다. Context Processor를 쓰면 직접 코딩하지 않고 각 뷰를 삽입할 수 있다.  `settings.py` 내 `TEMPLATE_CONTEXT_PROCESSORS`에 추가해서 사용한다.
 
 
 ## 데이터 렌더링하기 (HTML 템플릿들)
@@ -124,7 +124,8 @@ context는 딕셔너리. 장고 템플릿을 사용할 때 변수 <code>myvar1</
 - 장고는 네이티브 템플레이팅 시스템과 Jinja2 out of the box 파이썬 라이브러리 모두 지원
 
 ```html
-    ## filename: best/templates/best/index.html
+<!-- filename: best/templates/best/index.html -->
+
     <!DOCTYPE html>
     <html lang="en">
     <body> 
@@ -142,9 +143,12 @@ context는 딕셔너리. 장고 템플릿을 사용할 때 변수 <code>myvar1</
     </html>
 ```
 
-- 이 템플릿은 데이터 쿼리 예제에서 살펴본 youngest_team 변수(render () 함수 내 컨텍스트 변수에 포함된)를 사용해서 반복문을 사용하고 반복을 돌면서 팀의 이름을 하나씩 반환한다.
+- 이 템플릿은 데이터 쿼리 예제에서 살펴본 youngest_team 변수(render() 함수 내 컨텍스트 변수에 포함된)를 사용해서 반복문을 사용하고 반복을 돌면서 팀의 이름을 하나씩 반환한다.
 
+
+[장고 튜토리얼 강좌 2 : 뼈대 사이트 만들기](https://yongjunleeme.github.io/wiki/django-mozilla-2/)
 
 # Links
-[Mozllia django](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/Introduction)    
+[Mozllia django](https://developer.mozilla.org/ko/docs/Learn/Server-side/Django/Introduction)
+
 [Stackoverflow](https://stackoverflow.com/questions/20957388/what-is-a-context-in-django)
