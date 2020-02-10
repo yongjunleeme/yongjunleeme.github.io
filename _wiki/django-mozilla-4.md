@@ -98,7 +98,7 @@ admin.site.register(Author, AuthorAdmin)
 # admin.site.register(BookInstance)
 ```
 
-`@register` 데코레이터(decorator)를 사용(이것은 `admin.site.register()` 구문과 정확히 똑같다.
+`@register` 데코레이터(decorator)를 사용(`admin.site.register()` 구문과 같다)
 
 ```python
 # Register the Admin classes for Book using the decorator
@@ -129,7 +129,7 @@ class BookAdmin(admin.ModelAdmin):
 ```
 
 위 버전으로 BookAdmin 클래스를 대체한다. author는 Foreignkey 필드 관계(일-대-다)이기에, 관련된 레코드의 `__str__()`값에 의해 나타난다.
-genre 필드는 ManyToManyField이기 때문에 list_display에 직접적으로 특정할 수 없다(거대한 데이터베이스 접근에 비용이 발생할 수 있어 장고는 이것을 방지). 대신 정보를 문자열로 받기 위해 `display_genre` 함수를 정의(이는 위해서 호출한 함수, 아래에서 정의)
+genre 필드는 ManyToManyField이기 때문에 list_display에 직접적으로 특정할 수 없다(큰 데이터베이스 접근에는 비용이 발생할 수 있어 장고가 이를 방지). 대신 정보를 문자열로 받기 위해 `display_genre` 함수를 정의(이는 위해서 호출한 함수, 아래에서 정의)
 
 ```python
 ## filename: models.py
