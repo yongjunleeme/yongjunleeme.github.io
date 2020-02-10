@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic-url 
 summary : 
 date    : 2020-02-10 15:38:38 +0900
-updated : 2020-02-10 15:40:18 +0900
+updated : 2020-02-10 18:49:01 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,60 +12,6 @@ latex   : false
 ---
 * TOC
 {:toc}
-
-> 노마드코더 에어비앤비 [클론코딩강의](https://academy.nomadcoders.co/courses/637659/lectures/11906079) 수강 후 개인이 정리한 노트입니다. 코린이라 틀린 내용이 다수 포함될 가능성이 다분합니다. 넓은 아량을 베풀어 틀린 부분 지적해주시면 큰 도움이 되겠습니다.
-
-# Why
-* url에 변수를 넣기 위해
-
-# [Example](https://github.com/nomadcoders/airbnb-clone/commit/81362b70afb5541cc1538a0b299d0b517c4af5b4)
-
-* Namespace 기입
-
-    **confing.urls.py**
-    ```
-    urlpatterns = [
-        path("rooms/", include("rooms.urls", namespace="rooms")),
-    ]
-    ```
-
-* app_names 기입, path에 integer(정수)를 쓰는데 변수 이름은 pk다. 변수라고 표현하는 게 맞는지 모르곘다.
-* pk는 primary key(기본키)의 약자.
-
-    **rooms/url.py**
-    ```
-    from django.urls import path
-    from . import views
-
-    app_name = "rooms"
-
-    urlpatterns = [path("<int:pk>", views.room_detail, name="detail")]
-    ```
-
-* pk는 rooms/view.py 파일의 room_detail 함수에서 두 번째 인자로 받는다.
-
-    **rooms/views.py**
-    ```
-    from django.shortcuts import render
-
-    def room_detail(request, pk):
-    print(pk)
-    return render(request, "rooms/detail.html")
-    ```
-
-* html에서 pk를 아래와 같이 쓴다. 
-
-    **templates/rooms/room_list.html**
-    ```
-    <h3>
-        <a href="{% url "rooms:detail" room.pk %}">
-            {{room.name}} / ${{room.price}}
-        </a>
-     </h3>
-    ```
-
-
-[아래는 공식 공식문서](https://docs.djangoproject.com/en/3.0/topics/http/urls/)
 
 ## Example
 
@@ -102,7 +48,5 @@ urlpatterns = [
     * **uuid** - 같은 페이지 내 매핑된 다중 URL들을 막기 위해 대시와 소문자로 포함된다. 예를 들어 075194d3-6885-417e-a8a8-6c931e272f00.
 
 # Links
-
-* [노마드 아카데미](https://academy.nomadcoders.co/courses/637659/lectures/11906079)
 
 * [장고 공식문서](https://docs.djangoproject.com/en/3.0/topics/http/urls/)

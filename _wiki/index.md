@@ -32,13 +32,15 @@ regenerate: true
 
 ## [[algorithm]]
 
+* [[재귀함수]]
+
+
 ## [[study]]
 
 ## [[media]]
 
-* [[book]]
-	* [[classic-computer-science-problems-in-python]]{고전 컴퓨터 알고리즘 인 파이썬}
-		* [[재귀함수]]
+### [[book]]
 
+* [[함께자라기]]
+* [[손에잡히는빔]]
 
-	
