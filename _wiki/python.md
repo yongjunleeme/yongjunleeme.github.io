@@ -3,7 +3,7 @@ layout  : category
 title   : Python
 summary : 
 date    : 2020-02-01 22:05:28 +0900
-updated : 2020-02-03 14:33:04 +0900
+updated : 2020-02-08 14:22:44 +0900
 tags    : python
 toc     : true
 public  : true
@@ -14,6 +14,8 @@ latex   : false
 {:toc}
 
 
+## Python
+* [[decorator]]
 
-
-
+## Django
+[[django-wecode-1]]
