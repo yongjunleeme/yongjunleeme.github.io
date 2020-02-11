@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-wecode-1
 summary : 
 date    : 2020-02-08 13:38:23 +0900
-updated : 2020-02-10 18:32:20 +0900
+updated : 2020-02-11 13:24:08 +0900
 tags    : 
 toc     : true
 public  : true
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'user',
     'comment'
 ]
-``
+```
 
 - admin과 auth 기능을 사용하지 않을 예정이라 주석처리
 
@@ -75,7 +75,7 @@ AUTH_PASSWORD_VALIDATORS
     - **DEBUG** - 디버깅 가능여부 설정, False로 해놓으면 404 Not Found
     - **allowed_host** - 외부접속을 허용하는 IP주소
 
-추가 설정
+- 추가 설정
 ```python
 ##Stop Warning about '/' 슬래시 경고를 안 보게
 APPEND_SLASH=False
@@ -96,11 +96,11 @@ class User(models.Model):
 
 ## ORM
 
-```
+```shell
 $ python manage.py shell
 ```
 
-```
+```shell
 >>> from user.models import User
 >>> User.objects.create(email='abcd@abcd.net', password='1234')
 
@@ -108,7 +108,7 @@ $ python manage.py shell
 >>> User.object.all()                                   # 인스턴스화된 객체를 한 번에 담아오려다 보니 쿼리셋이라는 단위를 사용한다.
 ```
 
-```
+```shell
 >>> a = User.objects.all() 
 >>> b = User.objects.values()       # 복수로 쓰는 모양
 >>> c = User.objects.filter(id=1)
@@ -117,10 +117,47 @@ $ python manage.py shell
 위에는 모두 쿼리셋이고 아래는 모두 쿼리셋에 담긴 객체라고 한다.
 정확한지 모르겠다. 어떻게 가늠하는 것인지도 모르겠다.
 
-```
+```shell
 >>> d = User.objects.get(id=1)
 >>> e = User.objects.filter(id=1).values()
 ```
+
+장고 공식문서 [모델](https://docs.djangoproject.com/en/3.0/topics/db/models/) 에 나온 ORM 예제도 덧붙인다. 
+
+```python
+from django.db import models
+
+class Person(models.Model):
+    SHIRT_SIZES = (
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+    )
+    name = models.CharField(max_length=60)
+    shirt_size = models.CharField(max_length=1, choices=SHIRT_SIZES)
+```
+
+- `display` - 키값을 호출하는 메소드(ORM은 언더바로 메소드를 호출할 수 있는 모양이다)
+
+```shell
+>>> p = Person(name="Fred Flintstone", shirt_size="L")
+>>> p.save()
+>>> p.shirt_size
+'L'
+>>> p.get_shirt_size_display()
+'Large'
+```
+
+- `values_list` 
+
+```shell
+>>> fruit = Fruit.objects.create(name='Apple')
+>>> fruit.name = 'Pear'
+>>> fruit.save()
+>>> Fruit.objects.values_list('name', flat=True)
+<QuerySet ['Apple', 'Pear']>
+```
+
 
 > ORM이 django에서 핵심이라고 한다. 아직은 아는 게 거의 없어서 무슨 개념이든 섣불리 말하기가 겁난다..  [여기](https://django-orm-cookbook-ko.readthedocs.io/en/latest/) 에 ORM 정리가 잘 되어 있으니 참고하면 좋을 것 같다.
 
@@ -140,11 +177,11 @@ class UserView(View):
         if User.objects.filter(email = data['email']).exists(): 
             return JsonResponse({"message":"USER_ALREADY_EXIST"}, status=400) # 이미 존재하면 알림
 
-        User(
+        User(							   # User.objects.create 안 하고 User().save()로도 가능한갑다
             name     = data['name'],
             email    = data['email'],
             password = data['password']
-        ).save()
+        ).save() 						   # 딕셔너리가 아니라 튜플로 저장하는 건가..?
        
             return HttpResponse(status=200) # 그렇지 않으면 성공
     
@@ -164,9 +201,14 @@ class LoginView(View):
                     return HttpResponse(status = 200)
                 return HttpResponse(status = 401) 					# 401 Unauthorized
             return HttpResponse(status = 400)						# 400 Bad Request
-        except KeyError:											# 유저 정보가 틀리거나 존재하지 않는 조건 이외에 다른 예외조건에도 리턴을 달아주어야 하는 모양
+        except KeyError:											
             return JsonResponse({"message":"INVALID_KEYS"}, status = 400)
 ```
+- UserView - 회원가입 시 이메일이 이미 존재하면 알려주고 그렇지 않으면 이름, 이메일, 비밀번호를 데이터에 저장한다.
+- LoginView - 로그인 시 이메일이 이미 존재하면 등록된 유저이니 패스워드 확인까지 거쳐서 로그인 성공을 노티스한다. 패스워드가 틀리면 `401 unauthorized`를 그 전에 이메일이 존재하지 않으면 `400 bad request`를 노티스한다.
+- KeyError - 유저 정보가 틀리거나 존재하지 않는 조건 이외에 다른 예외조건에도 리턴을 달아주어야 하는 모양
+
+
 ## urls.py (user)
 
 ```python
@@ -218,7 +260,7 @@ class CommentView(View):
         return JsonResponse({'author':list(comment_data)}, status = 200)
 ```
 
-## urls.py
+## urls.py (comment)
 
 ```python
 from django.urls import path
@@ -233,14 +275,19 @@ urlpatterns = [
 
 CLI에서 간단하게 통신 테스트를 해볼 수 있는 툴
 
-```
+```shell
 # Ubuntu
-    sudo apt install httpie
+$ sudo apt install httpie
     
 # Mac
-    brew install httpie
+$ brew install httpie
 ```
 
-```
+```shell
 $ http -v 'url' name='테스트용이름' email='테스트용이메일' password='비밀번호'
 ```
+
+
+## Links
+
+[장고 공식문서](https://docs.djangoproject.com/en/3.0/topics/db/models/)
