@@ -12,12 +12,12 @@ regenerate: true
 * [[book-log-2020]]
 * [[memo-2020]]
 
-
 ## [[programming-language]]
 
 ### [[python]]
 
 * [[decorator]]
+* [[crawling-wecode-1]]
 
 ### [[django]]
 
@@ -26,7 +26,6 @@ regenerate: true
 * [[django-mozilla-3]]
 * [[django-mozilla-4]]
 * [[django-wecode-1]]
-* [[django-basic-url]]
 
 ## [[tool]]
 
