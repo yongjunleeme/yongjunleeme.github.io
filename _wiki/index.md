@@ -29,6 +29,8 @@ regenerate: true
 
 ## [[tool]]
 
+* [[github-basic-1]]
+
 ## [[algorithm]]
 
 * [[재귀함수]]
