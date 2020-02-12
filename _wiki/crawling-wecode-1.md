@@ -3,7 +3,7 @@ layout  : wiki
 title   : crawling-wecode-1
 summary : 
 date    : 2020-02-11 20:57:20 +0900
-updated : 2020-02-11 21:40:04 +0900
+updated : 2020-02-12 20:24:43 +0900
 tags    : 
 toc     : true
 public  : true
@@ -23,17 +23,13 @@ latex   : false
 
 정식명칭은 'Web Scraping'이며 단순히 웹에 있는 정보를 Get해오는 것뿐만 아니라 Action을 거친 동적 정보 추출(?)도 가능하다고 한다.
     
-연습 시 참고할 웹사이트
-- [서울시 공공데이터 포털](data.seoul.go.kr)
-- [공공 데이터 포털](data.go.kr)
-- [일별 박스 오피스](kobis.or.kr)
 
 도구 목록
 - [Scrapy](https://scrapy.org/) - 프레임워크
 - [Urllib](https://docs.python.org/ko/3/library/urllib.html) - Requests. Http통신에서 요청을 변수에 담아 다루는 등 URL 작업을 위한 여러 모듈을 모은 패키지
 - [Selenium](https://selenium.dev/) - 정적인 통신 이외에 자바스크립트와 같은 동적인 정보도 가져올 수 있는 프레임워크
 - [Beautifulsoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - 파서 역할의 패키지
--
+
 
 ## 개발환경
 
@@ -197,7 +193,6 @@ for row in request:
 
 ```python
 import requests
-from bs4 import BeautifulSoup
 
 req = requests.get('https://api.kurly.com/v1/categories/907?page_limit=99&page_no=1&delivery_type=0&sort_type=0&ver=1581403977942')
 
@@ -206,14 +201,6 @@ data = req.json()
 products = data['data']['products']
 
 result = []
-
-for product in products:
-    result.append({
-        'no'   : product['no'],
-        'name' : product['name'],
-        'price': product['price'],
-        'desc' : product['shortdesc']
-    })
 
 result = [{
     'no'   : product['no'],
