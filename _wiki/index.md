@@ -30,13 +30,16 @@ regenerate: true
 ## [[tool]]
 
 * [[github-basic-1]]
+* [[mini-conda]]
+* [[my-sql-ide]]
 
 ## [[algorithm]]
 
 * [[재귀함수]]
 
-
 ## [[study]]
+
+* [[encryption-wecode]]
 
 ## [[media]]
 
