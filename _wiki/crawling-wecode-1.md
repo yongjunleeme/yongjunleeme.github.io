@@ -3,7 +3,7 @@ layout  : wiki
 title   : crawling-wecode-1
 summary : 
 date    : 2020-02-11 20:57:20 +0900
-updated : 2020-02-12 20:24:43 +0900
+updated : 2020-02-13 17:46:56 +0900
 tags    : 
 toc     : true
 public  : true
@@ -21,7 +21,7 @@ latex   : false
 
 ## What
 
-정식명칭은 'Web Scraping'이며 단순히 웹에 있는 정보를 Get해오는 것뿐만 아니라 Action을 거친 동적 정보 추출(?)도 가능하다고 한다.
+정식명칭은 'Web Scraping'이며 단순히 웹에 있는 정보를 Get해오는 것뿐만 아니라 Action을 거친 동적 정보 추출(?)까지도 가능하다고 한다.
     
 
 도구 목록
@@ -213,8 +213,37 @@ for value in result:
     print(value)
 ```
 
+## 네이버 실검 크롤링 (Header 접근)
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+main_url = 'https://www.naver.com/srchrank?frm=main&ag=all&gr=1&ma=-2&si=0&en=0&sp=0'
+
+request_header = {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36',
+    'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+}
+
+html = requests.get(main_url, headers=request_header)
+
+print(html)
+
+soup = BeautifulSoup(html.text, 'html.parser')
+
+print(soup)
+```
+
+- mail_url - 개발자도구의 네트워크 탭에서 콘트롤 에프를 누르면 서치창이 나온다. 새로고침 버튼을 누른 후  크롤링하고 싶은 텍스트를 검색한다. 검색 되는 요소를 더블클릭하고 나오는 url을 복사해서 붙여넣는다.
+
+
+> 이 방법은 위코드 동기이신 작두님의 삽질 끝에 알아낸 꿀팁입니다. 때마침 질문을 드려서 나도 알게 되었는데 다시 한 번 감사드립니다.
+
 ## Links
 
 [빌보드](https://www.billboard.com/chart)    
 
 [마켓컬리](https://www.kurly.com/shop/goods/goods_list.php?category=029)
+
+[작두님](https://velog.io/@ash3767/%EA%B8%B0%EC%B4%88gmarket-%ED%81%AC%EB%A1%A4%EB%A7%81)
