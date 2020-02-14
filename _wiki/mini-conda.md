@@ -3,7 +3,7 @@ layout  : wiki
 title   : mini-conda 
 summary : 
 date    : 2020-02-13 19:13:25 +0900
-updated : 2020-02-13 19:27:39 +0900
+updated : 2020-02-14 20:18:54 +0900
 tags    : 
 toc     : true
 public  : true
@@ -40,6 +40,7 @@ $ conda deactivate
 ```
 
 * conda 가상환경 삭제하기
+
 ```shell
 $ conda env remove -n "가상환경이름"
 ```
@@ -51,6 +52,7 @@ $ conda env export> "가상환경이름.yaml"
 ```
 
 * conda 익스포트한 가상환경 임포트하기
+
 ```shell
 $ conda env create -f "가상환경이름.yaml"
 ```
