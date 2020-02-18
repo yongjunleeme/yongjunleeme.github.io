@@ -11,6 +11,7 @@ regenerate: true
 
 * [[book-log-2020]]
 * [[memo-2020]]
+* [[mindset]]
 
 ## [[programming-language]]
 
@@ -26,7 +27,10 @@ regenerate: true
 * [[django-mozilla-3]]
 * [[django-mozilla-4]]
 * [[django-wecode-1]]
-
+* [[django-wecode-2-encryption]]
+* [[django-initial-settings]]
+* [[django-wecode-3-modelling]] 
+  
 ## [[tool]]
 
 * [[github-basic-1]]
@@ -39,7 +43,6 @@ regenerate: true
 
 ## [[study]]
 
-* [[encryption-wecode]]
 
 ## [[media]]
 
