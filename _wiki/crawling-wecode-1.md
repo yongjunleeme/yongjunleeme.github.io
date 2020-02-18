@@ -3,7 +3,7 @@ layout  : wiki
 title   : crawling-wecode-1
 summary : 
 date    : 2020-02-11 20:57:20 +0900
-updated : 2020-02-14 21:09:38 +0900
+updated : 2020-02-17 13:33:11 +0900
 tags    : 
 toc     : true
 public  : true
@@ -365,6 +365,19 @@ urllib.urlretrieve(src)
 ```
 
 - `submit()`이 안 되면 `click()`을 상황에 따라 사용할 수도 있다. 
+
+## CSV 파일로 저장
+
+```python
+import csv
+import FinanceDataReader as fdr
+
+df = fdr.DataReader('AAPL', '2019')
+
+df.to_csv('./apple_fdr.csv')
+```
+
+- 금융 데이터를 손쉽게 쓸 수 있는 라이브러리
 
      
 - 텔레그램 알림
