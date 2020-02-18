@@ -3,7 +3,7 @@ layout  : wiki
 title   : my-sql-ide 
 summary : 
 date    : 2020-02-13 19:34:52 +0900
-updated : 2020-02-13 19:40:04 +0900
+updated : 2020-02-18 19:18:57 +0900
 tags    : 
 toc     : true
 public  : true
@@ -107,4 +107,15 @@ $ mysql -u root -p`
 
 위 명령어 입력 후 루트 비밀번호를 입력하여 mysql을 사용할 수 있게 됩니다.
 
+## 기본 명령어
 
+```shell
+$ show database;
+$ show tables;
+
+$ mysql -u root -p
+
+"이모티콘 깨지지 않도록 보완 - utfmb4"
+$ create database test character set utf8mb4 collate utf8mb4_general_ci;
+
+```
