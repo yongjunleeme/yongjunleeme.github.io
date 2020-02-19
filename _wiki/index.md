@@ -12,6 +12,8 @@ regenerate: true
 * [[book-log-2020]]
 * [[memo-2020]]
 * [[mindset]]
+* [[small-talk-big-idea]]
+* [[term]]
 
 ## [[programming-language]]
 
@@ -30,12 +32,14 @@ regenerate: true
 * [[django-wecode-2-encryption]]
 * [[django-initial-settings]]
 * [[django-wecode-3-modelling]] 
-  
+* [[django-ORM]] 
+
 ## [[tool]]
 
 * [[github-basic-1]]
 * [[mini-conda]]
 * [[my-sql-ide]]
+* [[shell-shortcut]]
 
 ## [[algorithm]]
 
