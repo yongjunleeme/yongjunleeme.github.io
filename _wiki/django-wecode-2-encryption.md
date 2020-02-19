@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-wecode-2-encryption 
 summary :
 date    : 2020-02-13 18:06:11 +0900
-updated : 2020-02-17 18:06:02 +0900
+updated : 2020-02-19 19:05:03 +0900
 tags    : encryption 
 toc     : true
 public  : true
@@ -37,7 +37,10 @@ latex   : false
 [네이버 기술블로그](https://d2.naver.com/helloworld/318732) 에 보다 정확하고 상세하게 설명돼 있다.
     
 JWT(JSON Web Tokens)     
-`Access token`을 생성하는 기술로 유저 데이터를 암호화해서 보관.
+* `Access token`을 생성하는 기술로 유저 데이터를 암호화해서 보관.
+* Http의 두 가지 중요한 요소(1.Stateless 2.Request and Response)를 토대로 Http는 통신 시 상태를 저장하지 않는다. 이에 요청을 할 때 필요한 정보를 포함해서 보내야 한다. 로그인을 예로 들면 헤더에 토큰값을 넣어서 요청하는 것이다. 
+* Json 기반 웹토큰은 크게 3부분으로 나뉜다. 1.토큰 2.페이로드 3.시그니처다. 이 중 시그니처만 암호화돼 있어서 서버만 복호화가 가능하고 나머지는 단순 문자 변경으로만 이뤄져 있다.
+
 
 ## Bcrypt, Pyjwt
 
