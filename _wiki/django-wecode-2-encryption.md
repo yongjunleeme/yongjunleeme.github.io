@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-wecode-2-encryption 
 summary :
 date    : 2020-02-13 18:06:11 +0900
-updated : 2020-02-19 19:05:03 +0900
+updated : 2020-02-20 19:24:58 +0900
 tags    : encryption 
 toc     : true
 public  : true
@@ -158,21 +158,22 @@ class SignupView(View):
         user_data = json_loads(request.body)
         try:
             if User.objects.filter(email = user_data['email']).exists():
-                return HttpResponse(status=400)
+                return HttpResponse(status = 400)
 
-            byted_password	= user_data['password'].encode('utf-8')
+            byted_password = user_data['password'].encode('utf-8')
             hashed_password = bcrypt.hashpw(byted_password, bcrypt.gensalt())
-            password        = hashed_password.decode('utf-8')
+            password = hashed_password.decode('utf-8')
             
             User(
-		        email		= user_data['email'],
-		        password	= password 
+		        email = user_data['email'],
+		        password = password 
 		    ).save()
+            
+            return HttpRespone(status = 200)
         
         except KeyError:
-            return JsonResponse({"message": "INVALID_KEYS"}, status = 400)
+            return JsonResponse({"message": "INVALID_KEY"}, status = 400)
 ```
-
 
 ### SigninView 로그인 (bcrypt.check)
 
@@ -184,12 +185,12 @@ class SignInView(View):
         user_data = json.loads(request.body)
         
         try:
-            if User.objects.filter(email = data['email']).exists():
-                user_in_db = User.objects.get(email = user_data['email'])
+            if User.objects.filter(email = user_data['email']).exists():
+                user = User.objects.get(email = user_data['email'])
                 
-                if bcrypt.checkpw(user_data['password'].encode('utf-8'), user_in_db.password.encode('utf-8')):
+                if bcrypt.checkpw(user_data['password'].encode('utf-8'), user.password.encode('utf-8')):
                 
-                    token = jwt.encode({'email' : user_data['email']}, SECRET_KEY, algorith = 'HS256')
+                    token = jwt.encode({'user': user.id}, SECRET_KEY, algorithm = 'HS256')
                     token = token.decode('utf-8')
                 
                     return JsonResponse({"token" : token}, status = 200)
@@ -199,8 +200,30 @@ class SignInView(View):
             return HttpResponse(status = 400)
         
         except KeyError:
-            return JsonResponse({"message": "INVALIN_KEY"}, status = 400)
+            return JsonResponse({"message": "INVALID_KEY"}, status = 400)
+
+class AccountView(View):
+    @login_required
+    def get(self, request, user_name='abc'):
+        if request.user.id == user_id:
+            return JsonResponse({'name':request.user.name, 'email':request.user.email}, status = 200
+        
+        return HttpResponse(status = 403))
 ```
+
+```python
+## filename: user/urls.py
+
+from django.urls import path
+from .views      import SignUpView, SignInView, AccountView
+
+urlpatterns = [
+    path('sign-up', SignUpView.as_view()),
+    path('sign-in', SignInView.as_view()),
+    path('<slug:user_name>', AccountView.as_view())
+]
+```
+
 ### TokenView 토큰확인 (jwt)
 
 ```python
@@ -208,12 +231,12 @@ class TokenCheckView(View):
     def post(self,request):
         user_data = json.loads(request.body)
 
-        user_token_info = jwt.decode(user_data['token'], SECRET_KEY, algorithm = 'HS256')
+        user_token_info = jwt.decode(user_data['token'], SECRET_KEY, algorithm = 'HS256') 
 
-        if Account.objects.filter(email=user_token_info['email']).exists() :
+        if User.objects.filter(email=user_token_info['email']).exists():
             return HttpResponse(status=200)
 
-        return HttpResponse(status=403)
+        return HttpResponse(status=403) #403 권한 때문에 거절
 ```
 
 > [이종민님 블로그](https://velog.io/@devmin/Django-login-crypt-token-basic-v1.2) 를 참고했다. 이곳에 더 상세하고 깔끔한 설명이 나와 있다.
@@ -223,38 +246,41 @@ class TokenCheckView(View):
 - 발행한 토큰을 헤더에 넣어서 요청하면 로그인 인증, 유지
 
 ```python
-filename: core/utils.py
+## filename: core/utils.py (account 앱 있는 폴더에 보통 위치 )
 
 import jwt
 import json
-import request
 
-from   django.http				import JsonResponse
-from   django.core.exceptions	import ObjectDoesNotExist
+from django.http import JsonResponse
+from django.core.exceptions	import ObjectDoesNotExist
 
-from   insta.settings			import SECRET_KEY
-from   user.models			    import User
+from insta.settings import SECRET_KEY
+from user.models import User
 
-def login_decorator(func):
+def login_required(func):
+
 	def wrapper(self, request, *args, **kwargs):
-		try:
-			access_token = request.headers.get('Authorization', None)
-			payload		 = jwt.decode(access_token, SECRET_KEY, algorithm = 'HS256')
-			user		 = User.objects.get(email = payload['email'])
-			request.user = user
-		
-		except jwt.exceptions.DecodeError:
-			return JsonResponse({'message': 'INVALID_TOKEN'}, status = 400)
-		
-		except User.DoesNotExist:
-			return JsonResponse({'message': 'INVALID_USER'}, status = 400)
-		
-		return func(self, request, *args, **kwargs)
+	    access_token = request.headers.get('Authorization', None)	
+        
+        if access_token:
+            try:
+                payload		 = jwt.decode(access_token, SECRET_KEY, algorithms = ['HS256'])
+                user_id      = decode.get('user', None)
+                user		 = User.objects.get(id = user_id)
+                request.user = user 
+            except jwt.DecodeError:
+                return JsonResponse({'message': 'INVALID_TOKEN'}, status = 403) 
+            except User.DoesNotExist:
+                return JsonResponse({'message': 'INVALID_USER'}, status = 401)
+            
+            return func(self, request, *args, **kwargs)
+        
+        return JsonResponse(status = 401)
 	
 	return wrapper
 ```		
 
-- `core` 앱을 만들어서 데코레이터를 따로 생성. 다른 앱에서 import할 가능성이 있기 때문
+- 데코레이터 파일을 따로 생성. 다른 앱에서 import할 가능성이 있기 때문
 - `ObjectDoesNotExist` 는 에러처리 용도
 - `try`
 	- `access_token` - 값이 있으면 Authorization에서 가져오고? 없으면 None
@@ -264,6 +290,7 @@ def login_decorator(func):
 - `DoesNotExist` - import를 `ObjectDoesNotExist`로 했지만 사용할 때는 이렇게 해야 한다고 함.
 
 ### CommentView (데코레이터)
+## filename: 
 
 ```python
 import json
@@ -275,10 +302,10 @@ from   django.views	import View
 from   django,http	import JsonResponse, HttpResponse
 
 class CommentView(View):
-	@login_decorator
+	@login_required
 	def get(self, request):
 		comment_data = Comment.objects.values()
-		return JsonResponse({'comment_list': list(comment_data)
+		return JsonResponse({'comment_list': list(comment_data)})
 		
 	@login_decorator
 	def post(self, request):
@@ -286,7 +313,7 @@ class CommentView(View):
 		
 		Comment(
 			email	= request.user.email,
-			comment = data['comment']
+			comment = comment_data['comment']
 		).save()
 		
 		return HttpResponse(status = 200)
