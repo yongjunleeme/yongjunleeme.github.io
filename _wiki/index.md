@@ -19,8 +19,8 @@ regenerate: true
 
 ### [[python]]
 
-* [[decorator]]
 * [[crawling-wecode-1]]
+* [[scrapping-options]]
 
 ### [[django]]
 
@@ -40,6 +40,7 @@ regenerate: true
 * [[mini-conda]]
 * [[my-sql-ide]]
 * [[shell-shortcut]]
+* [[database-wecode]]
 
 ## [[algorithm]]
 
@@ -47,6 +48,7 @@ regenerate: true
 
 ## [[study]]
 
+[[project-scurm]]
 
 ## [[media]]
 
@@ -55,3 +57,6 @@ regenerate: true
 * [[함께자라기]]
 * [[손에잡히는빔]]
 
+### incomplete
+
+- decorator
