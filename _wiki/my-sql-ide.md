@@ -3,7 +3,7 @@ layout  : wiki
 title   : my-sql-ide 
 summary : 
 date    : 2020-02-13 19:34:52 +0900
-updated : 2020-02-18 19:18:57 +0900
+updated : 2020-02-26 19:01:10 +0900
 tags    : 
 toc     : true
 public  : true
@@ -22,13 +22,13 @@ $ brew install mysql
 * mysql 시작
 
 ```shell
-$ mysql.server start`
+$ mysql server start
 ```
 
 * 기본 설정
 
 ```shell
-$ mysql_secure_installation`
+$ mysql_secure_installation
 ```
 
 이제 여러 질문들이 출력됩니다. 출력에 대한 답은 참고만 부탁을 드립니다.
@@ -99,23 +99,55 @@ previlege 테이블을 다시 로드할 것인지 묻습니다.
 $ brew services start mysql`
 ```
 
-* MySQL 사용
-
-```shell
-$ mysql -u root -p`
-```
-
-위 명령어 입력 후 루트 비밀번호를 입력하여 mysql을 사용할 수 있게 됩니다.
-
 ## 기본 명령어
 
 ```shell
 $ show database;
 $ show tables;
 
-$ mysql -u root -p
+"sql 시작
+$ mysql -u root -p # 패스워드 없이하려면 mysql -u root
 
+"데이터베이스 생성
 "이모티콘 깨지지 않도록 보완 - utfmb4"
 $ create database test character set utf8mb4 collate utf8mb4_general_ci;
 
+"sql 사용
+$ use test;
+
+"sql 보기
+$ show tables;
+
+```
+
+## `my_settings.py`
+
+```python
+DATABASES = {
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',    [1]
+        'NAME': 'django_insta',                  [2]
+        'USER': 'root',                          [3]
+        'PASSWORD': 'password',                  [4]
+        'HOST': 'localhost',                     [5]
+        'PORT': '3306',                          [6]
+    }
+}
+```
+
+## `settings.py`
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+
+##
+
+```shell
+$ python manage.py migrate
 ```
