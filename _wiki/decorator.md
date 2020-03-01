@@ -3,7 +3,7 @@ layout  : wiki
 title   : decorator
 summary : 
 date    : 2020-02-08 13:25:49 +0900
-updated : 2020-02-08 13:32:00 +0900
+updated : 2020-02-20 18:36:35 +0900
 tags    : 
 toc     : true
 public  : true
@@ -388,17 +388,9 @@ Because the `do_twice_wrapper()` doesn’t explicitly return a value, the call
     'Hi Adam'
 ```
 
-
-
 ## Links
 [Real Python](chrome-extension://cbnaodkpfinfiipjblikofhlhlcickei/src/pdfviewer/web/viewer.html?file=https://static.realpython.com/guides/the-power-of-python-decorators.pdf?__s=wbgek1ohelz1ifi6f59y)
 [Real Python]([https://realpython.com/primer-on-python-decorators/](https://realpython.com/primer-on-python-decorators/))
-
-
-
-
-
-
 
 
 
