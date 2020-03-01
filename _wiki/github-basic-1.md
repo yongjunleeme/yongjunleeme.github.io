@@ -3,7 +3,7 @@ layout  : wiki
 title   : github-basic-1
 summary : 
 date    : 2020-02-12 20:25:32 +0900
-updated : 2020-02-12 20:42:17 +0900
+updated : 2020-03-01 14:59:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,10 +12,6 @@ latex   : false
 ---
 * TOC
 {:toc}
-
-## What
-
-github 기본 명령어들 정리
 
 ## 초기 설정
 
@@ -53,6 +49,17 @@ $ git push origin master
 $ git status -s 
 ```
 
+```shell
+"git add 취소"
+$ git reset HEAD <파일명> "파일명 쓰지 않으면 전체 취소"
+
+"git commit 취소"
+$ git reset HEAD^
+
+"commit 메시지 변경"
+$ git commit —amend
+```
+
 ## 브랜치
 
 ```shell
@@ -77,10 +84,27 @@ git branch -d issue1 <삭제>
 $ git branch
 ```
 
-- 충돌 문제 
+## 충돌 문제 
+
+### 실제 충돌 시 
+
+1. Master를 최신으로 변경
+    - `git log``로 번호 확인
+    - 레파지토리 커밋 상에서 최신 번호 확인
+    - 내 로컬에서 최신과 다른 변경사항이 있으면 `git stash`로 저장
+    - 이후에 `git fetch`, `git pull origin master`로 최신화
+
+2.  충돌난 브랜치로 이동
+
+    - `git merge master`
+    - 충돌 부분 수정
+    - `git add, commit, push`
+    - 브랜치마스터가 머지
+
+### 교과서적 충돌 시
 
 ```shell
-"병합할 때 발생하는 충돌 해결하기"
+병합할 때 발생하는 충돌 해결하기"
 $ git checkout master
 $ git merge issue2
 $ git merge issue3
@@ -89,12 +113,15 @@ $ git merge issue3
 $ git add myfile.txt
 $ git commit -m "issue3 브랜치 병합"
 
+"충돌 중 수정한 파일이 있을 때?"
+$ git stash "하던 작업을 임시로 저장"
+
 "충돌 해결"
 $ git checkout master
 $ git pull origin master
 $ git checkout 브랜치명
 $ git merge master
-"충돌 부분 모두 수정"
+"충돌 부분 모두 수정" - 둘중 하나만 남기면 된다
 
 "rebase 로 병합하기"
 $ git checkout issue3

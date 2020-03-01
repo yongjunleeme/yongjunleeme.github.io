@@ -3,7 +3,7 @@ layout  : wiki
 title   : my-sql-ide 
 summary : 
 date    : 2020-02-13 19:34:52 +0900
-updated : 2020-02-26 19:01:10 +0900
+updated : 2020-03-01 19:53:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -101,26 +101,39 @@ $ brew services start mysql`
 
 ## 기본 명령어
 
-```shell
-$ show database;
-$ show tables;
+```mysql
+show database;
+show tables;
 
 "sql 시작
-$ mysql -u root -p # 패스워드 없이하려면 mysql -u root
+mysql -u root -p # 패스워드 없이하려면 mysql -u root
 
 "데이터베이스 생성
 "이모티콘 깨지지 않도록 보완 - utfmb4"
-$ create database test character set utf8mb4 collate utf8mb4_general_ci;
+create database test character set utf8mb4 collate utf8mb4_general_ci;
 
 "sql 사용
-$ use test;
+use test;
 
 "sql 보기
-$ show tables;
-
+show tables;
 ```
 
-## `my_settings.py`
+```mysql
+"데이터 삭제
+DROP DATABASE <데이터베이스 이름>
+
+"장고에 migrations폴더 내 파일과 pycache 폴더 삭제
+"__init__.py 파일은 남겨둔다
+
+
+"모든 데이터 출력"
+mysql> select * from <모델명> \G; 
+```
+
+## 장고 세팅
+
+### `my_settings.py`
 
 ```python
 DATABASES = {
@@ -135,7 +148,7 @@ DATABASES = {
 }
 ```
 
-## `settings.py`
+### `settings.py`
 
 ```python
 DATABASES = {
@@ -145,8 +158,6 @@ DATABASES = {
     }
 }
 ```
-
-##
 
 ```shell
 $ python manage.py migrate
