@@ -24,15 +24,19 @@ regenerate: true
 
 ### [[django]]
 
+
 * [[django-mozilla-1]]
 * [[django-mozilla-2]]
 * [[django-mozilla-3]]
 * [[django-mozilla-4]]
 * [[django-wecode-1]]
 * [[django-wecode-2-encryption]]
-* [[django-initial-settings]]
 * [[django-wecode-3-modelling]] 
-* [[django-ORM]] 
+
+* copy & paste
+    * [[django-initial-settings]]
+    * [[django-ORM]] 
+    * [[django-sql-cheatsheet]]
 
 ## [[tool]]
 
@@ -40,15 +44,12 @@ regenerate: true
 * [[mini-conda]]
 * [[my-sql-ide]]
 * [[shell-shortcut]]
-* [[database-wecode]]
 
 ## [[algorithm]]
 
 * [[재귀함수]]
 
 ## [[study]]
-
-[[project-scurm]]
 
 ## [[media]]
 
