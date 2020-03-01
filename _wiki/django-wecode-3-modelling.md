@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-wecode-3-modelling  
 summary : 
 date    : 2020-02-18 19:20:05 +0900
-updated : 2020-02-20 20:07:09 +0900
+updated : 2020-02-20 20:58:12 +0900
 tags    : 
 toc     : true
 public  : true
@@ -53,6 +53,8 @@ class Category(models.Model):
     ]
     
     name             = models.CharField(max_length = 20, choices=CATEGORY_CHOICES)
+    
+    class Meta:
         db_table     = 'categories'
 
 class Nutrition(models.Model):
@@ -63,7 +65,7 @@ class Nutrition(models.Model):
     protein          = models.DecimalField(max_digets = 4, decimal_places = 2)
 
     clss Meta:
-        db_table = 'nutrition'
+        db_table = 'nutritions'
 
 class Allergy(models.Model):
 
