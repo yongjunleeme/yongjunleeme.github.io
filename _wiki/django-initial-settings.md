@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-initial-settings 
 summary : 
 date    : 2020-02-18 18:57:43 +0900
-updated : 2020-02-23 09:47:08 +0900
+updated : 2020-03-01 19:53:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -157,7 +157,7 @@ DATABASES = {
 SECRET = {
             'secret'    : '시크릿키',
 }
-
+# 객체가 아니면 변수로 선언
 ```
 
 ```python
