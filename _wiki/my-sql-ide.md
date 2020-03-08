@@ -3,7 +3,7 @@ layout  : wiki
 title   : my-sql-ide 
 summary : 
 date    : 2020-02-13 19:34:52 +0900
-updated : 2020-03-01 19:53:36 +0900
+updated : 2020-03-08 16:16:01 +0900
 tags    : 
 toc     : true
 public  : true
@@ -138,12 +138,12 @@ mysql> select * from <모델명> \G;
 ```python
 DATABASES = {
     'default' : {
-        'ENGINE': 'django.db.backends.mysql',    [1]
-        'NAME': 'django_insta',                  [2]
-        'USER': 'root',                          [3]
-        'PASSWORD': 'password',                  [4]
-        'HOST': 'localhost',                     [5]
-        'PORT': '3306',                          [6]
+        'ENGINE': 'django.db.backends.mysql',    
+        'NAME': 'django_insta',                  
+        'USER': 'root',                          
+        'PASSWORD': 'password',                  
+        'HOST': 'localhost',                    
+        'PORT': '3306',                        
     }
 }
 ```
@@ -161,4 +161,27 @@ DATABASES = {
 
 ```shell
 $ python manage.py migrate
+```
+
+## 유용한 명령어
+
+### migration, db clen
+
+```shell
+find . -path "*/migrations/*.py"
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+
+python manage.py makemigrations
+python manage.py migrate
+
+```
+
+```SQL
+drop database wetyle_share;
+create database wetyle_share character set utf8mb4 collate utf8mb4_general_ci;
+```
+
+```SQL
+"mysql 비번 없이 로그인
+$ sudo mysql -uroot
 ```
