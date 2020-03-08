@@ -24,7 +24,6 @@ regenerate: true
 
 ### [[django]]
 
-
 * [[django-mozilla-1]]
 * [[django-mozilla-2]]
 * [[django-mozilla-3]]
@@ -32,6 +31,9 @@ regenerate: true
 * [[django-wecode-1]]
 * [[django-wecode-2-encryption]]
 * [[django-wecode-3-modelling]] 
+* [[django-basic-url]]
+* [[django-debugging]]
+
 
 * copy & paste
     * [[django-initial-settings]]
@@ -44,6 +46,18 @@ regenerate: true
 * [[mini-conda]]
 * [[my-sql-ide]]
 * [[shell-shortcut]]
+* [[web-basic]]
+* [[postman]]
+* [[aws]]
+
+### vim
+
+* [[practical-vim-1]]
+
+### copy & paste
+    * [[link-serverless]] 
+
+
 
 ## [[algorithm]]
 
