@@ -3,7 +3,7 @@ layout  : wiki
 title   : github-basic-1
 summary : 
 date    : 2020-02-12 20:25:32 +0900
-updated : 2020-03-01 14:59:02 +0900
+updated : 2020-03-08 17:49:12 +0900
 tags    : 
 toc     : true
 public  : true
@@ -100,6 +100,34 @@ $ git branch
     - 충돌 부분 수정
     - `git add, commit, push`
     - 브랜치마스터가 머지
+
+```shell
+$ git checkout master
+$ git fetch
+$ git pull origin master
+$ git status
+$ git checkout 브랜치명
+$ git log -1 
+"해시번호 최신확인"
+$ git merge master
+"merge conflicting로 명시된 파일 수정"
+$ git push, commit
+
+"현재 변경코드를 백업
+"마스터로 돌아가서 git pull origin master
+"새로운 브랜치 생성 후 변경코드를 복붙
+```
+
+```shell
+$ git add -i  <interactive로 확인?>
+"2: update 
+"삭제된 파일 업데이트
+
+"4: add untranced
+"추가된 파일 업데이트
+$ git add, commit
+```
+
 
 ### 교과서적 충돌 시
 
