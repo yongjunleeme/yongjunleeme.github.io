@@ -1,9 +1,9 @@
 ---
 layout  : wiki
-title   : 
+title   : aws
 summary : 
 date    : 2020-03-04 14:05:38 +0900
-updated : 2020-03-06 11:07:57 +0900
+updated : 2020-03-08 16:12:23 +0900
 tags    : 
 toc     : true
 public  : true
@@ -19,7 +19,7 @@ latex   : false
 
 - Elastic Commpute Cloud
 - AWS Server, EC2 서버에 API를 배포
-- 't2.nano(CPU 1, 0.5 GB memory)'부터 'x1.32xlarge (CPI 128, 1952GB)' 까지 다양하게 제공
+- `t2.nano(CPU 1, 0.5 GB memory)`부터 `x1.32xlarge (CPI 128, 1952GB)` 까지 다양하게 제공
 
 ### Security Group
 
@@ -53,10 +53,11 @@ latex   : false
 - 퍼블릭 IP - 전 세계 어디서도 연결 가능
 - IAM 역할 - 계정 권한 설정
 - 백엔드 22/SSh, 8000/tcp
-- 서버접속
+
+#### 서버작
 
 ```shell
-chmod -R 400 키이
+chmod -R 400 [keyname]
 
 ssh -i keyname ubuntu@13.124.155.63
 "퍼블릭 아이피 주소 아마존 웹사이트에서 복붙"
@@ -65,7 +66,7 @@ ssh -i keyname ubuntu@13.124.155.63
 
 ### [RDS와 Mysql 연동](https://stackoverflow.com/c/wecode/questions/172)
 
-- 원격접속
+#### 원격접속
 
 ```shell
 
@@ -76,24 +77,15 @@ $ mysql -h "호스트명" -u root -p
 $ mysql -h temptest.cj5v1k6zfree.ap-northeast-2.rds.amazonaws.com -u root -p
 ```
 
-- AWX RDS DB Export
+#### AWX RDS DB Export
 
 ```shell
-$ mysqldump -u root -p -h <host> -v <dbName> <dbTable> > <exportFile.sql>
+$ mysqldump -u root -p wetyle_share > wetyle_share.sql
+"명령어를 꺼냄"
+
+$ mysql -h wetyle_share-test.c2i2ypp7xnkb.ap-northeast-2.rds.amazonaws.com -u root -p
+"로컬DB를 아마존으로"
 ```
-
-
-```shell
-mysqldump -u root -p 스키마명 > 스키마명.sql wetyle_share < wetyle_share.sql
-
-mysql -h 호스트명 -u root -p wetyle_share < wetyle_share.sql
-
-ec2 서버 접
-
-
-
-
-
 
 #### RDS mysql 설치
 
@@ -101,28 +93,34 @@ ec2 서버 접
 
 $ sudo apt install gcc
 $ sudo apt install libmysqlclient-dev
-
+"RDS에 mysql설치가 안 될 때 먼저 설치할 것들"
 ```
 
-- mysql 비번없이 로그인
+```shell
+$ pip install gunicorn
+
+$ gunicorn --bind 0:8000 wetyle_share wsgi
+
+$ nohup gunicorn --bind 0:8000 wetyle_share.wsgi &
+"백그라운드에서 서버동작"
+
+$ ps -ef | grep python
+"현재 동작 중 프로세스"
+
+$ kill <프로세스 숫자>
+"가상환경 위에 공통 동작되는 프로세스 찾아서"
+```
 
 ```shell
 $ sudo mysql -uroot
+"mysql 비번 없이 로그인"
 ```
 
+#### 장고와 RDS에서 생성된 mysql 연동
 
-####
-지유니콘 --demon
-
-nohup gunicorn --bind 0:8000 wetyle_share.wsgi &
-
-nohup ignoring input and appending output to 'nohup.out'
-
-ps -ef | grep python 
-
-kill 3222
+- [참고링크](https://lukelee91.github.io/blog/aws-django-mysql-connection)
 
 ## Links
 
-- [ ](https://yorr.tistory.com/18)
-
+- [욜욜욜님 블로그](https://yorr.tistory.com/18)
+- [남쥐님 블로그](https://blog.naver.com/namji117/221760954391)
