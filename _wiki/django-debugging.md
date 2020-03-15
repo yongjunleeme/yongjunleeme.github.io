@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-03-08 18:14:06 +0900
-updated : 2020-03-08 18:50:55 +0900
+updated : 2020-03-15 18:27:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -75,7 +75,7 @@ MIDDLEWARE = [
 - https도 가능
 
 ```shell
-$ brew cas install ngrok
+$ brew cask install ngrok
 ```
 
 ```shell
@@ -85,7 +85,39 @@ $ ngrok http 8000
 - `localhost:8000/inscpect/http`
     - 터널을 통해 접근한 요청을 모두 볼 수 있다
 
+## [Faker](https://factoryboy.readthedocs.io/en/latest/)
+
+```python
+from faker import Faker
+fake = Faker()
+
+email = fake.email()
+username = fake.user_name()
+age = fake.pyint(min_value=0, max_value=100)
+```
+
+```python
+def test_post(self):
+    post = Post.objects.create(
+        blog=self.blog,
+        title=faker.sentence(),
+        tags=[faker.word()]
+    )
+```
+- [raccoony님 블로그](https://www.44bits.io/ko/post/faker-and-factory-boy-for-clean-code-on-python-test)
+
+
+```shell
+$ manage.py test -v 3
+```
+
+- [in-menory DB](https://pypi.org/project/django-memdb/) -> 매번 깨끗한 test DB
+- [DRF의 APITestCase Class](https://www.django-rest-framework.org/api-guide/testing/)
+- [factory_boy](https://factoryboy.readthedocs.io/en/latest/) -> random parameter value generator
+- [Vagrant Cloud](https://app.vagrantup.com/mvbcoding/boxes/awslinux/) - os 달라도 같은 가상환경 생성
+
 ## Links
 
 - [django debugging 할 때 유용하게 쓸 수 있는 도구들 - 김슬](https://www.youtube.com/watch?v=VUGNYr_GxEY&t=265s)
-
+- [django api server unit test and remote debugging](https://www.slideshare.net/addnull/20170813-django-api-server-unit-test-and-remote-debugging)
+- [깔끔한 파이썬 테스트 코드를 위한 Faker와 Factory Boy](https://www.44bits.io/ko/post/faker-and-factory-boy-for-clean-code-on-python-test)
