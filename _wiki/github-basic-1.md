@@ -3,7 +3,7 @@ layout  : wiki
 title   : github-basic-1
 summary : 
 date    : 2020-02-12 20:25:32 +0900
-updated : 2020-03-08 17:49:12 +0900
+updated : 2020-03-15 18:26:44 +0900
 tags    : 
 toc     : true
 public  : true
@@ -126,6 +126,34 @@ $ git add -i  <interactive로 확인?>
 "4: add untranced
 "추가된 파일 업데이트
 $ git add, commit
+```
+
+#### rebase
+
+```python
+$ git checkout master
+$ git pull origin master
+
+$ git rebase -i master 브랜치이름
+p <- pick으로 나머지를 녹인다.
+s
+s
+
+충돌파일 변경 - 헤드
+$ git add
+$ git rebase --continue
+
+충돌파일 변경 - 헤드
+
+combination이 뜨면 최종 커밋써야
+
+$ git add
+$ git rebase --continue
+
+성공하면 푸시 origin 
+
+석세스풀리 리베이스되었는데 푸시 안되는 경우
+$ git push origin 피처/브랜치 -f
 ```
 
 
