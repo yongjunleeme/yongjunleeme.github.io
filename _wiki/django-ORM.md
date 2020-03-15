@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-ORM
 summary : 
 date    : 2020-02-19 15:43:46 +0900
-updated : 2020-03-01 19:53:36 +0900
+updated : 2020-03-08 21:13:01 +0900
 tags    : 
 toc     : true
 public  : true
@@ -54,6 +54,7 @@ Comment.objects.filter(search='django') # django라는 단어가 포함된 모�
 - 쿼리셋이 사용될 때 실제 DB 커넥션이 이뤄짐. 그 전까지는 쿼리셋을 반환만
 - 출처 - [이설님 블로그](https://lee-seul.github.io/django/2017/08/26/Django-ORM.html)
 
+- [filter()와 filter().valuses() 차이, values와 values_list 차이](https://wangin9.tistory.com/entry/django-query-filter-value-distinct)
 
 ### `disply()`
 
@@ -236,11 +237,6 @@ posts = Post.objects.all().select_related('comment')
 for post in posts: # n
     comment = Comment.objects.filter(post=post) # 이미 캐시되어 실행안됨
 ```
-### 이미지
-
--위코드 동기분이 공유해주신 이미지
-
-![CheatSheet 001](https://user-images.githubusercontent.com/48748376/75623909-7a486700-5bf2-11ea-82fc-a49901d46225.png)
 
 ### 참고 링크
 
