@@ -40,7 +40,7 @@ regenerate: true
 * copy & paste
     * [[django-initial-settings]]
     * [[django-ORM]]
-    * [[djagndo-ORM-2]]
+    * [[django-ORM-2]]
     * [[django-sql-cheatsheet]]
 
 ## [[tool]]
