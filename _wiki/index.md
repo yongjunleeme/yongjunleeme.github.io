@@ -21,6 +21,7 @@ regenerate: true
 
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
+* [[snippet]]
 
 ### [[django]]
 
@@ -33,11 +34,13 @@ regenerate: true
 * [[django-wecode-3-modelling]] 
 * [[django-basic-url]]
 * [[django-debugging]]
-
+* [[django-debugging-example]]
+* [[code-review]]
 
 * copy & paste
     * [[django-initial-settings]]
-    * [[django-ORM]] 
+    * [[django-ORM]]
+    * [[djagndo-ORM-2]]
     * [[django-sql-cheatsheet]]
 
 ## [[tool]]
@@ -49,6 +52,11 @@ regenerate: true
 * [[web-basic]]
 * [[postman]]
 * [[aws]]
+* [[socila-login]]
+* [[unit-test]]
+
+* [[data-structure]] 
+* [[resume]]
 
 ### vim
 
@@ -56,8 +64,6 @@ regenerate: true
 
 ### copy & paste
     * [[link-serverless]] 
-
-
 
 ## [[algorithm]]
 
