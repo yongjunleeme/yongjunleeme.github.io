@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-initial-settings 
 summary : 
 date    : 2020-02-18 18:57:43 +0900
-updated : 2020-03-01 19:53:36 +0900
+updated : 2020-03-22 13:33:33 +0900
 tags    : 
 toc     : true
 public  : true
@@ -19,6 +19,10 @@ latex   : false
 
 - `.gitigore` 파일 생성 후 [gitignore](https://www.gitignore.io/) 에서 검색해서 키워드 선택( 예: `vim`,  `macOS`, `django`, `python`) 
      - 프로젝트 시작하면 먼저 해놓아야, 나중에 하면 인식 못할 수도
+
+```python
+$ echo "db.sqlite3" >> .gitignore
+```
 
 ## requirements
 
