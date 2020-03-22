@@ -1,9 +1,9 @@
 ---
 layout  : wiki
-title   : django-ORM-2
+title   : django-ORM-3
 summary : 
 date    : 2020-03-22 19:36:24 +0900
-updated : 2020-03-22 23:35:31 +0900
+updated : 2020-03-22 23:41:09 +0900
 tags    : 
 toc     : true
 public  : true
