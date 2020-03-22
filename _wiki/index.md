@@ -41,6 +41,7 @@ regenerate: true
     * [[django-initial-settings]]
     * [[django-ORM]]
     * [[django-ORM-2]]
+    * [[django-ORM-3]]
     * [[django-sql-cheatsheet]]
 
 ## [[tool]]
@@ -57,6 +58,7 @@ regenerate: true
 
 * [[data-structure]] 
 * [[resume]]
+* [[docker]]
 
 ### vim
 
