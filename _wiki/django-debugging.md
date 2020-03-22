@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-03-08 18:14:06 +0900
-updated : 2020-03-15 18:27:47 +0900
+updated : 2020-03-22 18:05:19 +0900
 tags    : 
 toc     : true
 public  : true
@@ -84,6 +84,13 @@ $ ngrok http 8000
 
 - `localhost:8000/inscpect/http`
     - 터널을 통해 접근한 요청을 모두 볼 수 있다
+
+```python
+$ ngrok authtoken <YOUR_AUTHTOKEN>
+$ ngrok http 80 --authtoken={Auth-Token}
+```
+
+- auth 연결
 
 ## [Faker](https://factoryboy.readthedocs.io/en/latest/)
 
