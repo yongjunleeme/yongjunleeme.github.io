@@ -3,7 +3,7 @@ layout  : wiki
 title   : github-basic-1
 summary : 
 date    : 2020-02-12 20:25:32 +0900
-updated : 2020-03-15 18:26:44 +0900
+updated : 2020-03-22 13:33:33 +0900
 tags    : 
 toc     : true
 public  : true
@@ -198,3 +198,25 @@ $ git merge issue3
 2. 브랜치에서 커밋
 3. [username.github.io/a](http://username.github.io/a) name of the project(gh-pages)
 ```
+
+## git flow
+
+why 
+어떻게 깃을 써야 가장 효율적일까?
+
+- 기존 브랜치
+    - master, feature 
+
+- flow 브랜치
+    - hotfix(상용 서비스 디버깅), release(배포후보, 마지막 테스트 전), master(배포코드), develop(마스터 역할), feature
+    - Why? 배포중에도 개발을 멈추지 않기 위해
+    - release 브랜치에서 버그생기면 release에서 디버깅
+    - 마스터로 가고 이후에 develop가서 머지까지
+    - hotfix는 master에서 브랜치 생성, 디버깅후 master로 올려서 배포, develop가서 머지까지
+
+## Tip
+
+```python
+$ echo "db.sqlite3" >> .gitignore
+```
+
