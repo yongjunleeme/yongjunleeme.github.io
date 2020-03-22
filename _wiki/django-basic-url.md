@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic-url 
 summary : 
 date    : 2020-02-10 15:38:38 +0900
-updated : 2020-02-10 18:49:01 +0900
+updated : 2020-03-22 23:35:31 +0900
 tags    : 
 toc     : true
 public  : true
@@ -16,7 +16,7 @@ latex   : false
 ## Example
 
 **sample URLconf**
-```
+```python
 from django.urls import path
 
 from . import views
