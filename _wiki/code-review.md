@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-03-11 13:09:01 +0900
-updated : 2020-03-15 18:26:44 +0900
+updated : 2020-03-27 13:44:04 +0900
 tags    : 
 toc     : true
 public  : true
@@ -27,7 +27,14 @@ latex   : false
 - 상품이 계속 쌓일 것 같으면 중간테이블에 수량 컬럼을 만들어서 저장
 - 단위가 있는 데이터 저장하는 필드 char가 아니라 integer로
 - commit -m으로 쓰지 않고 commit으로
-
+- 로그인할 때는 보안을 위해 메시지 안 주는 것이 보통 
+- :Gblame
+- extra git 
+- git summary1
+- 뷰 네이밍 명사로
+- 다 읽어와서 계산하지 말고 필요한 것만 읽어와서 계산
+- url은 항상 단순하
+- 자료형이 다른 데이터 리스트로 붙일 때 어펜드를 사용
 
 ## 코드
 
@@ -134,3 +141,6 @@ user_match = Q(.,..) & Q(..)
 followee = User.objects.get(id = followee_id)
             request.user.follow_relation.add(followee)
 ```
+
+
+
