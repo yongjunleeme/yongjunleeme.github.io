@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-initial-settings 
 summary : 
 date    : 2020-02-18 18:57:43 +0900
-updated : 2020-03-22 13:33:33 +0900
+updated : 2020-03-26 18:43:14 +0900
 tags    : 
 toc     : true
 public  : true
@@ -173,6 +173,63 @@ DATABASE = my_settings.DATABASES
 
 - `settings.py`에서 설정 적용
 - 추가적으로 외부 API(SNS로그인, AWS접속 정보 등)도 기록 가능
+
+
+## `debug_toolbar`, `django-extensions`, `silk`
+
+```python
+##filename: settings.py
+
+INSTALLED_APPS = [
+    'debug_toolbar',
+    'django_extensions',
+    'silk'
+]
+
+
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'silk.middleware.SilkyMiddleware'
+]
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+    'debug_toolbar.panels.profiling.ProfilingPanel'
+]
+```
+
+```python
+## urls.py
+
+from django.urls import path, include
+
+urlpatterns = [
+        path('hanteo', include('rank.urls')),
+        path('silk', include('silk.urls', namespace='silk'))
+]
+
+from django.conf import settings
+from django.conf.urls import include, url  # For django versions before 2.0
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
+```
+
 
 ## Links
 
