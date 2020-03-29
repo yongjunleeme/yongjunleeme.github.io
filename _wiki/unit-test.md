@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-03-10 14:01:08 +0900
-updated : 2020-03-29 19:23:39 +0900
+updated : 2020-03-29 19:43:10 +0900
 tags    : 
 toc     : true
 public  : true
@@ -33,7 +33,7 @@ latex   : false
     - 예) 뷰, 서비스, 모델 따로 모두
 
 
-## [Django unit-test]](https://docs.djangoproject.com/en/dev/topics/testing/overview/)
+## [Django unit-test](https://docs.djangoproject.com/en/dev/topics/testing/overview/)
 
 
 ### unittest 모듈
@@ -64,19 +64,19 @@ class NewVisitorTest(unittest.TestCase):                    # 1
 
 클래스당 하나 이상의 테스트 메소드를 작성할 수 있다.
 
-### 2, 3
+#### 2, 3
 
 setUp과 tearDown은 특수한 메소드로 각 테스트 시작 전과 후에 실행된다. 브라우저를 시작하고 닫을 때 사용 가능. `try/except`와 비슷한 구조로 트스트에 에러가 발생해도 tearDown이 실행(setUp 내 exception이 있는 경우네는 tearDown 실행 안 됨).
 
-### 5
+#### 5
 
 테스트 어설션을 만들기 위해 `self.assertIn`을 사용. `assertEqual`, `assertTrue`, `assertFalse` 등 유용한 함수 제공. [unnittest 문서](http://docs.python.org/3/library/unittest.html) 참고
 
-### 6
+#### 6
 
 `self.fail`은 테스트 실패를 발생시켜 에러 메시지 출력. 테스트가 끝난 것을 알리기 위해서도 사용
 
-### 7
+#### 7
 
 마지막은 `if __name__ == '__main__'` 부분이다(파이썬 스크립트가 다른 스크립트에 임포트된 것이 아니라 커맨드라인을 통해 싫행됐다는 것을 확인하는 코드). `unittest.main()`을 호출해서 unittest 실행자를 가동. 이는 자동으로 파일 내 테스트 클래스와 메소드를 찾아서 실행해주는 역할
 
@@ -87,25 +87,22 @@ setUp과 tearDown은 특수한 메소드로 각 테스트 시작 전과 후에 �
 ### `Client()`
 
 ```python
-from django.test import TestCase, Client #테스트를 위한 클래스 임포트
+from django.test import TestCase, Client 
 
-client = Client() #client는 requests나 httpie가 일하는 방식과 같이 동작하는 객체.
 class JustTest(TestCase):
     def test_just_get_view(self):
         response = client.get('/just') 
-				#현재 우리는 localhost로서가 아닌 기준 경로로부터 실행 
+				                                          # 현재 우리는 localhost로서가 아닌 기준 경로로부터 실행 
         self.assertEqual(response.status_code, 200)
-				#응답 코드를 비교 
+				                                           #응답 코드를 비교 
         self.assertEqual(response.json(), {
             "message": "Just Do Python with >Wecode"
-        })
-				#JSON 데이터를 비교
+        })                                                 # JSON 데이터를 비교
 ```
 
--`Client()` - requests나 http와 비슷한 역할, 이름대로 클라이언트로서 동작
+- `Client()` - requests나 http와 비슷한 역할, 이름대로 클라이언트로서 동작
 - 테스트 케이스를 만들 때는 항상 `TestCase()` 객체를 상속받아 새로운 테스트 클래스를 생성
-- 내부에 작성하는 테스트 함수 명은 언제나 `test_`로 시작
--
+- 내부에 작성하는 테스트 함수 명은 언제나 `test_`로 시작 
 
 ### 예제코드
 
