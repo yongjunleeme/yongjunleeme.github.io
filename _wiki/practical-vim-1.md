@@ -3,7 +3,7 @@ layout  : wiki
 title   : practical-vim-1
 summary : 
 date    : 2020-02-06 09:49:45 +0900
-updated : 2020-03-08 18:54:24 +0900
+updated : 2020-03-22 13:33:34 +0900
 tags    : 
 toc     : true
 public  : true
@@ -46,6 +46,12 @@ latex   : false
 |---------------|--------|------|----------
 | 연속 변경 실행하기 | qx{변경}q | @x  | u        
 |---------------|--------|------|----------
+
+## vim 클립보드 사용
+
+```python
+set clipboard=unnamed "use OS clipboard
+```
 
 
 ## Link
