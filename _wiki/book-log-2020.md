@@ -3,7 +3,7 @@ layout  : wiki
 title   : 2020년 독서록
 summary : 
 date    : 2020-02-01 21:35:59 +0900
-updated : 2020-02-10 19:06:45 +0900
+updated : 2020-03-27 09:27:05 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,6 +12,14 @@ latex   : false
 ---
 * TOC
 {:toc}
+
+## Two Scoops of Django
+100 % : 0 / 442
+* [X] 1장. 코딩스타일
+* [X] 2장. 최적화된 장고 환경 꾸미기
+* [X] 3장. 어떻게 장고프로젝트를 구성할 것인가
+* [X] 4장. 장고 앱 디자인의 기본
+* [X] 5장. settings와 requirements 파일
 
 ## 손이 먼저 반응하는 Practice vim 
 100 % : 0 / 340
