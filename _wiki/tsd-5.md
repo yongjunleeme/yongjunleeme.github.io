@@ -3,7 +3,7 @@ layout  : wiki
 title   : tsd-5 
 summary : 
 date    : 2020-03-27 09:15:02 +0900
-updated : 2020-03-29 16:20:35 +0900
+updated : 2020-03-29 19:45:08 +0900
 tags    : 
 toc     : true
 public  : true
@@ -77,16 +77,16 @@ from splits.models import BananaSplit
 ### 2.3 
 
 - PYTHONPATH 설정
-명령행과 환경 변수에 이미 익숙하다면 virtualenv의 PYTHONPATH를 설정함으로써 django-admin.py를 여러 작업에 사용할 수도 있다.
+명령행과 환경 변수에 이미 익숙하다면 virtualenv의 PYTHONPATH를 설정함으로써 `django-admin.py``를 여러 작업에 사용할 수도 있다.
 또한 virtualenv의 PYTHONPATH를 현재 디렉터리와 최신 버전의 pip를 포함하도록 설정하고, 현재 프로젝트의 최상위 디렉터리에서 `pip install -e .`를 실행하면, 현재 디렉터리에서 패키지를 수정 가능한 상태로 설치할 수 있다.
 설정 방법이 익숙하지 않거나 절차가 복잡해 보인다면 걱정하지 말고 manage.py를 이용하면 된다.
 
-- [참고1](http://hope.simons-rock.edu/~pshields/cs/python/pythonpath.html
+- [참고1](http://hope.simons-rock.edu/~pshields/cs/python/pythonpath.html)
 - [참고2](http://docs.djangoproject.com/en/1.8/ref/django-admin/)
 
 #### 2.5.1 베이그런트와 버추얼박스
 
-베이그런트는 재생산이 간으한 개발 환경ㅇ르 생성, 설정, 관리하는 데 쓰는 대중적인 도구다. 베이그런트의 큰 장점은 버추얼박스(또는 다른 VM 도구들)와 쉽게 엳농된다는 점이다.
+베이그런트는 재생산이 간으한 개발 환경 생성, 설정, 관리하는 데 쓰는 대중적인 도구다. 베이그런트의 큰 장점은 버추얼박스(또는 다른 VM 도구들)와 쉽게 엳농된다는 점이다.
 
 ## Link
 
