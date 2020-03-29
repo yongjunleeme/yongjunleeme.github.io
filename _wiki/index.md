@@ -43,6 +43,13 @@ regenerate: true
     * [[django-ORM-2]]
     * [[django-ORM-3]]
     * [[django-sql-cheatsheet]]
+    * [[django-cache]]
+
+* two scoops of django
+    * [[tsd-5]]
+
+* tdd with python
+    * [[tdd-3-website-test]]
 
 ## [[tool]]
 
