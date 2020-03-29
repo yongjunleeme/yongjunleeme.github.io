@@ -36,7 +36,8 @@ regenerate: true
 * [[django-debugging]]
 * [[django-debugging-example]]
 * [[code-review]]
-
+* [[unit-test]]
+* 
 * copy & paste
     * [[django-initial-settings]]
     * [[django-ORM]]
@@ -61,7 +62,6 @@ regenerate: true
 * [[postman]]
 * [[aws]]
 * [[socila-login]]
-* [[unit-test]]
 
 * [[data-structure]] 
 * [[resume]]
