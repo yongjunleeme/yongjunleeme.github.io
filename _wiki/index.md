@@ -37,15 +37,17 @@ regenerate: true
 * [[django-debugging-example]]
 * [[code-review]]
 * [[unit-test]]
-* 
-* copy & paste
-    * [[django-initial-settings]]
-    * [[django-ORM]]
-    * [[django-ORM-2]]
-    * [[django-ORM-3]]
-    * [[django-sql-cheatsheet]]
-    * [[django-cache]]
+* [[django-initial-settings]]
+* [[django-ORM]]
+* [[django-ORM-2]]
+* [[django-ORM-3]]
+* [[django-cache]]
 
+* copy & paste
+    * [[django-sql-cheatsheet]]
+    * [[shell-shortcut]]
+    * [[link-serverless]] 
+      
 * two scoops of django
     * [[tsd-5]]
 
@@ -57,26 +59,21 @@ regenerate: true
 * [[github-basic-1]]
 * [[mini-conda]]
 * [[my-sql-ide]]
-* [[shell-shortcut]]
 * [[web-basic]]
 * [[postman]]
 * [[aws]]
-* [[socila-login]]
-
-* [[data-structure]] 
-* [[resume]]
 * [[docker]]
 
 ### vim
 
 * [[practical-vim-1]]
 
-### copy & paste
-    * [[link-serverless]] 
-
 ## [[algorithm]]
 
+* [[data-structure]] 
 * [[재귀함수]]
+* [[first-data-structure-algorithm]]
+* [[database-basic]]
 
 ## [[study]]
 

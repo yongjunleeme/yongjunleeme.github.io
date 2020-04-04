@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-02-25 19:12:44 +0900
-updated : 2020-02-25 19:31:12 +0900
+updated : 2020-03-15 18:26:44 +0900
 tags    : 
 toc     : true
 public  : true
@@ -175,7 +175,6 @@ find_element_by_xpath를 사용하면 그중에 처음것 하나만, find_elemen
 
 이렇게 긁어온 후 .text를 추가하여 텍스트로 변환시켜보면, 누리끼리한 색의 데이터만 들어오는것을 알 수 있다.
 (find_elements_by_xpath를 사용한 경우는 selenium이 리스트 자료형으로 데이터를 가져다 주기 때문에 for loop이나 list comprehension을 사용하여 각 데이터에 .text를 붙여줘야만 변환이 된다.)
-
 
 
 ## Links
