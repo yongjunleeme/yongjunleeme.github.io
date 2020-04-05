@@ -13,7 +13,10 @@ regenerate: true
 * [[memo-2020]]
 * [[mindset]]
 * [[small-talk-big-idea]]
-* [[term]]
+* [[scribble]]
+* [[dev-tip]]
+* [[link]]
+* [[review]]
 
 ## [[programming-language]]
 
@@ -74,6 +77,7 @@ regenerate: true
 * [[재귀함수]]
 * [[first-data-structure-algorithm]]
 * [[database-basic]]
+
 
 ## [[study]]
 

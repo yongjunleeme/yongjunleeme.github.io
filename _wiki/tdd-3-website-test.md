@@ -3,7 +3,7 @@ layout  : wiki
 title   : tdd-3-website-test 
 summary : 
 date    : 2020-03-29 19:35:40 +0900
-updated : 2020-04-05 08:28:55 +0900
+updated : 2020-04-05 19:48:14 +0900
 tags    : 
 toc     : true
 public  : true
@@ -58,10 +58,10 @@ class HomePaseTest(TestCase):
         self.assertTrue(response.content.endswith(b'</html>'))         # 5
 ```
 
-- # 1. HttpRequest 객체를 생성해서 사용자가 어떤 요청을 브라우저에 보내는지 확인한다.
-- # 2. 이것을 home_page 뷰에 전달해서 응답을 취득한다. 이 객체는 HttpResponse라는 클래스의 인스턴스이다. 응답 내용(HTML 형태로 사용자에게 보내는 것)이 특정 속성을 가지고 있는지 확인한다.
-- # 3. 5. 그 다음은 응답 내용이 <html>로 시작하고 </html>로 끝나는지 확인한다. response.content는 byte형 데이터로, 파이썬 문자열이 아니다. 따라서 b'' 구문을 사용해서 비교한다. 
-- # 4. 반환 내용의 <title> 태그에 "To-Do lists"라는 단어가 있는지 확인한다. 앞선 기능 테스트에서 확인한 것이기 때문에 단위 테스트도 확인해주어야 한다.
+- 1. HttpRequest 객체를 생성해서 사용자가 어떤 요청을 브라우저에 보내는지 확인한다.
+- 2. 이것을 home_page 뷰에 전달해서 응답을 취득한다. 이 객체는 HttpResponse라는 클래스의 인스턴스이다. 응답 내용(HTML 형태로 사용자에게 보내는 것)이 특정 속성을 가지고 있는지 확인한다.
+- 3. 5. 그 다음은 응답 내용이 <html>로 시작하고 </html>로 끝나는지 확인한다. response.content는 byte형 데이터로, 파이썬 문자열이 아니다. 따라서 b'' 구문을 사용해서 비교한다. 
+- 4. 반환 내용의 <title> 태그에 "To-Do lists"라는 단어가 있는지 확인한다. 앞선 기능 테스트에서 확인한 것이기 때문에 단위 테스트도 확인해주어야 한다.
 
 #### 단위 테스트 - 코드 주기
 

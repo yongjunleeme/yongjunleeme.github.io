@@ -3,7 +3,7 @@ layout  : wiki
 title   : database-basic 
 summary : 
 date    : 2020-04-01 15:51:11 +0900
-updated : 2020-04-02 19:03:20 +0900
+updated : 2020-04-05 19:51:22 +0900
 tags    : 
 toc     : true
 public  : true
@@ -113,12 +113,14 @@ SELECT 쿼리 성능을 월등히 향상시키는 인덱스는 항상 좋은 것
 제 1 정규만 만족하는 릴레이션에서 부분 함수 종속성을 가지면 삽입이상, 갱신이상, 삭제이상 현상이 나타난다.
 제 1 정규형에 속하면서 기본키가 아닌 모든 속성이 기본키에 완전함수 종속되면 제 2 정규형이다.
 
+#### 제 3 정규형
+
+제 2 정규형에 속하면서, 기본키가 아닌 모든 속성이 기본키에 이행적 함수 종속이 되지 않으면 제 3 정규형이다.
+
+- 이행적 함수 종속(Transitive Functional Dependency)
+삼ㄴ단논법 같은 관계를 가진 함수종속이다. X, Y, Z에 대해 X -> Y이고 Y -> Z이면 X -> Z가 성립한다. 이를 Z가 X에 이행적으로 함수 종속되었다고 한다.
 
 [정규화참고 블로그](https://yaboong.github.io/database/2018/03/09/database-normalization-1/)
-
-### 정규화 장단
-
-
 
 
 ## Link 

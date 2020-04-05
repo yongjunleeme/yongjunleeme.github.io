@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-04-05 08:33:15 +0900
+updated : 2020-04-05 19:44:27 +0900
 tags    : 
 toc     : true
 public  : true
@@ -15,7 +15,23 @@ latex   : false
 
 ## 선형 배열
 
+- 정렬된 리스트에 원소 삽입
+
 ```python
+def solution(L, x):
+    if x > max(L): 
+        L.append(x)
+    elif x < min(L): 
+        L.insert(0, x)
+    else:
+        for i in range(len(L)):
+            if L[i] >= x:
+                t = i
+                break
+        L.insert(t, x) 
+
+    return L
+
 def solution(L, x):
     for idx, num in enumerate(L):
         if num > x:
@@ -28,6 +44,30 @@ def solution(L, x):
             pass
 
      return L
+```
+
+- 리스트에서 원소 찾아내기
+
+```python
+def solution(L, x):
+    answer = []
+    if x not in L:
+        answer.append(-1)
+    else:
+        for i in range(len(L)):
+            if L[i] == x:
+                answer.append(i)        
+    return answer
+
+def solution(L, x):
+    answer = []
+    if x not in L:
+        answer.append(-1)
+    else:
+        for i, v in enumerate(L):
+            if v == x:
+                answer.append(i)
+    return answer
 ```
 
 ## 탐색
@@ -49,20 +89,44 @@ def solution(L, x):
     return idx
 ```
 
+### 탐색 (search) 이란?
+복수의 원소로 이루어진 데이터에서 특정 원소를 찾아내는 작업입니다. 탐색에도 여러 가지 방법이 있지만, 아주 기본적인 두 가지를 소개합니다.
+
+선형 탐색 (linear search), 또는 순차 탐색 (sequential search): 순차적으로 모든 요소들을 탐색하여 원하는 값을 찾아냅니다. 배열의 길이에 비례하는 시간이 걸리므로, 최악의 경우에는 배열에 있는 모든 원소를 다 검사해야 할 수 있습니다. (이런 일은 어떤 원소를 찾으려 할 때 벌어질까요?)
+
+이진 탐색 (binary search): 탐색하려는 배열이 이미 정렬되어 있는 경우에만 적용할 수 있습니다. 배열의 가운데 원소와 찾으려 하는 값을 비교하면, (크기 순으로 정렬되어 있다는 성질을 이용하면) 왼쪽에 있을지 오른쪽에 있을지를 알 수 있습니다 (만약 있긴 있다면). 그러면, 적어도 반대쪽에 없는 것은 확실하므로, 배열의 반을 탐색하지 않고 버릴 수 있습니다. 이 과정을 반복하면 원하는 값을 찾아낼 수 있습니다. 한 번에 절반씩 배열을 잘라나간다면...몇 번이나 이 과정을 반복하게 될까요? (약간의 수학이네요?)
+
+그래서 이진 탐색이 선형 탐색보다 빠른 방법이기는 합니다. 그러나, 뭔가를 찾으려 한다고 할 때, 항상 이진 탐색 방법을 적용하는 것이 답인가요? 그러려면 우선 배열을 정렬해야 한다던데, 크기 순으로 정렬하는 것은 금방 되나요? 한 번만 탐색하고 말 거라면, 굳이 크기 순으로 늘어놓느라 시간을 소모하는 것보다 한번씩 다 뒤지는 것이 낫지 않나요? (물론입니다.)
+
 - 이진 탐색 O(log n)
 
 - sorted()
     - 내장 함수
-    - 정렬된 새로운 리스트 얻어냄
+    - 정렬된 새로운 리스트 얻어냄(오름차순)
+
+```python
+>>> sorted([5, 2, 3, 1, 4])
+[1, 2, 3, 4, 5]
+```
+
 - sort()
     - 리스트의 메서드
     - 해당 리스트를 정렬함
 
-reverse = True 정렬 순서 반대로
+```python
+>>> a = [5, 2, 3, 1, 4]
+>>> a.sort()
+>>> a
+[1, 2, 3, 4, 5]
+```
+
+- reverse = True 정렬 순서 반대로
 
 ```python
 L2 = sorted(L, reverse = True)
 ```
+
+- 길이순
 
 ```python
 L = ['abcd', 'xyz', 'spam']
@@ -72,9 +136,8 @@ sorted(L, key=lambda x: len(x))
 ```python
 L = [{'name': 'John', 'score': 83},.. ]
 
-L.sort(key = lambd x:x['name'])
+L.sort(key = lambda x:x['name'])
 # 알파벳 순으로 정렬
-
 ```
 
 ## 재귀
@@ -83,7 +146,7 @@ L.sort(key = lambd x:x['name'])
 
 알고리즘들 중에는, 재귀 알고리즘 (recursive algorithm) 이라고 불리는 것들이 있습니다. 이것은 알고리즘의 이름이 아니라 성질입니다. 주어진 문제가 있을 때, 이것을 같은 종류의 보다 쉬운 문제의 답을 이용해서 풀 수 있는 성질을 이용해서, 같은 알고리즘을 반복적으로 적용함으로써 풀어내는 방법입니다.
 
-예를 들면, 1 부터 n 까지 모든 자연수의 합을 구하는 문제 (sum(n))는, 1 부터 n - 1 까지의 모든 자연수의 합을 구하는 문제 (sum(n - 1))를 풀고, 여기에 n 을 더해서 그 답을 찾을 수 있습니다. 즉,
+예를 들면, 1 부터 n 까지 모든 자연수의 합을 구하는 문제 (sum(n))는, 1 부터 n - 1 까지의 모든 자연수의 합을 구하는 문제 (sum(n - 1))를 풀고, 여기에 n 을 더해서 그 답을 찾을 수 있습니다.
 
 ```python
 sum(n) = sum(n - 1) + n
@@ -205,7 +268,7 @@ def solution(L, x, l, u):
         - n개의 크기 순으로 정렬된 수에서 특정 값을 찾기 위해 이진 탐색 알고리즘을 적용
     - 이차 시간 알고리즘 - O(n제곱)
         - 삽입 정렬
-    - 병합 정렬 - nlong n (merge sort)
+    - 병합 정렬 - O(nlog n) (merge sort)
 
 ## 연결 리스트
 
@@ -224,28 +287,184 @@ def solution(L, x, l, u):
         - 삽입, 삭제, 순회, ...
         - 정렬, 탐색, ...
 
-- Node
+- Linked List Node 구성
     - Data
     - Link(next)
-    - 노드 내 데이터는 다른 구조로 이뤄질 수 있음 예) 문제열, 레코드, 다른 연결 리스트 등
+        - 노드 내 데이터는 다른 구조로 이뤄질 수 있음 예) 문제열, 레코드, 다른 연결 리스트 등
 
-## 예제
+- 기본적 연결 리스트
+    - Head (노드의 처음 값)
+    - Tail (노드의 마지막 값)
+    - of nodes: 3 (노드수)
 
-- K번째 수 
+### 시간 복잡도
+
+- 특정 원소 지칭 - 배열 O(1), 연결 리스트 O(n)
+
+
+### 예제
+
+- 연결 리스트 순회
 
 ```python
-def get(self, pos):
-    if <= 0 or pos > self.nodeCount:
-        return None
+class Node:
+    def __init__(self, item):
+        self.data = item
+        self.next = None
         
-    i = 1
-    curr = self.head
-    shile i < pos:
-        curr = curr.next
-        i += 1
+class LinkedList:
+    def __init__(self):
+        self.nodeCount = 0
+        self.head = None
+        self.tail = None
+        
+    def getAt(self, pos)
+        if pos < 1 or pos > self.nodeCount:
+            return None
+        i = 1
+        curr = self.head
+        while i < pos:
+            curr = curr.next
+            i += 1
+        return curr
+    
+    def traverse(self):
+        answer = []
+        curr = self.head
+        while = curr != None:
+            answer.append(curr.data)
+            curr = curr.next
+        return answer
+
+def solution(x):
+    return 0        
 ```
 
-9분
+## 연결 리스트 응용
+
+### 설명
+
+여기에서는, 연결 리스트의 핵심 연산으로서 아래와 같은 것들이 등장합니다.
+
+- 원소의 삽입 (insertion)
+- 원소의 삭제 (deletion)
+- 두 리스트 합치기 (concatenation)
+
+이러한 연산이 쉽게 (빠르게) 이루어질 수 있다는 점이 연결 리스트가 선형 배열에 비하여 가지는 특장점입니다. 조금 다르게 표현하면, 이런 연산들이 빨라야 하는 응용처에 적용하기 위함이 연결 리스트의 존재 이유입니다.
+
+그런데, 나열된 데이터 원소들의 사이에 새로운 데이터 원소를 삽입하려면, 앞/뒤의 원소들을 연결하고 있는 링크를 끊어 내고, 그 자리에 새로운 원소를 집어넣기 위해서 링크들을 조정해 주어야 하는, 프로그래머로서는 아주 조금 귀찮은 일들이 수반됩니다. 이 강의에서는 그러한 작업들을 Python 코드로 작성하는 연습을 함으로써 자료 구조를 다루는 프로그래밍 기법의 기초를 익힙니다. 이 기법들은 이후에 조금씩 더 복잡해지는 자료 구조를 프로그램으로 구현하는 데 바탕이 될 것입니다. 늘 그렇듯, 프로그래밍에서 어려운 점은 특이한 경우들에 대해서도 고려해야 한다는 점인데요, 원소의 삽입에 있어서는 맨 앞 또는 맨 뒤에 새로운 원소를 삽입하는 경우가 조금 생각할 꺼리가 되는 일입니다.
+
+마찬가지로, 원소의 삭제에 있어서도 맨 앞 또는 맨 뒤의 원소를 삭제하는 경우가 조금 신경써서 처리할 일들이 생기는 경우들입니다.
+
+마지막으로, 두 리스트를 합치는 일은 생각보다 훨씬 쉽습니다. 눈치가 빠른 분들은 이것이 매우 간단하리라는 것을 (제 7 강을 공부하셨다면) 쉽게 알아차리셨을 것 같네요.
+
+연결 리스트를 다루는 프로그래밍 연습을 해보면서, 두 가지를 염두에 두시기를 바랍니다. 첫째, 이것이 무엇을 위함이냐? 즉, 연결 리스트라는 자료 구조를 착안함으로써 어떤 목적을 이루고자 했는지, 다시 말하면 연결 리스트가 가지는 장점이 어떤 곳에서 발휘되는지, 알고리즘의 복잡도 (제 6 강을 참고하세요) 측면에서 생각해보시기 바랍니다. 둘째, 링크를 조정하는 등의 코딩은 앞으로 나타나게 될 트리 (tree) 라든지, 이 강의 시리즈에서 다루지는 않지만 그래프 (graph) 등을 프로그래밍할 때를 대비한 연습이 된다는 점을 떠올리시고, 이런 종류의 코딩에 익숙해지려 노력해 보시기 바랍니다.
+
+
+```python
+class Node:
+    def __init__(self, item):
+        self.data = item
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.nodeCount = 0
+        self.head = None
+        self.tail = None
+
+    def __repr__(self):
+        if self.nodeCount == 0:
+            return 'LinkedList: empty'
+
+        s = ''
+        curr = self.head
+        while curr is not None:
+            s += repr(curr.data)
+            if curr.next is not None:
+                s += ' -> '
+            curr = curr.next
+        return s
+
+
+    def getAt(self, pos):
+        if pos < 1 or pos > self.nodeCount:
+            return None
+
+        i = 1
+        curr = self.head
+        while i < pos:
+            curr = curr.next
+            i += 1
+
+        return curr
+
+
+    def insertAt(self, pos, newNode):
+        if pos < 1 or pos > self.nodeCount + 1:
+            return False
+
+        if pos == 1:
+            newNode.next = self.head
+            self.head = newNode
+
+        else:
+            if pos == self.nodeCount + 1:
+                prev = self.tail
+            else:
+                prev = self.getAt(pos - 1)
+            newNode.next = prev.next
+            prev.next = newNode
+
+        if pos == self.nodeCount + 1:
+            self.tail = newNode
+
+        self.nodeCount += 1
+        return True
+
+
+    def getLength(self):
+        return self.nodeCount
+
+
+    def traverse(self):
+        result = []
+        curr = self.head
+        while curr is not None:
+            result.append(curr.data)
+            curr = curr.next
+        return result
+
+
+    def concat(self, L):
+        self.tail.next = L.head
+        if L.tail:
+            self.tail = L.tail
+        self.nodeCount += L.nodeCount
+
+```
+
+- 원소 삽입
+    - pos가 가리키는 위치에 (1 <= pos <= nodeCount + 1)
+    - newNode를 삽입하고 성공/실패에 따라 True/False 리턴
+    - 복잡도
+        - 맨 앞 삽입: O(1)
+        - 중간 삽입: O(n)
+        - 맨 끝 삽입 O(1) - Tail 덕분에
+
+
+- 원소의 삭제
+    - pos가 가리키는 위치의 (1 <= pos <= nodeCount)
+    - node를 삭제하고
+    - 그 node의 데이터를 리턴
+    - 복잡도
+        - 맨 앞 삭제: O(1)
+        - 중간 삭제: O(n)
+        - 맨 끝 삭제: O(n)
+
+- 두 리스트의 연결
+    - concat
 
 ## Link 
 
