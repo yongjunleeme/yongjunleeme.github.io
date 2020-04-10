@@ -3,7 +3,7 @@ layout  : wiki
 title   : 2020년 독서록
 summary : 
 date    : 2020-02-01 21:35:59 +0900
-updated : 2020-04-05 10:01:23 +0900
+updated : 2020-04-07 23:36:21 +0900
 tags    : 
 toc     : true
 public  : true
@@ -29,6 +29,7 @@ latex   : false
 * [X] 3장. 어떻게 장고프로젝트를 구성할 것인가
 * [X] 4장. 장고 앱 디자인의 기본
 * [X] 5장. settings와 requirements 파일
+* [X] 2020-04-07 6장. 장고에서 모델 이용하기
 
 ## 손이 먼저 반응하는 Practice vim 
 100 % : 0 / 340
