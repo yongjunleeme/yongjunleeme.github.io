@@ -1,9 +1,9 @@
 ---
 layout  : wiki
-title   : 
+title   : django-debugging-tool 
 summary : 
 date    : 2020-03-08 18:14:06 +0900
-updated : 2020-03-26 18:43:14 +0900
+updated : 2020-04-07 14:43:16 +0900
 tags    : 
 toc     : true
 public  : true
