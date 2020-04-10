@@ -6,7 +6,6 @@ public  : true
 regenerate: true
 ---
 
-
 ## [[diary]]
 
 * [[book-log-2020]]
@@ -14,7 +13,7 @@ regenerate: true
 * [[mindset]]
 * [[small-talk-big-idea]]
 * [[scribble]]
-* [[dev-tip]]
+* [[tip]]
 * [[link]]
 * [[review]]
 
@@ -36,7 +35,7 @@ regenerate: true
 * [[django-wecode-2-encryption]]
 * [[django-wecode-3-modelling]] 
 * [[django-basic-url]]
-* [[django-debugging]]
+* [[django-debugging-tool]]
 * [[django-debugging-example]]
 * [[code-review]]
 * [[unit-test]]
@@ -50,7 +49,7 @@ regenerate: true
     * [[django-sql-cheatsheet]]
     * [[shell-shortcut]]
     * [[link-serverless]] 
-      
+
 * two scoops of django
     * [[tsd-5]]
 
@@ -62,8 +61,6 @@ regenerate: true
 * [[github-basic-1]]
 * [[mini-conda]]
 * [[my-sql-ide]]
-* [[web-basic]]
-* [[postman]]
 * [[aws]]
 * [[docker]]
 
@@ -71,15 +68,16 @@ regenerate: true
 
 * [[practical-vim-1]]
 
-## [[algorithm]]
+## [[study]]
 
 * [[data-structure]] 
 * [[재귀함수]]
 * [[first-data-structure-algorithm]]
+* [[dev-common-sense]]
 * [[database-basic]]
-
-
-## [[study]]
+* [[web-basic]]
+* [[python-basic]]
+* [[OS-basic]]
 
 ## [[media]]
 
