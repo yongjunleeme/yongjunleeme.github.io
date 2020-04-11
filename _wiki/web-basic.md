@@ -3,7 +3,7 @@ layout  : wiki
 title   : web-basic
 summary : 
 date    : 2020-03-02 14:15:19 +0900
-updated : 2020-04-09 15:59:28 +0900
+updated : 2020-04-12 00:16:41 +0900
 tags    : 
 toc     : true
 public  : true
@@ -62,8 +62,9 @@ latex   : false
 2. 메시지를 받은 웹 서버 애플리케이션은 요청 메시지에 따른 응답 메시지를 넣어 클라이언트로 보낸다.
 3. 왔던 방식대로 응답 메시지가 클라이언트에게 전달된다.
 
+## HTTP3
 
-https://evan-moon.github.io/2019/10/08/what-is-http3/
+### [HTTP3](https://evan-moon.github.io/2019/10/08/what-is-http3/)
 
 ## Links
 

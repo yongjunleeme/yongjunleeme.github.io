@@ -3,7 +3,7 @@ layout  : wiki
 title   : python-basic
 summary : 
 date    : 2020-04-07 17:43:42 +0900
-updated : 2020-04-11 19:02:09 +0900
+updated : 2020-04-12 00:16:41 +0900
 tags    : 
 toc     : true
 public  : true
@@ -50,13 +50,13 @@ StopIteration
 4. 이 때 모든 local state는 유지되는데 변수의 상태, 명령어, 포인터, 내부 스택, 예외 처리 상태를 포함한다.
 5. 그 후 제어권을 상위 컨텍스트로 양보하고 또 `__next__()`가 호출되면 제네레이터는 중단된 시점부터 다시 시작한다.
 
-> yield문의 값은 어떤 메서드를 통해 제네레이터가 다시 동작했는지에 따라 다른데 `__next__()`를 사용하면 None이고 `send()`를 사용하면 메서드로 전달된 값을 갖게 돼 외부에서 데이터를 입력받을 수 있게 된다.
+- yield문의 값은 어떤 메서드를 통해 제네레이터가 다시 동작했는지에 따라 다른데 `__next__()`를 사용하면 None이고 `send()`를 사용하면 메서드로 전달된 값을 갖게 돼 외부에서 데이터를 입력받을 수 있게 된다.
 
 ### 이점
 
 List, Set, Dict 표현식은 Iterable(이터러블)하기에 for 표현식 등에서 유용하게 쓰인다. 그러나 모든 값을 메모리에 담아 큰 값을 다룰 때는 좋지 않다. 제네레이터를 사용하면 yield를 통해 그때그때 필요한 값만 받아쓰기 떄문에 모든 값을 메모리에 넣을 필요가 없게 된다.
 
-> `range()` 함수는 Python 2.x에서 리스트를 반환하고 Python 3.x에선 range 객체를 반환한다. 이 range 객체는 제네레이터, 이터레이터가 아니다. 실제로 `next(range(1))`를 호출하면 `TypeError: 'range' object is not an iterator` 오류가 발생한다. 그렇지만 내부 구현상 제네레이터를 사용한 것처럼 메모리 사용에 이점이 있다.
+- `range()` 함수는 Python 2.x에서 리스트를 반환하고 Python 3.x에선 range 객체를 반환한다. 이 range 객체는 제네레이터, 이터레이터가 아니다. 실제로 `next(range(1))`를 호출하면 `TypeError: 'range' object is not an iterator` 오류가 발생한다. 그렇지만 내부 구현상 제네레이터를 사용한 것처럼 메모리 사용에 이점이 있다.
 
 ```python
 >>> import sys
@@ -287,8 +287,7 @@ print(M.mro())
 print(A.mro())
 ```
 
-
-
 ## Link
 
 - [Interview_Question_for_Beginner](https://github.com/JaeYeopHan/Interview_Question_for_Beginner/tree/master/Python)
+- [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
