@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-04-05 19:44:27 +0900
+updated : 2020-04-11 15:28:19 +0900
 tags    : 
 toc     : true
 public  : true
@@ -367,7 +367,6 @@ class Node:
         self.data = item
         self.next = None
 
-
 class LinkedList:
     def __init__(self):
         self.nodeCount = 0
@@ -399,7 +398,6 @@ class LinkedList:
             i += 1
 
         return curr
-
 
     def insertAt(self, pos, newNode):
         if pos < 1 or pos > self.nodeCount + 1:
@@ -465,6 +463,61 @@ class LinkedList:
 
 - 두 리스트의 연결
     - concat
+
+
+
+```python
+class Node:
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
+
+class NodeMgmt:
+    def __init__(self, data):
+        self.head = Node(data)
+    
+    def add(self, data):
+        if self.head == '':
+            self.head = Node(data) # head가 없으니add할 data만 삽
+        else:
+            node = self.head
+            while node.next:
+                node = node.next  # Node.next == None까지 전진
+            node.next = Node(data) # 생성할 노드를 연결
+    
+    def desc(self):
+        node = self.head
+        while node:
+            print(node.data)
+            node = node.next
+    
+    # a, b, c 순서대로 링크드리스트 있다는 가정
+    # 1. a 데이터 삭제하려면 head를 b로 바뀌어야
+    # 2. c 데이터 삭제하려면 b 데이터 주소값 None으로
+    # 3. b 데이터 삭제하려면 a 주소값을 c데이터로 변경
+    def delete(self, data):
+        if self.head = '':
+            print("해당 값을 가진 노드가 없습니다.")
+            return
+        
+        if self.head.data == data: # data는 인자로 받은 삭제할 데이터
+            temp = self.head
+            self.head = self.head.next
+            def temp
+        else:
+            node = self.head
+            while node.next:
+                if node.next.data == data:
+                    temp = node.next
+                    node.next = node.next.next # Node.next.next는 None이니 node.next에 넣고 마무리
+                    del temp
+                    return
+                else:
+                    node = node.next
+                    
+    
+    
+```
 
 ## Link 
 
