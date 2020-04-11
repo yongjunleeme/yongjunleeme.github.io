@@ -3,7 +3,7 @@ layout  : wiki
 title   : tsd-5 
 summary : 
 date    : 2020-03-27 09:15:02 +0900
-updated : 2020-03-29 19:45:08 +0900
+updated : 2020-04-07 23:36:21 +0900
 tags    : 
 toc     : true
 public  : true
@@ -86,7 +86,80 @@ from splits.models import BananaSplit
 
 #### 2.5.1 베이그런트와 버추얼박스
 
-베이그런트는 재생산이 간으한 개발 환경 생성, 설정, 관리하는 데 쓰는 대중적인 도구다. 베이그런트의 큰 장점은 버추얼박스(또는 다른 VM 도구들)와 쉽게 엳농된다는 점이다.
+베이그런트는 재생산이 간으한 개발 환경 생성, 설정, 관리하는 데 쓰는 대중적인 도구다. 베이그런트의 큰 장점은 버추얼박스(또는 다른 VM 도구들)와 쉽게 연동된다는 점이다.
+
+## 3장. 어떻게 장고 프로젝트를 구성할 것인가
+
+장고 프로젝트 템플릿
+- [Cookiecutter](https://github.com/pydanny/cookiecutter-django)
+- [다른 Cookiecutter](https://www.djangopackages.com/grids/g/cookecutters)
+
+### 3.2 우리가 선호하는 프로젝트 구성
+
+```
+<repository_root>
+    <django_project.root>/
+        <configuration_root>
+```
+
+#### 3.2.1 최상위 레벨: 저장소 루트
+
+최상위 <repository-root>/ 디렉터리는 프로젝트의 최상위 절대 루트다. <django_project_root> 이외에 README.rst, docs/ 디렉터리, .gitignore, requirements.txt, 그리고 배포에 필요한 다른 파일 등 중요한 내용이 위치한다.
+
+#### 3.2.2 두 번째 레벨: 프로젝트 루트
+두 번째 레벨은 장고 프로젝트 소스들이 위치하는 디렉터리다. 모든 파이썬 코드는 <django_project_root>/ 디렉터리 아래와 그 하부 디렉터리들에 위치한다.
+
+#### 3.2.3 세 번째 레벨: 설정 루트
+
+<configuration_root> 디렉터리는 settings 모듈과 기본 URLConf(urls.py)이 위치
+
+### 3.3 예제 프로젝트 구성
+
+```
+icecreamratings_project/
+    .gitignore
+    Makerfile
+    docs/
+    README.rst
+    requirements.txt
+    icecreamratings/
+        manage.py
+        meida/ # 개발 전용
+        products/ # 앱
+        prifiles/ # 앱
+        ratings/ # 앱
+        static/ 
+        templates/
+        config/
+            __init__.py
+            settings/
+            urls.py
+            wsgi.py
+```
+- Makerfile - 간단한 배포 작업 내용과 매크로들을 포함한 파일이다. 복잡한 구성의 경우에는 인보크(Invoke), 페이버(Paver) 또는 페브릭(Fabric) 등의 도구를 이용한다.
+- media/ - 개발 용도로 이용되는 디렉터리다. 사용자가 올리는 사진 등의 미디어 파일이 올라가는 정소다. 큰 프로젝트의 경우 사용자들이 올리는 미디어 파일들은 독립된 서버에서 호스팅한다.
+- static/ - CSS, 자바스크립트, 이미지 등 사용자가 올리는 것 이외의 정적 파일들을 위치시키는 곳이다. 큰 프로젝트의 경우 독립된 서버에서 호스팅한다.
+- templates/ -  시스템 통합 템플릿 저장 장소
+
+### 3.5 startproject
+
+#### 3.5.2 우리가 선호하는 프로젝트 템플릿
+
+```shell
+$ cookiecutter https://github.com/pydanny/cookiecutter-django
+```
+
+cookiecutter-django를 포크하여 해당 장고 프로젝트 요구에 맞게 수정해서 마음대로 변형할 수 있다.
+
+#### 3.5.3 대안 템플릿: django-kevin
+
+https://github.com/imkevinxu/django-kevin
+
+
+### 4장. 장고 앱 디자인의 기본
+
+
+
 
 ## Link
 
