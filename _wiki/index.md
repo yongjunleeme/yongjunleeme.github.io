@@ -78,6 +78,8 @@ regenerate: true
 * [[web-basic]]
 * [[python-basic]]
 * [[OS-basic]]
+* [[postgreSQL]]
+* [[sql]]
 
 ## [[media]]
 
@@ -88,4 +90,4 @@ regenerate: true
 
 ### incomplete
 
-- decorator
+- [[decorator]]
