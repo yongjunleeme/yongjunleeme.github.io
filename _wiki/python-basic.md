@@ -3,7 +3,7 @@ layout  : wiki
 title   : python-basic
 summary : 
 date    : 2020-04-07 17:43:42 +0900
-updated : 2020-04-12 00:16:41 +0900
+updated : 2020-04-14 07:50:41 +0900
 tags    : 
 toc     : true
 public  : true
@@ -285,6 +285,163 @@ class M(B, A, Z):
 ```python
 print(M.mro())
 print(A.mro())
+```
+
+## 모듈
+
+```python
+# filename: pkg/fibonacci.py
+
+# 클래스
+from pkg.fibonacci import Fibonacci
+
+print("ex1 : ", Fibonacci.fib2(200))
+print("ex1 : ", Fibonacci().title)  # 함수 실행해 초기화 후 호출
+
+# 함수
+import pkg.calculations as c
+
+print("ex4 : ", c.add(10,10))
+print("ex4 : ", c.mul(10,4))
+
+# 함수
+from pkg.calculations import div as d
+
+print("ex5 : ", int(d(100,10)))
+```
+
+## 파일 읽기, 쓰기
+
+- 읽기 모드 r, 쓰기 모드(기존 파일 삭제) w, 추가 모드(파일 생성 또는 추가) a
+- [공식](https://docs.python.org/3.7/library/functions.html#open)
+- 상대 경로('../', './'), 절대 경로 확인('C:\...')
+
+
+```txt
+## filename: review.txt
+
+The film, projected in the form of animation,
+imparts the lesson of how wars can be eluded through reasoning and peaceful dialogues,
+which eventually paves the path for gaining a fresh perspective on an age-old problem.
+The story also happens to centre around two parallel characters, Shundi King and Hundi King,
+who are twins, but they constantly fight over unresolved issues planted in their minds
+by external forces from within their very own units.
+
+```
+
+### r
+
+```python
+f = open('./resource/review.txt', 'r')
+contents = f.read()
+print(contents)
+
+# print(dir(f))
+# 반드시 close 리소스 반환 - 외부 파일과 커넥션 형성하는 것이므로
+f.close()
+
+print()
+```
+
+### with
+
+```python
+with open('./resource/review.txt', 'r') as f: # with 쓰면 close() 필요 없음
+    c = f.read()
+    print(iter(c))
+    print(list(c))
+    print(c)
+
+print()
+```
+
+```python
+with open('./resource/review.txt', 'r') as f:
+    for c in f:   # 프린트 찍어보면 텍스트의 라인 단위로 가져온다.
+        # print(c)
+        print(c.strip())   # 앞뒤 공백 제거
+
+print()
+```
+
+#### readline()
+
+- readline : 한 줄씩 읽기, readline(문자수) : 문자수 읽기
+
+```python
+with open('./resource/review.txt', 'r') as f:
+    line = f.readline()
+    while line:
+        print(line, end=' ####')
+        line = f.readline()
+```
+
+#### readlines()
+
+- readlines : 전체 읽은 후 라인 단위 리스트 저장
+- \n 포함해서 리스트로 반환
+
+```python
+with open('./resource/review.txt', 'r') as f:
+    contents = f.readlines()
+    print(contents)
+    print()
+    for c in contents:
+        print(c, end='')
+```
+
+#### 평균
+
+```txt
+## filename: score.txt
+95
+78
+92
+89
+100
+66
+```
+
+```python
+with open('./resource/score.txt', 'r') as f:
+    score = []
+    for line in f:
+        score.append(int(line))
+    print(score)
+    print('Average : {:6.3f}'.format(sum(score) / len(score)))
+    # 6개 숫자 3번째 자리까지?, format()
+```
+
+#### 파일쓰기
+
+```python
+# 예제1 - w -> 생성
+with open('./resource/test.txt', 'w') as f:
+    f.write('niceman!')
+
+# 예제2 - a -> 기존 파일에 추
+with open('./resource/test.txt', 'a') as f:
+    f.write('niceman!!')
+
+# 예제3
+from random import randint
+
+with open('./resource/score2.txt', 'w') as f:
+    for cnt in range(6): # 0부터 5까지 순환
+        f.write(str(randint(50, 100))) # 50~100 사이 random int 생성
+        f.write('\n')
+
+# 예제4
+# writelines : 리스트 -> 파일로 저장
+with open('./resource/test2.txt', 'w') as f:
+    list = ['Kim\n', 'Park\n', 'Lee\n']
+    f.writelines(list)
+
+# 예제5
+with open('./resource/test3.txt', 'w') as f:
+    print('Test Contents!', file=f)   # file을 쓰면 print함수 내용이 곧장 파일로 저장
+    print('Test Contents!!', file=f)
+
 ```
 
 ## Link
