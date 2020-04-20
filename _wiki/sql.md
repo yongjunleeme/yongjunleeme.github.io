@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-13 22:36:44 +0900
-updated : 2020-04-19 22:02:04 +0900
+updated : 2020-04-19 22:34:43 +0900
 tags    : 
 toc     : true
 public  : true
@@ -23,6 +23,15 @@ latex   : false
 
 - alias
     - SELECT a.first_name FROM customer a
+
+### Basic
+
+```python
+"컬럼 목록 출력"
+SHOW COLUMNS FROM table_name
+
+
+```
 
 ### order by
 
@@ -70,18 +79,18 @@ VALUES
 
 ```python
 SELECT
-        DISTICT BCOLOR
+        DISTINCT BCOLOR
 FROM
         T1
 ORDER BY
         BCOLOR;
 ```
 
-#### DISTICT ON
+#### DISTINCT ON
 
 ```python
 SELECT
-    DISTICT ON (BCOLOR) BCOLOR
+    DISTINCT ON (BCOLOR) BCOLOR
   , FCOLOR
 FROM
     T1
@@ -130,7 +139,7 @@ OFFSET  3;  "3은 0, 1, 2, 3 즉, 4번째 행부터 시작
 
 ### FETCH
 
-- 특정 집합을 출력 시 출력하는 행의 수를 한정하는 역할. 부분 범위 처리 시사용
+-  출력하는 행의 수를 한정. 부분 범위 처리 시사용
 
 ```python
 SELECT
@@ -183,7 +192,7 @@ SELECT
   FROM RENTAL
  WHERE
           CUSTOMER_ID = 1 
-       OR CUSTOMER_ID = 2  "OR보다 IN으로 쓰는 게 가독성 더 좋다"
+       OR CUSTOMER_ID = 2  "OR보다 위에 있는IN을 쓰는 게 가독성 더 좋다"
 ORDER BY RETURN_DATE DESC;
 ---------------------------------------
 SELECT
@@ -192,7 +201,7 @@ SELECT
      , RETURN_DATE
   FROM RENTAL
  WHERE
-       CUSTOMER_ID NOT IN (1, 2) "1도 아니로 2도 아닌 행을 출력. 1, 2를 제외한 모든 행 출력"
+       CUSTOMER_ID NOT IN (1, 2) "1도 2도 아닌 행을 출력. 1, 2를 제외한 모든 행 출력"
 ORDER BY RETURN_DATE DESC;
 ---------------------------------------
 SELECT
@@ -216,13 +225,13 @@ SELECT
       FIRST_NAME
     , LAST_NAME
  FROM CUSTOMER
-WHERE CUSTOMER_ID IN (                  "RETURN_DATE가 2005년 5월 27일인 CUSTOMER_ID의 FIRST_DATE, LAST_DATE를 출력"
-					    SELECT
-					        CUSTOMER_ID
-					    FROM
-					        RENTAL
-					    WHERE
-					        CAST (RETURN_DATE AS DATE) = '2005-05-27' 
+WHERE CUSTOMER_ID IN ( "RETURN_DATE가 2005년 5월 27일인 CUSTOMER_ID의 FIRST_DATE, LAST_DATE를 출력"
+	SELECT
+		CUSTOMER_ID
+	FROM
+		RENTAL
+	WHERE
+		CAST (RETURN_DATE AS DATE) = '2005-05-27' 
        				);
 ```
 
@@ -275,7 +284,7 @@ SELECT
 
 SELECT
         CUSTOMER_ID, PAYMENT_ID
-      , AMOUNT         , PAYMENT_DATE, to_char(PAYMENT_DATE, 'yyyy-mm-dd')
+      , AMOUNT, PAYMENT_DATE, to_char(PAYMENT_DATE, 'yyyy-mm-dd')
       , CAST(PAYMENT_DATE AS DATE)
   FROM PAYMENT
   WHERE to_char(PAYMENT_DATE, 'yyyy-mm-dd') BETWEEN '2007-02-07' AND '2007-02-15';
