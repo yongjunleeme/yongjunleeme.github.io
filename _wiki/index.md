@@ -21,6 +21,8 @@ regenerate: true
 
 ### [[python]]
 
+* [[class-advanced]]
+* [[data-model]]
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
 * [[snippet]]
@@ -44,6 +46,7 @@ regenerate: true
 * [[django-ORM-2]]
 * [[django-ORM-3]]
 * [[django-cache]]
+* [[django-basic]]
 
 * copy & paste
     * [[django-sql-cheatsheet]]
@@ -80,6 +83,7 @@ regenerate: true
 * [[OS-basic]]
 * [[postgreSQL]]
 * [[sql]]
+* [[sql-join]]
 
 ## [[media]]
 
