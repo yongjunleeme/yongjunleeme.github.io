@@ -3,7 +3,7 @@ layout  : wiki
 title   : data-structure 
 summary : 
 date    : 2020-03-12 16:13:09 +0900
-updated : 2020-03-15 19:19:00 +0900
+updated : 2020-04-22 10:19:59 +0900
 tags    : 
 toc     : true
 public  : true
@@ -73,9 +73,18 @@ latex   : false
 ## Stack
 
 - 기억포인트 - 접시쌓기, 브라우저에서 뒤로 가기
-- LIFO(Last In First Out)
+- LIFO(Last In First Out) 
 - 밑단에 어레이를 쓴다. 메모리를 곧바로 엑세스하므로 빠르다.
 - Stackoverflow - 함수에서 함수를 호출하는데 정해진 메모리를 초과할 때 나는 에러 (대부분은 무한루프)
+- 장점
+    - 구조가 단순해서, 구현이 쉽다.
+    - 데이터 저장/읽기 속도가 빠르다.
+- 단점 (일반적인 스택 구현시)
+    - 데이터 최대 갯수를 미리 정해야 한다.
+        - 파이썬의 경우 재귀 함수는 1000번까지만 호출이 가능함
+    -저장 공간의 낭비가 발생할 수 있음
+        - 미리 최대 갯수만큼 저장 공간을 확보해야 함
+
 
 ```python
  class Stack:
@@ -109,6 +118,10 @@ latex   : false
 - FIFO(First In First Out)
 - 기억포인드 - 맛집, 먼저 줄서는대로 먼저 나온다. 
 - 프라이어티큐 - 우선순위가 있는 순서대로 예) os 멀티코어 실행, 예외처리
+- [Visualgo](https://visualgo.net/en/list) - 시연 웹사이트
+- 참고: 어디에 큐가 많이 쓰일까?
+    - 멀티 태스킹을 위한 프로세스 스케쥴링 방식을 구현하기 위해 많이 사용됨 (운영체제 참조)
+    - 큐의 경우에는 장단점 보다는 (특별히 언급되는 장단점이 없음), 큐의 활용 예로 프로세스 스케쥴링 방식을 함께 이해해두는 것이 좋음
 
 ```python
 class Queue:
@@ -131,6 +144,67 @@ class Queue:
         return self[0]
 ```
 
+### 용어
+
+- Enqueue: 큐에 데이터를 넣는 기능
+- Dequeue: 큐에서 데이터를 꺼내는 기능
+
+### 파이썬 라이브러리
+
+- Queue(): 가장 일반적인 큐 자료 구조
+- LifoQueue(): 나중에 입력된 데이터가 먼저 출력되는 구조 (스택 구조라고 보면 됨)
+- PriorityQueue(): 데이터마다 우선순위를 넣어서, 우선순위가 높은 순으로 데이터 출
+
+```python
+import queue
+
+data_queue = queue.Queue()
+
+ata_queue.put("funcoding")
+data_queue.put(1)
+
+data_queue.qsize()
+data_queue.get()
+data_queue.qsize()
+```
+
+```python
+# LifoQueue()로 큐 만들기 (LIFO(Last-In, First-Out))
+
+import queue
+
+data_queue = queue.LifoQueue()
+
+# PriorityQueue()로 큐 만들기
+
+import queue
+
+data_queue = queue.PriorityQueue()
+
+data_queue.put((10, "korea"))
+data_queue.put((5, 1))
+data_queue.put((15, "china"))
+
+# 리스트 변수로 큐를 다루는 enqueue, dequeue 기능 구현해보기
+
+queue_list = list()
+
+def enqueue(data):
+    queue_list.append(data)
+    
+def dequeue():
+    data = queue_list[0]
+    del queue_list[0]
+    return data
+    
+for index in range(10):
+    enqueue(index)
+
+len(queue_list)
+dequeue()
+```
+
+
 ## Tree
 - 이진트리
     - 탐색속도 로그n회 (리스트는 n회)
@@ -146,3 +220,4 @@ class Queue:
 ## Link
 
 - [wecode](https://stackoverflow.com/c/wecode/questions/192)
+- [잔재미코딩](https://www.fun-coding.org/Chapter05-queue-live.html)
