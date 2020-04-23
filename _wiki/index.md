@@ -10,6 +10,7 @@ regenerate: true
 
 * [[book-log-2020]]
 * [[memo-2020]]
+* [[review-2020]]
 * [[mindset]]
 * [[small-talk-big-idea]]
 * [[scribble]]
@@ -23,6 +24,7 @@ regenerate: true
 
 * [[class-advanced]]
 * [[data-model]]
+* [[sequence]]
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
 * [[snippet]]
