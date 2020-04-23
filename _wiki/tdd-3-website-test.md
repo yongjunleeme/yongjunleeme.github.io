@@ -3,7 +3,7 @@ layout  : wiki
 title   : tdd-3-website-test 
 summary : 
 date    : 2020-03-29 19:35:40 +0900
-updated : 2020-04-22 19:48:12 +0900
+updated : 2020-04-23 18:30:35 +0900
 tags    : 
 toc     : true
 public  : true
@@ -56,10 +56,13 @@ if __name__ == '__main__': # 7
 
 ### MVC, URL, 뷰 함수
 
+- url의 사이트 루트('/')를 해석해서 특정 뷰기능에 매칭시킬 수 있는가?
+- 이 뷰 기능이 특정 HTML을 반환하게 해서 기능 테스트를 통과할 수 있는가?
+
 ```python
 from django.core.urlresolvers import resolve
 from django.test              import TestCase
-from lists.views              imoprt home_page
+from lists.views              import home_page
 
 class HomePageTest(TestCase):
 
