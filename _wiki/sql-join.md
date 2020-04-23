@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-20 21:31:38 +0900
-updated : 2020-04-22 21:14:04 +0900
+updated : 2020-04-23 19:16:16 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,6 +12,8 @@ latex   : false
 ---
 * TOC
 {:toc}
+
+![Visual_SQL_JOINS_orig](https://user-images.githubusercontent.com/48748376/80087912-c088c980-8596-11ea-9d04-4030331f8f00.jpg)
 
 ## JOIN
 
