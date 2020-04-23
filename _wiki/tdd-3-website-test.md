@@ -3,7 +3,7 @@ layout  : wiki
 title   : tdd-3-website-test 
 summary : 
 date    : 2020-03-29 19:35:40 +0900
-updated : 2020-04-05 20:22:56 +0900
+updated : 2020-04-22 19:48:12 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,6 +12,41 @@ latex   : false
 ---
 * TOC
 {:toc}
+
+## 2장. unittest 모듈을 이용한 기능 테스트 확장
+
+### 파이썬 기본 라이브러리의 unittest 모듈
+
+```python
+from selenium import webdriver
+import unittest
+
+class NewVisitorTest(unittest.TestCase): # 1
+
+    def setUp(self): # 2
+        self.browser = webdriver.Firefox()
+
+    def tearDown(self): # 3
+        self.browser.quit()
+
+    def test_can_start_a_list_and_retrieve_it_later(self): # 4
+        self.browser.get('http://localhost:8000')
+
+        self.assertIn('To-Do', self.browser.title) # 5
+        self.fail('Finish the test!') # 6
+
+if __name__ == '__main__': # 7
+    unittest.main(warnings='ignore') # 8
+```
+
+- 1. unitest.TestCase를 상속해서 테스트를 클래스 형태로 만든다.
+- 2. test라는 명칭으로 시작하는 모든 메소드는 테스트 메소드이며 테스트 실행자에 의해 실행된다. 클래스당 하나 이상의 테스트 메소드를 작성할 수 있다.
+- 3, 4. setUp과 tearDown은 특수한 메소드로 , 각 테스트 시작 전과 후에 실행된다.
+- 5. [테스트 어설션 만드는 유용한 함수들](http://docs.python.org/3/library/unittest.html)
+- 6. self.fail은 강제적으로 테스트 실패를 발생시켜서 에러 메시지를 출력. 필자는 테스트가 끝났다는 것을 알리기 위해 사용.
+- 7. if __name__ = '__main__' - 파이썬 스크립트가 다른 스크립트에 임포트도니 것이 아니라 커맨드라인을 통해 실행됐다는 것을 확인하는 코드. unittest.main()을 호출해서 unittest 테스트 실행자를 가동한다. 이것은 자동으로 파일 내 테스트 클래스와 메소드를 찾아서 실행해주는 역할
+- 8. warning = 'ignore'는 테스트 작성 시 발생하는 불필요한 리소스 경고를 제거하기 위한 것.
+
 
 ## 3장. 단위 테스트를 이용한 간단한 홈페이지 테스트
 
