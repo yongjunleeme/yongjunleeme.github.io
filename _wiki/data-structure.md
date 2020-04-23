@@ -3,7 +3,7 @@ layout  : wiki
 title   : data-structure 
 summary : 
 date    : 2020-03-12 16:13:09 +0900
-updated : 2020-04-22 10:19:59 +0900
+updated : 2020-04-22 12:14:46 +0900
 tags    : 
 toc     : true
 public  : true
@@ -110,6 +110,15 @@ latex   : false
      data = self._stack[-1]
 
      return data
+```
+
+```python
+yellow_el = [1, 2, 3, 4, 5, 6]
+yellow = Stack()
+print(yellow._stack)
+for i in yellow_el:
+  yellow.push(i)
+print(yellow._stack)
 ```
 
 ## Queue
