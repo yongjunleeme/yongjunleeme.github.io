@@ -3,7 +3,7 @@ layout  : wiki
 title   : aws
 summary : 
 date    : 2020-03-04 14:05:38 +0900
-updated : 2020-03-22 19:05:37 +0900
+updated : 2020-04-13 18:44:30 +0900
 tags    : 
 toc     : true
 public  : true
@@ -118,7 +118,7 @@ $ pip install gunicorn
 
 $ gunicorn --bind 0:8000 wetyle_share wsgi
 
-$ nohup gunicorn --bind 0:8000 wetyle_share.wsgi:application &
+$ nohup gunicorn --bind 0:8000 wetyle_share.wsgi &
 "백그라운드에서 서버동작"
 
 $ ps -ef | grep python
@@ -137,11 +137,11 @@ $ sudo mysql -uroot
 DATABASE = {
     'default' : {
         'ENGINE'   : 'django.db.backends.mysql',
-        'NAME'     : '[YOUR_RDS_MYSQL_DATABASE_SCHEME]',
-        'USER'     : '[YOUR_RDS_HOST_USER_NAME]',
-        'PASSWORD' : '[YOUR_RDS_HOST_PASSWORD]',
-        'HOST'     : '[YOUR_RDS_HOST]',
-        'PORT'     : '[DEFAULT_PORT_3306]',
+        'NAME'     : 'hivibe',
+        'USER'     : 'root',
+        'PASSWORD' : '',
+        'HOST'     : 'RDS 주소',
+        'PORT'     : '3306',
         'OPTIONS'  : {
             'init_command'  : "SET sql_mode='STRICT_TRANS_TABLES'",
             'charset'       : 'utf8mb4',
