@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-21 16:11:20 +0900
-updated : 2020-04-22 15:08:40 +0900
+updated : 2020-04-23 15:44:10 +0900
 tags    : 
 toc     : true
 public  : true
@@ -136,7 +136,7 @@ for s in students:
     print('EX7-1 -', s)
 ```
 
-## Masic Method
+## 매직메소드 
 
 ```python
 # Special Method(Magic Method)
@@ -259,8 +259,6 @@ print('EX3-9 -', bool(v3))
 
 print()
 print()
-
-
 
 # 참고 : 파이썬 바이트 코드 실행
 import dis
