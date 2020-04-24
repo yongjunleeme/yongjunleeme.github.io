@@ -83,7 +83,6 @@ regenerate: true
 * [[web-basic]]
 * [[python-basic]]
 * [[OS-basic]]
-* [[postgreSQL]]
 * [[sql]]
 * [[sql-join]]
 
