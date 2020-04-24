@@ -3,7 +3,7 @@ layout  : wiki
 title   : 2020년 독서록
 summary : 
 date    : 2020-02-01 21:35:59 +0900
-updated : 2020-04-23 12:05:00 +0900
+updated : 2020-04-24 11:25:16 +0900
 tags    : 
 toc     : true
 public  : true
@@ -42,10 +42,10 @@ latex   : false
 
 ## 손이 먼저 반응하는 Practice vim 
 100 % : 0 / 340
-* [X] 1장. Vim의 방식 [[practice-vim-1]]
+* [X] 1장. Vim의 방식 [[practical-vim-1]]
 * 1부. 모드
     * [X] 2020-04-23 2장. 일반모드
-    * [ ] 3장. 끼워넣기 모드
+    * [X] 2020-04-24 3장. 끼워넣기 모드
     * [ ] 4장. 비주얼 모드
     * [ ] 5장. 명령행 모드
 * 2부. 파일
