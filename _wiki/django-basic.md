@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-23 18:03:51 +0900
+updated : 2020-04-24 19:16:16 +0900
 tags    : 
 toc     : true
 public  : true
@@ -318,7 +318,8 @@ class LoginForm(forms.Form):
                 self.add_error('password', '비밀번호를 틀렸습니다')
             else:
                 self.user_id = fcuser.id
-
-
 ```
 
+## Link
+
+- [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
