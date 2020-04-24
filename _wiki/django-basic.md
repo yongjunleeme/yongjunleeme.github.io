@@ -1,19 +1,19 @@
 ---
 layout  : wiki
-title   : 
+title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-24 19:16:16 +0900
+updated : 2020-04-24 19:20:43 +0900
 tags    : 
 toc     : true
 public  : true
-parent  : 
+parent  : django
 latex   : false
 ---
 * TOC
 {:toc}
 
-##
+## django-basic
 
 ```python
 from django.db import models
@@ -55,7 +55,7 @@ $ .schema [테이블명]
 - templates 폴더 생성
 - 부트스트랩에서 CDN 검색 후 복붙
 
-```python
+```html
 # base.html
 
 <html>
@@ -89,7 +89,7 @@ $ .schema [테이블명]
 </html>
 ```
 
-```python
+```html
 # registre.html
 
 {% extends "base.html" %}
@@ -134,7 +134,7 @@ $ .schema [테이블명]
 
 - input에 name 변수의 값(username)을 view에서 받아서 처리
 
-```python
+```html
 # home.html
 
 {% extends "base.html" %}
@@ -168,7 +168,7 @@ $ .schema [테이블명]
 
 ```
 
-```python
+```html
 # login.html
 
 {% extends "base.html" %}
@@ -203,8 +203,6 @@ $ .schema [테이블명]
   </div>
 </div>
 {% endblock %}
-
-
 ```
 
 
@@ -213,7 +211,7 @@ $ .schema [테이블명]
 - [CDN](https://docs.microsoft.com/ko-kr/azure/cdn/cdn-overview)
    - CDN(콘텐츠 배달 네트워크)은 사용자에게 웹 콘텐츠를 효율적으로 제공할 수 있는 서버의 분산 네트워크입니다. CDN은 최종 사용자와 가까운 POP(point-of-presence) 위치의 Edge 서버에 캐시된 콘텐츠를 저장하여 대기 시간을 최소화합니다.
 
-```python
+```html
 # 장고 메인에 `/static` 폴더 생성 후 스테틱 파일(예제에서는 부트스트랩 CSS) 복사
 # settings.py에 경로 지정
 
