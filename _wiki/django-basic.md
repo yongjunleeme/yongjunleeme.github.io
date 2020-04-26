@@ -77,8 +77,8 @@ $ .schema [테이블명]
   </head>
 <body>
   <div class="container">
-  {% block contents %}
-  {% endblock %}
+  block contents
+  endblock
   </div>
 </body>
 </html>
