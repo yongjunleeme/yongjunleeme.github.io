@@ -96,7 +96,7 @@ block contents
 </div>
 <div class="row mt-5">
   <div class="col-12">
-    {{ error }}
+     error 
   </div>
 </div>
 <div class="row mt-5">
@@ -176,7 +176,7 @@ block contents
 </div>
 <div class="row mt-5">
   <div class="col-12">
-    error
+    || error ||
   </div>
 </div>
 <div class="row mt-5">
@@ -185,12 +185,12 @@ block contents
       csrf_token
       for field in form
       <div class="form-group">
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
-          placeholder="{{ field.label }}" name="{{ field.name }}" />
+        <label for="|| field.id_for_label ||">|| field.label ||</label>
+        <input type="|| field.field.widget.input_type ||" class="form-control" id="|| field.id_for_label }}"
+          placeholder="|| field.label }}" name="|| field.name ||" />
       </div>
       if field.errors
-      <span style="color: red">{{ field.errors }}</span>
+      <span style="color: red">|| field.errors ||</span>
       endif
       endfor
       <button type="submit" class="btn btn-primary">로그인</button>
