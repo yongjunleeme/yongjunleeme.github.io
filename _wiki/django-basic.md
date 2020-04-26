@@ -8,7 +8,7 @@ tags    :
 toc     : true
 public  : true
 parent  : django
-latex   : true 
+latex   : false
 ---
 * TOC
 {:toc}
@@ -58,7 +58,6 @@ $ .schema [테이블명]
 # base.html
 
 <html>
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8" />
