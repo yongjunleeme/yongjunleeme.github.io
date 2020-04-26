@@ -7,7 +7,7 @@ updated : 2020-04-26 17:43:16 +0900
 tags    : 
 toc     : true
 public  : true
-parent  : django
+parent  : 
 latex   : false
 ---
 * TOC
