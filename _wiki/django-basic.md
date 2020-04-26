@@ -3,12 +3,12 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-26 17:40:21 +0900
+updated : 2020-04-26 17:43:16 +0900
 tags    : 
 toc     : true
 public  : true
 parent  : django
-latex   : false
+latex   : true 
 ---
 * TOC
 {:toc}
@@ -47,7 +47,6 @@ $ sqlite3.db.sqlite3
 $ .tables
 
 $ .schema [테이블명]
-
 ```
 
 ### 회원가입
