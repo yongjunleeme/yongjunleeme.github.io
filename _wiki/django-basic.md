@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-24 19:20:43 +0900
+updated : 2020-04-26 17:40:21 +0900
 tags    : 
 toc     : true
 public  : true
