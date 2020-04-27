@@ -50,7 +50,9 @@ $ .tables
 $ .schema [테이블명]
 ```
 
-### 회원가입
+## 로그인, 회원가입
+
+### templates
 
 - templates 폴더 생성
 - 부트스트랩에서 CDN 검색 후 복붙
@@ -85,7 +87,7 @@ $ .schema [테이블명]
 ```
 
 ```html
-# registre.html
+# register.html
 
 extends "base.html"
 block contents
@@ -96,16 +98,16 @@ block contents
 </div>
 <div class="row mt-5">
   <div class="col-12">
-     error 
+     || error ||
   </div>
 </div>
 <div class="row mt-5">
   <div class="col-12">
     <form method="POST" action="."> # action에는 post 수행할 경로 지정
-      {% csrf_token %}   # form 태그에는 csrf 명시, 크로스도메인 공격을 막기 위해 키를 숨겨놓고 검증?, 장고에서는 csrf를 안 쓰면 에
+       csrf_token    # form 태그에는 csrf 명시, 크로스도메인 공격을 막기 위해 키를 숨겨놓고 검증?, 장고에서는 csrf를 안 쓰면 에러
       <div class="form-group">
         <label for="username">사용자 이름</label>
-        <input type="text" class="form-control" id="username" placeholder="사용자 이름" name="username" />  # input에 name 값으로 정보 전달.
+        <input type="text" class="form-control" id="username" placeholder="사용자 이름" name="username" />  # input에 name 값으로 정보 전달
       </div>
       <div class="form-group">
         <label for="useremail">사용자 이메일</label>
@@ -204,7 +206,9 @@ endblock
 ### Static 파일 관리
 
 - [CDN](https://docs.microsoft.com/ko-kr/azure/cdn/cdn-overview)
-   - CDN(콘텐츠 배달 네트워크)은 사용자에게 웹 콘텐츠를 효율적으로 제공할 수 있는 서버의 분산 네트워크입니다. CDN은 최종 사용자와 가까운 POP(point-of-presence) 위치의 Edge 서버에 캐시된 콘텐츠를 저장하여 대기 시간을 최소화합니다.
+   - CDN은 사용자에게 웹 콘텐츠를 효율적으로 제공할 수 있는 서버의 분산 네트워크입니다. CDN은 최종 사용자와 가까운 POP(point-of-presence) 위치의 Edge 서버에 캐시된 콘텐츠를 저장하여 대기 시간을 최소화합니다.
+
+- [부트스트랩 테마](https://bootswatch.com/)에서 css파일 다운로드 후 static 폴더로 이동
 
 ```python
 # 장고 메인에 `/static` 폴더 생성 후 스테틱 파일(예제에서는 부트스트랩 CSS) 복사
@@ -220,7 +224,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 <link rel="stylesheet" href="/static/bootstrapp.min.css" />
 ```
 
-## 로그인, 회원가입
+### views.py
 
 ```python
 from django.http import HttpResponse
