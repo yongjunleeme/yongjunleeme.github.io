@@ -3,7 +3,7 @@ layout  : wiki
 title   : aws
 summary : 
 date    : 2020-03-04 14:05:38 +0900
-updated : 2020-04-27 18:25:33 +0900
+updated : 2020-04-27 18:39:12 +0900
 tags    : 
 toc     : true
 public  : true
@@ -33,24 +33,24 @@ $ ssh -i keyname ubuntu@13.124.155.63 "EC2.IP주소 적고 EC2 인스턴스 접�
 ```shell
 $ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
-chmod -R 755 Miniconda3-latest-Linux-x86_64.sh "실행 가능하도록 권한 변경"
+$ chmod -R 755 Miniconda3-latest-Linux-x86_64.sh "실행 가능하도록 권한 변경"
 
-./Miniconda3-latest-Linux-x86_64.sh "파일실행 - yes 계속"
+$ ./Miniconda3-latest-Linux-x86_64.sh "파일실행 - yes 계속"
 
 "콘다 환경변수 변경"
-cd miniconda3/bin
-./conda init bash
-cd
-source .bashrc
+$ cd miniconda3/bin
+$ ./conda init bash
+$ cd
+$ source .bashrc
 ```
 
 #### sql 설치
 
 ```shell
-sudo apt-get update
-sudo apt-get upgrade
-sudo api install gcc
-sudo apt-get install libmysqlclient-dev
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo api install gcc
+$ sudo apt-get install libmysqlclient-dev
 ```
 
 ### [RDS와 Mysql 연동](https://stackoverflow.com/c/wecode/questions/172)
@@ -110,7 +110,6 @@ $ mysql -h temptest.cj5v1k6zfree.ap-northeast-2.rds.amazonaws.com -u root -p
 ```
 
 ### 로컬 DB RDS로 이관
-
 
 #### 데이터베이스 백업
 
