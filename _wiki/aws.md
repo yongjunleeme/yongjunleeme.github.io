@@ -3,7 +3,7 @@ layout  : wiki
 title   : aws
 summary : 
 date    : 2020-03-04 14:05:38 +0900
-updated : 2020-04-27 18:39:12 +0900
+updated : 2020-04-27 18:56:42 +0900
 tags    : 
 toc     : true
 public  : true
@@ -92,7 +92,7 @@ ALLOWED_HOSTS = ['*', '00.000.00.000', '00.000.00.000:8000']   # EC2 IPv4 퍼블
 ```python
 $ pip install gunicorn
 
-$ nohup gunicorn --bind 0:8000 vibe.wsgi &   "서버 On"
+$ nohup gunicorn --bind 0.0.0.0:8000 vibe.wsgi &   "서버 On"
 
 "서버 Off"
 $ ps -ef | grep python
