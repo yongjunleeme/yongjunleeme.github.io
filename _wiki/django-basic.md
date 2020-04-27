@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-26 17:43:16 +0900
+updated : 2020-04-27 20:08:20 +0900
 tags    : 
 toc     : true
 public  : true
@@ -21,14 +21,10 @@ from django.db import models
 # Create your models here.
 
 class Fcuser(models.Model):
-    username = models.CharField(max_length=32,  # verbose_name -> 어드민에 보이는 제목
-                                verbose_name='사용자명')
-    useremail = models.EmailField(max_length=128,
-                                  verbose_name='사용자이메일')
-    password = models.CharField(max_length=64,
-                                verbose_name='비밀번호')
-    registered_dttm = models.DateTimeField(auto_now_add=True, # -> auto_now_add -> 등록된 시간 기록
-                                           verbose_name='등록시간') # dttm -> datetime
+    username = models.CharField(max_length=32, verbose_name='사용자명') # verbose_name -> 어드민에 보이는 제목
+    useremail = models.EmailField(max_length=128, verbose_name='사용자이메일')
+    password = models.CharField(max_length=64, verbose_name='비밀번호')
+    registered_dttm = models.DateTimeField(auto_now_add=True, verbose_name='등록시간') # -> auto_now_add -> 등록된 시간 기록
 
     def __str__(self):
         return self.username
@@ -202,7 +198,6 @@ block contents
 endblock
 ```
 
-
 ### Static 파일 관리
 
 - [CDN](https://docs.microsoft.com/ko-kr/azure/cdn/cdn-overview)
@@ -224,6 +219,38 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 <link rel="stylesheet" href="/static/bootstrapp.min.css" />
 ```
 
+### urls.py
+
+```python
+# fc_community/urls.py
+
+from django.contrib import admin
+from django.urls import path, include
+from fcuser.views import home
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('fcuser/', include('fcuser.urls')),
+    path('board/', include('board.urls')),
+    path('', home), # 리다이렉트되는 홈url은 메인 디렉토리 url 내에 작성
+]
+```
+
+```python
+# fc_user/urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('register/', views.register),
+    path('login/', views.login),
+    path('logout/', views.logout)
+]
+
+```
+
+
 ### views.py
 
 ```python
@@ -233,7 +260,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from .models import Fcuser
 from .forms import LoginForm
 
-def home(request): 
+def home(request): # 리다이렉트되는 홈 설정
     return render(request, 'home.html')
 
 def logout(request):
@@ -293,10 +320,10 @@ class LoginForm(forms.Form):
             'required': '아이디를 입력해주세요.'
         },
         max_length=32, label="사용자 이름")
-    password = forms.CharField(
-        error_messages={
-            'required': '비밀번호를 입력해주세요.'
-        },
+        password = forms.CharField(
+            error_messages={
+                'required': '비밀번호를 입력해주세요.'
+            },
         widget=forms.PasswordInput, label="비밀번호")
 
     def clean(self):
@@ -306,12 +333,12 @@ class LoginForm(forms.Form):
 
         if username and password:
             try:
-                fcuser = Fcuser.objects.get(username=username)
+                fcuser = Fcuser.objects.get(username=username)  # 앞 username은 모델의 필드명, 뒤 username은 변수 username의 post 통해 얻은 값
             except Fcuser.DoesNotExist:
                 self.add_error('username', '아이디가 없습니다')
                 return
 
-            if not check_password(password, fcuser.password):
+            if not check_password(password, fcuser.password): # check_password 1번쨰 인자는 변수 password통해 입력받은 값, 2번째 인자는 모델에 입력된 패스워드 값
                 self.add_error('password', '비밀번호를 틀렸습니다')
             else:
                 self.user_id = fcuser.id
