@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-27 20:08:20 +0900
+updated : 2020-04-28 19:01:28 +0900
 tags    : 
 toc     : true
 public  : true
@@ -181,7 +181,7 @@ block contents
   <div class="col-12">
     <form method="POST" action=".">
       csrf_token
-      for field in form
+      for field in form                # {{ form.as_p }} - p태그
       <div class="form-group">
         <label for="|| field.id_for_label ||">|| field.label ||</label>
         <input type="|| field.field.widget.input_type ||" class="form-control" id="|| field.id_for_label }}"
@@ -307,6 +307,7 @@ def register(request): # request를 url과 연결하면 요청정보가 request 
         return render(request, 'register.html', res_data) # res_data -> 데이터 전달, res_data['error']의 error 키는 templates폴더 내 html 파일에서 {{error}} 로 연결하면 그 자리에 자동 매핑
 
 ```
+### form.py
 
 ```python
 # forms.py
