@@ -3,7 +3,7 @@ layout  : wiki
 title   : github-basic-1
 summary : 
 date    : 2020-02-12 20:25:32 +0900
-updated : 2020-04-23 19:00:41 +0900
+updated : 2020-04-24 21:03:21 +0900
 tags    : 
 toc     : true
 public  : true
@@ -18,6 +18,7 @@ latex   : false
 ```shell
 $ git diff --staged         "커밋하려는 추가 코드를 보여준다"
 $ git commit -am "코멘트"   "add, commit 한 번에"
+$ git log --oneline         "커밋 리스트 확인
 ```
 
 ## 초기 설정
