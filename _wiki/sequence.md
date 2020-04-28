@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-23 15:38:33 +0900
-updated : 2020-04-24 16:55:13 +0900
+updated : 2020-04-28 14:42:52 +0900
 tags    : 
 toc     : true
 public  : true
@@ -48,6 +48,29 @@ print('EX1-7 -', [chr(s) for s in codes3])
 print('EX1-8 -', [chr(s) for s in codes4])
 ```
 
+## 리스트 주의할 점
+
+```python
+marks1 = [['~'] * 3 for n in range(3)]
+marks2 = [['~'] * 3] * 3
+
+print('EX4-1 -', marks1)
+print('EX4-2 -', marks2)
+
+print()
+
+# 수정
+marks1[0][1] = 'X'
+marks2[0][1] = 'X'
+
+print('EX4-3 -', marks1)
+print('EX4-4 -', marks2)
+
+# 증명
+print('EX4-5 -', [id(i) for i in marks1])
+print('EX4-6 -', [id(i) for i in marks2])
+```
+
 ## Generator
 
 ```python
@@ -71,29 +94,6 @@ print('EX3-1 -', ('%s' % c + str(n) for c in ['A', 'B', 'C', 'D'] for n in range
 
 for s in ('%s' % c + str(n) for c in ['A', 'B', 'C', 'D'] for n in range(1,11)):
     print('EX3-2 -', s)
-```
-
-## 리스트 주의할 점
-
-```python
-marks1 = [['~'] * 3 for n in range(3)]
-marks2 = [['~'] * 3] * 3
-
-print('EX4-1 -', marks1)
-print('EX4-2 -', marks2)
-
-print()
-
-# 수정
-marks1[0][1] = 'X'
-marks2[0][1] = 'X'
-
-print('EX4-3 -', marks1)
-print('EX4-4 -', marks2)
-
-# 증명
-print('EX4-5 -', [id(i) for i in marks1])
-print('EX4-6 -', [id(i) for i in marks2])
 ```
 
 ## Tuple Advanced
@@ -173,7 +173,9 @@ print('EX7-11 -', f_list.sort(key=lambda x: x[-1], reverse=True), f_list)
 # 숫자 기반 : 배열(리스트의 거의 모든 연산 지원)
 ```
 
-## Dict 구조
+## Dict Advanced
+
+### Dict 구조
 
 ```python
 # 시퀀스형
@@ -194,7 +196,7 @@ print('EX1-2 -', hash(t1))
 
 ```
 
-## 지능형 딕셔너리(Comprehending Dict)
+### 지능형 딕셔너리(Comprehending Dict)
 
 ```python
 import csv
@@ -214,20 +216,14 @@ print(NA_CODES)
 n_code1 = {country: code for country, code in NA_CODES}
 n_code2 = {country.upper(): code for country, code in NA_CODES}
 
-print()
-print()
-
 print('EX2-2 -',)
 print(n_code1)
-
-print()
-print()
 
 print('EX2-3 -',)
 print(n_code2)
 ```
 
-## Dict Setdefault
+### Dict Setdefault
 
 ```python
 source = (('k1', 'val1'),
@@ -255,12 +251,9 @@ for k, v in source:
     new_dict2.setdefault(k, []).append(v)
 
 print('EX3-2 -', new_dict2)
-
-print()
-print()
 ```
 
-## 사용자 정의 dict 상속(UserDict 가능)
+### 사용자 정의 dict 상속(UserDict 가능)
 
 ```python
 class UserDict(dict):
@@ -292,12 +285,9 @@ print('EX4-3 -', 'one' in user_dict3)
 # print('EX4-4 -', user_dict3['three'])
 print('EX4-5 -', user_dict3.get('three'))
 print('EX4-6 -', 'three' in user_dict3)
-
-print()
-print()
 ```
 
-## immutable Dict
+### immutable Dict
 
 ```python
 from types import MappingProxyType
@@ -317,9 +307,6 @@ print('EX5-3 -', d is d_frozen, d == d_frozen)
 d['key2'] = 'TEST2'
 
 print('EX5-4 -', d)
-
-print()
-print()
 
 s1 = {'Apple', 'Orange', 'Apple', 'Orange', 'Kiwi'}
 s2 = set(['Apple', 'Orange', 'Apple', 'Orange', 'Kiwi'])
@@ -341,24 +328,21 @@ print('EX6-5 -', s5, type(s5))
 
 # 선언 최적화
 
-from dis import dis
+from dis import dis # 파이썬 인터프리터 처리과정 프린트
 
 print('EX6-5 -')
 print(dis('{10}'))
 
 print('EX6-6 -')
-print(dis('set([10])'))
-
-print()
-print()
+print(dis('set([10])')) # 배열을 넣으면 그냥 셋으로 선언하는 것에 비해 리스트를 빌드하고 함수를 호출하는 부가적인 과정이 추가된다.
 ```
 
-## 지능형 집합(Comprehending Set)
+### 지능형 집합(Comprehending Set)
 
 ```python
 from unicodedata import name
 
 print('EX7-1 -')
 
-print({name(chr(i), '') for i in range(0,256)})
+print({name(chr(i), '') for i in range(0,256)}) # 유니코드와 유니코드 설명
 ```
