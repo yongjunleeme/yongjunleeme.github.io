@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-23 15:38:33 +0900
-updated : 2020-04-28 14:42:52 +0900
+updated : 2020-04-28 16:39:31 +0900
 tags    : 
 toc     : true
 public  : true
@@ -346,3 +346,7 @@ print('EX7-1 -')
 
 print({name(chr(i), '') for i in range(0,256)}) # 유니코드와 유니코드 설명
 ```
+
+## Link
+
+- [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
