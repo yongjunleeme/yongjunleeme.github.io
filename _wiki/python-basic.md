@@ -3,7 +3,7 @@ layout  : wiki
 title   : python-basic
 summary : 
 date    : 2020-04-07 17:43:42 +0900
-updated : 2020-04-28 16:19:35 +0900
+updated : 2020-04-28 17:32:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -351,8 +351,6 @@ with open('./resource/review.txt', 'r') as f: # with 쓰면 close() 필요 없�
     print(iter(c))
     print(list(c))
     print(c)
-
-print()
 ```
 
 ```python
@@ -360,8 +358,6 @@ with open('./resource/review.txt', 'r') as f:
     for c in f:   # 프린트 찍어보면 텍스트의 라인 단위로 가져온다.
         # print(c)
         print(c.strip())   # 앞뒤 공백 제거
-
-print()
 ```
 
 #### readline()
@@ -387,7 +383,7 @@ with open('./resource/review.txt', 'r') as f:
     print(contents)
     print()
     for c in contents:
-        print(c, end='')
+        print(c, end='') # end='' 줄바꿈을 없애줌
 ```
 
 #### 평균
@@ -412,21 +408,21 @@ with open('./resource/score.txt', 'r') as f:
     # 6개 숫자 3번째 자리까지?, format()
 ```
 
-#### 파일쓰기
+#### 파일쓰기 (만들기)
 
 ```python
-# 예제1 - w -> 생성
+# 예제1 - w -> 생성 (기존파일 삭제)
 with open('./resource/test.txt', 'w') as f:
     f.write('niceman!')
 
-# 예제2 - a -> 기존 파일에 추
+# 예제2 - a -> 기존 파일에 추가
 with open('./resource/test.txt', 'a') as f:
     f.write('niceman!!')
 
 # 예제3
 from random import randint
 
-with open('./resource/score2.txt', 'w') as f:
+with open('./resource/score2.txt', 'w') as f:
     for cnt in range(6): # 0부터 5까지 순환
         f.write(str(randint(50, 100))) # 50~100 사이 random int 생성
         f.write('\n')
@@ -510,7 +506,7 @@ else:
     print('ok! else!')
 ```
 
-python```
+```python
 # 예제2
 try:
     z = 'Kim'  # 'Cho' 예외 발생
@@ -586,7 +582,6 @@ with open('./resource/sample1.csv', 'r') as f:
     print(reader)
     print(type(reader))
     print(dir(reader))  # __iter__ 확인 - 반복문 가능하다는 뜻
-    print()
 
     for c in reader: # 1행마다 리스트로 나옴 ['7', '이동철', '2017-03-01']...
         print(c)
@@ -614,7 +609,7 @@ with open('./resource/sample1.csv', 'r') as f:  # 값마다 필드명(맨윗줄 
 
 ```
 
-#### 파일쓰기 - 리스트를 csv로 저장
+#### 파일쓰기(만들기) - 리스트를 csv로 저장
 
 ```python
 # 예제4
@@ -630,7 +625,7 @@ with open('./resource/sample3.csv', 'w', newline='' ) as f:  # newline='' 은 �
         wt.writerow(v)
 ```
 
-### 파일쓰기 - 리스트 1열씩 아니라 전체를 csv로 저장
+### 파일쓰기(만들기) - 리스트 1열씩 아니라 전체를 csv로 저장
 
 ```python
 # 예제5
@@ -667,10 +662,10 @@ print(xlsx.tail()) # 끝 5개 데이터 확인
 print(xlsx.shape)  # 행, 열 구조 확인
 ```
 
-# 엑셀 or CSV로 다시 내보내기
+### 엑셀 or CSV로 내보내기
 
 ```python
-xlsx.to_excel('./resource/result.xlsx', index=False) # index는 
+xlsx.to_excel('./resource/result.xlsx', index=False)
 xlsx.to_csv('./resource/result.csv', index=False)
 ```
 
