@@ -3,7 +3,7 @@ layout  : wiki
 title   : class-advanced
 summary : 
 date    : 2020-04-19 16:36:19 +0900
-updated : 2020-04-21 16:31:45 +0900
+updated : 2020-04-28 16:39:31 +0900
 tags    : 
 toc     : true
 public  : true
@@ -31,7 +31,6 @@ class Student():
 
     def __repr__(self):  # str과 같은 기능 
         return 'repr : {} - {}'.format(self._name, self._number)
-    
 
 student1 = Student('Kim', 1, 1, {'gender': 'Male', 'score1': 95, 'score2': 88})
 student2 = Student('Lee', 2, 2, {'gender': 'Female', 'score1': 77, 'score2': 92})
@@ -92,12 +91,8 @@ print(studt1._name == studt2._name) # 값을 비교
 print(studt1 is studt2) # id를 비교
 
 # dir & __dict__ 확인
-
 print(dir(studt1))
 print(dir(studt2))
-
-print()
-print()
 
 print(studt1.__dict__)
 print(studt2.__dict__)
@@ -107,7 +102,6 @@ print(studt1)
 
 # Doctring - 주석 메시지 확인
 print(Student.__doc__)
-print()
 
 # 실행
 studt1.detail_info()
@@ -123,16 +117,11 @@ Student.detail_info(studt2)
 print(studt1.__class__, studt2.__class__)  # 부모를 알려준
 print(id(studt1.__class__) == id(studt2.__class__))
 
-print()
-
 # 인스턴스 변수
 # 직접 접근(PEP 문법적으로 권장X)
 
 print(studt1._name, studt2._name)
 print(studt1._email, studt2._email)
-
-print()
-print()
 
 # 클래스 변수
 
@@ -140,10 +129,6 @@ print()
 print(studt1.student_count)
 print(studt2.student_count)
 print(Student.student_count)
-
-print()
-print()
-
 
 # 공유 확인
 print(Student.__dict__)
@@ -233,17 +218,14 @@ student_2 = Student(2, 'Lee', 'Myungho', 'Student2@daum.net', '2', 500, 4.3)
 # 기본 정보
 print(student_1)
 print(student_2)
-print()
 
 # 전체 정보
 print(student_1.detail_info())
 print(student_2.detail_info())
-print()
 
 # 학비 정보(인상 전)
 print(student_1.get_fee())
 print(student_2.get_fee())
-print()
 
 # 학비 인상(클래스 메소드 미사용)
 Student.tuition_per = 1.2
@@ -251,37 +233,29 @@ Student.tuition_per = 1.2
 # 학비 정보(인상 후)
 print(student_1.get_fee_culc())
 print(student_2.get_fee_culc())
-print()
 
 # 학비 인상(클래스 메소드 사용)
 student_1.raise_fee(1.6)
-print()
 
 # 학비 정보(인상 후 : 클래스메소드)
 print(student_1.get_fee_culc())
 print(student_2.get_fee_culc())
-print()
 
 # 학생 학비 변경 확인
 print(student_1._tuition)
 print(student_2._tuition)
-print()
 
 # 클래스 메소드 인스턴스 생성 실습
-
 student_3 = Student.student_const(3, 'Park', 'Minji', 'Student3@gmail.com', '3', 550, 4.5)
 student_4 = Student.student_const(4, 'Cho', 'Sunghan', 'Student4@naver.com', '4', 600, 4.1)
 
 # 전체 정보
 print(student_3.detail_info())
 print(student_4.detail_info())
-print()
 
 # 학생 학비 변경 확인
 print(student_3._tuition)
 print(student_4._tuition)
-print()
-
 
 # 장학금 혜택 여부(스테이틱 메소드 미사용)
 def is_scholarship(inst):
@@ -294,17 +268,19 @@ print(is_scholarship(student_1))
 print(is_scholarship(student_2))
 print(is_scholarship(student_3))
 print(is_scholarship(student_4))
-print()
 
 # 장학금 혜택 여부(스테이틱 메소드 사용)
 print('Static : ', Student.is_scholarship_st(student_1))
 print('Static : ', Student.is_scholarship_st(student_2))
 print('Static : ', Student.is_scholarship_st(student_3))
 print('Static : ', Student.is_scholarship_st(student_4))
-print()
 
 print('Static : ', student_1.is_scholarship_st(student_1))
 print('Static : ', student_2.is_scholarship_st(student_2))
 print('Static : ', student_3.is_scholarship_st(student_3))
 print('Static : ', student_4.is_scholarship_st(student_4))
 ```
+
+## Link
+
+- [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
