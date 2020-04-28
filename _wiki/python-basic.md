@@ -3,7 +3,7 @@ layout  : wiki
 title   : python-basic
 summary : 
 date    : 2020-04-07 17:43:42 +0900
-updated : 2020-04-14 23:25:41 +0900
+updated : 2020-04-28 16:19:35 +0900
 tags    : 
 toc     : true
 public  : true
@@ -317,7 +317,7 @@ print("ex5 : ", int(d(100,10)))
 - 상대 경로('../', './'), 절대 경로 확인('C:\...')
 
 
-```txt
+```python
 ## filename: review.txt
 
 The film, projected in the form of animation,
@@ -392,7 +392,7 @@ with open('./resource/review.txt', 'r') as f:
 
 #### 평균
 
-```txt
+```python
 ## filename: score.txt
 95
 78
@@ -444,94 +444,60 @@ with open('./resource/test3.txt', 'w') as f:
 
 ```
 
-#### 예외 처리
+## 예외 처리
+
+### 예외 종류
 
 ```python
-
 # 문법적으로 에러가 없지만 코드 실행 프로세스(런타임)에서 발생하는 예외 처리 중요
-
-## NameError : 참조 변수 없음
-
-a = 10
-b = 15
-
-# print(c)
-
-
-## ZeroDivisionError : 0 나누기 에러
-
-# print(10 / 0)
-
-
-## KeyError
-
-dic = {'name': 'Kim', 'Age': 33, 'City': 'Seoul'}
-
-# print(dic['hobby'])     # 키가 존재하지 않으면 예외
-# print(dic.get('hobby')) # 안전
-
-
 # 항상 예외가 발생하지 않을 것으로 가정하고 먼저 코딩
 # 그 후 런타임 예외 발생 시 예외처리 권장(EAFP 코딩 스타일)
 
+## NameError : 참조 변수 없음
+a = 10
+b = 15
+# print(c)
+
+## ZeroDivisionError : 0 나누기 에러
+# print(10 / 0)
+
+## KeyError
+dic = {'name': 'Kim', 'Age': 33, 'City': 'Seoul'}
+# print(dic['hobby'])     # 키가 존재하지 않으면 예외
+# print(dic.get('hobby')) # 딕셔너리 호출할 때는 꼭 get을 쓰자 
 
 ## AttributeError : 모듈, 클래스에 있는 잘못된 속성 사용시에 예외
-
 # print(time.time())
 # print(time.month()) # 예외 발생
-
-x = [1, 2, 3]
-# print(x.append(4))
-# print(x.add(10))
 ```
 
 ```python
 # ValueError : 참조 값이 없을 때 예외
-
 x = [1, 5, 9]
-
-# x.remove(5)
-# print(x)
-
 # x.remove(100)
 # print(x) # 예외 발생
 
-t = (10, 100, 1000)
-
-print(t.index(100))
-# print(t.index(7)) # 예외 발생
-
-
 # FileNotFoundError
-
 # f = open('test.txt') # 얘외 발생
 
-
 # TypeError : 자료형에 맞지 않는 연산을 수행 할 경우
-
 x = [1, 2]
 y = (1, 2)
 z = 'test'
-
 # print(x + y) # 예외 발생
-# print(x + z) # 예외 발생
-# print(y + z) # 예외 발생
-# print(sum([1,2,3],10,1)) # 예외 발생
+```
 
-# print(x + list(y))
-# print(x + list(z)
+### 예외 처리 예제
 
-
-# 예외 처리 기본
+```python
+# 예외 처리 문법 
 # try               에러가 발생 할 가능성이 있는 코드 실행
 # except 에러명1:    여러 개 가능(에러 처리)
 # except 에러명2: 
 # else:             try 블록의 에러가 없을 경우 실행
 # finally:          항상 실행
 
-
 # 예제1
-
 name = ['Kim', 'Lee', 'Park']
 
 try:
@@ -542,24 +508,22 @@ except ValueError:
     print('Not found it! - Occurred ValueError!')
 else:
     print('ok! else!')
+```
 
-print()
-
+python```
 # 예제2
-
 try:
     z = 'Kim'  # 'Cho' 예외 발생
     x = name.index(z)
     print('{} Found it! {} in name'.format(z, x + 1))
-except:  # 모든 에러를 처리(Exception)
+except:  # 모든 에러를 처리(Exception:과 같다)
     print('Not found it! - Occurred ValueError!')
 else:
     print('ok! else!')
+```
 
-print()
-
+```python
 # 예제3
-
 try:
     z = 'Kim'  # 'Cho' 예외 발생
     x = name.index(z)
@@ -571,23 +535,25 @@ else:
     print('ok! else!')
 finally:
     print('ok! finally!')  # 무조건 수행 됨
+```
 
-print()
+#### except 없이 사용
 
+```python
 # 예제4
-# 예외처리는 하지 않지만, 무조건 수행 되는 코딩 패턴
-
+# 예외처리는 하지 않지만 무조건 수행되는 코딩 패턴
 try:
-    print('try')
+    print('try') # 자주 쓰는 패턴
 finally:
     print('finally')
+```
 
-print()
+#### raise
 
+```python
 # 예제5
 # 예외 발생 : raise
 # raise 키워드로 예외 직접 발생
-
 try:
     a = 'Park'
     if a == 'Kim':
@@ -603,6 +569,110 @@ else:
 
 ```
 
+## 파일 읽기 쓰기(Excel, CSV)
+
+### csv - 콤마로 구분
+
+```python
+# CSV : MIME - text/csv
+
+import csv
+
+# 예제1
+with open('./resource/sample1.csv', 'r') as f:
+    reader = csv.reader(f)  # import한 csv의 메소드인 csv.reader()
+    next(reader) # 첫줄의 필드명(Header) 스킵하는 용도
+    # 확인
+    print(reader)
+    print(type(reader))
+    print(dir(reader))  # __iter__ 확인 - 반복문 가능하다는 뜻
+    print()
+
+    for c in reader: # 1행마다 리스트로 나옴 ['7', '이동철', '2017-03-01']...
+        print(c)
+```
+
+### csv - |로 구분
+
+```python
+# 예제2
+with open('./resource/sample2.csv', 'r') as f:
+    reader = csv.reader(f, delimiter='|')  # 구분자 선택
+```
+
+### csv를 딕셔너리로 변환
+
+```python
+# 예제3 (Dict 변환)
+with open('./resource/sample1.csv', 'r') as f:  # 값마다 필드명(맨윗줄 컬럼명)이 더해진 튜플로 출력
+    reader = csv.DictReader(f)  # OrderDict([('번호', '5'), ('이름', '홍미진')... ])
+
+    for c in reader:
+        for k, v in c.items(): # 번호 6 <cr> 이름 김순철...
+            print(k, v)
+        print('-----')
+
+```
+
+#### 파일쓰기 - 리스트를 csv로 저장
+
+```python
+# 예제4
+w = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15]]  # 1개 리스트가 1개 열로 저장
+
+with open('./resource/sample3.csv', 'w', newline='' ) as f:  # newline='' 은 자동 줄바꿈 방지
+    wt = csv.writer(f)
+    # dir 확인
+    print(dir(wt))
+    print(type(wt))
+    
+    for v in w:  # 조건문을 걸어주면 1열씩 걸러낼 수 있다.
+        wt.writerow(v)
+```
+
+### 파일쓰기 - 리스트 1열씩 아니라 전체를 csv로 저장
+
+```python
+# 예제5
+with open('./resource/sample3.csv', 'w', newline='') as f:
+    wt = csv.writer(f)
+
+    wt.writerows(w)  # 1번에 전체를 불러옴:
+```
+
+### Excel 불러오기
+
+```python
+# Excel 불러올 라이브러리 많고 아래가 그 종류들. 보통 pandas를 주로 사용. pandas 쓰면 numpy도 설치
+# openpyxl, xlswriter, xlrd, xlwt, xlutils
+# pandas는 내부적으로 openpyxl, xlrd를 씀
+
+# XSL, XLSX : MIME - applications/vnd.excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+# pip install pandas 설치 필요
+# pip install xlrd   설치 필요
+# pip install openpyxl 설치 필요
+
+# openpyxl, xlsxwriter, xlrd, xlwt, xlutils 등 있으나 pandas를 주로 사용(openpyxl, xlrd) 포함
+
+import pandas as pd
+
+xlsx = pd.read_excel('./resource/sample.xlsx')
+# 두 번째 인자 ('./resouce/sample.xlsx', 두 번째 인자)
+# (엑셀시트명)sheetname='시트명' 또는 숫자
+# (몇 번째 행을 헤더로 지정할 것인지)header=3
+# (스킵할 행)skiprow=1 실습
+
+print(xlsx.head()) # 상위 5개 데이터 확인
+print(xlsx.tail()) # 끝 5개 데이터 확인
+print(xlsx.shape)  # 행, 열 구조 확인
+```
+
+# 엑셀 or CSV로 다시 내보내기
+
+```python
+xlsx.to_excel('./resource/result.xlsx', index=False) # index는 
+xlsx.to_csv('./resource/result.csv', index=False)
+```
 
 ## Link
 
