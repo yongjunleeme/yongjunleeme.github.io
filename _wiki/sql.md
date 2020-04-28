@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-13 22:36:44 +0900
-updated : 2020-04-20 21:10:24 +0900
+updated : 2020-04-28 18:53:28 +0900
 tags    : 
 toc     : true
 public  : true
@@ -28,13 +28,40 @@ latex   : false
 
 ```python
 "컬럼 목록 출력"
-SHOW COLUMNS FROM table_name
+SHOW COLUMNS FROM table_name;
 
+"order by"
+SELECT ID, NAME FROM CUSTOMER ORDER BY NAME ASC;
 
+"distinct"
+SELECT DISTINCT NAME FROM CUSTOMER;
+
+"distinct on" - postgres만 가능 - on 컬럼 기준으로 
+SELECT DISTINCT ON NAME, COLOR FROM CUSTOMER; 
+
+"where"
+SELECT LAST_NAME, FIRST_NAME FROM CUSTOMER WHERE FIRST_NAME = 'JAMIE' AND LAST_NAME = 'RICE';
+
+"limit" - 출력 행의 수 한정 "offset" - 시작위치 지정
+SELECT FILM_ID FROM FILM LIMIT 4 OFFSET 3;
+
+"in" - 존재여부 판단
+SELECT CUSTOMER_ID, RENTAL_ID FROM RENTAL WHERE CUSTOMER_ID IN (1, 2); "OR 조건"
+
+SELECT CUSTOMER_ID, RENTAL_ID FROM RENTAL WHERE CUSTOMER_ID NOT IN (1, 2); "AND 조건"
+
+"between"
+SELECT CUSTOMER_ID, PAYMENT_ID FROM PAYMENT WHERE AMOUT 8 AND 9;
+
+"like" - 패턴 검색, % -> 모든 문자, _ -> 문자 1개
+SELECT FIRST_NAME FROM CUSTOMER WHERE FIRST_NAME LIKE '_HER%';
+
+"is null" - null값 여부 판단
+SELECT ID, FIRST_NAME FROM CONTACTS WHERE FIRST_NAME IS NULL;
 ```
 
 ```python
-"pament 테이블에서 단일 거래의 amount 액수가 가장 많은 고객들의 customer_id 추출, 단 customer_id 값은 유일해야 한다"
+"payment 테이블에서 단일 거래의 amount 액수가 가장 많은 고객들의 customer_id 추출, 단 customer_id 값은 유일해야 한다"
 
 SELECT
        DISTINCT A.CUSTOMER_ID
@@ -69,12 +96,11 @@ SELECT
             1 ASC, 2 DESC
     "숫자를 변수처럼 활용 가능
     "그러나 가독성이 좋지 않음
-
 ```
 
 ### DISTINCT
 
-중복값 제거
+- 중복값 제거
 
 ```python
 CREATE TABLE T1 ( ID SERIAL NOT NULL PRIMARY KEY, BCOLOR VARCHAR, FCOLOR VASRCHAR );
@@ -89,9 +115,7 @@ VALUES
         , ('red', NULL)
         , (NULL, 'red');
 
- COMMIT; 
-"INSERT 후 커밋
-
+COMMIT; 
 ```
 
 ```python
@@ -420,29 +444,5 @@ SELECT
   FROM
        CONTACTS
 WHERE PHONE IS NOT NULL;
-
 ```
 
-###
-
-```python
---PAYMENT 테이블에서 단일 거래의 AMOUNT의 액수가 가장 많은 고객들의 CUSTOMER_ID를 추출하라. 
---단, CUSTOMER_ID의 값은 유일해야 한다.
-
-SELECT 
-	   DISTINCT A.CUSTOMER_ID 
-  FROM PAYMENT A
- WHERE A.AMOUNT = 
-	(
-		SELECT 
-				K.AMOUNT 
-		FROM PAYMENT K
-	        ORDER BY K.AMOUNT DESC
-		LIMIT 1 --LIMIT절
-				)
-;
-
---실무 -> 한국말 -> sql작성 -> 정답 -> 실력 안늘죠
---정답 -> 어떻게든 해결하자 입니다. 
-
-```
