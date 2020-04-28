@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-28 19:01:28 +0900
+updated : 2020-04-28 19:24:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -181,13 +181,13 @@ block contents
   <div class="col-12">
     <form method="POST" action=".">
       csrf_token
-      for field in form                # {{ form.as_p }} - p태그
+      for field in form                # {{ form.as_p }} - p태그, {{ form.as_table }} - table 태그
       <div class="form-group">
-        <label for="|| field.id_for_label ||">|| field.label ||</label>
+        <label for="|| field.id_for_label ||">|| field.label ||</label>  # form.py에서 모델에 지정한 label 값을 가져옴
         <input type="|| field.field.widget.input_type ||" class="form-control" id="|| field.id_for_label }}"
           placeholder="|| field.label }}" name="|| field.name ||" />
       </div>
-      if field.errors
+      if field.errors    # error가 발생하면 errors 함수 호
       <span style="color: red">|| field.errors ||</span>
       endif
       endfor
@@ -272,7 +272,7 @@ def logout(request):
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): # form에 빌트인 메소드 is_valid - 값 존재여부만 판단
             request.session['user'] = form.user_id
             return redirect('/')
     else:
@@ -318,17 +318,17 @@ from django.contrib.auth.hashers import check_password
 class LoginForm(forms.Form):
     username = forms.CharField(
         error_messages={
-            'required': '아이디를 입력해주세요.'
+            'required': '아이디를 입력해주세요.'  # required에 원하는 메시지 삽입 가능
         },
         max_length=32, label="사용자 이름")
         password = forms.CharField(
             error_messages={
                 'required': '비밀번호를 입력해주세요.'
             },
-        widget=forms.PasswordInput, label="비밀번호")
+        widget=forms.PasswordInput, label="비밀번호") # PasswordInput - 패스워트 ** 타입으로 변경
 
     def clean(self):
-        cleaned_data = super().clean()
+        cleaned_data = super().clean()  # form의 빌트인 메소드를 상속하므로 super()를 쓴다.
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
 
