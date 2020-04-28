@@ -25,9 +25,12 @@ regenerate: true
 * [[class-advanced]]
 * [[data-model]]
 * [[sequence]]
+* [[first-class-functions]
+* [[python-basic]]
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
 * [[snippet]]
+
 
 ### [[django]]
 
@@ -50,16 +53,13 @@ regenerate: true
 * [[django-cache]]
 * [[django-basic]]
 
-* copy & paste
-    * [[django-sql-cheatsheet]]
-    * [[shell-shortcut]]
-    * [[link-serverless]] 
+#### two scoops of django
 
-* two scoops of django
-    * [[tsd-5]]
+* [[tsd-5]]
 
-* tdd with python
-    * [[tdd-3-website-test]]
+#### tdd with python
+
+* [[tdd-3-website-test]]
 
 ## [[tool]]
 
@@ -81,10 +81,15 @@ regenerate: true
 * [[dev-common-sense]]
 * [[database-basic]]
 * [[web-basic]]
-* [[python-basic]]
 * [[OS-basic]]
 * [[sql]]
 * [[sql-join]]
+
+### copy & paste
+
+* [[django-sql-cheatsheet]]
+* [[link-serverless]] 
+
 
 ## [[media]]
 
