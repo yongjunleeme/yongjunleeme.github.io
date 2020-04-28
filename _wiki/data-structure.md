@@ -3,7 +3,7 @@ layout  : wiki
 title   : data-structure 
 summary : 
 date    : 2020-03-12 16:13:09 +0900
-updated : 2020-04-27 13:24:25 +0900
+updated : 2020-04-28 12:58:14 +0900
 tags    : 
 toc     : true
 public  : true
@@ -284,6 +284,57 @@ get_data('Andy')
     - 검색이 많이 필요한 경우
     - 저장, 삭제, 읽기가 빈번한 경우
     - 캐시 구현 시(중복 확인이 쉽기 때문)
+
+### 충돌 해결 알고리즘
+
+- 키값이 중복되는 등의 충돌 가능성이 높다.
+
+#### Chaining 기법
+
+- 개방 해싱 또는 Open Hashing 기법 중 하나: 해시 테이블 저장공간 외의 공간을 활용하는 기법
+- 링크드 리스트를 이용해 데이터를 추가로 연결하는 기법
+- 예시에서는 링크드 리스트가 아닌 배열로 구현
+
+```python
+hash_table = list([0 for i in range(8)])
+
+def get_key(data):
+    return hash(data)
+
+def hash_function(key):
+    return key % 8
+
+def save_data(data, value):
+    index_key = get_key(data)
+    hash_address = hash_function(index_key)
+    if hash_table[hash_address] != 0:
+        for index in range(len(hash_table[hash_address])):
+            if hash_table[hash_address][index][0] == index_key:
+                hash_table[hash_address][index][1] = value
+                return
+        hash_table[hash_address].append([index_key, value])
+    else:
+        hash_table[hash_address] = [[index_key, value]]
+    
+def read_data(data):
+    index_key = get_key(data)
+    hash_address = hash_function(index_key)
+
+    if hash_table[hash_address] != 0:
+        for index in range(len(hash_table[hash_address])):
+            if hash_table[hash_address][index][0] == index_key:
+                return hash_table[hash_address][index][1]
+        return None
+    else:
+        return None
+
+
+save_data('Dd', '1201023010')
+save_data('Data', '3301023010')
+read_data('Dd')
+
+print(hash_table)
+```
 
 
 ## 알고리즘 성능 표기법
