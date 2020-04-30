@@ -3,7 +3,7 @@ layout  : wiki
 title   : data-structure 
 summary : 
 date    : 2020-03-12 16:13:09 +0900
-updated : 2020-04-29 10:21:06 +0900
+updated : 2020-04-30 19:57:55 +0900
 tags    : 
 toc     : true
 public  : true
@@ -386,6 +386,65 @@ save_data('dk', '01200123123')
 save_data('da', '3333333333')
 read_data('dc')
 ```
+
+### 빈번한 충돌을 개선하는 방법
+
+#### 해시 함수를 재정의 또는 해시 테이블 저장공간을 확대
+
+```python
+hash_table = list([None for i in range(16)])
+
+def hash_function(key):
+    return key % 16
+```
+
+#### SHA(Secure Hash Algorithm)
+
+- 어떤 데이터도 유일한 고정값을 리턴
+
+##### SHA-1
+
+```python
+import hashlib
+
+data = 'test'.encode()
+hash_object = hashlib.sha1()
+hash_object.updade(data)
+hex_dig = hash_objects.hexdigest()
+print(hex_dig)
+```
+
+##### SHA-256
+
+```python
+import hashlib
+
+data = 'test'.encode()
+hash_object = hashlib.sha256()
+hash_object.update(data)
+hex_dig = hash_object.hexdigest()
+print(hex_dig)
+```
+
+```python
+import hashlib
+
+hash_table = list([0 for i in range(8)])
+
+def get_key(data):
+        hash_object = hashlib.sha256()
+        hash_object.update(data.encode())
+        hex_dig = hash_object.hexdigest()
+        return int(hex_dig, 16)
+```
+
+### 시간 복잡도
+
+- 일반적인 경우(충돌이 없으면) O(1)
+- 최악의 경우(모두 충돌이 발생하면) O(n)
+- 검색 예
+    - 배열에 데이터를 저장하고, 검색할 떄 O(n) 
+    - 데이터 저장곤간을 가진 해시 테이블을 저장하고 난 다음 검색할 때 O(1)
 
 ## 알고리즘 성능 표기법
 
