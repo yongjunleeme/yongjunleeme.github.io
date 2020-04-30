@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-28 19:24:02 +0900
+updated : 2020-04-29 19:28:21 +0900
 tags    : 
 toc     : true
 public  : true
@@ -122,10 +122,7 @@ block contents
   </div>
 </div>
 endblock
-
 ```
-
-- input에 name 변수의 값(username)을 view에서 받아서 처리
 
 ```html
 # home.html
@@ -181,13 +178,13 @@ block contents
   <div class="col-12">
     <form method="POST" action=".">
       csrf_token
-      for field in form                # {{ form.as_p }} - p태그, {{ form.as_table }} - table 태그
+      for field in form      # || form.as_p || - p태그, || form.as_table || - table 태그
       <div class="form-group">
-        <label for="|| field.id_for_label ||">|| field.label ||</label>  # form.py에서 모델에 지정한 label 값을 가져옴
-        <input type="|| field.field.widget.input_type ||" class="form-control" id="|| field.id_for_label }}"
+        <label for="|| field.id_for_label ||">|| field.label ||</label>  # form.py에서 모델에 지정한 label 값을 가져옴, form 내부에 id_for_label이라는 변수가 있다( 해당 테이블의 id를 물고 있는 다른 필드 값을 가져오는 건가..? )
+        <input type="|| field.field.widget.input_type ||" class="form-control" id="|| field.id_for_label }}" # form의 widge 내부에 input_type 이라는 변수가 있다.
           placeholder="|| field.label }}" name="|| field.name ||" />
       </div>
-      if field.errors    # error가 발생하면 errors 함수 호
+      if field.errors    # error가 발생하면 errors 함수 호출, forms.py에서 error_messages 설정 
       <span style="color: red">|| field.errors ||</span>
       endif
       endfor
@@ -250,7 +247,6 @@ urlpatterns = [
 
 ```
 
-
 ### views.py
 
 ```python
@@ -304,7 +300,7 @@ def register(request): # request를 url과 연결하면 요청정보가 request 
 
             fcuser.save()
 
-        return render(request, 'register.html', res_data) # res_data -> 데이터 전달, res_data['error']의 error 키는 templates폴더 내 html 파일에서 {{error}} 로 연결하면 그 자리에 자동 매핑
+        return render(request, 'register.html', res_data) # res_data -> 데이터 전달, res_data['error']의 error 키는 templates폴더 내 html 파일에서 || error ||로 연결하면 그 자리에 자동 매핑
 
 ```
 ### form.py
@@ -321,11 +317,11 @@ class LoginForm(forms.Form):
             'required': '아이디를 입력해주세요.'  # required에 원하는 메시지 삽입 가능
         },
         max_length=32, label="사용자 이름")
-        password = forms.CharField(
-            error_messages={
-                'required': '비밀번호를 입력해주세요.'
-            },
-        widget=forms.PasswordInput, label="비밀번호") # PasswordInput - 패스워트 ** 타입으로 변경
+    password = forms.CharField(
+        error_messages={
+            'required': '비밀번호를 입력해주세요.'
+        },
+        widget = forms.PasswordInput, label="비밀번호") # PasswordInput - 패스워트 ** 타입으로 변경
 
     def clean(self):
         cleaned_data = super().clean()  # form의 빌트인 메소드를 상속하므로 super()를 쓴다.
