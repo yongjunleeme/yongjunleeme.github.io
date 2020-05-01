@@ -30,7 +30,7 @@ regenerate: true
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
 * [[snippet]]
-
+* [[test]]
 
 ### [[django]]
 
@@ -89,7 +89,6 @@ regenerate: true
 
 * [[django-sql-cheatsheet]]
 * [[link-serverless]] 
-
 
 ## [[media]]
 
