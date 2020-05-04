@@ -3,7 +3,7 @@ layout  : wiki
 title   : data-structure 
 summary : 
 date    : 2020-03-12 16:13:09 +0900
-updated : 2020-04-30 19:57:55 +0900
+updated : 2020-05-04 09:16:59 +0900
 tags    : 
 toc     : true
 public  : true
@@ -215,10 +215,100 @@ dequeue()
 
 ## Tree
 
-- 이진트리
+### 트리구조
+
+- Node와 Branch를 이용해서, 사이클을 이루지 않도록 구성한 데이터 구조
+- 이진 트리(Binary Tree) 형태 구조는 탐색(검색) 알고리즘 구현에 주로 사용됨
+
+### 알아둘 용어
+
+- Node : 트리에서 데이터를 저장하는 기본 요소(데이터와 다른 연결된 노드에 대한 브랜치 정보 포함)
+- 레벨 : 최상위 노드를 Level 0으로 지정할 때 하위 Branch로 연결된 노드의 깊이
+- Leaf Node(Terminal Node) : Child Node가 없는 노드
+
+### 이진 트리와 이진 탐색 트리
+
+- 이진트리 : 노드의 최대 브랜치가 2인 트리
+- 이진 탐색 트리 - 이진 트리에 왼쪽 노드는 해당 노드보다 작은 값, 오른쪽 노드는 해당 노드보다 큰 값을 할당
     - 탐색속도 로그n회 (리스트는 n회)
     - tree -> bigOnotation ( logN ) 
     - cf) set ( 1 )
+- [참고 이미지](https://blog.penjee.com/5-gifs-to-understand-binary-search-tree/#binary-search-tree-insertion-node)
+
+#### 링크드 리스트로 이진 트리 구현
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+        
+class NodeMgmt:
+    def __init__(self, head):
+        self.head = head
+    
+    def insert(self, value):
+        self.current_node = self.head
+        while True:
+            if value < self.current_node.value:
+                if self.current_node.left != None:  # 왼쪽 브랜치에 값이 있다면
+                    self.current_node = self.current_node.left # 비교할 대상을 변경
+                else:
+                    self.current_node.left = Node(value)
+                    break
+            else:
+                if self.current_node.right != None:
+                    self.current_node = self.current_node.right
+                else:
+                    self.current_node.right = Node(value)
+                    break
+```
+
+### 이진 탐색 트리
+
+```python
+class NodeMgmt:
+    def __init__(self, head):
+        self.head = head
+    
+    def insert(self, value):
+        self.current_node = self.head
+        while True:
+            if value < self.current_node.value:
+                if self.current_node.left != None:
+                    self.current_node = self.current_node.left
+                else:
+                    self.current_node.left = Node(value)
+                    break
+            else:
+                if self.current_node.right != None:
+                    self.current_node = self.current_node.right
+                else:
+                    self.current_node.right = Node(value)
+                    break
+    
+    def search(self, value):
+        self.current_node = self.head
+        while self.current_node:
+            if self.current_node.value == value:
+                return True
+            elif value < self.current_node.value:
+                self.current_node = self.current_node.left
+            else:
+                self.current_node = self.current_node.right
+        return False
+        
+head = Node(1)
+BST = NodeMgmt(head)
+BST.insert(2)
+BST.insert(3)
+BST.insert(0)
+BST.insert(4)
+BST.insert(8)
+
+BST.search(-1)
+```
 
 ## Linked list
 - 이전메모리가 다음 메모리를 참조
