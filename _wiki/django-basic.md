@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-04-29 19:28:21 +0900
+updated : 2020-05-04 15:26:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,6 +12,8 @@ latex   : false
 ---
 * TOC
 {:toc}
+
+{% raw %}
 
 ## django-basic
 
@@ -341,6 +343,325 @@ class LoginForm(forms.Form):
                 self.user_id = fcuser.id
 ```
 
+
+## 게시판
+
+### templates
+
+#### base.html
+
+```python
+<html>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
+  <link rel="stylesheet" href="/static/bootstrap.min.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    {% block contents %}
+    {% endblock %}
+  </div>
+</body>
+
+</html>
+```
+
+#### border_detail.html
+
+```python
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="form-group">
+      <label for="title">제목</label>
+      <input type="text" class="form-control" id="title" value="{{ board.title }}" readonly />
+      <label for="contents">내용</label>
+      <textarea class="form-control" readonly>{{ board.contents }}</textarea>
+      <label for="tags">태그</label>
+      <span id="tags" class="form-control">
+        {{ board.tags.all|join:", " }}
+      </span>
+    </div>
+    <button class="btn btn-primary" onclick="location.href='/board/list/'">돌아가기</button>
+  </div>
+</div>
+{% endblock %}
+```
+
+#### border_list.html
+
+```python
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+  <div class="col-12">
+    <table class="table table-light">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>제목</th>
+          <th>아이디</th>
+          <th>일시</th>
+        </tr>
+      </thead>
+      <tbody class="text-dark">
+        {% for board in boards %}
+        <tr onclick="location.href='/board/detail/{{ board.id }}/'">
+          <th>{{ board.id }}</th>
+          <td>{{ board.title }}</td>
+          <td>{{ board.writer }}</td>
+          <td>{{ board.registered_dttm }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col-12">
+    <nav>
+      <ul class="pagination justify-content-center">
+        {% if boards.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?p={{ boards.previous_page_number }}">이전으로</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">이전으로</a>
+        </li>
+        {% endif %}
+        <li class="page-item active">
+          <a class="page-link" href="#">{{ boards.number }} / {{ boards.paginator.num_pages }}</a>
+        </li>
+        {% if boards.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?p={{ boards.next_page_number }}">다음으로</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link disabled" href="#">다음으로</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" onclick="location.href='/board/write/'">글쓰기</button>
+  </div>
+</div>
+{% endblock %}
+```
+
+#### border_writhe.html
+
+```python
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+  <div class="col-12">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% ifequal field.name 'contents' %}
+        <textarea class="form-control" name="{{ field.name }}" placeholder="{{ field.label }}"></textarea>
+        {% else %}
+        <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
+          placeholder="{{ field.label }}" name="{{ field.name }}" />
+        {% endifequal %}
+      </div>
+      {% if field.errors %}
+      <span style="color: red">{{ field.errors }}</span>
+      {% endif %}
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">글쓰기</button>
+      <button type="button" class="btn btn-primary" onclick="location.href='/board/list/'">돌아가기</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+```
+
+### model.py
+
+```python
+from django.db import models
+
+# Create your models here.
+
+
+class Board(models.Model):
+    title = models.CharField(max_length=128,
+                             verbose_name='제목')
+    contents = models.TextField(verbose_name='내용')
+    writer = models.ForeignKey('fcuser.Fcuser', on_delete=models.CASCADE,
+                               verbose_name='작성자')
+    tags = models.ManyToManyField('tag.Tag', verbose_name='태그')
+    registered_dttm = models.DateTimeField(auto_now_add=True,
+                                           verbose_name='등록시간')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'fastcampus_board'
+        verbose_name = '패스트캠퍼스 게시글'
+        verbose_name_plural = '패스트캠퍼스 게시글'
+```
+
+### views.py
+
+```python
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+from django.http import Http404
+from fcuser.models import Fcuser
+from tag.models import Tag
+from .models import Board
+from .forms import BoardForm
+
+# Create your views here.
+
+
+def board_detail(request, pk):
+    try:
+        board = Board.objects.get(pk=pk)
+    except Board.DoesNotExist:
+        raise Http404('게시글을 찾을 수 없습니다')
+
+    return render(request, 'board_detail.html', {'board': board})
+
+
+def board_write(request):
+    if not request.session.get('user'):
+        return redirect('/fcuser/login/')
+
+    if request.method == 'POST':
+        form = BoardForm(request.POST)
+        if form.is_valid():
+            user_id = request.session.get('user')
+            fcuser = Fcuser.objects.get(pk=user_id)
+
+            tags = form.cleaned_data['tags'].split(',')
+
+            board = Board()
+            board.title = form.cleaned_data['title']
+            board.contents = form.cleaned_data['contents']
+            board.writer = fcuser
+            board.save()
+
+            for tag in tags:
+                if not tag:
+                    continue
+
+                _tag, _ = Tag.objects.get_or_create(name=tag)
+                board.tags.add(_tag)
+
+            return redirect('/board/list/')
+    else:
+        form = BoardForm()
+
+    return render(request, 'board_write.html', {'form': form})
+
+
+def board_list(request):
+    all_boards = Board.objects.all().order_by('-id') # 최신순으로 배열한다는 의미
+    page = int(request.GET.get('p', 1))
+    paginator = Paginator(all_boards, 3)
+
+    boards = paginator.get_page(page)
+    return render(request, 'board_list.html', {'boards': boards})
+```
+
+#### forms.py
+
+```python
+from django import forms
+
+
+class BoardForm(forms.Form):
+    title = forms.CharField(
+        error_messages={
+            'required': '제목을 입력해주세요.'
+        },
+        max_length=128, label="제목")
+    contents = forms.CharField(
+        error_messages={
+            'required': '내용을 입력해주세요.'
+        },
+        widget=forms.Textarea, label="내용")
+    tags = forms.CharField(
+        required=False, label="태그")
+
+```
+
+#### urls.py
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('detail/<int:pk>/', views.board_detail),
+    path('list/', views.board_list),
+    path('write/', views.board_write)
+]
+
+```
+
+#### admins.py
+
+```python
+from django.contrib import admin
+from .models import Board
+
+# Register your models here.
+
+
+class BoardAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+
+admin.site.register(Board, BoardAdmin)
+
+```
+
+#### apps.py
+
+```python
+from django.apps import AppConfig
+
+
+class BoardConfig(AppConfig):
+    name = 'board'
+
+```
+
 ## Link
 
 - [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
+
+{% endraw %}
