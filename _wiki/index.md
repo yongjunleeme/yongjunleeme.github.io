@@ -27,6 +27,7 @@ regenerate: true
 * [[sequence]]
 * [[first-class-functions]] 
 * [[python-basic]]
+* [[object-reference]]
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
 * [[snippet]]
