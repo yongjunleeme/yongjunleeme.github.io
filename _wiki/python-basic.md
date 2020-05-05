@@ -3,7 +3,7 @@ layout  : wiki
 title   : python-basic
 summary : 
 date    : 2020-04-07 17:43:42 +0900
-updated : 2020-05-05 17:15:58 +0900
+updated : 2020-05-05 17:19:16 +0900
 tags    : 
 toc     : true
 public  : true
@@ -861,7 +861,7 @@ conn.commit()
 conn.close()
 ```
 
-### Typing-game
+## Typing-game
 
 ```python
 import random
@@ -922,7 +922,7 @@ if __name__ == '__main__':
 
 ```
 
-#### 사운드 적용 및 DB 연동
+### 사운드 적용 및 DB 연동
 
 ```python
 import random
@@ -1019,7 +1019,7 @@ conn.close()
 print("게임 시간 :", et, "초", "정답 개수 : {}".format(cor_cnt))
 ```
 
-### 주소록 제작
+## 주소록 제작
 
 ```python
 import os.path
