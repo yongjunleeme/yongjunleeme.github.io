@@ -3,7 +3,7 @@ layout  : wiki
 title   : python-basic
 summary : 
 date    : 2020-04-07 17:43:42 +0900
-updated : 2020-05-05 10:13:27 +0900
+updated : 2020-05-05 11:04:48 +0900
 tags    : 
 toc     : true
 public  : true
@@ -692,13 +692,13 @@ print('sqlite3.sqlite_version', sqlite3.sqlite_version)
 ```python
 # DB생성 & Autocommit
 # 본인 DB 파일 경로
-conn = sqlite3.connect('본인이 원하는 경로/database.db', isolation_level=None)
+conn = sqlite3.connect('본인이 원하는 경로/database.db', isolation_level=None) # isolation_level=None -> auto commit
 
 # DB생성(메모리)
 # conn = sqlite3.connect(":memory:")
 
 # Cursor연결
-c = conn.cursor()
+c = conn.cursor() # 현재 데이터베이스를 가리키는 위치
 print('Cursor Type : ', type(c))
 ```
 
@@ -708,9 +708,9 @@ c.execute(
     "CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, username text, email text, phone text, website text, regdate text)")  # AUTOINCREMENT
 
 # 데이터 삽입
-c.execute("INSERT INTO users VALUES (1 ,'Kim','Kim@naver.com', '010-0000-0000', 'Kim.com', ?)", (nowDatetime,)) # ?로 변수(nowDatetime)가 할당된다.
+c.execute("INSERT INTO users VALUES (1 ,'Kim','Kim@naver.com', '010-0000-0000', 'Kim.com', ?)", (nowDatetime,)) # ?로 변수(nowDatetime)가 할당된다, 튜플로
 c.execute("INSERT INTO users(id, username, email, phone, website, regdate) VALUES (?, ?, ?, ?, ?, ?)",
-          (2, 'Park', 'Park@naver.com', '010-1111-1111', 'Park.com', nowDatetime))
+          (2, 'Park', 'Park@naver.com', '010-1111-1111', 'Park.com', nowDatetime)) 
 
 # Many 삽입(튜플, 리스트)
 userList = (
