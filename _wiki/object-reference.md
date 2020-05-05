@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-04 10:53:00 +0900
-updated : 2020-05-04 13:18:52 +0900
+updated : 2020-05-04 14:40:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -174,13 +174,16 @@ print('EX4-7 -', len(i2[1:6]))
 ### abc 활용 예제
 
 ```python
+
+# RandomMachine 클래스를 상속받아서 인형뽑기를 구현
+
 import abc
 
 class RandomMachine(abc.ABC): # metaclass=abc.ABCMeta (3.4 이하 버전)
     # __metaclass__ = abc.ABCMeta
     
     # 추상 메소드
-    @abc.abstractmethod
+    @abc.abstractmethod # 자식 클래스에서 강제로 메소드를 구현해야 실행 가능
     def load(self, iterobj):
         '''iterable 항목 추가'''
     
@@ -190,7 +193,7 @@ class RandomMachine(abc.ABC): # metaclass=abc.ABCMeta (3.4 이하 버전)
     def pick(self, iterobj):
         '''무작위 항목 뽑기'''
     
-    def inspect(self):
+    def inspect(self): # 자식 클래스에서 공통적으로 사용할 메소드는 부모 클래스에서 선언
         items = []
         while True:
             try:
