@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-05-04 15:26:02 +0900
+updated : 2020-05-04 21:46:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -382,7 +382,7 @@ class LoginForm(forms.Form):
 </html>
 ```
 
-#### border_detail.html
+#### board_detail.html
 
 ```python
 {% extends "base.html" %}
@@ -406,7 +406,7 @@ class LoginForm(forms.Form):
 {% endblock %}
 ```
 
-#### border_list.html
+#### board_list.html
 
 ```python
 {% extends "base.html" %}
@@ -473,7 +473,7 @@ class LoginForm(forms.Form):
 {% endblock %}
 ```
 
-#### border_writhe.html
+#### board_write.html
 
 ```python
 {% extends "base.html" %}
@@ -486,7 +486,7 @@ class LoginForm(forms.Form):
       {% for field in form %}
       <div class="form-group">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {% ifequal field.name 'contents' %}
+        {% ifequal field.name 'contents' %}  # 2개가 동일한지 비교하는 구문
         <textarea class="form-control" name="{{ field.name }}" placeholder="{{ field.label }}"></textarea>
         {% else %}
         <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
@@ -545,7 +545,6 @@ from .forms import BoardForm
 
 # Create your views here.
 
-
 def board_detail(request, pk):
     try:
         board = Board.objects.get(pk=pk)
@@ -554,7 +553,6 @@ def board_detail(request, pk):
 
     return render(request, 'board_detail.html', {'board': board})
 
-
 def board_write(request):
     if not request.session.get('user'):
         return redirect('/fcuser/login/')
@@ -562,12 +560,12 @@ def board_write(request):
     if request.method == 'POST':
         form = BoardForm(request.POST)
         if form.is_valid():
-            user_id = request.session.get('user')
+            user_id = request.session.get('user') # 세션에서 유저 받아온다
             fcuser = Fcuser.objects.get(pk=user_id)
 
             tags = form.cleaned_data['tags'].split(',')
 
-            board = Board()
+            board = Board() # 모델 Board 클래스
             board.title = form.cleaned_data['title']
             board.contents = form.cleaned_data['contents']
             board.writer = fcuser
@@ -632,7 +630,7 @@ urlpatterns = [
 
 ```
 
-#### admins.py
+#### admin.py
 
 ```python
 from django.contrib import admin
