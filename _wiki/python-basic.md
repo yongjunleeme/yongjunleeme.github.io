@@ -3,7 +3,7 @@ layout  : wiki
 title   : python-basic
 summary : 
 date    : 2020-04-07 17:43:42 +0900
-updated : 2020-05-05 11:04:48 +0900
+updated : 2020-05-05 17:15:58 +0900
 tags    : 
 toc     : true
 public  : true
@@ -823,6 +823,422 @@ with conn:
             f.write('%s\n' % line)
         print('Dump Print Complete.')
 ```
+
+### 테이블 수정 및 삭제
+
+```python
+import sqlite3
+# DB생성(파일)
+conn = sqlite3.connect('본인이 원하는 경로/database.db/database.db')
+
+c = conn.cursor()
+
+# 데이터 수정1
+c.execute("UPDATE users SET username = ? WHERE id = ?", ('niceman', 1))
+
+# 데이터 수정2
+c.execute("UPDATE users SET username = :name WHERE id = :id", {"name": 'niceman', 'id': 3})
+
+# 데이터 수정3
+c.execute("UPDATE users SET username = '%s' WHERE id = '%s'" % ('badboy', 5))
+
+# Row Delete1
+c.execute("DELETE FROM users WHERE id = ?", (7,))
+
+# Row Delete2
+c.execute("DELETE FROM users WHERE id = :id", {'id': 8})
+
+# Row Delete3
+c.execute("DELETE FROM users WHERE id = '%s'" % 9)
+
+# 테이블 전체 데이터 삭제
+print("users db deleted : ", conn.execute("delete from users").rowcount, "rows")
+
+# 커밋
+conn.commit()
+
+# 접속 해제
+conn.close()
+```
+
+### Typing-game
+
+```python
+import random
+import time
+
+words = []                                   # 영어 단어 리스트(1000개 로드)
+
+n = 1                                        # 게임 시도 횟수
+cor_cnt = 0                                  # 정답 개수
+
+with open('./resource/word.txt', 'r') as f:  # 문제 txt 파일 로드
+    for c in f:
+        words.append(c.strip())
+
+print(words)                                 
+
+input("Ready? Press Enter Key!")             # input -> 스트링으로 입력받음-> 다른 타입 쓰려면 형변환해야 
+
+start = time.time()                          # Start Time
+
+while n <= 5:                                # 5회 반복
+    random.shuffle(words)                    # List shuffle -> 임의로 섞어줌
+    q = random.choice(words)                 # Choice -> 1개 뽑기 
+
+	print()
+
+    print("*Question # {}".format(n))
+    print(q)                                 # 문제 출력
+
+    x = input()                              # 타이핑 입력
+
+	print()
+    
+    if str(q).strip() == str(x).strip():     # 입력 확인(공백제거)
+        print("Pass!")
+        cor_cnt += 1                         # 정답 개수 카운트
+    else:
+        print("Wrong!")
+
+    n += 1                                   # 다음 문제 전환
+
+end = time.time()                            # End Time
+et = end - start                             # 총 게임 시간
+
+et = format(et, ".3f")                       # 소수 셋째 자리 출력(시간)
+
+if cor_cnt >= 3:                             # 3개 이상 합격
+    print("결과 : 합격")
+else:
+    print("불합격")
+    
+# 수행 시간 출력
+print("게임 시간 :", et, "초", "정답 개수 : {}".format(cor_cnt))
+
+# 시작지점
+if __name__ == '__main__':
+    pass
+
+```
+
+#### 사운드 적용 및 DB 연동
+
+```python
+import random
+import time
+# 사운드 출력 필요 모듈
+import winsound
+import sqlite3
+import datetime
+
+# DB생성 & Autocommit
+# 본인 DB 파일 경로
+conn = sqlite3.connect('본인이 원하는 경로/records.db', isolation_level=None)
+
+# Cursor연결
+cursor = conn.cursor()
+
+# 테이블 생성(Datatype : TEXT NUMERIC INTEGER REAL BLOB)
+cursor.execute(
+    "CREATE TABLE IF NOT EXISTS records(id INTEGER PRIMARY KEY AUTOINCREMENT,  cor_cnt INTEGER, record text, regdate text)"
+)
+
+words = []                                   # 영어 단어 리스트(1000개 로드)
+
+n = 1                                        # 게임 시도 횟수
+cor_cnt = 0                                  # 정답 개수
+
+with open('./resource/word.txt', 'r') as f:  # 문제 txt 파일 로드
+    for c in f:
+        words.append(c.strip())
+
+print(words)                                 # 단어 리스트 확인
+
+input("Ready? Press Enter Key!")             # Enter Game Start!
+
+start = time.time()                          # Start Time
+
+while n <= 5:                                # 5회 반복
+    random.shuffle(words)                    # List shuffle!
+    q = random.choice(words)                 # List -> words random extract!
+
+	print()
+
+    print("*Question # {}".format(n))
+    print(q)                                 # 문제 출력
+
+    x = input()                              # 타이핑 입력
+
+	print()
+    
+    if str(q).strip() == str(x).strip():     # 입력 확인(공백제거)
+        winsound.PlaySound(                  # 정답 소리 재생
+            './sound/good.wav',
+            winsound.SND_FILENAME
+        )
+        print("Pass!")
+        cor_cnt += 1                         # 정답 개수 카운트
+
+    else:
+        winsound.PlaySound(                  # 오답 소리 재생
+            './sound/bad.wav',
+            winsound.SND_FILENAME
+        )
+
+        print("Wrong!")
+
+    n += 1                                   # 다음 문제 전환
+
+end = time.time()                            # End Time
+et = end - start                             # 총 게임 시간
+
+et = format(et, ".3f")                       # 소수 셋째 자리 출력(시간)
+
+print()
+print('--------------')
+
+
+if cor_cnt >= 3:                             # 3개 이상 합격
+    print("결과 : 합격")
+else:
+    print("불합격")
+
+# 기록 DB 삽입
+cursor.execute(
+    "INSERT INTO records('cor_cnt', 'record', 'regdate') VALUES (?, ?, ?)",
+    (
+        cor_cnt, et, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    )
+)
+
+# 접속 해제
+conn.close()
+
+# 수행 시간 출력
+print("게임 시간 :", et, "초", "정답 개수 : {}".format(cor_cnt))
+```
+
+### 주소록 제작
+
+```python
+import os.path
+# 파일 저장
+import pickle
+
+
+# 연락처 클래스
+class Contact:
+    def __init__(self, name, phone_num, email):
+        self.name = name
+        self.phone_num = phone_num
+        self.email = email
+
+    # 개인 연락처 출력
+    def prt_info(self):
+        print("Name : {}".format(self.name))
+        print("Phone_number : {}".format(self.phone_num))
+        print("e_mail : {}".format(self.email))
+        print("-" * 20)
+        print()
+
+
+# 연락처 정보 입력
+def add_cont(c_list):
+    name = input_name()
+    phone_num = input_phone()
+    email = input_email()
+    print()
+
+    for v in c_list:
+        # 같은 이름은 등록 불가능(프로그램 상에서만)
+        if name == v.name:
+            print('Name exists.')
+            print()
+            break
+    else:
+        # 인스턴스 생성
+        cont = Contact(name, phone_num, email)
+        print('saved.')
+        print()
+        # 인스턴스 반환
+        c_list.append(cont)
+
+
+# 메뉴 출력
+def prt_menu():
+    print("1. Add")
+    print("2. Info")
+    print("3. Delete")
+    print("4. DB Save")
+    print("5. DB Drop")
+    print("6. Exit")
+    print()
+    # 메뉴 넘버 입력
+    menu = input("Select Menu Number : ")
+    print()
+    return int(menu)
+
+
+# 이름으로 조회 된 연락처 삭제
+def del_cont(c_list):
+    # 삭제 할 이름 입력
+    nm = input("Name: ")
+    print()
+
+    if len(c_list) > 0:
+        # enumerate : 인덱스 생성
+        for i, cont in enumerate(c_list):
+            if str(cont.name).strip() == nm.strip():
+                print('"{}" deleted.'.format(cont.name))
+                print()
+                del c_list[i]  # 해당 리스트 삭제
+                break
+        else:
+            # 삭제 할 데이터 없을 경우
+            print('No files to delete.')
+            print()
+    else:
+        # 연락처 리스트가 비어 있을 경우
+        print('No files to delete.')
+        print()
+
+
+# 저장 된 모든 연락처 정보 출력
+def prt_cont(c_list):
+    # 연락처 리스트가 비어 있지 않은 경우
+    if len(c_list) > 0:
+        # 리스트 형태로 된 인스턴스 정보 출력
+        for i in c_list:
+            i.prt_info()
+    else:
+        # 연락처가 비어 있을 경우
+        print('Contact is empty.')
+        print()
+
+
+# 파일로 저장
+def store_cont_db(c_list):
+    try:
+        # 기존 DB 있으면 생성, 없으면 추가(Binary)
+        with open("cont_db.bin", "wb") as f:
+            # pickle 파일로 저장
+            pickle.dump(c_list, f)
+
+            print('db saved')
+            print()
+    except IOError as log:
+        print(log)
+
+
+# 파일 DB 로드
+def load_cont_db():
+    # pickle 데이터 저장 변수
+    p_list = []
+    # 파일이 존재하는지 체크
+    if os.path.isfile('cont_db.bin'):
+        # 예외처리
+        try:
+            with open("cont_db.bin", "rb") as f:
+                p_list = pickle.load(f)
+        except IOError as log:
+            print(log)
+    else:
+        # 처음 실행 시 파일이 존재하지 않으면 출력
+        print('DB File not found!')
+        print()
+
+    return p_list
+
+
+# 파일 DB 삭제
+def drop_cont_db():
+    if os.path.isfile('cont_db.bin'):
+        # 예외처리
+        try:
+            # 파일 삭제
+            os.remove('cont_db.bin')
+            print('DB File dropped.')
+        except FileNotFoundError as log:
+            print(log)
+    else:
+        # 파일이 존재하지 않으면 출력
+        print('DB File not found!')
+        print()
+
+
+# 이름 입력
+def input_name():
+    while True:
+        try:
+            # input() 함수 : 입력 함수(자료형은 무조건 Str)
+            name = input("Name: ")
+            if len(name) < 2:
+                raise ValueError
+            else:
+                break
+        except ValueError:
+            print("Name is too short.")
+    return name
+
+
+# 전화번호 입력
+def input_phone():
+    while True:
+        try:
+            # input() 함수 : 입력 함수(자료형은 무조건 Str)
+            phone_num = input("Phone number: ")
+            if len(phone_num) < 2:
+                raise ValueError
+            else:
+                break
+        except ValueError:
+            print("Phone number is too short.")
+    return phone_num
+
+
+# 전화번호 입력
+def input_email():
+    while True:
+        try:
+            # input() 함수 : 입력 함수(자료형은 무조건 Str)
+            phone_email = input("E-mail: ")
+            if len(phone_email) < 2:
+                raise ValueError
+            else:
+                break
+        except ValueError:
+            print("Email is too short.")
+    return phone_email
+
+
+# 프로그램 시작
+def main():
+    # 연락처 리스트 로드
+    c_list = load_cont_db()
+
+    while True:
+        # 실행 메뉴 번호 저장
+        menu = prt_menu()
+        if menu == 1:  # 추가
+            add_cont(c_list)
+        elif menu == 2:  # 출력
+            prt_cont(c_list)
+        elif menu == 3:  # 삭제
+            del_cont(c_list)
+        elif menu == 4:  # DB 저장
+            store_cont_db(c_list)
+        elif menu == 5:  # DB 삭제
+            drop_cont_db()
+        else:
+            break
+
+
+if __name__ == "__main__":
+    # 프로그램 시작
+    main()
+```
+
 
 ## Link
 
