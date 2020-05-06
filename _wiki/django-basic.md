@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-05-04 21:46:36 +0900
+updated : 2020-05-06 21:03:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -397,7 +397,11 @@ class LoginForm(forms.Form):
       <textarea class="form-control" readonly>{{ board.contents }}</textarea>
       <label for="tags">태그</label>
       <span id="tags" class="form-control">
-        {{ board.tags.all|join:", " }}
+        {{ board.tags.all|join:", " }} # 템플릿 내장 함수 사용
+        # 위와 같은 기능
+        # {% for tag in board.tags.all %}
+        # {% tag.name %}
+        # {% endfor %}
       </span>
     </div>
     <button class="btn btn-primary" onclick="location.href='/board/list/'">돌아가기</button>
@@ -575,7 +579,7 @@ def board_write(request):
                 if not tag:
                     continue
 
-                _tag, _ = Tag.objects.get_or_create(name=tag)
+                _tag, _ = Tag.objects.get_or_create(name=tag) # _는 없는 변수, 원래는 불리언을 받는 위치, get_or_create는 있으면 가져오고 없으면 만들어서 가져온다
                 board.tags.add(_tag)
 
             return redirect('/board/list/')
@@ -587,8 +591,8 @@ def board_write(request):
 
 def board_list(request):
     all_boards = Board.objects.all().order_by('-id') # 최신순으로 배열한다는 의미
-    page = int(request.GET.get('p', 1))
-    paginator = Paginator(all_boards, 3)
+    page = int(request.GET.get('p', 1)) # p로 받고 없으면 1번째 페이지로
+    paginator = Paginator(all_boards, 3) # 3개씩 나오도록
 
     boards = paginator.get_page(page)
     return render(request, 'board_list.html', {'boards': boards})
@@ -656,6 +660,46 @@ from django.apps import AppConfig
 class BoardConfig(AppConfig):
     name = 'board'
 
+```
+
+## 태그
+
+### models.py
+
+```python
+from django.db import models
+
+# Create your models here.
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=32, verbose_name='태그명')
+    registered_dttm = models.DateTimeField(auto_now_add=True,
+                                           verbose_name='등록시간')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'fastcampus_tag'
+        verbose_name = '패스트캠퍼스 태그'
+        verbose_name_plural = '패스트캠퍼스 태그'
+```
+
+### admin.py
+
+```python
+from django.contrib import admin
+from .models import Tag
+
+# Register your models here.
+
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+admin.site.register(Tag, TagAdmin)
 ```
 
 ## Link
