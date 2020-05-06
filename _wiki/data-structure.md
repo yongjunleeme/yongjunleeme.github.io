@@ -3,7 +3,7 @@ layout  : wiki
 title   : data-structure 
 summary : 
 date    : 2020-03-12 16:13:09 +0900
-updated : 2020-05-05 08:55:24 +0900
+updated : 2020-05-06 13:09:29 +0900
 tags    : 
 toc     : true
 public  : true
@@ -754,6 +754,178 @@ def get_key(data):
 - 검색 예
     - 배열에 데이터를 저장하고, 검색할 떄 O(n) 
     - 데이터 저장곤간을 가진 해시 테이블을 저장하고 난 다음 검색할 때 O(1)
+
+## Heap
+
+### 힙이란?
+
+- 데이터에서 최댓값과 최솟값을 빠르게 찾기 위해 고안된 완전 이진 트리(Complete Binary Tree)
+    - 완전 이진 트리: 노드를 삽입할 때 최하단 왼쪽 노드부터 차례대로 삽입하는 트리
+- 힙을 사용하는 이유
+    - 배열에서 최댓값과 최솟값을 찾으려면 O(n)이 걸림
+    - 이에 반해, 힙에서는 O(logn)이 걸림
+    - 우선순위 큐와 같이 최댓값 또는 최솟값을 빠르게 찾아야 하는 자료구조에서 활용
+
+### 힙 구조
+
+- 최댓값을 구하는 구조(최대 힙, Max Heap)와 최솟값을 구하는 구조(최소 힙, Min Heap)로 나뉜다.
+- 힙의 2가지 조건
+    - 각 노드 값은 해당 노드의 자식 노드가 가진 값보다 크거나 같다.(최대 힙)
+    - 완전 이진 트리 형태를 가짐
+- 힙과 이진 탐색 트리 공통점과 차이
+    - 공통점 - 힙과 이진 탐색 트리는 모두 이진 트리
+    - 차이점
+        - 힙은 각 노드의 값이 자식 노드보다 크거나 같음(최대 힙)
+        - 이진 탐색 트리는 왼쪽 자식 노드의 값이 가장 작고, 그 다음 부모 노드, 그 다음 오른쪽 자식 노드 값이 가장 크다
+        - 힙은 이진 탐색 트리의 조건인 자식 노드에서 작은 값은 왼쪽, 큰 값은 오른쪽이라는 조건은 없다
+    - 이진 탐색 트리는 탐색을 위한 구조, 힙은 최대/최솟값 검색을 위한 구조
+
+<img width="765" alt="1" src="https://user-images.githubusercontent.com/48748376/81132722-5b67a780-8f8a-11ea-8ca7-961cd2d75ba2.png">
+
+### 힙 동작
+
+#### 데이터 삽입(기본 동작)
+
+- 삽입할 노드는 왼쪽 하단부 노드부터 채워지는 형태
+
+<img width="770" alt="2" src="https://user-images.githubusercontent.com/48748376/81132727-5efb2e80-8f8a-11ea-9a26-48a05faab3e9.png">
+
+#### 힙에 데이터 삽입(삽입할 데이터가 힙의 데이터보다 클 경우)
+
+- 채워진 노드 위치에서 부모 노드보다 값이 클 경우, 부모 노드와 위치를 바꿔주는 작업을 반복(Swap)
+
+<img width="764" alt="3" src="https://user-images.githubusercontent.com/48748376/81132728-5f93c500-8f8a-11ea-901a-310fb9cf591f.png">
+
+#### 힙의 데이터 삭제(Max Heap의 예)
+
+- 보통 삭제는 최상단 노드(루트 노드)를 삭제하는 것이 일반적
+    - 루트 노드에서 최댓값, 최솟값을 바로 꺼내 쓰는 것이 힙의 용도
+- 상단의 데이터 삭제 시, 최하단부 왼쪽에 위치한 노드(일반적으로 가장 마지막에 추가한 노드)를 루트 노드로 이동
+- 루트 노드의 값이 차일드 노드보다 작을 경우, 루트 노드의 차일드 노드 중 가장 큰 값을 가진 토드와 루트 노드 위치를 바꿔주는 작업을 반복(Swap)
+
+<img width="809" alt="4" src="https://user-images.githubusercontent.com/48748376/81132729-60c4f200-8f8a-11ea-8954-d8d81b0a96b7.png">
+
+#### 힙 구현
+
+- 힙과 배열
+
+- 일반적으로 힙 구현 시 배열 자료구조를 활용, 루트 노드 인덱스 1로 지정(힙 구현 편의를 위해)
+- 부모 노드 인덱스 = 자식 노드 인덱스 // 2
+- 왼쪽 자식 노드 인덱스 = 부모 노드 인덱스 * 2
+- 오른쪽 자식 노드 인덱스 = 부모 노드 인덱스 * 2 + 1
+
+<img width="415" alt="5" src="https://user-images.githubusercontent.com/48748376/81132732-615d8880-8f8a-11ea-918a-42ead17502c9.png">
+
+```python
+# 10 노드의 부모 노드 인덱스
+2 // 2 -> 1
+
+# 15 노드의 왼쪽 자식 노드 인덱스
+1 * 2 -> 2
+
+# 15 노드의 오른쪽 자식 인덱스
+2 * 2 + 1 -> 5
+```
+
+#### 힙에 데이터 삽입 구현(Max Heap)
+
+##### 힙 클래스 구현1
+
+```python
+class Heap:
+    def __init__(self, data):
+        self.heap_array = list()
+        self.heap_array.append(None)
+        self.heap_array.append(data)
+        
+heap = Heap(1)
+headp.heap_array
+-> [None, 1]
+```
+
+##### 힙 클래스 구현2 - insert1
+
+- 인덱스 1부터 시작
+- 그냥 append로 뒤에 붙여주면 끝
+
+<img width="780" alt="6" src="https://user-images.githubusercontent.com/48748376/81132734-615d8880-8f8a-11ea-8acf-34b8cd5baa9b.png">
+
+```python
+    def insert(self, data):
+        if len(self.heap_array) == 0:
+            self.heap_array.append(None)
+            self.heap_array.append(data)
+            return True
+            
+        self.heap_array.append(data)
+        return True
+```
+
+##### 힙 클래스 구현3 - insert2
+
+- 삽입한 노드가 부모 노드의 값보다 클 경우, 부모 노드와 삽입한 노드 위치 바꿈
+- 삽입한 노드가 루트 노드가 되거나, 부모 노드보다 값이 작거나 같을 경우까지 반복
+
+- 부모 노드 인덱스 = 자식 노드 인덱스 // 2
+- 왼쪽 자식 노드 인덱스 = 부모 노드 인덱스 * 2
+- 오른쪽 자식 노드 인덱스 = 부모 노드 인덱스 * 2 + 1
+
+<img width="782" alt="7" src="https://user-images.githubusercontent.com/48748376/81132737-61f61f00-8f8a-11ea-8d52-182ad2e17b24.png">
+
+```python
+heap = Heap(15)
+heap.insert(10)
+heap.insert(8)
+heap.insert(5)
+heap.insert(4)
+heap.insert(20)
+heap.heap_array
+-> [None, 20, 10, 15, 5, 4, 8]
+```
+
+```python
+class Heap:
+    def __init__(self, data):
+        self.heap_array = list()
+        self.heap_array.append(None)
+        slef.heap_array.append(data)
+        
+    def move_up(self, inserted_idx):
+        if inserted_idx <= 1:
+            return False
+        
+        parent_idx = inserted_idx // 2
+        if self.heap_array[inserted_idx] > self.heap_array[parent_idx]:
+            return True
+        else:
+            return False
+            
+    def insert(self, data):
+        if len(self.heap_array) == 0:
+            self.heap_array.append(None)
+            self.heap_array.append(data)
+            return True
+        
+        self.heap_array.append(data)
+        
+        inserted_idx = len(self.heap_array) - 1
+        
+        while self.move_up(inserted_idx): # move_up 메소드가 True인 동안 순회
+            parent_idx = inserted_idx // 2 # 부모 노드와 자식 노드를 바꿈
+            self.heap_array[inserted_idx], self.heap_array[parent_idx] = self.heap_array[parent_idx], self.heap_array[inserted_idx]
+            inserted_idx = parent_idx
+        
+        return True
+        
+```
+
+##### 힙에 데이터 삭제 구현(Max Heap)
+
+
+
+
+
+
 
 ## 알고리즘 성능 표기법
 
