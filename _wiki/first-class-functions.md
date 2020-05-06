@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-class-functions
 summary : 
 date    : 2020-04-27 17:27:53 +0900
-updated : 2020-05-06 15:53:54 +0900
+updated : 2020-05-06 16:57:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -18,7 +18,7 @@ latex   : false
 ```python
 # 일급 함수(일급 객체)
 # 파이썬 함수 특징
-# 1.런타임 초기화 가능
+# 1.런타임 초기화 가능 (런타임 - 프로그래밍 언어가 구동되는 환경)
 # 2.변수 등에 할당 가능
 # 3.함수 인수 전달 가능
 # 4.함수 결과로 반환 가능
@@ -37,6 +37,7 @@ print('EX1-1 -', factorial(5))
 print('EX1-2 -', factorial.__doc__)
 print('EX1-3 -', type(factorial), type(A))   # 파이썬에서 사용하는 클래스 메소드, 변수 메소드 등은 어트리뷰트(속성)라고 부름
 print('EX1-4 -', set(sorted(dir(factorial))) - set(sorted(dir(A)))) # 함수 속성에서 클래스 속성을 뺀 결과 -> 함수만 가지고 있는 속성
+# set을 쓰면 속성끼리 뺄셈도 가능하구나
 print('EX1-5 -', factorial.__name__) # 함수 이름 출력
 print('EX1-5 -', factorial.__code__) # 함수에 쓰인 코드, 코드가 로컬 위치 출력
 ```
@@ -48,18 +49,22 @@ var_func = factorial # factorial() 이 아님
 print('EX2-1 -', var_func)
 print('EX2-2 -', var_func(10))
 print('EX2-3 -', map(var_func, range(1,11))) # 원형으로 할당(내부에서 실행하므로)
-print('EX2-4 -', list(map(var_func, range(1,6)))) # 결괏값 모두 출력
+print('EX2-4 -', list(map(var_func, range(1,6)))) # 모든 요소의 결괏값 출력
 ```
 
-### reduce()
+### map, filter
 
 ```python
 # 함수 인수 전달 및 함수로 결과 반환 -> 고위 함수(Higher-order function)
 # map, filter, reduce 등
 
-print('EX3-1 -', list(map(var_func, filter(lambda x: x % 2, range(1,6)))))
+print('EX3-1 -', list(map(var_func, filter(lambda x: x % 2, range(1,6))))) # filter -> 함수의 결과가 참인지 거짓인지에 따라 해당 요소를 포함할지를 결정
 print('EX3-2 -', [var_func(i) for i in range(1,6) if i % 2])
+```
 
+### reduce
+
+```python
 # reduce()
 
 from functools import reduce # 원래는 빌트인, 많이 안 써서 따로 분류
@@ -105,7 +110,7 @@ class LottoGame:
         random.shuffle(self._balls)
         return sorted([random.choice(self._balls) for n in range(6)])
 
-    def __call__(self): # __call__을 안 쓰면 game()으로 못 쓴다
+    def __call__(self): # __call__을 안 쓰면 game()으로 못 쓴다, game()으로 호출하면 __call__에 해당하는 메소드 실행
         return self.pick()
 
 
