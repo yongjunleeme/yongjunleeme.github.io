@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-05-06 21:03:36 +0900
+updated : 2020-05-07 17:54:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -62,23 +62,19 @@ $ .schema [테이블명]
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
-  <link rel="stylesheet" href="/static/bootstrap.min.css" />
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
-  </head>
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+  <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
 <body>
   <div class="container">
-  block contents
-  endblock
+  {% block contents %}
+  {% endblock %}
   </div>
 </body>
 </html>
@@ -87,8 +83,8 @@ $ .schema [테이블명]
 ```html
 # register.html
 
-extends "base.html"
-block contents
+{% extends "base.html" %}
+{% block contents %}
 <div class="row mt-5">
   <div class="col-12 text-center">
     <h1>회원가입</h1>
@@ -96,13 +92,13 @@ block contents
 </div>
 <div class="row mt-5">
   <div class="col-12">
-     || error ||
+     {{ error }} # 키가 error인 값을 받아온다 
   </div>
 </div>
 <div class="row mt-5">
   <div class="col-12">
     <form method="POST" action="."> # action에는 post 수행할 경로 지정
-       csrf_token    # form 태그에는 csrf 명시, 크로스도메인 공격을 막기 위해 키를 숨겨놓고 검증?, 장고에서는 csrf를 안 쓰면 에러
+       {% csrf_token %} # form 태그에는 csrf 명시, 크로스도메인 공격을 막기 위해 키를 숨겨놓고 검증?, 장고에서는 csrf를 안 쓰면 에러
       <div class="form-group">
         <label for="username">사용자 이름</label>
         <input type="text" class="form-control" id="username" placeholder="사용자 이름" name="username" />  # input에 name 값으로 정보 전달
@@ -129,9 +125,8 @@ endblock
 ```html
 # home.html
 
-extends "base.html"
-
-block contents
+{% extends "base.html" %}
+{% block contents %}
 <div class="row mt-5">
   <div class="col-12 text-center">
     <h1>홈페이지!</h1>
@@ -156,16 +151,15 @@ block contents
     <button class="btn btn-primary btn-block" onclick="location.href='/board/list/'">게시물보기</button>
   </div>
 </div>
-endblock
+{% endblock %}
 
 ```
 
 ```html
 # login.html
 
-extends "base.html"
-
-block contents
+{% extends "base.html" %}
+{% block contents %}
 <div class="row mt-5">
   <div class="col-12 text-center">
     <h1>로그인</h1>
@@ -173,28 +167,28 @@ block contents
 </div>
 <div class="row mt-5">
   <div class="col-12">
-    || error ||
+    {{ error }}
   </div>
 </div>
 <div class="row mt-5">
   <div class="col-12">
     <form method="POST" action=".">
-      csrf_token
-      for field in form      # || form.as_p || - p태그, || form.as_table || - table 태그
+      {% csrf_token %}
+      {% for field in form %}     # || form.as_p || - p태그, || form.as_table || - table 태그
       <div class="form-group">
-        <label for="|| field.id_for_label ||">|| field.label ||</label>  # form.py에서 모델에 지정한 label 값을 가져옴, form 내부에 id_for_label이라는 변수가 있다( 해당 테이블의 id를 물고 있는 다른 필드 값을 가져오는 건가..? )
-        <input type="|| field.field.widget.input_type ||" class="form-control" id="|| field.id_for_label }}" # form의 widge 내부에 input_type 이라는 변수가 있다.
-          placeholder="|| field.label }}" name="|| field.name ||" />
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>  # id_for_label - 해당 필드의 id를 렌더, label - form.py에서 모델에 지정한 label 값을 가져옴,  
+        <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}" 
+          placeholder="{{ field.label }}" name="{ field.name }}" />
       </div>
       if field.errors    # error가 발생하면 errors 함수 호출, forms.py에서 error_messages 설정 
-      <span style="color: red">|| field.errors ||</span>
+      <span style="color: red">{{ field.errors }}</span>
       endif
       endfor
       <button type="submit" class="btn btn-primary">로그인</button>
     </form>
   </div>
 </div>
-endblock
+{% endblock %}
 ```
 
 ### Static 파일 관리
@@ -305,7 +299,7 @@ def register(request): # request를 url과 연결하면 요청정보가 request 
         return render(request, 'register.html', res_data) # res_data -> 데이터 전달, res_data['error']의 error 키는 templates폴더 내 html 파일에서 || error ||로 연결하면 그 자리에 자동 매핑
 
 ```
-### form.py
+### forms.py
 
 ```python
 # forms.py
@@ -340,7 +334,7 @@ class LoginForm(forms.Form):
             if not check_password(password, fcuser.password): # check_password 1번쨰 인자는 변수 password통해 입력받은 값, 2번째 인자는 모델에 입력된 패스워드 값
                 self.add_error('password', '비밀번호를 틀렸습니다')
             else:
-                self.user_id = fcuser.id
+                self.user_id = fcuser.id # user_id는 views에서 session['user']에 키로 할당
 ```
 
 
@@ -357,19 +351,14 @@ class LoginForm(forms.Form):
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
-  <link rel="stylesheet" href="/static/bootstrap.min.css" />
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+  <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
