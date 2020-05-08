@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-04 10:53:00 +0900
-updated : 2020-05-08 19:50:25 +0900
+updated : 2020-05-08 19:55:56 +0900
 tags    : 
 toc     : true
 public  : true
@@ -280,9 +280,9 @@ print('EX3-3 -', tuple1 == tuple2)
 print('EX3-4 -', tuple1.__eq__(tuple2))
 ```
 
-### Copy, Deepcopy(깊은 복사, 얕은 복사)
+## Copy, Deepcopy(깊은 복사, 얕은 복사)
 
-#### Copy
+### Copy
 
 ```python
 tl1 = [10, [100, 105], (5, 10, 15)]
@@ -312,7 +312,7 @@ print('EX4-10 -', tl3)
 # print(id(tl1[2]))
 ```
 
-#### Deep Copy
+### Deep Copy
 
 ```python
 # 장바구니
@@ -347,7 +347,7 @@ print('EX5-4 -', basket2._products)
 print('EX5-5 -', basket3._products)
 ```
 
-### 함수 매개변수 전달 사용법
+## 함수 매개변수 전달 사용법
 
 ```python
 def mul(x, y):
