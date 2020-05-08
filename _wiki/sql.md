@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-13 22:36:44 +0900
-updated : 2020-04-28 18:53:28 +0900
+updated : 2020-05-08 18:45:50 +0900
 tags    : 
 toc     : true
 public  : true
@@ -59,6 +59,55 @@ SELECT FIRST_NAME FROM CUSTOMER WHERE FIRST_NAME LIKE '_HER%';
 "is null" - null값 여부 판단
 SELECT ID, FIRST_NAME FROM CONTACTS WHERE FIRST_NAME IS NULL;
 ```
+
+```python
+select sum(salary) from salaries where playerid = 'rodrial01'
+
+"self join" - 같은 필드(컬럼) 내 다른 필드(로우)들을 조인 
+select nameFirst || ' ' || nameLast from master limit 10;
+
+select count(distinct(nameFirst || ' ' || nameLast)) from master;
+
+select nameFirst || ' ' || nameLast as name, count(*) from master group by name having count(*) > 1
+
+select teamID, SUM(salary) AS total_salary FROM salaries group by teamID order by SUM(salary) DESC
+```
+
+### JOIN
+
+<img width="931" alt="sql join" src="https://user-images.githubusercontent.com/48748376/81392400-91a75180-9159-11ea-913a-c1f2a7ead442.png">
+
+```python
+"join"
+SELECT
+    t2.nameFirst || ' ' || t2.namaLast As name,
+    t1.salary
+FROM
+    Salaries t1
+JOIN
+    Master t2 ON t2.playerID = t1.playerID
+ORDER  BY salary DESC
+LIMIT 20;
+
+"left join"
+select
+    count(distinct t1.playerid)
+from
+    master t1
+left join |
+    allstarfull on t2.playerid = t1.playerid
+    
+
+select
+    count(distinct t1.playerid)
+from
+    master t1
+left join
+    allstarfull on t2.playerid = t1.playerid
+where t2.playerid is null
+```
+
+
 
 ```python
 "payment 테이블에서 단일 거래의 amount 액수가 가장 많은 고객들의 customer_id 추출, 단 customer_id 값은 유일해야 한다"
