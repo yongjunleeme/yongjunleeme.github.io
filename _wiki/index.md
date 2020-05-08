@@ -17,6 +17,7 @@ regenerate: true
 * [[tip]]
 * [[link]]
 * [[review]]
+* [[media]]
 
 ## [[programming-language]]
 
@@ -27,6 +28,7 @@ regenerate: true
 * [[sequence]]
 * [[first-class-functions]] 
 * [[python-basic]]
+* [[closure-decorator]]
 * [[object-reference]]
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
@@ -53,6 +55,7 @@ regenerate: true
 * [[django-ORM-3]]
 * [[django-cache]]
 * [[django-basic]]
+* [[django-project-commerce]]
 
 #### two scoops of django
 
@@ -85,6 +88,7 @@ regenerate: true
 * [[OS-basic]]
 * [[sql]]
 * [[sql-join]]
+* [[interview-question]]
 
 ### copy & paste
 
