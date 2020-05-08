@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-20 21:31:38 +0900
-updated : 2020-04-23 19:16:16 +0900
+updated : 2020-05-04 21:52:27 +0900
 tags    : 
 toc     : true
 public  : true
@@ -21,7 +21,10 @@ latex   : false
 - OUTER 조인 - 특정 컬럼을 기준으로 매칭된 집합을 출력하지만 한쪽 집합은 모두 출력하고 다른 한쪽의 집합은 매칭되는 컬럼의 값만을 출력
 - SELF 조인 - 동일한 테이블끼리 특정 컬럼을 기준으로 매칭되는 집합을 출력
 - FULL OUTER 조인 - INNER, LEFT OUTER, RIGHT OUTER 조인 집합을 모두 출력
-- CROSS 조인 - Catesian Product라고도 하며 조인되는 두 테이블에서 곱집합을 반환
+- CROSS 조인
+    - 가능한 경우의 수 모두 출력?
+    - Catesian Product라고도 하며 조인되는 두 테이블에서 곱집합을 반환
+    - 데이터 복제에 많이 쓰이는 기법
 - NATURAL 조인 - 특정 테이블의 같은 이름을 가진 컬럼 ₩간의 조인집합을 출력
 
 
@@ -227,4 +230,67 @@ FROM film f1 --테이블을 조회
 WHERE f1.LENGTH = f1.length  
 AND F1.FILM_ID <> f1.FILM_ID
 ;
+```
+
+
+### Cross Join
+
+```python
+CREATE TABLE CROSS_T1
+(
+  LABEL CHAR(1) PRIMARY KEY
+);
+
+CREATE TABLE CROSS_T2 
+(
+  SCORE INT PRIMARY KEY
+);
+
+
+INSERT INTO CROSS_T1 (LABEL)
+VALUES
+('A'),
+('B');
+
+COMMIT; 
+
+SELECT * FROM CROSS_T1; 
+
+INSERT INTO CROSS_T2 (SCORE)
+VALUES
+(1),
+(2),
+(3);
+
+COMMIT;
+
+SELECT * FROM CROSS_T2;
+
+------------------------------------------------------
+SELECT
+      *
+ FROM CROSS_T1
+CROSS JOIN 
+      CROSS_T2
+ORDER BY LABEL       
+;
+
+SELECT * 
+FROM CROSS_T1, CROSS_T2
+ORDER BY LABEL 
+; --inner 조인을 표현하는 다른방법 
+
+--위 2개의  sql문 결과 집합이 동일하죠~ -> 같은 sql문입니다. 
+--sql문의 목적이 집합을 출력하는 것이다. -> 정보는 ~ -> 정보가 같다면 sql문 자체는 다르더라도~ 동일한 sql문이다. 
+
+SELECT LABEL, 
+      CASE WHEN LABEL = 'A' THEN sum(score)  
+           WHEN LABEL = 'B' THEN sum(score) * -1
+           ELSE 0 
+           END AS calc
+ FROM CROSS_T1
+CROSS JOIN 
+      CROSS_T2
+GROUP BY LABEL      
+ORDER BY LABEL    
 ```
