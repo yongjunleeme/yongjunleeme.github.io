@@ -3,7 +3,7 @@ layout  : wiki
 title   : class-advanced
 summary : 
 date    : 2020-04-19 16:36:19 +0900
-updated : 2020-04-28 16:39:31 +0900
+updated : 2020-05-10 14:13:37 +0900
 tags    : 
 toc     : true
 public  : true
@@ -77,6 +77,9 @@ class Student():
     def __del__(self):
         Student.student_count -= 1
 ```
+
+- 클래스 속성: 모든 인스턴스가 공유. 인스턴스 전체가 사용해야 하는 값을 저장할 때 사용
+- 인스턴스 속성: 인스턴스별로 독립되어 있음. 각 인스턴스가 값을 따로 저장해야 할 때 사용
 
 ```python
 # Self 의미
@@ -284,3 +287,4 @@ print('Static : ', student_4.is_scholarship_st(student_4))
 ## Link
 
 - [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
+- [파이썬 코딩 도장](https://dojang.io/mod/page/view.php?id=2378)
