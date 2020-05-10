@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-13 22:36:44 +0900
-updated : 2020-05-08 18:45:50 +0900
+updated : 2020-05-08 22:13:29 +0900
 tags    : 
 toc     : true
 public  : true
@@ -106,6 +106,66 @@ left join
     allstarfull on t2.playerid = t1.playerid
 where t2.playerid is null
 ```
+
+### create, insert, update, replace
+
+```python
+create table mytable (id int, name varchar(255), debut date);
+
+create table mytable2 (id integer primary key autoincrement, name varchar(255), debut date);
+
+insert into mytable2 (name, debut) values ('yongjun', '2020-05-08');
+
+update mytable2 set debut = '2010-09-01' where id = 1234;
+
+replace into mytable2 (id, name, debut) values (1234, 'yongjun', '2020-05-08');
+
+insert or ignore into mytable2 (id, name, debut) values (1, 'yongjun', '2020-05-08');
+
+```
+
+### delete, alter, drop
+
+```python
+delete from mytable2 where id=1;
+
+alter table rename to players;
+alter table add column dob date;
+
+drop table mytable;
+```
+
+### sql function
+
+```python
+select substr(name, 1, 4) from players2
+select upper(name) from players
+select length(name) from players
+
+max, avg, count, sum
+
+--시간 관련
+
+select date('now')
+select date('current_timestamp')
+
+select datetime('now')
+
+- 고정 시간 변경( 데이터베이스마다 문법 상이 )
+select datetime(current_timestmap, '+1 day')
+
+mysql -> select current_timestamp - interval '7 days'
+
+select
+  case when
+    name = 'yongjun' then 'ok'
+  when name = 'yongpal' then 'ok2'
+  else 'no ok'
+  end as name_ok
+from
+  players2
+```
+
 
 
 
