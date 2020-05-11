@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-21 16:11:20 +0900
-updated : 2020-04-28 16:39:31 +0900
+updated : 2020-05-10 19:39:54 +0900
 tags    : 
 toc     : true
 public  : true
@@ -147,15 +147,12 @@ for s in students:
 # 파이썬의 중요한 핵심 프레임워크 -> 시퀀스(Sequence), 반복(Iterator), 함수(Functions), 클래스(Class)
 
 # 매직메소드 기초 설명
-
 # 기본형
 
 print(int)
 
 # 모든 속성 및 메소드 출력
 print(dir(int))
-print()
-print()
 
 n = 100
 
@@ -165,9 +162,6 @@ print('EX1-2 -', n.__add__(200))
 print('EX1-3 -', n.__doc__)
 print('EX1-4 -', n.__bool__(), bool(n))
 print('EX1-5 - ', n * 100, n.__mul__(100))
-
-print()
-print()
 
 # 클래스 예제1
 class Student:
@@ -209,9 +203,6 @@ print('EX2-3 -', s1 - s2)
 print('EX2-4 -', s2 - s1)
 print('EX2-5 - ', s1)
 print('EX2-6 - ', s2)
-
-print()
-print()
 ```
 
 ```python
@@ -256,9 +247,11 @@ print('EX3-6 -', v1 * 4)
 print('EX3-7 -', v2 * 10)
 print('EX3-8 -', bool(v1), bool(v2))
 print('EX3-9 -', bool(v3))
+```
 
-print()
-print()
+## dis - 바이트코드 프로세스 출력
+
+```python
 
 # 참고 : 파이썬 바이트 코드 실행
 import dis
