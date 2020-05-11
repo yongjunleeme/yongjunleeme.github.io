@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 12:56:15 +0900
-updated : 2020-05-11 13:03:36 +0900
+updated : 2020-05-11 15:13:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -32,8 +32,6 @@ t = 'ABCDEF'
 for c in t:
     print('EX1-1 -', c)
 
-print()
-
 # while 사용
 
 w = iter(t)
@@ -41,18 +39,17 @@ w = iter(t)
 while True:
     try:
         print('EX1-2 -', next(w))
-    except StopIteration:
+    except StopIteration: # 더이상 next 없으면 예외처리
         break
 
-print()
 ```
 
 ```python
 from collections import abc
 
 # 반복형 확인
-print('EX1-3 -', hasattr(t, '__iter__'))
-print('EX1-4 -', isinstance(t, abc.Iterable))
+print('EX1-3 -', hasattr(t, '__iter__')) # hasattr -> 속성 존재여부 확인
+print('EX1-4 -', isinstance(t, abc.Iterable)) # t가 iterable 클래스와 같은지 확인
 ```
 
 ```python
@@ -217,7 +214,7 @@ gen5 = itertools.chain('ABCDE', range(1,11,2))
 print('EX6-8 -', list(gen5))
 ```
 
-#### 연결 2
+#### 연결 2 - 벡터에 사용
 
 ```python
 gen6 = itertools.chain(enumerate('ABCDE'))
