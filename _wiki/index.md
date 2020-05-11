@@ -38,14 +38,9 @@ regenerate: true
 
 ### [[django]]
 
-* [[django-mozilla-1]]
-* [[django-mozilla-2]]
-* [[django-mozilla-3]]
-* [[django-mozilla-4]]
 * [[django-wecode-1]]
 * [[django-wecode-2-encryption]]
 * [[django-wecode-3-modelling]] 
-* [[django-basic-url]]
 * [[django-debugging-tool]]
 * [[django-debugging-example]]
 * [[code-review]]
@@ -90,6 +85,7 @@ regenerate: true
 * [[sql]]
 * [[sql-join]]
 * [[interview-question]]
+* [[spotify-api]]
 
 ### copy & paste
 
