@@ -3,7 +3,7 @@ layout  : wiki
 title   : data-structure 
 summary : 
 date    : 2020-03-12 16:13:09 +0900
-updated : 2020-05-12 13:14:20 +0900
+updated : 2020-05-12 13:24:05 +0900
 tags    : 
 toc     : true
 public  : true
@@ -121,60 +121,49 @@ latex   : false
     - 멀티 태스킹을 위한 프로세스 스케쥴링 방식을 구현하기 위해 많이 사용됨 (운영체제 참조)
     - 큐의 경우에는 장단점 보다는 (특별히 언급되는 장단점이 없음), 큐의 활용 예로 프로세스 스케쥴링 방식을 함께 이해해두는 것이 좋음
 
-```python
-class Queue:
-    def __init__(self):
-        self._queue = []
+### queue 라이브러리 활용
 
-    def push(self, data):
-        return self._queue.append(data)
+- queue 라이브러리에는 다양한 큐 구조로 Queue(), LifoQueue(), PriorityQueue() 제공
+    - Queue(): 일반적인 큐 자료 구조
+    - LifoQueue(): 나중에 입력된 데이터가 먼저 출력되는 구조 (스택 구조라고 보면 됨)
+    - PriorityQueue(): 데이터마다 우선순위를 넣어서, 우선순위가 높은 순으로 데이터 출력
 
-    def pop(self)
-        if len(self._queue) == 0:
-            return None
-
-        return self._queue.pop()
-
-    def peek(self):
-        if len(self._queue) == 0:
-            return None
-
-        return self[0]
-```
-
-### 용어
-
-- Enqueue: 큐에 데이터를 넣는 기능
-- Dequeue: 큐에서 데이터를 꺼내는 기능
-
-### 파이썬 라이브러리
-
-- Queue(): 가장 일반적인 큐 자료 구조
-- LifoQueue(): 나중에 입력된 데이터가 먼저 출력되는 구조 (스택 구조라고 보면 됨)
-- PriorityQueue(): 데이터마다 우선순위를 넣어서, 우선순위가 높은 순으로 데이터 출
+#### Queue()
 
 ```python
 import queue
 
 data_queue = queue.Queue()
 
-ata_queue.put("funcoding")
+data_queue.put("funcoding")
 data_queue.put(1)
 
 data_queue.qsize()
+
 data_queue.get()
+
 data_queue.qsize()
+
+data_queue.get()
 ```
 
+#### LifoQueue()
+
 ```python
-# LifoQueue()로 큐 만들기 (LIFO(Last-In, First-Out))
-
 import queue
-
 data_queue = queue.LifoQueue()
 
-# PriorityQueue()로 큐 만들기
+data_queue.put("funcoding")
+data_queue.put(1)
 
+data_queue.qsize()
+
+data_queue.get()
+```
+
+#### PriorityQueue()
+
+```python
 import queue
 
 data_queue = queue.PriorityQueue()
@@ -183,8 +172,14 @@ data_queue.put((10, "korea"))
 data_queue.put((5, 1))
 data_queue.put((15, "china"))
 
-# 리스트 변수로 큐를 다루는 enqueue, dequeue 기능 구현해보기
+data_queue.qsize()
 
+data_queue.get()
+```
+
+### enqueue, dequeue
+
+```python
 queue_list = list()
 
 def enqueue(data):
@@ -194,13 +189,15 @@ def dequeue():
     data = queue_list[0]
     del queue_list[0]
     return data
-    
+
 for index in range(10):
     enqueue(index)
 
 len(queue_list)
+
 dequeue()
 ```
+
 
 ## Tree
 
