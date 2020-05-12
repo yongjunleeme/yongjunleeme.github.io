@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 15:54:23 +0900
-updated : 2020-05-11 16:09:50 +0900
+updated : 2020-05-12 16:31:04 +0900
 tags    : 
 toc     : true
 public  : true
@@ -27,6 +27,14 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fc_django.settings')
 
 application = get_wsgi_application()
+```
+
+### settings.py
+
+```python
+INSTALLED_APPS = [
+    'django.contrib.humanize'  # 템플릿에서 필터 사용, built-in template tagsand filters로 검색
+]
 ```
 
 ### urls.py
@@ -250,7 +258,7 @@ class FcuserAdmin(admin.ModelAdmin):
 admin.site.register(Fcuser, FcuserAdmin)
 ```
 
-### template
+### templates
 
 #### base.html
 
@@ -539,7 +547,7 @@ admin.site.register(Product, ProductAdmin)
 
 ```html
 {% extends "base.html" %}
-{% load humanize %}
+{% load humanize %} # | 필터 사용 가능하게 만듦
 {% block header %}
 <script>
   function product_detail(id) {
@@ -825,7 +833,7 @@ admin.site.register(Order, OrderAdmin)
 
 ```html
 {% extends "base.html" %}
-{% load humanize %}
+{% load humanize %} 
 {% block contents %}
 <div class="row mt-5">
   <div class="col-12">
