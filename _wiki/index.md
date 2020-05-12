@@ -78,6 +78,7 @@ regenerate: true
 * [[data-structure]] 
 * [[재귀함수]]
 * [[first-data-structure-algorithm]]
+* [[algorithm]]
 * [[dev-common-sense]]
 * [[database-basic]]
 * [[web-basic]]
