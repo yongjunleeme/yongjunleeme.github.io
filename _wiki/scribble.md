@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-05-11 08:51:13 +0900
+updated : 2020-05-12 09:36:19 +0900
 tags    : 
 toc     : true
 public  : true
@@ -14,13 +14,6 @@ latex   : false
 {:toc}
 
 > 개인이 보는 용도의 낙서장입니다;
-
-𝑛2 = 𝑙𝑜𝑔𝑛
-
-a의 x승이 b = x는 로그 a를 밑으로하는 b
-상용로그 - 밑이 10인 로그
-
-
 
 ## 운영체제
 
@@ -40,8 +33,7 @@ a의 x승이 b = x는 로그 a를 밑으로하는 b
 - 명령어 - 머신의 스테이트를 바꾸는 것
 - 포트 - 메모리에 연결된 인풋 아웃풋
 
-
-1
+<img width="845" alt="1" src="https://user-images.githubusercontent.com/48748376/81625350-9870e580-9433-11ea-8fa4-05cdfe3c7f53.png">
 
 #### Key Interfaces
 
@@ -51,47 +43,47 @@ a의 x승이 b = x는 로그 a를 밑으로하는 b
 
 #### Terminology
 
-- Microprocessor : 한 개의 칩 프로세서 (예: Intel i7, Pentium IV, AMD Aholon, SUN Ultrasparc, ARM, MIPS, ...)
+##### Microprocessor : 한 개의 칩 프로세서 (예: Intel i7, Pentium IV, AMD Aholon, SUN Ultrasparc, ARM, MIPS, ...)
 
-- ISA (Instruction Set Architecture)
+##### ISA (Instruction Set Architecture)
     - 레지스터나 메모리와 같은 머신의 스테이트를 비저블하게 만들고 머신의 명령어를 정의한다.
     - Examples
         - X86 - 인텔의 32비트 ISA
         - 모바일은 Arm의 SoC(System on Chip) -(cpu gpu 등 통합)의 ISA
 
-- Microarchitectur
+##### Microarchitectur
     - ISA에 따라 구현한 하드웨어
     - 파이프라이닝, 캐시, 브랜치, 프레딕션, 버퍼
 
-- CISC(Complex Instruction Set Computer)
+##### CISC(Complex Instruction Set Computer)
     - 80년대 중반까지 아키텍처 (예: x86)
     - 큰 사이즈의 ISA
     - 많은 명령어 포맷들, 각기 다른 사이즈의 명령어들 
 
-- RISC(Reduced Instruction Set Computer)
+##### RISC(Reduced Instruction Set Computer)
     - 80년대 이래 만들어진 대부분의 아키텍쳐(예: MIPS, ARM, PowerPC, Alpha, ...)
     - 로드-스토어 구조
         - 오직 레지스터로 컴퓨테이션
     - 작은 사이즈의 ISA
     - 각 명령어 심플, 고정된 사이즈
 
-- Word
+##### Word
     - Defaul data size for computation
     - GPR & ALU 데이터 사이즈
         - GPR(General Purpose Registers), ALU(Arithmetic and Logic Unit)
     - 워드 사이즈는 프로세서(8b, 16b, 32b, or 64b)에 의해 결정
 
-- Address (or pointer)
+##### Address (or pointer)
     - 메모리의 위치를 가리킨다
     - 각 주소는 바이트를 가리킨다(byte addressable)
     - 32b 주소라면 2의 32승 바이트 = 4GB
     - 256MB 메모리라면, 적어도 28비트 어드레스가 필요하다(2의 28승은 256MB)
 
-- Caches
+##### Caches
     - Faster but smaller memory close to processor
         - 빠르고 작은 SRAMs, 그러나 비싸다
 
-- Interrupt
+##### Interrupt
     - 프로세서의 시퀀싱(특정 명령어들의 순서)을 정지하게 만드는 I/O 장치들의 메커니즘
     - 프로세서보다 느린 I/O 장치들의 프로세서 이용을 개선하기 위한 방법
     - 외부 이벤트나 잘못된 상태(Exceptions)에 의해 절차의 제어가 강제된다(Handler).
@@ -104,8 +96,6 @@ Evolution of Operation Systems
 Ia64 - 600명 cpu디자이너
 
 Mips - 실리콘그래픽스
-
-마이크로아키텍쳐
 
 람다 - 미니멈 피처 사이즈
 
