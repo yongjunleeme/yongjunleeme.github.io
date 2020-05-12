@@ -3,7 +3,7 @@ layout  : wiki
 title   : tsd-5 
 summary : 
 date    : 2020-03-27 09:15:02 +0900
-updated : 2020-04-07 23:36:21 +0900
+updated : 2020-05-12 13:28:44 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,7 +12,6 @@ latex   : false
 ---
 * TOC
 {:toc}
-
 
 모델은 크게(Fat Models), 유틸리티는 모듈로(Utility Modules), 뷰는 가볍게(Thin Views), 템플릿은 단순하게(Stupid Template)
 
@@ -90,13 +89,13 @@ from splits.models import BananaSplit
 
 ## 3장. 어떻게 장고 프로젝트를 구성할 것인가
 
-장고 프로젝트 템플릿
+- 장고 프로젝트 템플릿
 - [Cookiecutter](https://github.com/pydanny/cookiecutter-django)
 - [다른 Cookiecutter](https://www.djangopackages.com/grids/g/cookecutters)
 
 ### 3.2 우리가 선호하는 프로젝트 구성
 
-```
+```python
 <repository_root>
     <django_project.root>/
         <configuration_root>
@@ -107,6 +106,7 @@ from splits.models import BananaSplit
 최상위 <repository-root>/ 디렉터리는 프로젝트의 최상위 절대 루트다. <django_project_root> 이외에 README.rst, docs/ 디렉터리, .gitignore, requirements.txt, 그리고 배포에 필요한 다른 파일 등 중요한 내용이 위치한다.
 
 #### 3.2.2 두 번째 레벨: 프로젝트 루트
+
 두 번째 레벨은 장고 프로젝트 소스들이 위치하는 디렉터리다. 모든 파이썬 코드는 <django_project_root>/ 디렉터리 아래와 그 하부 디렉터리들에 위치한다.
 
 #### 3.2.3 세 번째 레벨: 설정 루트
@@ -115,7 +115,7 @@ from splits.models import BananaSplit
 
 ### 3.3 예제 프로젝트 구성
 
-```
+```python
 icecreamratings_project/
     .gitignore
     Makerfile
@@ -153,11 +153,10 @@ cookiecutter-django를 포크하여 해당 장고 프로젝트 요구에 맞게 
 
 #### 3.5.3 대안 템플릿: django-kevin
 
-https://github.com/imkevinxu/django-kevin
+[django-kevin](https://github.com/imkevinxu/django-kevin)
 
 
 ### 4장. 장고 앱 디자인의 기본
-
 
 
 
