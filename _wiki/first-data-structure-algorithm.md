@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-04-11 15:28:19 +0900
+updated : 2020-05-12 13:02:30 +0900
 tags    : 
 toc     : true
 public  : true
@@ -359,6 +359,38 @@ def solution(x):
 마지막으로, 두 리스트를 합치는 일은 생각보다 훨씬 쉽습니다. 눈치가 빠른 분들은 이것이 매우 간단하리라는 것을 (제 7 강을 공부하셨다면) 쉽게 알아차리셨을 것 같네요.
 
 연결 리스트를 다루는 프로그래밍 연습을 해보면서, 두 가지를 염두에 두시기를 바랍니다. 첫째, 이것이 무엇을 위함이냐? 즉, 연결 리스트라는 자료 구조를 착안함으로써 어떤 목적을 이루고자 했는지, 다시 말하면 연결 리스트가 가지는 장점이 어떤 곳에서 발휘되는지, 알고리즘의 복잡도 (제 6 강을 참고하세요) 측면에서 생각해보시기 바랍니다. 둘째, 링크를 조정하는 등의 코딩은 앞으로 나타나게 될 트리 (tree) 라든지, 이 강의 시리즈에서 다루지는 않지만 그래프 (graph) 등을 프로그래밍할 때를 대비한 연습이 된다는 점을 떠올리시고, 이런 종류의 코딩에 익숙해지려 노력해 보시기 바랍니다.
+
+```python
+class Node:
+    def __init__(self, item):
+        self.data = item
+        self.next = None
+
+class LinkedList:  # 연결 리스트 요소의 맨 앞이 헤드, 맨 끝은 테일
+    def __init__(self):
+        self.nodeCount = 0
+        self.head = None
+        self.tail = None
+
+    def getAt(self, pos): # pos번째 노드를 찾아서 리턴
+        if pos < 1 or pos > self.nodeCount:
+            return Node
+        i = 1 # 인덱스 1부터 시작
+
+        curr = self.head
+        while i < pos:
+            curr = curr.next
+            i += 1
+        return curr
+    
+    def traverse(self):
+        answer = []
+        curr = self.head
+        while curr != None:
+            answer.append(curr.data)
+            curr = curr.next
+        return answer
+```
 
 
 ```python
