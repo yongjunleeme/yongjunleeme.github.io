@@ -87,6 +87,7 @@ regenerate: true
 * [[sql-join]]
 * [[interview-question]]
 * [[spotify-api]]
+* [[spotify-rds]]
 
 ### copy & paste
 
