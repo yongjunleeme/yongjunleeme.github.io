@@ -1,9 +1,9 @@
 ---
 layout  : wiki
-title   : 
+title   : concurrency 
 summary : 
 date    : 2020-05-11 12:56:15 +0900
-updated : 2020-05-12 15:36:09 +0900
+updated : 2020-05-13 16:38:26 +0900
 tags    : 
 toc     : true
 public  : true
@@ -299,7 +299,7 @@ c2 = coroutine1() # 제너레이터를 실행한 다음 값을 보내야 한다.
 
 def coroutine2(x):
     print('>>> coroutine started : {}'.format(x))
-    y = yield x # x가 메인루틴에 전달할 값, y는 메인루틴이 코루틴에게 send로 보내야 하는 값
+    y = yield x # x는 메인루틴에 전달할 값으로 next메소드로 호출, y는 메인루틴이 코루틴에게 send로 보내야 하는 값
     print('>>> coroutine received : {}'.format(y))
     z = yield x + y 
     print('>>> coroutine received : {}'.format(z))
@@ -341,13 +341,224 @@ def sumer():
         term = yield total
         total += term
 
-
 su = sumer()
 
 print('EX2-1 -', su.send(100))
 print('EX2-2 -', su.send(40))
 print('EX2-3 -', su.send(60))
 ```
+
+### 코루틴 예제3 (예외처리)
+
+```python
+class SampleException(Exception):
+    '''설명에 사용할 예외 유형'''
+
+def coroutine_except():
+    print('>> coroutine stated.')
+    try:
+        while True:
+            try:
+                x = yield
+            except SampleException:
+                print('-> SampleException handled. Continuing..')
+            else:
+                print('-> coroutine received : {}'.format(x))
+    finally:
+        print('-> coroutine ending')
+
+
+exe_co = coroutine_except()
+
+print('EX3-1 -', next(exe_co))
+print('EX3-2 -', exe_co.send(10))
+print('EX3-3 -', exe_co.send(100))
+print('EX3-4 -', exe_co.throw(SampleException)) # 예외처리했으므로 계속 값을 보낼 수 있음
+print('EX3-5 -', exe_co.send(1000))
+print('EX3-6 -', exe_co.close()) # GEN_CLOSED
+```
+
+### 코루틴 예제4(return)
+
+```python
+def averager_re():
+    total = 0.0
+    cnt = 0
+    avg = None
+    while True:
+        term = yield
+        if term is None:
+            break
+        total += term
+        cnt += 1
+        avg = total / cnt
+    return 'Average : {}'.format(avg)
+
+avger2 =averager_re()
+
+next(avger2)
+
+avger2.send(10)
+avger2.send(30)
+avger2.send(50)
+
+try:
+    avger2.send(None)
+except StopIteration as e:
+    print('EX4-1 -', e.value)
+```
+
+### 코루틴 예제5(yeild from)
+
+```python
+# StopIteration 자동 처리(3.7 -> await)
+# 중첩 코루틴 처리
+
+
+def gen1():
+    for x in 'AB':
+        yield x
+    for y in range(1,4):
+        yield y
+
+t1 = gen1()
+
+print('EX5-1 -', next(t1))
+print('EX5-2 -', next(t1))
+print('EX5-3 -', next(t1))
+print('EX5-4 -', next(t1))
+print('EX5-5 -', next(t1))
+# print('EX5-6 -', next(t1))
+
+t2 = gen1()
+
+print('EX5-7 -', list(t2))
+
+def gen2():
+    yield from 'AB'
+    yield from range(1,4)
+
+t3 = gen2()
+
+print('EX6-1 -', next(t3))
+print('EX6-2 -', next(t3))
+print('EX6-3 -', next(t3))
+print('EX6-4 -', next(t3))
+print('EX6-5 -', next(t3))
+# print('EX6-6 -', next(t3))
+
+t4 = gen2()
+
+print('EX6-7 -', list(t4))
+
+def gen3_sub():
+    print('Sub coroutine.')
+    x = yield 10
+    print('Recv : ', str(x))
+    x = yield 100
+    print('Recv : ', str(x))
+
+def gen4_main():
+    yield from gen3_sub()
+
+t5 = gen4_main()
+
+print('EX7-1 -', next(t5))
+print('EX7-2 -', t5.send(7))
+print('EX7-2 -', t5.send(77))
+```
+
+## Future
+
+### 순차 실행
+
+```python
+import os  # 폴더 경로 확인 위해
+import time
+import sys
+import csv
+
+# 국가정보, 대문자변수 - 바뀌지 않는 정보
+NATION_LS = ('Singapore Germany Israel Norway Italy Canada France Spain Mexico').split() # 콤마로 구분된 리스트로 반환
+# 초기 CSV 위치
+TARGET_CSV = 'C:/python_advanced/resources/nations.csv' # 본인 경로 변경
+# 저장 폴더 위치
+DEST_DIR = 'C:/python_advanced/csvs' # 본인 경로 변경
+# CSV 헤더 기초 정보
+HEADER = ['Region','Country','Item Type','Sales Channel','Order Priority','Order Date','Order ID','Ship Date','Units Sold','Unit Price','Unit Cost','Total Revenue','Total Cost','Total Profit']
+
+# 국가별 CSV 파일 저장
+def save_csv(data, filename):
+    # 최종 경로 생성
+    path = os.path.join(DEST_DIR, filename)
+
+    with open(path, 'w', newline='') as fp:
+        writer = csv.DictWriter(fp, fieldnames=HEADER)
+        # Header Write
+        writer.writeheader()
+        # Dict to CSV Write
+        for row in data:
+            writer.writerow(row)
+
+# 국가별 분리
+def get_sales_data(nt):
+    with open(TARGET_CSV, 'r') as f:
+        reader = csv.DictReader(f)
+        # Dict을 리스트로 적재
+        data = []
+        # Header 확인
+        # print(reader.fieldnames)
+        for r in reader:
+            # OrderedDict 확인
+            # print(r)
+            # 조건에 맞는 국가만 삽입
+            if r['Country'] == nt:
+                data.append(r)
+    return data
+
+# 중간 상황 출력
+def show(text):
+    print(text, end=' ')
+    # 중간 출력(버퍼 비우기)
+    sys.stdout.flush()
+
+
+# 국가 별 분리 함수 실행
+def separate_many(nt_list):
+    for nt in sorted(nt_list):
+        # 분리 데이터
+        data = get_sales_data(nt)
+        # 상황 출력
+        show(nt)
+        # 파일 저장
+        save_csv(data, nt.lower() + '.csv')
+
+    return len(nt_list)
+
+
+# 시간 측정 및 메인함수
+def main(separate_many):
+    # 시작 시간
+    start_tm = time.time()
+    # 결과 건수
+    result_cnt = separate_many(NATION_LS)
+    # 종료 시간
+    end_tm = time.time() - start_tm
+
+    msg = '\n{} csv separated in {:.2f}s'
+    # 최종 결과 출력
+    print(msg.format(result_cnt, end_tm))
+
+
+# 실행
+if __name__ == '__main__': # 불필요한 함수 실행 안하도록
+    main(separate_many)
+```
+
+
+### concurrent.futures 방법1
+
+### concurrent.futures 방법2
 
 ## Link
 
