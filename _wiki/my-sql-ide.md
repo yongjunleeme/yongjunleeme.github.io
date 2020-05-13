@@ -3,7 +3,7 @@ layout  : wiki
 title   : my-sql-ide 
 summary : 
 date    : 2020-02-13 19:34:52 +0900
-updated : 2020-03-08 16:16:01 +0900
+updated : 2020-05-13 21:52:00 +0900
 tags    : 
 toc     : true
 public  : true
@@ -165,6 +165,12 @@ $ python manage.py migrate
 
 ## 유용한 명령어
 
+### --help
+
+```shell
+$ mysql --help
+```
+
 ### migration, db clen
 
 ```shell
@@ -181,7 +187,8 @@ drop database wetyle_share;
 create database wetyle_share character set utf8mb4 collate utf8mb4_general_ci;
 ```
 
+### 비번 없이 로그인
+
 ```SQL
-"mysql 비번 없이 로그인
 $ sudo mysql -uroot
 ```
