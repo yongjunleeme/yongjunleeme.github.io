@@ -76,8 +76,8 @@ regenerate: true
 ## [[study]]
 
 * [[data-structure]] 
-* [[재귀함수]]
 * [[first-data-structure-algorithm]]
+* [[classic-algorithm-in-python]] 
 * [[algorithm]]
 * [[dev-common-sense]]
 * [[database-basic]]
