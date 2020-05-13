@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-12 10:58:07 +0900
+updated : 2020-05-13 13:43:14 +0900
 tags    : 
 toc     : true
 public  : true
@@ -17,11 +17,11 @@ latex   : false
 
     - 연습장과 펜을 준비
     - 간단한 경우부터 복잡한 순서대로 생각
-    - 가능한 알고리즘이 보인다면 구현 세부 항목을 나누고 나눠서 적는다
+    - 가능한 알고리즘이 보인다면 구현 세부 항목을 나눠서 적는다
     - 데이터구조, 변수 정리
     - 각 문장을 코드로 적는다
 
-## 버블정렬
+## 기본정렬-버블정렬 (앞뒤비교)
 
 - 두 인접한 데이터를 비교해 앞 데이터가 뒤 데이터보다 크면 자리를 바꾸는 정렬 알고리즘
 - [시각화 참고](https://visualgo.net/en/sorting?slide=1)
@@ -30,7 +30,7 @@ latex   : false
 
 - 데이터 2개일 떄, 3개일 때, 4개일 떄...
 
-- 데이터가 네 개 일때 (데이터 갯수에 따라 복잡도가 떨어지는 것은 아니므로, 네 개로 바로 로직을 이해해보자.)
+- 데이터가 네 개 일때 (데이터 개수에 따라 복잡도가 떨어지는 것은 아니므로, 네 개로 바로 로직을 이해해보자.)
 - 예: data_list = [1, 9, 3, 2]
 - 1차 로직 적용
     - 1 와 9 비교, 자리바꿈없음 [1, 9, 3, 2]
@@ -87,6 +87,79 @@ print(bubblesort(data_list))
 - 반복문이 두 개 O( 𝑛2 )
     - 최악의 경우,  𝑛(𝑛−1) / 2 
 - 완전 정렬이 되어 있는 상태라면 최선은 O(n)
+
+
+## 기본정렬-선택정렬 (최솟값)
+
+### 선택정렬이란?
+
+- 주어진 데이터 중 최솟값을 찾아서 맨 앞에 위치한 값과 교체
+- 맨 앞의 위치한 값을 뺀 나미저 데이터를 동일한 방법으로 반복
+- [그림으로 보기1](https://visualgo.net/en/sorting?slide=1)
+- [그림으로 보기2](https://en.wikipedia.org/wiki/Selection_sort)
+
+### 간단한 경우부터 복잡한 경우 순서대로 생각
+
+- 데이터가 두 개 일때
+    - 예: dataList = [9, 1]
+        - data_list[0] > data_list[1] 이므로 data_list[0] 값과 data_ list[1] 값을 교환
+- 데이터가 세 개 일때
+    - 예: data_list = [9, 1, 7]
+        - 처음 한번 실행하면, 1, 9, 7 이 됨
+        - 두 번째 실행하면, 1, 7, 9 가 됨
+- 데이터가 네 개 일때
+    - 예: data_list = [9, 3, 2, 1]
+        - 처음 한번 실행하면, 1, 3, 2, 9 가 됨
+        - 두 번째 실행하면, 1, 2, 3, 9 가 됨
+        - 세 번째 실행하면, 변화 없음
+
+### 세부 항목 나눠서 적기
+
+1. for stand in range(len(data_list) - 1) 로 반복
+2. lowest = stand 로 놓고,
+3. for num in range(stand, len(data_list)) stand 이후부터 반복
+4. 내부 반복문 안에서 data_list[lowest] > data_list[num] 이면,
+5. lowest = num
+6. data_list[num], data_list[lowest] = data_list[lowest], data_list[num]
+
+### 코드 구현
+
+```python
+def selection_sort(data):
+    for stand in range(len(data) - 1): # 2중 for문
+        lowest = stand
+        for index in range(stand + 1, len(data)):
+            if data[lowest] > data[index]:
+                lowest = index
+        data[lowest], data[stand] = data[stand], data[lowest]
+    return data
+```
+
+```python
+import random
+
+data_list = random.sample(range(100), 10) # 0~99까지 랜덤수를 10개 생성
+
+selection_sort(data_list)
+-> [9, 12, 13, 24, 53, 55, 69, 80, 87, 98]
+```
+
+### 시간 복잡도 분석
+
+```python
+반복문이 두 개 O( 𝑛2 )
+    실제로 상세하게 계산하면,  𝑛∗(𝑛−1)2
+```
+
+## 삽입 정렬
+
+### 삽입 정렬이란?
+
+- [그림으로 보기1](https://commons.wikimedia.org/wiki/File:Insertion-sort-example.gif)
+- [그림으로 보기2](https://visualgo.net/en/sorting)
+
+
+
 
 
 ## Link
