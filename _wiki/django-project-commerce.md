@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 15:54:23 +0900
-updated : 2020-05-12 16:31:04 +0900
+updated : 2020-05-13 18:58:15 +0900
 tags    : 
 toc     : true
 public  : true
@@ -16,6 +16,10 @@ latex   : false
 {% raw %}
 
 ## fc_django
+
+### 외부 
+
+- [부트스트랩 4 summernote](https://summernote.org/getting-started/#for-bootstrap-4)
 
 ### wsgi.py
 
@@ -214,7 +218,7 @@ def index(request):
 class RegisterView(FormView):
     template_name = 'register.html'
     form_class = RegisterForm
-    success_url = '/'
+    success_url = '/' # 성공하면 자동 이동
 
     def form_valid(self, form):
         fcuser = Fcuser(
@@ -224,7 +228,7 @@ class RegisterView(FormView):
         )
         fcuser.save()
 
-        return super().form_valid(form)
+        return super().form_valid(form) # 기존의 form_valid()를 상속?
 
 
 class LoginView(FormView):
@@ -656,7 +660,7 @@ admin.site.register(Product, ProductAdmin)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <script>
   $(document).ready(function () {
-    $('#id_description').summernote({
+    $('#id_description').summernote({ # 위즈윅 에디터 등록, id의 description 필드
       height: 300
     });
   });
