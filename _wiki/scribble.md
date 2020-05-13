@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-05-12 09:36:19 +0900
+updated : 2020-05-13 09:35:12 +0900
 tags    : 
 toc     : true
 public  : true
@@ -89,7 +89,33 @@ latex   : false
     - 외부 이벤트나 잘못된 상태(Exceptions)에 의해 절차의 제어가 강제된다(Handler).
     - 외부 인터럽트는 외부 이벤트나 비동기에 의해 발생
 
-Evolution of Operation Systems
+#### OS Basic
+
+##### Process
+
+- 실행 중 프로그램 하나의 인스턴스
+- 프로세스의 3가지 컴포넌트
+    - 실행 가능한 프로그램
+    - The associated data
+    - 실행 컨텍스트(프로세스 상태)
+        - 프로세스 레지스터
+        - 프로세스 우선순위와 같은 정보를 포함
+        - OS가 프로세스를 제어할 수 있는 내부 데이터
+
+#### Memory Management
+
+##### Virtual Memory
+
+- 피지컬 메인 메모리와 관계없이 논리적 관점에서 주어지는 프로그램 어드레스
+- 여러 사용자의 잡이 동시에 메인 메모리를 사용해해 하는 요구사항을 충족 
+- 실제 디램(피지컬 메모리)보다 용량이 훨씬 크다. 
+- 예: CPU 내부 주소는 모두 가상 메모
+
+##### Paging
+
+- 고정 사이즈 블록들의 프로세스를 허용?
+- 프로그램은 가상 주소를 통해 워드를 참조
+- 가상 주소와 메인 메모리의 실제 주소 사이의 동적 매핑을 제공
 
 
 
@@ -99,7 +125,6 @@ Mips - 실리콘그래픽스
 
 람다 - 미니멈 피처 사이즈
 
-
 ## 컴퓨터구조
 
 ### 1
@@ -107,7 +132,7 @@ Mips - 실리콘그래픽스
 - [인터리빙](http://www.ktword.co.kr/abbr_view.php?m_temp1=1061) - 페이딩 등 연집 에러(Burst Error)가 발생하기 쉬운 무선채널 환경 등에서 집중적인 비트 에러를 시간 또는 주파수 상에서 분산시키는 기술
     - 비트 오류 발생을 시간 또는 주파수 상에서 랜덤하게 분산시키는 기술
 
-- [디미니싱 리턴 Diminishing Returns](https://en.wikipedia.org/wiki/Diminishing_returns) - 수확 체
+- [디미니싱 리턴 Diminishing Returns](https://en.wikipedia.org/wiki/Diminishing_returns) - 수확 체감의 법칙
 
 - 프로그램 - 순서를 가진 기계어 명령의 시퀀스. 이를 순서대로 Fetch해서 디코딩하고 명령어가 시키는 작업을 한다. 그러면서 머신 스테이트를 업데이트하는 것.
 
