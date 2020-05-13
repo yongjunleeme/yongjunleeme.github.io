@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 12:56:15 +0900
-updated : 2020-05-12 15:00:35 +0900
+updated : 2020-05-12 15:36:09 +0900
 tags    : 
 toc     : true
 public  : true
@@ -261,6 +261,7 @@ for chr, group in gen9:
 - 코루틴 : 루틴 실행 중 멈추면 특정 위치로 갔다가 다시 원래 위치로 돌아와 프로세스 수행 -> 동시성 프로그래밍 가능
     - 코루틴 스케쥴링은 오버헤드가 적다.
 - 쓰레드 : 싱글쓰레드, 멀티쓰레드는 복잡하다. 공유되는 자원이 교착 상태를 일으킬 가능성이 있어서. 컨텍스트 스위칭 비용 발생, 자원 소비 가능성 증가
+- [코딩도장 코루틴](https://dojang.io/mod/page/view.php?id=2418)
 
 ### 코루틴 예제1
 
@@ -286,6 +287,7 @@ print('EX1-1 -', c1, type(c1))
 
 c2 = coroutine1() # 제너레이터를 실행한 다음 값을 보내야 한다.
 # c2.send(100) # 예외 발생
+```
 
 ### 코루틴 예제2
 
@@ -299,7 +301,7 @@ def coroutine2(x):
     print('>>> coroutine started : {}'.format(x))
     y = yield x # x가 메인루틴에 전달할 값, y는 메인루틴이 코루틴에게 send로 보내야 하는 값
     print('>>> coroutine received : {}'.format(y))
-    z = yield x + y # 왼쪽은 전달해줘야 하는 값, 오른쪽은 전송받는 값
+    z = yield x + y 
     print('>>> coroutine received : {}'.format(z))
 
 c3 = coroutine2(10)
