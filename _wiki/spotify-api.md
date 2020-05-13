@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 20:19:47 +0900
-updated : 2020-05-12 18:22:15 +0900
+updated : 2020-05-12 18:45:23 +0900
 tags    : 
 toc     : true
 public  : true
@@ -35,7 +35,7 @@ def main():
     headers = get_headers(client_id, client_secret)
 
     ## Spotify Search API
-    params = {
+    params = {  # 변수 용도는 api 문서 참고
         "q": "BTS",
         "type": "artist",
         "limit": "5"
@@ -45,9 +45,9 @@ def main():
     print(r.status_code)
     print(r.text)
     print(r.headers)
-    sys.exit(0)
+    sys.exit(0) # 에러 없이 테스트하는 방법
 
-def get_headers(client_id, client_secret):
+def get_headers(client_id, client_secret): # 토큰 만료 대비 토큰 생성 함수
     endpoint = "https://accounts.spotify.com/api/token"
     encoded = base64.b64encode("{}:{}".format(client_id, client_secret).encode('utf-8')).decode('ascii')
 
@@ -61,7 +61,7 @@ def get_headers(client_id, client_secret):
 
     r = requests.post(endpoint, data=payload, headers=headers)
 
-    access_token = json.loads(r.text)['access_token']
+    access_token = json.loads(r.text)['access_token'] # json 변환 전에는 str
 
     headers = {
         "Authorization": "Bearer {}".format(access_token)
