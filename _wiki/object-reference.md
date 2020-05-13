@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-04 10:53:00 +0900
-updated : 2020-05-08 19:55:56 +0900
+updated : 2020-05-08 20:13:46 +0900
 tags    : 
 toc     : true
 public  : true
@@ -287,7 +287,7 @@ print('EX3-4 -', tuple1.__eq__(tuple2))
 ```python
 tl1 = [10, [100, 105], (5, 10, 15)]
 tl2 = tl1
-tl3 = list(tl1)
+tl3 = list(tl1) # 자료형과 같이 선언하면 원본이 변해도 복사본은 변하지 않음
 
 print('EX4-1 -', tl1 == tl2)
 print('EX4-2 -', tl1 is tl2)
