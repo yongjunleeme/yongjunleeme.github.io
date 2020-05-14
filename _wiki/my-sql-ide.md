@@ -3,7 +3,7 @@ layout  : wiki
 title   : my-sql-ide 
 summary : 
 date    : 2020-02-13 19:34:52 +0900
-updated : 2020-05-13 21:52:00 +0900
+updated : 2020-05-13 22:37:44 +0900
 tags    : 
 toc     : true
 public  : true
@@ -169,6 +169,13 @@ $ python manage.py migrate
 
 ```shell
 $ mysql --help
+```
+
+### mysql db 장고 삽입
+
+```shell
+"my_settings.py 만들고 데이터베이스 생성 후에
+$ mysql -u root -p hanteo < hanteo.sql
 ```
 
 ### migration, db clen
