@@ -3,7 +3,7 @@ layout  : wiki
 title   : my-sql-ide 
 summary : 
 date    : 2020-02-13 19:34:52 +0900
-updated : 2020-05-13 22:37:44 +0900
+updated : 2020-05-14 20:20:10 +0900
 tags    : 
 toc     : true
 public  : true
@@ -15,19 +15,19 @@ latex   : false
 
 ## 설치 방법 in mac
 
-```shell
+```python
 $ brew install mysql
 ```
 
 * mysql 시작
 
-```shell
+```python
 $ mysql server start
 ```
 
 * 기본 설정
 
-```shell
+```python
 $ mysql_secure_installation
 ```
 
@@ -95,40 +95,10 @@ previlege 테이블을 다시 로드할 것인지 묻습니다.
 
 추가적으로 mysql server가 재부팅과 상관없이 켜져있을 수 있도록 brew services를 이용하여 서버를 켜두겠습니다.
 
-```shell
+- 서버 on
+
+```python
 $ brew services start mysql`
-```
-
-## 기본 명령어
-
-```mysql
-show database;
-show tables;
-
-"sql 시작
-mysql -u root -p # 패스워드 없이하려면 mysql -u root
-
-"데이터베이스 생성
-"이모티콘 깨지지 않도록 보완 - utfmb4"
-create database test character set utf8mb4 collate utf8mb4_general_ci;
-
-"sql 사용
-use test;
-
-"sql 보기
-show tables;
-```
-
-```mysql
-"데이터 삭제
-DROP DATABASE <데이터베이스 이름>
-
-"장고에 migrations폴더 내 파일과 pycache 폴더 삭제
-"__init__.py 파일은 남겨둔다
-
-
-"모든 데이터 출력"
-mysql> select * from <모델명> \G; 
 ```
 
 ## 장고 세팅
@@ -159,28 +129,24 @@ DATABASES = {
 }
 ```
 
-```shell
-$ python manage.py migrate
-```
-
 ## 유용한 명령어
 
 ### --help
 
-```shell
+```python
 $ mysql --help
 ```
 
 ### mysql db 장고 삽입
 
-```shell
+```python
 "my_settings.py 만들고 데이터베이스 생성 후에
 $ mysql -u root -p hanteo < hanteo.sql
 ```
 
-### migration, db clen
+### migration, db clean
 
-```shell
+```python
 find . -path "*/migrations/*.py"
 find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 
@@ -189,13 +155,13 @@ python manage.py migrate
 
 ```
 
-```SQL
+```python
 drop database wetyle_share;
 create database wetyle_share character set utf8mb4 collate utf8mb4_general_ci;
 ```
 
 ### 비번 없이 로그인
 
-```SQL
+```python
 $ sudo mysql -uroot
 ```
