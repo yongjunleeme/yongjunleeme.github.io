@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-13 13:43:14 +0900
+updated : 2020-05-14 12:37:41 +0900
 tags    : 
 toc     : true
 public  : true
@@ -20,6 +20,53 @@ latex   : false
     - 가능한 알고리즘이 보인다면 구현 세부 항목을 나눠서 적는다
     - 데이터구조, 변수 정리
     - 각 문장을 코드로 적는다
+
+## 기본정렬-삽입정렬
+
+- 2번째 인덱스(1)부터 시작
+- 해당 인덱스 값과 그 앞 인덱스 값부터 앞쪽으로 비교해서 값이 작으면 값을 바꾼다
+- [그림으로 보기1](https://visualgo.net/en/sorting?slide=1)
+- [그림으로 보기2](https://commons.wikimedia.org/wiki/File:Insertion-sort-example.gif)
+
+### 간단한 경우부터 복잡한 경우 순서대로 생각
+
+- 예: data_list = [9, 3, 2, 5]
+    - 처음 한번 실행하면, key값은 9, 인덱스(0) - 1 은 0보다 작으므로 끝: [9, 3, 2, 5]
+    - 두 번째 실행하면, key값은 3, 9보다 3이 작으므로 자리 바꾸고, 끝: [3, 9, 2, 5]
+    - 세 번째 실행하면, key값은 2, 9보다 2가 작으므로 자리 바꾸고, 다시 3보다 2가 작으므로 끝: [2, 3, 9, 5]
+    - 네 번째 실행하면, key값은 5, 9보다 5이 작으므로 자리 바꾸고, 3보다는 5가 크므로 끝: [2, 3, 5, 9]
+
+### 세부 항목 나눠서 적기
+
+1. for stand in range(len(data_list)) 로 반복
+2. key = data_list[stand]
+3. for num in range(stand, 0, -1) 반복
+    - 내부 반복문 안에서 data_list[stand] < data_list[num - 1] 이면,
+        - data_list[num - 1], data_list[num] = data_list[num], data_list[num - 1]
+
+### 코드 작성
+
+```python
+def insertion_sort(data):
+    for index in range(len(data) - 1):
+        for index2 in range(index + 1, 0, -1):
+            if data[index2] < data[index2 - 1]:
+                data[index2], data[index2 - 1] = data[index2 - 1], data[index2]
+            else:
+                break
+    return data
+    
+import random
+
+data_list = random.sample(range(100), 50)
+print (insertion_sort(data_list))
+```
+
+### 시간복잡도 분석
+
+- 반복문이 두 개 O( 𝑛2 )
+- 최악의 경우,  𝑛∗(𝑛−1) / 2 
+- 완전 정렬이 되어 있는 상태라면 최선은 O(n)
 
 ## 기본정렬-버블정렬 (앞뒤비교)
 
@@ -97,6 +144,8 @@ print(bubblesort(data_list))
 - 맨 앞의 위치한 값을 뺀 나미저 데이터를 동일한 방법으로 반복
 - [그림으로 보기1](https://visualgo.net/en/sorting?slide=1)
 - [그림으로 보기2](https://en.wikipedia.org/wiki/Selection_sort)
+- [이해가 안 가면 볼 코드](http://pythontutor.com/live.html#mode=edit)
+
 
 ### 간단한 경우부터 복잡한 경우 순서대로 생각
 
@@ -148,7 +197,7 @@ selection_sort(data_list)
 
 ```python
 반복문이 두 개 O( 𝑛2 )
-    실제로 상세하게 계산하면,  𝑛∗(𝑛−1)2
+    실제로 상세하게 계산하면,  𝑛∗(𝑛−1) / 2
 ```
 
 ## 삽입 정렬
