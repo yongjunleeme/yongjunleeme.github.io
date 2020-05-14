@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-13 22:36:44 +0900
-updated : 2020-05-08 22:13:29 +0900
+updated : 2020-05-14 21:18:43 +0900
 tags    : 
 toc     : true
 public  : true
@@ -135,6 +135,103 @@ alter table add column dob date;
 drop table mytable;
 ```
 
+### create
+
+```python
+mysql> CREATE TABLE artists(id VARCHAR(255), name VARCHAR(255), followers INTEGER, popularity INTEGER, url VARCHAR(255), image_url VARCHAR(255), PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
+
+" 이모티콘포함 -> CHARSET='utf8mb4' COLLATE 'utf8mb4_unicode_ci'
+
+mysql> CREATE TABLE artist_genres (artist_id VARCHAR(255), genre VARCHAR(255)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
+
+mysql> show create table artists;
+```
+
+### insert
+
+```python
+mysql> INSERT INTO artist_genres (artist_id, genre) VALUES ('1234', 'pop');
+
+mysql> INSERT INTO artist_genres (artist_id, genre) VALUES ('1234', 'pop');
+```
+
+### delete
+
+```python
+mysql> DELETE FROM artist_genres;
+
+mysql> DROP TABLE artist_genres;
+```
+
+### update
+
+```python
+mysql> CREATE TABLE artist_genres (artist_id VARCHAR(255), genre VARCHAR(255), UNIQUE KEY(artist_id, genre)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
+```
+
+- 같은 id의 값들을 넣어도 1개러 업데이트된다
+- 그러나 모든 정보를 알고 있어야 해서 잘 안 쓴다?
+
+```python
+mysql>UPDATE artist_genres SET genre='pop' where artist_id = '1234';
+```
+
+### replace
+
+- 컬럼추가
+
+```python
+mysql>ALTER TABLE artist_genres ADD COLUMN country VARCHAR(255);
+```
+
+- 업데이트 시간 자동 업데이트
+    - 디폴트가 현재 시간이고 업데이트될 떄마다 현재 시간으로 업데이트 한다
+
+```python
+mysql>ALTER TABLE artist_genres ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE_TIMESTAMP;
+```
+
+- insert 
+  
+```python
+INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'pop', 'UK');
+```
+
+- replace - 기존 데이터에 없으면 생성, 있으면 지운 다음 생성
+    - 단점
+        - 1지우고 2다시 생성 2스텝
+        - id가 변할 수 있다
+
+```python
+mysql>REPLACE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'pop', 'UK');
+```
+
+### insert ignore
+
+- 기존 데이터에 있으면 무시
+
+```python
+mysql>INSERT IGNORE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'UK');
+
+mysql>INSERT IGNORE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'FR');
+```
+
+### duplicate key update
+
+- 지우지 않고 업데이트
+- 거의 이것만 쓴다.
+
+```python
+mysql>INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'FR') ON DUPLICATE KEY UPDATE artist_id='1234', genre='rock', country='FR';
+```
+
+### id autoincrement
+
+```python
+mysql>id primary_key auto_increment
+```
+
+
 ### sql function
 
 ```python
@@ -167,7 +264,7 @@ from
 ```
 
 
-
+## 예제
 
 ```python
 "payment 테이블에서 단일 거래의 amount 액수가 가장 많은 고객들의 customer_id 추출, 단 customer_id 값은 유일해야 한다"
