@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-13 22:13:39 +0900
+updated : 2020-05-14 22:12:13 +0900
 tags    : 
 toc     : true
 public  : true
@@ -218,4 +218,225 @@ if __name__=='__main__':
     main()
 ```
 
+## database 
+
+### create
+
+```python
+mysql> CREATE TABLE artists(id VARCHAR(255), name VARCHAR(255), followers INTEGER, popularity INTEGER, url VARCHAR(255), image_url VARCHAR(255), PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
+
+" 이모티콘포함 -> CHARSET='utf8mb4' COLLATE 'utf8mb4_unicode_ci'
+
+mysql> CREATE TABLE artist_genres (artist_id VARCHAR(255), genre VARCHAR(255)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
+
+mysql> show create table artists;
+```
+
+### insert
+
+```python
+mysql> INSERT INTO artist_genres (artist_id, genre) VALUES ('1234', 'pop');
+
+mysql> INSERT INTO artist_genres (artist_id, genre) VALUES ('1234', 'pop');
+```
+
+### delete
+
+```python
+mysql> DELETE FROM artist_genres;
+
+mysql> DROP TABLE artist_genres;
+```
+
+```python
+mysql> alter table artist_genres drop column country;
+```
+
+### update
+
+```python
+mysql> CREATE TABLE artist_genres (artist_id VARCHAR(255), genre VARCHAR(255), UNIQUE KEY(artist_id, genre)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
+```
+
+- 같은 id의 값들을 넣어도 1개러 업데이트된다
+- 그러나 모든 정보를 알고 있어야 해서 잘 안 쓴다?
+
+```python
+mysql>UPDATE artist_genres SET genre='pop' where artist_id = '1234';
+```
+
+### replace
+
+- 컬럼추가
+
+```python
+mysql>ALTER TABLE artist_genres ADD COLUMN country VARCHAR(255);
+```
+
+- 업데이트 시간 자동 업데이트
+    - 디폴트가 현재 시간이고 업데이트될 떄마다 현재 시간으로 업데이트 한다
+
+```python
+mysql>ALTER TABLE artist_genres ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE_TIMESTAMP;
+```
+
+- insert 
+  
+```python
+INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'pop', 'UK');
+```
+
+- replace - 기존 데이터에 없으면 생성, 있으면 지운 다음 생성
+    - 단점
+        - 1지우고 2다시 생성 2스텝
+        - id가 변할 수 있다
+
+```python
+mysql>REPLACE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'pop', 'UK');
+```
+
+### insert ignore
+
+- 기존 데이터에 있으면 무시
+
+```python
+mysql>INSERT IGNORE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'UK');
+
+mysql>INSERT IGNORE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'FR');
+```
+
+### duplicate key update
+
+- replace와 비슷하지만 지우지 않고 업데이트
+- 실제 코딩 시 거의 이것만 쓴다
+
+```python
+mysql>INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'FR') ON DUPLICATE KEY UPDATE artist_id='1234', genre='rock', country='FR';
+```
+
+### id autoincrement
+
+```python
+mysql>id primary_key auto_increment
+```
+
+## {}.format
+
+```python
+...
+def main():
+
+    try:
+        conn = pymysql.connect(host, user=username, passwd=password, db=database, port=port, use_unicode=True, charset='utf8')
+        cursor = conn.cursor()
+    except:
+        logging.error("could not connect to rds")
+        sys.exit(1)
+
+    cursor.execute("SHOW TABLES")
+    print(cursor.fetchall())
+
+    print("success")
+
+    query = "INSERT INTO artist_genres (artist_id, genre, updated_at) VALUES ('{1}', '{0}', NOW())".format('1234', 'hip-hop')
+    
+    # query = "INSERT INTO artist_genres (artist_id, genre) VALUES ('%s', '%s') % (artist_id, genre)"
+    
+    cursor.execute(query)
+    conn.commit()
+    
+    sys.exit(0)
+
+    headers = get_headers(client_id, client_secret)
+
+    ## Spotify Search API
+    params = {
+        "q": "BTS",
+        "type": "artist",
+        "limit": "5"
+    }
+...
+```
+
+
+## Dictionary, json
+
+```python
+raw = json.loads(r.text)
+print(raw['artist'].keys()) # 키 출력해서 다음 뎁스로 넘어간다
+```
+
+## duplicate record 핸들링
+
+- 에러나면 sys.exit(0) 놓고 위에 프린트 찍어가며 디버깅
+
+```python
+...
+def main():
+    try:
+        conn = pymysql.connect(host, user=username, passwd=password, db=database, port=port, use_unicode=True, charset='utf8')
+        cursor = conn.cursor()
+    except:
+        logging.error("could not connect to rds")
+        sys.exit(1)
+
+    headers = get_headers(client_id, client_secret)
+
+    ## Spotify Search API
+    params = {
+        "q": "BTS",
+        "type": "artist",
+        "limit": "1"
+    }
+
+    r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
+
+    raw = json.loads(r.text)
+    print(type(raw))
+    print(raw['artists']['items'][0].keys())
+
+    artist = {}
+
+    artist_raw = raw['artists']['items'][0]
+    if artist_raw['name'] == params['q']:
+
+        artist.update(
+            {
+                'id': artist_raw['id'],
+                'name': artist_raw['name'],
+                'followers': artist_raw['followers']['total'],
+                'popularity': artist_raw['popularity'],
+                'url': artist_raw['external_urls']['spotify'],
+                'image_url': artist_raw['images'][0]['url']
+            }
+        )
+
+    query = """
+        INSERT INTO artists (id, name, followers, popularity, url, image_url)
+        VALUES ('{}', '{}', {}, {}, '{}', '{}')
+        ON DUPLICATE KEY UPDATE id='{}', name='{}', followers={}, popularity={}, url='{}', image_url='{}'
+    """.format(
+            artist['id'],
+            artist['name'],
+            artist['followers'],
+            artist['popularity'],
+            artist['url'],
+            artist['image_url'],
+            artist['id'],
+            artist['name'],
+            artist['followers'],
+            artist['popularity'],
+            artist['url'],
+            artist['image_url']
+    )
+    cursor.execute(query)
+    conn.commit()
+
+    sys.exit(0)
+
+
+    try:
+        r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
+...
+```
 
