@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-14 22:51:27 +0900
+updated : 2020-05-15 20:44:52 +0900
 tags    : 
 toc     : true
 public  : true
@@ -120,7 +120,7 @@ def main():
         cursor = conn.cursor()
     except:
         logging.error("could not connect to rds")
-        sys.exit(1) # 1은 실패 0은 성공
+        sys.exit(1) 
 
     cursor.execute("SHOW TABLES")
     print(cursor.fetchall())
@@ -324,7 +324,9 @@ mysql>id primary_key auto_increment
 mysql> alter table artist_genres drop column country;
 ```
 
-## {}.format
+## pymysql 데이터 핸들링
+
+### {}.format
 
 ```python
 ...
@@ -362,15 +364,14 @@ def main():
 ...
 ```
 
-
-## Dictionary, json
+### Dictionary, json
 
 ```python
 raw = json.loads(r.text)
 print(raw['artist'].keys()) # 키 출력해서 다음 뎁스로 넘어간다
 ```
 
-## duplicate record 핸들링
+### duplicate record 핸들링
 
 - 에러나면 sys.exit(0) 놓고 위에 프린트 찍어가며 디버깅
 
@@ -444,3 +445,108 @@ def main():
 ...
 ```
 
+### 함수로 코드 최적화 
+
+```python
+def main():
+    ...
+    if artist_raw['name'] == params['q']:
+
+        artist.update(
+            {
+                'id': artist_raw['id'],
+                'name': artist_raw['name'],
+                'followers': artist_raw['followers']['total'],
+                'popularity': artist_raw['popularity'],
+                'url': artist_raw['external_urls']['spotify'],
+                'image_url': artist_raw['images'][0]['url']
+            }
+        )
+        
+    # query 하드코딩 삭제
+
+    insert_row(cursor, artist, 'artists')
+    conn.commit()
+
+    sys.exit(0)
+    ...
+...
+def insert_row(cursor, data, table):
+
+    placeholders = ', '.join(['%s'] * len(data)) # data -> artist -> %s, %s, %s ...
+    columns = ', '.join(data.keys())
+    key_placeholders = ', '.join(['{0}=%s'.format(k) for k in data.keys()]) # id=%s, name=%s...
+    sql = "INSERT INTO %s ( %s ) VALUES ( %s ) ON DUPLICATE KEY UPDATE %s" % (table, columns, placeholders, key_placeholders)
+    # print(sql)
+    # sys.exit(0)
+    cursor.execute(sql, list(data.values())*2) # insert into values, duplicate key update values 2개 넣어야 해서 *2
+
+
+if __name__=='__main__':
+    main()
+```
+
+### csv 데이터 삽입
+
+```python
+...
+def main():
+
+    try:
+        conn = pymysql.connect(host, user=username, passwd=password, db=database, port=port, use_unicode=True, charset='utf8')
+        cursor = conn.cursor()
+    except:
+        logging.error("could not connect to rds")
+        sys.exit(1)
+
+    headers = get_headers(client_id, client_secret)
+
+    ## Spotify Search API
+
+    artists = []
+    with open('artist_list.csv') as f:
+        raw = csv.reader(f)
+        for row in raw:
+            artists.append(row[0])
+
+    for a in artists:
+        params = {
+            "q": a,
+            "type": "artist",
+            "limit": "1"
+        }
+
+        r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
+
+        raw = json.loads(r.text)
+
+        artist = {}
+        try:
+            artist_raw = raw['artists']['items'][0]
+            if artist_raw['name'] == params['q']: # 아티스트가 데이터에 있으면
+
+                artist.update(
+                    {
+                        'id': artist_raw['id'],
+                        'name': artist_raw['name'],
+                        'followers': artist_raw['followers']['total'],
+                        'popularity': artist_raw['popularity'],
+                        'url': artist_raw['external_urls']['spotify'],
+                        'image_url': artist_raw['images'][0]['url']
+                    }
+                )
+                insert_row(cursor, artist, 'artists')
+        except:
+            logging.error('something wrong') # 에러 로그
+            continue # 에러 뜨더라도 프로세스 지속
+
+    conn.commit()
+    sys.exit(0)
+...
+
+```
+- mysql에서 확인
+
+```python
+mysql> SELECT COUNT(*) FROM artists;
+```
