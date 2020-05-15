@@ -3,7 +3,7 @@ layout  : wiki
 title   : concurrency 
 summary : 
 date    : 2020-05-11 12:56:15 +0900
-updated : 2020-05-14 16:33:47 +0900
+updated : 2020-05-15 13:54:58 +0900
 tags    : 
 toc     : true
 public  : true
@@ -665,6 +665,133 @@ def main(separate_many):
 # 실행
 if __name__ == '__main__':
     main(separate_many)
+```
+
+## Asyncio
+
+### 순차실행
+
+- 동기는 기다리고 비동기는 안 기다리는?
+
+```python
+
+# BlockIO
+# 순차 실행
+
+import timeit
+from urllib.request import urlopen
+
+urls = ['http://daum.net', 'https://google.com', 'https://apple.com', 'https://tistory.com', 'https://github.com/', 'https://gmarket.co.kr/']
+start = timeit.default_timer()
+
+# 순차 실행부
+for url in urls:
+    print('Start', url)
+    urlopen(url)
+    # urlopen으로 인해 다른 작업들도 모두 일시정지
+    # 이를 BlockIO라 하고 주로 파일쓰기, 네트워크 I/O 등에서 일어난다
+    print('Done', url)
+
+# 완료시간 - 시작시간
+duration = timeit.default_timer() - start
+
+# 총 실행 시간
+print('Total Time : ', duration) # 요청, 응답에 걸린 시간
+```
+
+### Thread
+
+```python
+# BlockIO -> Thread 사용
+# 쓰레드 개수 및 GIL 문제 고려, 공유 메모리(뮤텍스) 문제 해결
+# 비순차 실행
+
+import timeit
+from urllib.request import urlopen
+from concurrent.futures import ThreadPoolExecutor
+import threading
+
+# 시작 시간
+start = timeit.default_timer()
+urls = ['http://daum.net', 'https://google.com', 'https://apple.com', 'https://tistory.com', 'https://github.com/', 'https://gmarket.co.kr/']
+
+
+def fetch(url):
+    print('Thread Name :', threading.current_thread().getName(), 'Start', url) # 현재 스레드 이름 출력
+    urlopen(url)
+    print('Thread Name :', threading.current_thread().getName(), 'Done', url)
+
+def main():
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        for url in urls:
+            executor.submit(fetch, url)
+
+if __name__ == '__main__': # 쓰레드 쓸 때는 진입점을 만들어줘야 에러가 안 난다
+    # 함수 실행
+    main()
+    # 완료시간 - 시작시간
+    duration = timeit.default_timer() - start
+    # 총 실행 시간
+    print('Total Time : ', duration)
+
+```
+
+### Asyncio
+
+- 단일 스레드에서 너멈추면 내가 일하고, 내가 멈추면 네가 일한다
+
+```python
+# 비동기 I/O Coroutine - Asyncio 작업
+# Generator -> 반복적인 객체 Return 사용 -> 단일 스레드로 여러 스레드 사용하는 것 같은 효과
+# 즉, 실행 Stop -> 다른 작업으로 위임 -> Stop 지점 부터 재실행 원리
+# non-blocking 비동기 처리에 적합
+
+# aiohttp 사용 가능(Asyncio 지원)
+import asyncio
+import timeit
+from urllib.request import urlopen
+from concurrent.futures import ThreadPoolExecutor
+import threading
+
+# 시작 시간
+start = timeit.default_timer()
+urls = ['http://daum.net', 'https://google.com', 'https://apple.com', 'https://tistory.com', 'https://github.com/', 'https://gmarket.co.kr/']
+
+# urlopen은 BlockIO라 쓰레드로 변경
+# urlopen에 async를 붙인 aiphttp 라이브러리 쓰면 쓰레드 없이 해결 가능
+async def fetch(url, executor):
+    # 쓰레드 이름 주목!
+    print('Thread Name :', threading.current_thread().getName(), 'Start', url)
+    # 실행
+    res = await loop.run_in_executor(executor, urlopen, url) # 일꾼 1명, 일꾼이 처리할 함수, url
+    print('Thread Name :', threading.current_thread().getName(), 'Done', url)
+    # 반환
+    return res.read()[0:5]
+
+async def main():
+    # 쓰레드 풀 생성
+    executor = ThreadPoolExecutor(max_workers=10)
+
+    # asyncio.ensure_future :
+    futures = [
+        asyncio.ensure_future(fetch(url, executor)) for url in urls # task 정의
+    ]
+    
+    # 결과 취합
+    rst = await asyncio.gather(*futures) # await과 yield from 같다
+
+    print()
+    print('Result : ', rst)
+
+if __name__ == '__main__':
+    # 루프 생성
+    loop = asyncio.get_event_loop() # 지금 일하는 컴이 yield를 만나면 다른 컴에 넘겨주는 루프
+    # 루프 대기
+    loop.run_until_complete(main())
+    # 완료시간 - 시작시간
+    duration = timeit.default_timer() - start
+    # 총 실행 시간
+    print('Total Time : ', duration)
 ```
 
 
