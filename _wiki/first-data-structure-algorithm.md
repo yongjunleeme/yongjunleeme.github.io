@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-12 13:02:30 +0900
+updated : 2020-05-15 11:02:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -274,18 +274,11 @@ def solution(L, x, l, u):
 
 ### 설명
 
-데이터 원소들을 순서를 지어 늘어놓는다는 점에서 연결 리스트 (linked list) 는 선형 배열 (linear array) 과 비슷한 면이 있지만, 데이터 원소들을 늘어놓는 방식에서 이 두 가지는 큰 차이가 있습니다. 구체적으로는, 선형 배열이 번호가 붙여진 칸에 원소들을 채워넣는 방식이라고 한다면, 연결 리스트는 각 원소들을 줄줄이 엮어서 관리하는 방식입니다. 그렇다면, 선형 배열에 비해서 연결 리스트가 가지는 이점은 무엇일까요?
-
-연결 리스트에서는 원소들이 링크 (link) 라고 부르는 고리로 연결되어 있으므로, 가운데에서 끊어 하나를 삭제하거나, 아니면 가운데를 끊고 그 자리에 다른 원소를 (원소들을) 삽입하는 것이 선형 배열의 경우보다 쉽습니다. 여기에서 쉽다 라고 표현한 것은, 빠른 시간 내에 처리할 수 있다는 뜻입니다. 이러한 이점 때문에, 원소의 삽입/삭제가 빈번히 일어나는 응용에서는 연결 리스트가 많이 이용됩니다. 컴퓨터 시스템을 구성하는 중요한 요소인 운영체제 (operating system) 의 내부에서도 이러한 연결 리스트가 여러 곳에서 이용되고 있습니다.
-
-그렇다면, 연결 리스트가 선형 배열에 비해서 가지는 단점은 없을까요? 물론 있습니다. 세상에 공짜는 없는 법이어서, 위에서 말한 바와 같이 원소의 삽입과 삭제가 용이하다는 장점은 거저 얻어지지 않습니다. 생각하기 쉬운 하나의 단점은, 선형 배열에 비해서 데이터 구조 표현에 소요되는 저장 공간 (메모리) 소요가 크다는 점입니다. 링크 또한 메모리에 저장되어 있어야 하므로, 연결 리스트를 표현하기 위해서는 동일한 데이터 원소들을 담기 위하여 사용하는 메모리 요구량이 더 큽니다. 그보다 더 우리의 관심을 끄는 단점은, k 번째의 원소 를 찾아가는 데에는 선형 배열의 경우보다 시간이 오래 걸린다는 점입니다. 선형 배열에서는 데이터 원소들이 번호가 붙여진 칸들에 들어 있으므로 그 번호를 이용하여 대번에 특정 번째의 원소를 찾아갈 수 있는 데 비하여, 연결 리스트에서는 단지 원소들이 고리로 연결된 모습을 하고 있으므로 특정 번째의 원소를 접근하려면 앞에서부터 하나씩 링크를 따라가면서 찾아가야 합니다.
-
-- 추상적 자료구조
-    - Data
-        - 예: 정수, 문자열, 레코드, ...
-    - A set of operations
-        - 삽입, 삭제, 순회, ...
-        - 정렬, 탐색, ...
+- 장점
+    - 삽입, 삭제, 합치기 유연
+- 단점
+    - 메모리 소모 크다
+    - k번째 찾아가는 데 배열보다 오래 걸린다
 
 - Linked List Node 구성
     - Data
@@ -304,61 +297,7 @@ def solution(L, x, l, u):
 
 ### 예제
 
-- 연결 리스트 순회
-
-```python
-class Node:
-    def __init__(self, item):
-        self.data = item
-        self.next = None
-        
-class LinkedList:
-    def __init__(self):
-        self.nodeCount = 0
-        self.head = None
-        self.tail = None
-        
-    def getAt(self, pos)
-        if pos < 1 or pos > self.nodeCount:
-            return None
-        i = 1
-        curr = self.head
-        while i < pos:
-            curr = curr.next
-            i += 1
-        return curr
-    
-    def traverse(self):
-        answer = []
-        curr = self.head
-        while = curr != None:
-            answer.append(curr.data)
-            curr = curr.next
-        return answer
-
-def solution(x):
-    return 0        
-```
-
-## 연결 리스트 응용
-
-### 설명
-
-여기에서는, 연결 리스트의 핵심 연산으로서 아래와 같은 것들이 등장합니다.
-
-- 원소의 삽입 (insertion)
-- 원소의 삭제 (deletion)
-- 두 리스트 합치기 (concatenation)
-
-이러한 연산이 쉽게 (빠르게) 이루어질 수 있다는 점이 연결 리스트가 선형 배열에 비하여 가지는 특장점입니다. 조금 다르게 표현하면, 이런 연산들이 빨라야 하는 응용처에 적용하기 위함이 연결 리스트의 존재 이유입니다.
-
-그런데, 나열된 데이터 원소들의 사이에 새로운 데이터 원소를 삽입하려면, 앞/뒤의 원소들을 연결하고 있는 링크를 끊어 내고, 그 자리에 새로운 원소를 집어넣기 위해서 링크들을 조정해 주어야 하는, 프로그래머로서는 아주 조금 귀찮은 일들이 수반됩니다. 이 강의에서는 그러한 작업들을 Python 코드로 작성하는 연습을 함으로써 자료 구조를 다루는 프로그래밍 기법의 기초를 익힙니다. 이 기법들은 이후에 조금씩 더 복잡해지는 자료 구조를 프로그램으로 구현하는 데 바탕이 될 것입니다. 늘 그렇듯, 프로그래밍에서 어려운 점은 특이한 경우들에 대해서도 고려해야 한다는 점인데요, 원소의 삽입에 있어서는 맨 앞 또는 맨 뒤에 새로운 원소를 삽입하는 경우가 조금 생각할 꺼리가 되는 일입니다.
-
-마찬가지로, 원소의 삭제에 있어서도 맨 앞 또는 맨 뒤의 원소를 삭제하는 경우가 조금 신경써서 처리할 일들이 생기는 경우들입니다.
-
-마지막으로, 두 리스트를 합치는 일은 생각보다 훨씬 쉽습니다. 눈치가 빠른 분들은 이것이 매우 간단하리라는 것을 (제 7 강을 공부하셨다면) 쉽게 알아차리셨을 것 같네요.
-
-연결 리스트를 다루는 프로그래밍 연습을 해보면서, 두 가지를 염두에 두시기를 바랍니다. 첫째, 이것이 무엇을 위함이냐? 즉, 연결 리스트라는 자료 구조를 착안함으로써 어떤 목적을 이루고자 했는지, 다시 말하면 연결 리스트가 가지는 장점이 어떤 곳에서 발휘되는지, 알고리즘의 복잡도 (제 6 강을 참고하세요) 측면에서 생각해보시기 바랍니다. 둘째, 링크를 조정하는 등의 코딩은 앞으로 나타나게 될 트리 (tree) 라든지, 이 강의 시리즈에서 다루지는 않지만 그래프 (graph) 등을 프로그래밍할 때를 대비한 연습이 된다는 점을 떠올리시고, 이런 종류의 코딩에 익숙해지려 노력해 보시기 바랍니다.
+#### 순회
 
 ```python
 class Node:
@@ -392,45 +331,20 @@ class LinkedList:  # 연결 리스트 요소의 맨 앞이 헤드, 맨 끝은 �
         return answer
 ```
 
+#### 삽입
+
+- 원소 삽입
+    - pos가 가리키는 위치에 (1 <= pos <= nodeCount + 1)
+    - newNode를 삽입하고 성공/실패에 따라 True/False 리턴
+    - 복잡도
+        - 맨 앞 삽입: O(1)
+        - 중간 삽입: O(n)
+        - 맨 끝 삽입 O(1) - Tail 덕분에
+- 두 리스트의 연결
+    - concat
 
 ```python
-class Node:
-    def __init__(self, item):
-        self.data = item
-        self.next = None
-
-class LinkedList:
-    def __init__(self):
-        self.nodeCount = 0
-        self.head = None
-        self.tail = None
-
-    def __repr__(self):
-        if self.nodeCount == 0:
-            return 'LinkedList: empty'
-
-        s = ''
-        curr = self.head
-        while curr is not None:
-            s += repr(curr.data)
-            if curr.next is not None:
-                s += ' -> '
-            curr = curr.next
-        return s
-
-
-    def getAt(self, pos):
-        if pos < 1 or pos > self.nodeCount:
-            return None
-
-        i = 1
-        curr = self.head
-        while i < pos:
-            curr = curr.next
-            i += 1
-
-        return curr
-
+...
     def insertAt(self, pos, newNode):
         if pos < 1 or pos > self.nodeCount + 1:
             return False
@@ -472,17 +386,9 @@ class LinkedList:
         if L.tail:
             self.tail = L.tail
         self.nodeCount += L.nodeCount
-
 ```
 
-- 원소 삽입
-    - pos가 가리키는 위치에 (1 <= pos <= nodeCount + 1)
-    - newNode를 삽입하고 성공/실패에 따라 True/False 리턴
-    - 복잡도
-        - 맨 앞 삽입: O(1)
-        - 중간 삽입: O(n)
-        - 맨 끝 삽입 O(1) - Tail 덕분에
-
+#### 삭제
 
 - 원소의 삭제
     - pos가 가리키는 위치의 (1 <= pos <= nodeCount)
@@ -493,62 +399,120 @@ class LinkedList:
         - 중간 삭제: O(n)
         - 맨 끝 삭제: O(n)
 
-- 두 리스트의 연결
-    - concat
+```python
+...
+    def popAt(self, pos):
+        if 1 > pos or pos > self.nodeCount:
+            raise IndexError
+        
+        curr = self.getAt(pos)
 
+        if pos == 1 and pos == self.nodeCount:
+            self.head = None
+            self.tail = None
+        elif pos == 1:
+            self.head = self.getAt(pos + 1)
+        else:
+            prev = self.getAt(pos - 1)
+            
+            if self.nodeCount != pos:
+                prev.next = self.getAt(pos + 1)
+            else:
+                prev.next = None
+                self.tail = prev
+        
+        self.nodeCount = self.nodeCount - 1
+        return curr.data
+...
+```
+
+#### insertAfter, insertAt
+
+- 삽입과 삭제 유연 장점 설려서
+    - 포지션을 수가 아니라 노드로, 주어진 노드 뒤에 삽입
+        - 맨 앞에 dummy node 추가
+            - `self.head = Node(None)`
 
 
 ```python
 class Node:
-    def __init__(self, data, next=None):
-        self.data = data
-        self.next = next
+	def __init__(self, item):
+		self.data = item
+		self.next = None
 
-class NodeMgmt:
-    def __init__(self, data):
-        self.head = Node(data)
-    
-    def add(self, data):
-        if self.head == '':
-            self.head = Node(data) # head가 없으니add할 data만 삽
-        else:
-            node = self.head
-            while node.next:
-                node = node.next  # Node.next == None까지 전진
-            node.next = Node(data) # 생성할 노드를 연결
-    
-    def desc(self):
-        node = self.head
-        while node:
-            print(node.data)
-            node = node.next
-    
-    # a, b, c 순서대로 링크드리스트 있다는 가정
-    # 1. a 데이터 삭제하려면 head를 b로 바뀌어야
-    # 2. c 데이터 삭제하려면 b 데이터 주소값 None으로
-    # 3. b 데이터 삭제하려면 a 주소값을 c데이터로 변경
-    def delete(self, data):
-        if self.head = '':
-            print("해당 값을 가진 노드가 없습니다.")
-            return
-        
-        if self.head.data == data: # data는 인자로 받은 삭제할 데이터
-            temp = self.head
-            self.head = self.head.next
-            def temp
-        else:
-            node = self.head
-            while node.next:
-                if node.next.data == data:
-                    temp = node.next
-                    node.next = node.next.next # Node.next.next는 None이니 node.next에 넣고 마무리
-                    del temp
-                    return
-                else:
-                    node = node.next
-                    
-    
-    
+
+class LinkedList:
+	def __init__(self):
+		self.nodeCount = 0
+		self.head = Node(None)
+		self.tail = None
+		self.head.next = self.tail
+
+	def __repr__(self):
+		if self.nodeCount == 0:
+			return 'LinkedList: empty'
+
+		s = ''
+		curr = self.head
+		while curr.next:
+			curr = curr.next
+			s += repr(curr.data)
+			if curr.next is not None:
+				s += ' -> '
+		return s
+
+
+	def getLength(self):
+		return self.nodeCount
+
+
+	def traverse(self):
+		result = []
+		curr = self.head
+		while curr.next:
+			curr = curr.next
+			result.append(curr.data)
+		return result
+
+
+	def getAt(self, pos):
+		if pos < 0 or pos > self.nodeCount:
+			return None
+
+		i = 0
+		curr = self.head
+		while i < pos:
+			curr = curr.next
+			i += 1
+
+		return curr
+
+
+	def insertAfter(self, prev, newNode):
+		newNode.next = prev.next
+		if prev.next is None:
+			self.tail = newNode
+		prev.next = newNode
+		self.nodeCount += 1
+		return True
+
+
+	def insertAt(self, pos, newNode):
+		if pos < 1 or pos > self.nodeCount + 1:
+			return False
+
+		if pos != 1 and pos == self.nodeCount + 1:
+			prev = self.tail
+		else:
+			prev = self.getAt(pos - 1)
+		return self.insertAfter(prev, newNode)
+
+
+	def concat(self, L):
+		self.tail.next = L.head.next
+		if L.tail:
+			self.tail = L.tail
+		self.nodeCount += L.nodeCount    
 ```
 
 ## Link 
