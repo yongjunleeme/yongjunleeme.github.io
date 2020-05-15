@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-14 22:12:13 +0900
+updated : 2020-05-14 22:51:27 +0900
 tags    : 
 toc     : true
 public  : true
@@ -225,7 +225,7 @@ if __name__=='__main__':
 ```python
 mysql> CREATE TABLE artists(id VARCHAR(255), name VARCHAR(255), followers INTEGER, popularity INTEGER, url VARCHAR(255), image_url VARCHAR(255), PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
 
-" 이모티콘포함 -> CHARSET='utf8mb4' COLLATE 'utf8mb4_unicode_ci'
+" 이모티콘포함 -> CHARSET='utf8mb4' COLLATE 'utf8mb4_unicode_ci'"
 
 mysql> CREATE TABLE artist_genres (artist_id VARCHAR(255), genre VARCHAR(255)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
 
@@ -248,39 +248,39 @@ mysql> DELETE FROM artist_genres;
 mysql> DROP TABLE artist_genres;
 ```
 
-```python
-mysql> alter table artist_genres drop column country;
-```
-
 ### update
+
+- unique key 추가
 
 ```python
 mysql> CREATE TABLE artist_genres (artist_id VARCHAR(255), genre VARCHAR(255), UNIQUE KEY(artist_id, genre)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
 ```
 
-- 같은 id의 값들을 넣어도 1개러 업데이트된다
+- 같은 id의 값들을 넣어도 1개로 업데이트된다
 - 그러나 모든 정보를 알고 있어야 해서 잘 안 쓴다?
 
 ```python
+mysql>UPDATE artist_genres SET genre='pop' where artist_id = '1234';
+
 mysql>UPDATE artist_genres SET genre='pop' where artist_id = '1234';
 ```
 
 ### replace
 
-- 컬럼추가
+- 컬럼 추가
 
 ```python
 mysql>ALTER TABLE artist_genres ADD COLUMN country VARCHAR(255);
 ```
 
-- 업데이트 시간 자동 업데이트
+- 업데이트 시간 컬럼 추가
     - 디폴트가 현재 시간이고 업데이트될 떄마다 현재 시간으로 업데이트 한다
 
 ```python
-mysql>ALTER TABLE artist_genres ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE_TIMESTAMP;
+mysql>ALTER TABLE artist_genres ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 ```
 
-- insert 
+- insert - 에러 
   
 ```python
 INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'pop', 'UK');
@@ -318,6 +318,10 @@ mysql>INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'roc
 
 ```python
 mysql>id primary_key auto_increment
+```
+
+```python
+mysql> alter table artist_genres drop column country;
 ```
 
 ## {}.format
