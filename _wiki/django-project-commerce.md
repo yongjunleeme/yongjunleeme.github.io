@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 15:54:23 +0900
-updated : 2020-05-13 18:58:15 +0900
+updated : 2020-05-15 16:04:01 +0900
 tags    : 
 toc     : true
 public  : true
@@ -105,9 +105,9 @@ from django.shortcuts import redirect
 from .models import Fcuser
 
 def login_required(function):
-    def wrap(request, *args, **kwargs):
+    def wrap(request, *args, **kwargs): #원래 데코레이터를 받는 dispatch 함수의 인자가 dispatch(request, *args, **kwargs)이므로 맞춰줘야 함
         user = request.session.get('user')
-        if user is None or not user:
+        if user is None or not user: # user가 None이거나 없거나
             return redirect('/login')
         return function(request, *args, **kwargs)
 
@@ -737,7 +737,7 @@ from django.db import transaction
 
 
 class RegisterForm(forms.Form):
-    def __init__(self, request, *args, **kwargs):
+    def __init__(self, request, *args, **kwargs): # request를 만들어주는 방법
         super().__init__(*args, **kwargs)
         self.request = request
 
@@ -778,7 +778,7 @@ from fcuser.models import Fcuser
 
 # Create your views here.
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch') # decorator 원래는 class 내 dispatch 함수에 써야 하지만 장고에서 decorator 직접 쓰도록 지원
 class OrderCreate(FormView):
     form_class = RegisterForm
     success_url = '/product/'
@@ -812,7 +812,7 @@ class OrderList(ListView):
     template_name = 'order.html'
     context_object_name = 'order_list'
 
-    def get_queryset(self, **kwargs):
+    def get_queryset(self, **kwargs): # 쿼리셋 오버라이딩해서 쓰는 방법
         queryset = Order.objects.filter(fcuser__email=self.request.session.get('user'))
         return queryset
 ```
