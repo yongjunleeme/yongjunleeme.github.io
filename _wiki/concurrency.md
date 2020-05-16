@@ -3,7 +3,7 @@ layout  : wiki
 title   : concurrency 
 summary : 
 date    : 2020-05-11 12:56:15 +0900
-updated : 2020-05-15 13:54:58 +0900
+updated : 2020-05-16 13:41:26 +0900
 tags    : 
 toc     : true
 public  : true
@@ -125,7 +125,7 @@ print('EX3-8 -', next(wt))
 # print('EX3-9 -', next(wt))
 ```
 
-### 예제1
+### 예제 1
 
 ```python
 def generator_ex1():
@@ -146,7 +146,7 @@ for v in generator_ex1():
     # print('EX4-3 -', v)
 ```
 
-### 예제 2
+### 예제 2(리스트, 제너레이터 차이)
 
 ```python
 temp2 = [x * 3 for x in generator_ex1()]
@@ -158,14 +158,11 @@ print('EX5-2 -',temp3)
 for i in temp2:
     print('EX5-3 -', i)
 
-print()
-print()
-
 for i in temp3:
     print('EX5-4 -', i)
 ```
 
-### 예제 3(자주 사용하는 함수)
+### 예제 3(itertool)
 
 ```python
 import itertools
@@ -758,7 +755,7 @@ start = timeit.default_timer()
 urls = ['http://daum.net', 'https://google.com', 'https://apple.com', 'https://tistory.com', 'https://github.com/', 'https://gmarket.co.kr/']
 
 # urlopen은 BlockIO라 쓰레드로 변경
-# urlopen에 async를 붙인 aiphttp 라이브러리 쓰면 쓰레드 없이 해결 가능
+# urlopen에 async를 붙인 aiohttp 라이브러리 쓰면 쓰레드 없이 해결 가능
 async def fetch(url, executor):
     # 쓰레드 이름 주목!
     print('Thread Name :', threading.current_thread().getName(), 'Start', url)
