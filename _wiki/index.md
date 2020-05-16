@@ -52,6 +52,7 @@ regenerate: true
 * [[django-cache]]
 * [[django-basic]]
 * [[django-project-commerce]]
+* [[django-rest-framwork-example]]
 
 #### two scoops of django
 
@@ -88,6 +89,7 @@ regenerate: true
 * [[interview-question]]
 * [[spotify-api]]
 * [[spotify-rds]]
+* [[dynamo-db]]
 
 ### copy & paste
 
