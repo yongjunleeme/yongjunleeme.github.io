@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-15 20:44:52 +0900
+updated : 2020-05-16 16:49:18 +0900
 tags    : 
 toc     : true
 public  : true
@@ -549,4 +549,83 @@ def main():
 
 ```python
 mysql> SELECT COUNT(*) FROM artists;
+```
+
+### Batch 
+
+```python
+...
+main():
+    try:
+        conn = pymysql.connect(host, user=username, passwd=password, db=database, port=port, use_unicode=True, charset='utf8')
+        cursor = conn.cursor()
+    except:
+        logging.error("could not connect to rds")
+        sys.exit(1)
+
+    headers = get_headers(client_id, client_secret)
+    
+    cursor.execute("SELECT id FROM artists")
+    artists = []
+
+    for (id, ) in cursor.fetchall():
+        artists.append(id)
+
+    artist_batch = [artists[i: i+50] for i in range(0, len(artists), 50)]
+
+    for i in artist_batch:
+
+        ids = ','.join(i)
+        URL = "https://api.spotify.com/v1/artists/?ids={}".format(ids)
+
+        r = requests.get(URL, headers=headers)
+        raw = json.loads(r.text)
+        print(raw)
+        print(len(raw['artists']))
+
+        sys.exit(0)
+...
+```
+
+### batch2
+
+```python
+def main():
+    cursor.execute("SELECT id FROM artists")
+    artists = []
+
+    for (id, ) in cursor.fetchall():
+        artists.append(id)
+
+    artist_batch = [artists[i: i+50] for i in range(0, len(artists), 50)]
+
+    artist_genres = []
+    for i in artist_batch:
+        ids = ','.join(i)
+        URL = "https://api.spotify.com/v1/artists/?ids={}".format(ids)
+
+        r = requests.get(URL, headers=headers)
+        raw = json.loads(r.text)
+
+        for artist in raw['artists']:
+            for genre in artist['genres']:
+
+                artist_genres.append(
+                    {
+                        'artist_id': artist['id'],
+                        'genre': genre
+                    }
+                )
+
+    for data in artist_genres:
+        insert_row(cursor, data, 'artist_genres')
+
+    conn.commit()
+    cursor.close()
+
+    sys.exit(0)
+```
+
+```python
+mysql> SELECT genre, COUNT(*) FROM artists t1 JOIN artist_genres t2 ON t2.artist_id = t1.id WHERE t1.poularity > 80 GROUP BY 1 ORDER BY 2 DESC LIMIT 20;
 ```
