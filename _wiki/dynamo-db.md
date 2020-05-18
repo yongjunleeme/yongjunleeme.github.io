@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-16 17:13:03 +0900
-updated : 2020-05-17 20:17:33 +0900
+updated : 2020-05-17 22:41:09 +0900
 tags    : 
 toc     : true
 public  : true
@@ -29,7 +29,7 @@ latex   : false
 
 - boto3 - aws가 제공하는 파이썬 SDK
     - [aws cli confing](https://yongjunleeme.github.io/wiki/spotify-rds/#aws-cli)
-    -
+
 ```python
 $ pip install boto3 --user
 ```
@@ -85,7 +85,6 @@ def main():
     for country in countries:
         for (artist_id, ) in cursor.fetchall():
 
-            for
             URL = "https://api.spotify.com/v1/artists/{}/top-tracks".format(artist_id)
             params = {
                 'country': 'US'
@@ -156,7 +155,6 @@ def main():
     table = dynamodb.Table('top_tracks')
 
     response = table.query(
-        KeyFilter
         FilterExpression=Attr('popularity').gt(90) # 애트리뷰트를 사용, 공식문서 참조, gt -> greater than
     )
     %% response = table.get_item(  # 키가 2개면 2개 모두 필요(파티션 키, 소트 키)
