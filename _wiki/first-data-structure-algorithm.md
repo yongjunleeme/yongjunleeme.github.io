@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-15 11:02:47 +0900
+updated : 2020-05-18 11:11:09 +0900
 tags    : 
 toc     : true
 public  : true
@@ -431,89 +431,168 @@ class LinkedList:  # 연결 리스트 요소의 맨 앞이 헤드, 맨 끝은 �
 - 삽입과 삭제 유연 장점 설려서
     - 포지션을 수가 아니라 노드로, 주어진 노드 뒤에 삽입
         - 맨 앞에 dummy node 추가
-            - `self.head = Node(None)`
+            - `self.head = Node(None)` 
+        - index를 1이 아닌 0부터 시작
 
+```python
+class Node: 
+    def __init__(self, item):
+        self.data = item
+        self.next = None 
+
+class LinkedList: 
+    def __init__(self):
+        self.nodeCount = 0
+        self.head = Node(None)
+        self.tail = None
+        self.head.next = self.tail
+
+    def traverse(self):
+        result = []
+        curr = self.head
+        while curr.next:
+            curr = curr.next
+            result.append(curr.data)
+        return result 
+
+    def getAt(self, pos):
+        if pos < 0 or pos > self.nodeCount:
+            return None 
+        i = 0
+        curr = self.head
+        while i < pos:
+            curr = curr.next
+            i += 1 
+        return curr 
+
+    def insertAfter(self, prev, newNode):
+        newNode.next = prev.next
+        if prev.next is None:
+            self.tail = newNode
+        prev.next = newNode
+        self.nodeCount += 1
+        return True 
+
+    def insertAt(self, pos, newNode):
+        if pos < 1 or pos > self.nodeCount + 1:
+            return False 
+        if pos != 1 and pos == self.nodeCount + 1:
+            prev = self.tail
+        else:
+            prev = self.getAt(pos - 1)
+        return self.insertAfter(prev, newNode) 
+
+    def popAfter(self, prev):
+        if prev == self.tail:
+            return None
+        curr = prev.next
+        prev.next = curr.next
+        if curr.next == None:
+            self.tail = prev
+        self.nodeCount -= 1
+        return curr.data 
+
+    def popAt(self, pos):
+        if pos < 1 or pos > self.nodeCount:
+            raise IndexError
+        return self.popAfter(self.getAt(pos-1))        
+
+def solution(x):
+    return 0 
+```
+
+#### Doubly Linked List
+
+- 앞으로뿐만 아니라 뒤로도 진행 가능
+    - Node 구조 확장
+    - 리스트 처음과 끝에 dummy node 추가
 
 ```python
 class Node:
-	def __init__(self, item):
-		self.data = item
-		self.next = None
+
+    def __init__(self, item):
+        self.data = item
+        self.prev = None
+        self.next = None
 
 
-class LinkedList:
-	def __init__(self):
-		self.nodeCount = 0
-		self.head = Node(None)
-		self.tail = None
-		self.head.next = self.tail
+class DoublyLinkedList:
 
-	def __repr__(self):
-		if self.nodeCount == 0:
-			return 'LinkedList: empty'
-
-		s = ''
-		curr = self.head
-		while curr.next:
-			curr = curr.next
-			s += repr(curr.data)
-			if curr.next is not None:
-				s += ' -> '
-		return s
+    def __init__(self):
+        self.nodeCount = 0
+        self.head = Node(None)
+        self.tail = Node(None)
+        self.head.prev = None
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        self.tail.next = None
 
 
-	def getLength(self):
-		return self.nodeCount
+    def __repr__(self):
+        if self.nodeCount == 0:
+            return 'LinkedList: empty'
+
+        s = ''
+        curr = self.head
+        while curr.next.next:
+            curr = curr.next
+            s += repr(curr.data)
+            if curr.next.next is not None:
+                s += ' -> '
+        return s
 
 
-	def traverse(self):
-		result = []
-		curr = self.head
-		while curr.next:
-			curr = curr.next
-			result.append(curr.data)
-		return result
+    def getLength(self):
+        return self.nodeCount
 
 
-	def getAt(self, pos):
-		if pos < 0 or pos > self.nodeCount:
-			return None
-
-		i = 0
-		curr = self.head
-		while i < pos:
-			curr = curr.next
-			i += 1
-
-		return curr
+    def traverse(self):
+        result = []
+        curr = self.head
+        while curr.next.next:
+            curr = curr.next
+            result.append(curr.data)
+        return result
 
 
-	def insertAfter(self, prev, newNode):
-		newNode.next = prev.next
-		if prev.next is None:
-			self.tail = newNode
-		prev.next = newNode
-		self.nodeCount += 1
-		return True
+    def getAt(self, pos):
+        if pos < 0 or pos > self.nodeCount:
+            return None
+
+        if pos > self.nodeCount // 2:
+            i = 0
+            curr = self.tail
+            while i < self.nodeCount - pos + 1:
+                curr = curr.prev
+                i += 1
+        else:
+            i = 0
+            curr = self.head
+            while i < pos:
+                curr = curr.next
+                i += 1
+
+        return curr
 
 
-	def insertAt(self, pos, newNode):
-		if pos < 1 or pos > self.nodeCount + 1:
-			return False
+    def insertAfter(self, prev, newNode):
+        next = prev.next
+        newNode.prev = prev
+        newNode.next = next
+        prev.next = newNode
+        next.prev = newNode
+        self.nodeCount += 1
+        return True
 
-		if pos != 1 and pos == self.nodeCount + 1:
-			prev = self.tail
-		else:
-			prev = self.getAt(pos - 1)
-		return self.insertAfter(prev, newNode)
 
+    def insertAt(self, pos, newNode):
+        if pos < 1 or pos > self.nodeCount + 1:
+            return False
 
-	def concat(self, L):
-		self.tail.next = L.head.next
-		if L.tail:
-			self.tail = L.tail
-		self.nodeCount += L.nodeCount    
+        prev = self.getAt(pos - 1)
+        return self.insertAfter(prev, newNode) 
 ```
+
 
 ## Link 
 
