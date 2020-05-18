@@ -90,6 +90,8 @@ regenerate: true
 * [[spotify-api]]
 * [[spotify-rds]]
 * [[dynamo-db]]
+* [[s3]]
+* [[athena]]
 
 ### copy & paste
 
