@@ -53,6 +53,7 @@ regenerate: true
 * [[django-basic]]
 * [[django-project-commerce]]
 * [[django-rest-framwork-example]]
+* [[flask-basic]]
 
 #### two scoops of django
 
@@ -67,8 +68,18 @@ regenerate: true
 * [[github-basic-1]]
 * [[mini-conda]]
 * [[my-sql-ide]]
-* [[aws]]
 * [[docker]]
+* [[sql]]
+* [[linux]]
+
+### aws
+
+* [[aws-basic]]
+* [[spotify-api]]
+* [[spotify-rds]]
+* [[dynamo-db]]
+* [[s3]]
+* [[spark]]
 
 ### vim
 
@@ -78,20 +89,13 @@ regenerate: true
 
 * [[data-structure]] 
 * [[first-data-structure-algorithm]]
-* [[classic-algorithm-in-python]] 
 * [[algorithm]]
+* [[classic-algorithm]] 
 * [[dev-common-sense]]
 * [[database-basic]]
 * [[web-basic]]
 * [[OS-basic]]
-* [[sql]]
-* [[sql-join]]
 * [[interview-question]]
-* [[spotify-api]]
-* [[spotify-rds]]
-* [[dynamo-db]]
-* [[s3]]
-* [[athena]]
 
 ### copy & paste
 
