@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-14 12:42:19 +0900
+updated : 2020-05-18 11:36:55 +0900
 tags    : 
 toc     : true
 public  : true
@@ -24,7 +24,8 @@ latex   : false
 ## 기본정렬-버블정렬 (앞뒤비교)
 
 - 두 인접한 데이터를 비교해 앞 데이터가 뒤 데이터보다 크면 자리를 바꾸는 정렬 알고리즘
-- [시각화 참고](https://visualgo.net/en/sorting?slide=1)
+- [시각화 참고](https://visualgo.net/en/sorting)
+- [시각화 참고2](https://en.wikipedia.org/wiki/Bubble_sort)
 
 ### 간단한 경우부터 복잡한 경우 순서대로 생각
 
