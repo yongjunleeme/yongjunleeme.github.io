@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-16 16:49:18 +0900
+updated : 2020-05-19 18:52:57 +0900
 tags    : 
 toc     : true
 public  : true
@@ -629,3 +629,7 @@ def main():
 ```python
 mysql> SELECT genre, COUNT(*) FROM artists t1 JOIN artist_genres t2 ON t2.artist_id = t1.id WHERE t1.poularity > 80 GROUP BY 1 ORDER BY 2 DESC LIMIT 20;
 ```
+
+## Link
+
+- [올인원 데이터엔지니어링](https://www.fastcampus.co.kr/data_online_engineering)
