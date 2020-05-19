@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-16 17:13:03 +0900
-updated : 2020-05-17 22:41:09 +0900
+updated : 2020-05-19 18:52:57 +0900
 tags    : 
 toc     : true
 public  : true
@@ -174,11 +174,11 @@ def main():
     print(response['Items'])
     print(len(response['Items']))
     
-    
-
-
-
 if __name__=='__main__':
     main()
 
 ```
+
+## Link
+
+- [올인원 데이터엔지니어링](https://www.fastcampus.co.kr/data_online_engineering)
