@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-18 21:14:37 +0900
-updated : 2020-05-19 23:58:56 +0900
+updated : 2020-05-20 09:41:52 +0900
 tags    : 
 toc     : true
 public  : true
@@ -683,4 +683,4 @@ def slack_todos():
 
 - [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
 
-{% endrow %}
+{% endraw %}
