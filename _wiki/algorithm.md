@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-18 11:36:55 +0900
+updated : 2020-05-20 18:05:25 +0900
 tags    : 
 toc     : true
 public  : true
@@ -207,7 +207,62 @@ selection_sort(data_list)
 - [그림으로 보기1](https://commons.wikimedia.org/wiki/File:Insertion-sort-example.gif)
 - [그림으로 보기2](https://visualgo.net/en/sorting)
 
+## 재귀
 
+```python
+def factorial(num):
+    if num > 1:
+        return num * factorial(num - 1)
+    else:
+        return num
+```
+
+### 시간, 공간복잡도
+
+- 시간 복잡도/공간 복잡도는 O(n-1) 이므로 결국, 둘 다 O(n)
+    - 일종의 n-1번 반복문을 호출한 것과 동일
+    - factorial() 함수를 호출할 때마다, 지역변수 n 이 생성됨
+
+### 예제
+
+- 재귀 함수를 활용해서 완성해서 1부터 num까지의 곱이 출력되게 만드세요
+
+```python
+def multiple(num):
+    if num <= 1:
+        return num
+    return num * multiple(num - 1)
+```
+
+- 숫자가 들어 있는 리스트가 주어졌을 때, 리스트의 합을 리턴하는 함수를 만드세요
+
+```python
+import random 
+data = random.sample(range(100), 10)
+print(data)
+
+def sum_list(data):
+    if len(data) <= 1:
+        return data[0]
+    return data[0] + sum_list(data[1:])
+
+print(sum_list(data))
+```
+
+#### 회문(palindrome)
+
+- 회문(palindrome)은 순서를 거꾸로 읽어도 제대로 읽은 것과 같은 단어와 문장을 의미함
+
+```python
+def palindrome(string):
+    if len(strung) <= 1: # 가운데 있는 회문 중간 글자까지 왔다는 것을 의미하므로
+        return True
+    
+    if string[0] == string[-1]:
+        return palindrome(string[1:-1])
+    else:
+        return False
+```
 
 
 
