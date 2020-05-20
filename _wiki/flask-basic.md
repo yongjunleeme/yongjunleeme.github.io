@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-18 21:14:37 +0900
-updated : 2020-05-20 09:41:52 +0900
+updated : 2020-05-20 13:38:46 +0900
 tags    : 
 toc     : true
 public  : true
@@ -286,7 +286,7 @@ from wtforms.validators import DataRequired, EqualTo
 
 class RegisterForm(FlaskForm):
     userid = StringField('userid', validators=[DataRequired()])
-    password = PasswordField('password', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired(), EqualTo('repassword')])
     repassword = PasswordField('repassword', validators=[DataRequired()])
 
 class LoginForm(FlaskForm):
@@ -308,6 +308,9 @@ class LoginForm(FlaskForm):
 ```
 
 ### templates/register.html
+
+- static 파일 그냥 static 폴더 만들어서 저장
+- url_for() 함수 사용하면 static 폴더에 없어도 파일 추적 가능
 
 ```html
 <html>
@@ -375,6 +378,7 @@ class LoginForm(FlaskForm):
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
+  # <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> static폴더에 없어도 파일 경로 자동으로 찾아주는 함수 url_for
 </head>
 
 <body>
