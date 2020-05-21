@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-20 17:04:27 +0900
+updated : 2020-05-21 12:49:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -508,24 +508,21 @@ def solution(x):
     - 리스트 처음과 끝에 dummy node 추가
 
 ```python
-class Node:
-
+class Node: 
     def __init__(self, item):
         self.data = item
         self.prev = None
         self.next = None
 
-
-class DoublyLinkedList:
-
+class DoublyLinkedList: 
     def __init__(self):
         self.nodeCount = 0
         self.head = Node(None)
         self.tail = Node(None)
-        self.head.prev = None
+        self.head.prev = None # 더미노드
         self.head.next = self.tail
         self.tail.prev = self.head
-        self.tail.next = None
+        self.tail.next = None # 더미노드
 
 
     def __repr__(self):
@@ -534,7 +531,7 @@ class DoublyLinkedList:
 
         s = ''
         curr = self.head
-        while curr.next.next:
+        while curr.next.next: # 더미노드까지
             curr = curr.next
             s += repr(curr.data)
             if curr.next.next is not None:
@@ -591,6 +588,29 @@ class DoublyLinkedList:
 
         prev = self.getAt(pos - 1)
         return self.insertAfter(prev, newNode) 
+    
+    def popAfter(self, prev):
+        curr = prev.next
+        next = curr.next
+        prev.next = next
+        next.prev = prev
+        self.nodeCount -= 1
+        return curr.data
+
+    def popBefore(self, next):
+        curr = next.prev
+        prev = curr.prev
+        prev.next = next
+        next.prev = prev
+        self.nodeCount -= 1
+        return curr.data
+
+
+    def popAt(self, pos):
+        if pos < 1 or pos > self.nodeCount:
+            raise IndexError
+        curr = self.getAt(pos)
+        return self.popAfter(curr.prev)
 ```
 
 ## Stack
@@ -649,7 +669,75 @@ class LinkedListStack:
 
 ### 예제
 
-#### 
+#### 수식의 괄호 검사
+
+```python
+class ArrayStack:
+
+    def __init__(self):
+        self.data = []
+
+    def size(self):
+        return len(self.data)
+
+    def isEmpty(self):
+        return self.size() == 0
+
+    def push(self, item):
+        self.data.append(item)
+
+    def pop(self):
+        return self.data.pop()
+
+    def peek(self):
+        return self.data[-1]
+
+
+def solution(expr):
+    match = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    }
+    S = ArrayStack()
+    for c in expr:
+        if c in '({[':
+            S.push(c)
+        elif c in match:
+            if S.isEmpty():
+                return False
+            else:
+                t = S.pop()
+                if t != match[c]:
+                    return False
+    return S.isEmpty()
+```
+
+#### 수식의 후위 표기법(Postfix Notation)
+
+- 중위 표기법 (infix notation) - A + B
+- 후위 표기법 (Postfix Notation) - AB+
+    - 괄호를 쓰지 않고도 연산의 우선순위를 수식에 표현
+        - `(A + B) * (C + D)` 중위 -> `A B + C D + *` 후위
+        - `A + B * C` 중위 -> `A B C * +` 후위
+    - 컴퓨터가 후위 표기법을 사용하면 수식을 만날 때마다 스택에 적용
+
+
+연산자를 만나면 우선 스택에 넣는다.
+연산자를 다시 만나면 스택에 있는 것과 비교해 우선순위가 높은 것을 팝해서 피연산자 뒤에 놓는다.
+그러고 나서 만난 연산자를 스택에 넣는다.
+수식의 끝에 도달하면 연산자를 팝해서 ㅍ피연산자 뒤에 놓는다.
+
+A+B+C
+
+동일한 연산자라도 연산자를 만나면 
+
+괄호의 처리
+
+여는 괄호는 스택에 푸시
+닫는 괄호를 만나면 여는 괄호가 나올 때까찌 pop
+
+연산자를 만났을 때, 여는 괄호 너머까지 pop하지 않도
 
 
 ## Link 
