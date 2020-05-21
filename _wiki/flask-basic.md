@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-18 21:14:37 +0900
-updated : 2020-05-20 13:38:46 +0900
+updated : 2020-05-21 15:56:38 +0900
 tags    : 
 toc     : true
 public  : true
@@ -231,6 +231,8 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'jqiowejrojzxcovnklqnweiorjqwoijroi'
 
+csrf = CSRFProtect()
+csrf.init_app(app)
 db.init_app(app)
 db.app = app
 db.create_all()
@@ -282,7 +284,7 @@ class Fcuser(db.Model):
 from models import Fcuser
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, EqualTo
+from wtforms.validators import DataRequired, EqualTo # 커맨드 누르고 클릭하면 소스 까볼 수 있다 -> UserPassword의 구조는 DataRequired에서 참고
 
 class RegisterForm(FlaskForm):
     userid = StringField('userid', validators=[DataRequired()])
@@ -299,7 +301,7 @@ class LoginForm(FlaskForm):
             userid = form['userid'].data
             password = field.data
 
-            fcuser = Fcuser.query.filter_by(userid=userid).first()
+            fcuser = Fcuser.query.filter_by(userid=userid).first() # 첫번째값
             if fcuser.password != password:
                 raise ValueError('Wrong password')
 
@@ -396,8 +398,8 @@ class LoginForm(FlaskForm):
           </div>
           <div class="form-group">
             {{ form.password.label("비밀번호") }}
-            {% if form.password.errors %}
-            {{ form.password.errors.0 }}
+            {% if form.password.errors %} # password 내 errors를 담는 그릇이 있다
+            {{ form.password.errors.0 }} # errors의 0번째
             {% endif %}
             {{ form.password(class="form-control", placeholder="비밀번호") }}
           </div>
@@ -682,6 +684,36 @@ def slack_todos():
 
     return ret_msg
 ```
+
+## PythonAnywhere 배포
+
+- [pythonanywhere](https://www.pythonanywhere.com/)
+
+- 파일 압축해서 업로드(가상환경파일 제외)
+- Open Bash console here
+
+```python
+$ unzip.project.zip -d project
+
+$ virtualenv --python=python3.8 falsk_fastcampus
+$ source flask_fastcampus/bin/activate
+$ pip install flask flask-wtf flask-sqlalchemy
+$ exit
+```
+
+- Web - add a new web app
+- Code -> 디렉토리 설정
+- Virtualenv -> 디렉토리 설정
+- WSGI
+    - HELLO_WORLD 주석 설정
+    - FLASK 주석 해제
+        - 폴더 위치 수정
+    
+```python
+from app import app as application # noqa
+```
+
+
 
 ## Link
 
