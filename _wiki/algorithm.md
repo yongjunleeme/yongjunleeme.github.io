@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-20 18:05:25 +0900
+updated : 2020-05-21 14:11:16 +0900
 tags    : 
 toc     : true
 public  : true
@@ -264,6 +264,39 @@ def palindrome(string):
         return False
 ```
 
+#### 문제
+
+1, 정수 n에 대해
+2. n이 홀수이면 3 X n + 1 을 하고,
+3. n이 짝수이면 n 을 2로 나눕니다.
+4. 이렇게 계속 진행해서 n 이 결국 1이 될 때까지 2와 3의 과정을 반복합니다.
+
+예를 들어 n에 3을 넣으면,
+
+`
+3
+10
+5
+16
+8
+4
+2
+1
+`
+
+이렇게 정수 n을 입력받아, 위 알고리즘에 의해 1이 되는 과정을 모두 출력하는 함수를 작성하세요.
+
+```python
+def func(n):
+    print (n)
+    if n == 1:
+        return n
+    
+    if n % 2 == 1:
+        return (func((3 * n) + 1))
+    else:
+        return (func(int(n / 2)))
+```
 
 
 ## Link
