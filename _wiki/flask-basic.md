@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-18 21:14:37 +0900
-updated : 2020-05-21 15:56:38 +0900
+updated : 2020-05-22 19:27:22 +0900
 tags    : 
 toc     : true
 public  : true
@@ -181,7 +181,7 @@ from forms import RegisterForm, LoginForm
 from api_v1 import api as api_v1
 
 app = Flask(__name__)
-app.register_blueprint(api_v1, url_prefix='/api/v1')
+app.register_blueprint(api_v1, url_prefix='/api/v1') # api 웹주소는 /api/v1 다음으로 지정 /register면 /api/v1/register
 
 @app.route('/', methods=['GET'])
 def home():
@@ -258,7 +258,7 @@ class Todo(db.Model):
     due = db.Column(db.String(64))
     tstamp = db.Column(db.DateTime, server_default=db.func.now())
 
-    @property
+    @property # 이것을 쓰면 serialize를 함수가 아니라 변수처럼 사용 가능, 모델을 직렬화해야 사용 가능
     def serialize(self):
         return {
             'id': self.id,
@@ -551,6 +551,17 @@ class LoginForm(FlaskForm):
 </body>
 
 </html>
+```
+
+### api_v1/__init__.py
+
+```python
+from flask import Blueprint
+
+api = Blueprint('api', __name__)
+
+from . import todo
+
 ```
 
 ### api_v1/todo.py
