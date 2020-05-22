@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-21 14:11:16 +0900
+updated : 2020-05-22 16:51:00 +0900
 tags    : 
 toc     : true
 public  : true
@@ -21,7 +21,7 @@ latex   : false
     - 데이터구조, 변수 정리
     - 각 문장을 코드로 적는다
 
-## 기본정렬-버블정렬 (앞뒤비교)
+## 기본정렬-버블정렬
 
 - 두 인접한 데이터를 비교해 앞 데이터가 뒤 데이터보다 크면 자리를 바꾸는 정렬 알고리즘
 - [시각화 참고](https://visualgo.net/en/sorting)
@@ -138,13 +138,12 @@ print (insertion_sort(data_list))
 
 ## 기본정렬-선택정렬 (최솟값)
 
-### 선택정렬이란?
+### 선택정렬이란? - 최솟값을 선택한다
 
 - 주어진 데이터 중 최솟값을 찾아서 맨 앞에 위치한 값과 교체
 - 맨 앞의 위치한 값을 뺀 나미저 데이터를 동일한 방법으로 반복
 - [그림으로 보기1](https://visualgo.net/en/sorting?slide=1)
-- [그림으로 보기2](https://en.wikipedia.org/wiki/Selection_sort)
-- [이해가 안 가면 볼 코드](http://pythontutor.com/live.html#mode=edit)
+- [그림으로 보기2](https://en.wikipedia.org/wiki/Selection_sort) - selection_sort 선택
 
 
 ### 간단한 경우부터 복잡한 경우 순서대로 생각
@@ -199,13 +198,6 @@ selection_sort(data_list)
 반복문이 두 개 O( 𝑛2 )
     실제로 상세하게 계산하면,  𝑛∗(𝑛−1) / 2
 ```
-
-## 삽입 정렬
-
-### 삽입 정렬이란?
-
-- [그림으로 보기1](https://commons.wikimedia.org/wiki/File:Insertion-sort-example.gif)
-- [그림으로 보기2](https://visualgo.net/en/sorting)
 
 ## 재귀
 
