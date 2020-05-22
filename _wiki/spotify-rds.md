@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-19 18:52:57 +0900
+updated : 2020-05-22 17:58:13 +0900
 tags    : 
 toc     : true
 public  : true
@@ -73,21 +73,23 @@ mysql> CREATE TABLE people (first_name VARCHAR(20), last_name VARCHAR(20), age I
 Entities: 하나의 개체 (사람)
 Attributes: 엔터티의 속성 (성, 이름)
 
+- Unique key, pk 차이
+
 <img width="666" alt="44" src="https://user-images.githubusercontent.com/48748376/81815785-652e7380-9565-11ea-9666-5ff9715effe8.png">
 
-- Unique key, pk 차이
+- ERD 형식
 
 <img width="1319" alt="11" src="https://user-images.githubusercontent.com/48748376/81815764-5f389280-9565-11ea-8511-3cd434f39ca4.png">
 
+- ERD 예시
+
 <img width="510" alt="22" src="https://user-images.githubusercontent.com/48748376/81815778-63fd4680-9565-11ea-9e99-47224b962db4.png">
 
-- ERD 예시
+- 티켓마스터 ERD
 
 <img width="839" alt="33티켓마스터" src="https://user-images.githubusercontent.com/48748376/81815781-6495dd00-9565-11ea-8c1b-4ae9152cae3d.png">
 
-- 티켓마스터 ERD 예시
-
-#### Spotify ERD
+- Spotify ERD
 
 <img width="1219" alt="55" src="https://user-images.githubusercontent.com/48748376/81815786-65c70a00-9565-11ea-846f-e21d65a60f3f.png">
 
