@@ -54,6 +54,7 @@ regenerate: true
 * [[django-project-commerce]]
 * [[django-rest-framwork-example]]
 * [[flask-basic]]
+* [[django-nomad-drf]]
 
 #### two scoops of django
 
