@@ -3,7 +3,7 @@ layout  : wiki
 title   : github-basic-1
 summary : 
 date    : 2020-02-12 20:25:32 +0900
-updated : 2020-04-24 21:03:21 +0900
+updated : 2020-05-24 18:14:57 +0900
 tags    : 
 toc     : true
 public  : true
@@ -19,7 +19,64 @@ latex   : false
 $ git diff --staged         "커밋하려는 추가 코드를 보여준다"
 $ git commit -am "코멘트"   "add, commit 한 번에"
 $ git log --oneline         "커밋 리스트 확인
+$ git status -s
 ```
+
+### gitignore
+
+```python
+$ echo "db.sqlite3" >> .gitignore
+```
+
+```python
+# 슬래시(/)로 시작하면 하위 디렉터리에 적용되지(recursivity) 않는다.
+# 느낌표(!)로 시작하는 패턴의 파일은 무시하지 않는다.
+
+# 윗 라인에서 확장자가 .a인 파일은 무시하게 했지만 lib.a는 무시하지 않음
+!lib.a
+
+# 현재 디렉토리에 있는 TODO 팡리은 무시하고 subdir/TODO처럼 하위 디렉토리에 있는 파일은 무시하지 않음
+/TODO
+
+# build/ 디렉터리에 있는 모든 파일은 무시
+build/
+
+# doc/notes.txt 파일은 무시하고 doc/server/arch.txt 파일은 무시하지 않음
+doc/*.txt
+
+# doc 디렉터리 아래의 모든 .pdf 파일을 무시
+doc/**/*.pdf
+```
+
+### `git diff`
+
+```python
+$ git diff               - unstaged 상태인 것들만 보여준다
+$ git diff --staged      - Stagind Area에 넣은 파일의 변경 부분 확인
+$ git diff --cached      
+```
+
+### `git commit`
+
+```python
+$ git moddit -a -m 'added new benchmarks'
+# -a 옵션 추가(git add 안 해도 됨)하면 Tracked 상태의 파일을 자동으로 Staging Area에 넣는다.
+```
+
+### `git rm`
+
+```python
+$ git rm gret.gemsepc
+- 그냥 지우면 삭제 파일 Unstaged상태, git rm으로 지우면 staged
+- 이미 파일을 수정했거나 수정한 파일을 staging area에 추가했다면  -f 옵션으로 강제 삭제해야
+- 이 점은 실수로 데이터 삭제 못하도록 하는 안전장치
+
+$ git rm --cached README
+- Staging Area에서만 제거하고 워킹 디렉터리에 있는 파일은 지우지 않고 남겨둔다.
+- 다시 말해, 하드디스크에 있는 파일은 그래도 두고 Git만 추적하지 않게 한다.
+```
+
+
 
 ## 초기 설정
 
@@ -224,7 +281,4 @@ why
 
 ## Tip
 
-```python
-$ echo "db.sqlite3" >> .gitignore
-```
 
