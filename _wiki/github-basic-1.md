@@ -3,7 +3,7 @@ layout  : wiki
 title   : github-basic-1
 summary : 
 date    : 2020-02-12 20:25:32 +0900
-updated : 2020-05-24 18:14:57 +0900
+updated : 2020-05-24 18:26:31 +0900
 tags    : 
 toc     : true
 public  : true
@@ -67,15 +67,76 @@ $ git moddit -a -m 'added new benchmarks'
 
 ```python
 $ git rm gret.gemsepc
-- 그냥 지우면 삭제 파일 Unstaged상태, git rm으로 지우면 staged
-- 이미 파일을 수정했거나 수정한 파일을 staging area에 추가했다면  -f 옵션으로 강제 삭제해야
-- 이 점은 실수로 데이터 삭제 못하도록 하는 안전장치
+# 그냥 지우면 삭제 파일 Unstaged상태, git rm으로 지우면 staged
+# 이미 파일을 수정했거나 수정한 파일을 staging area에 추가했다면  -f 옵션으로 강제 삭제해야
+# 이 점은 실수로 데이터 삭제 못하도록 하는 안전장치
 
 $ git rm --cached README
-- Staging Area에서만 제거하고 워킹 디렉터리에 있는 파일은 지우지 않고 남겨둔다.
-- 다시 말해, 하드디스크에 있는 파일은 그래도 두고 Git만 추적하지 않게 한다.
+# Staging Area에서만 제거하고 워킹 디렉터리에 있는 파일은 지우지 않고 남겨둔다.
+# 다시 말해, 하드디스크에 있는 파일은 그래도 두고 Git만 추적하지 않게 한다.
 ```
 
+### 파일이름 변경
+
+```shell
+$ git mv file_from file_to
+"중요한 것은 이름을 변경하고 나서 꼭 rm/add 명령 실행해야"
+```
+
+### `git log`
+
+
+```python
+$ git log -p -2
+# -p 각 커밋의 diff 결과, -2 2개만
+# 동료가 무엇을 커밋햇는지 리뷰, 조회하는데 유용
+
+$ git log --stat
+# 각 커밋의 통계 정보를 조회
+
+$ git log --pretty=oneline
+# --pretty-> 형식 옵션 선택 oneline->한 줄로
+
+$ git log --pretty=format:"%h - %an, %ar : %s"
+# git log--pretty=format에 쓸 수 있는 몇 가지 유용한 옵션, git log 주요 옵션 ( 검색 후 표 참조)
+
+# git log 조회 범위를 제한하는 옵션
+$ git log --since=2.weeks
+# --since, --after 명시한 날짜 이후의 커밋만 검색
+# --until, --befor 명시한 날짜 이전의 커밋만 조회
+# --author         입력한 저자의 커밋만 보여준다.
+# --committer      입력한 커미터의 커밋만 보여준다.
+# --grep           커밋 메시지 안의 텍스트를 검색한다.
+
+$ git log -Sfunctino_name
+# -S               커밋 변경(추가/삭제) 내용 안의 텍스트를 검색한다.
+
+$ git log -- path1 path2
+# 파일 경로 검색
+```
+
+### 커밋 취소
+
+```python
+$ git commit --amend
+
+$ git reset HEAD CONTRIBUTING.md
+# unstaged 상태로 변경
+```
+
+### 리모트 레파지토리 확인
+
+```python
+$ git remote
+# 저장소를 clone하면 origin이라는 리모트 저장소가 자동으로 등록
+
+$ git remote -v
+# 단축 이름과 URL을 함께 볼 수 있다.
+
+# 리모트 저장소 추가하기
+$ git remote add pb https://github.com/paulboone/ticgit
+# git remote add [단축이름] [url]
+```
 
 
 ## 초기 설정
