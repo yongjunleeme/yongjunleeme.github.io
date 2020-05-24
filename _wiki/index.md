@@ -12,9 +12,9 @@ regenerate: true
 * [[memo-2020]]
 * [[review-2020]]
 * [[mindset]]
+* [[tip]]
 * [[small-talk-big-idea]]
 * [[scribble]]
-* [[tip]]
 * [[link]]
 * [[review]]
 * [[media]]
@@ -68,9 +68,9 @@ regenerate: true
 
 * [[github-basic-1]]
 * [[mini-conda]]
-* [[my-sql-ide]]
+* [[my-sql-install]]
 * [[docker]]
-* [[sql]]
+* [[sql-command]]
 * [[linux]]
 
 ### aws
