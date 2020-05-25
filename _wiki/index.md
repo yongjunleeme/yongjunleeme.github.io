@@ -34,7 +34,6 @@ regenerate: true
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
 * [[snippet]]
-* [[test]]
 
 ### [[django]]
 
@@ -72,6 +71,7 @@ regenerate: true
 * [[docker]]
 * [[sql-command]]
 * [[linux]]
+* [[jekyll-install]]
 
 ### aws
 
@@ -81,6 +81,7 @@ regenerate: true
 * [[dynamo-db]]
 * [[s3]]
 * [[spark]]
+* [[lambda]]
 
 ### vim
 
