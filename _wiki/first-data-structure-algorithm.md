@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-21 12:49:47 +0900
+updated : 2020-05-26 12:15:01 +0900
 tags    : 
 toc     : true
 public  : true
@@ -611,6 +611,13 @@ class DoublyLinkedList:
             raise IndexError
         curr = self.getAt(pos)
         return self.popAfter(curr.prev)
+    
+     def concat(self, L):
+        self.tail.prev.next = L.head.next
+        L.head.next.prev = self.tail.prev
+        self.tail = L.tail
+
+        self.nodeCount += L.nodeCount
 ```
 
 ## Stack
@@ -739,6 +746,21 @@ A+B+C
 
 연산자를 만났을 때, 여는 괄호 너머까지 pop하지 않도
 
+
+## 큐
+
+- 넣을 때는 한쪽 끝에서 밀어 넣어야 하고
+    - 인큐(enqueue) 연산 - 배열 O(1), 이중연결리스트
+- 꺼낼 때는 반대 쪽에서 꺼내야 하는 제약이 있음
+    - 디큐(dequeue) 연산 - 배열 O(n), 이중연결리스트
+
+```python
+from pythonds.basic.queue import Queue
+
+Q = Queue()
+dir(Q)
+
+```
 
 ## Link 
 
