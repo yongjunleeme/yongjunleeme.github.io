@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-05-22 22:36:39 +0900
+updated : 2020-05-26 20:17:04 +0900
 tags    : 
 toc     : true
 public  : true
@@ -40,7 +40,11 @@ cls.fakers[code].seed_instance(random.randint(1, 10000)) 로 수정
 ++++
 ```
 
-### RESTful API
+### [Serializers](https://www.django-rest-framework.org/)
 
-- Formula
-    - (Collections + Elements) + HTTP Verb
+- 쿼리셋과 같은 복잡한 데이터를 JSON, XML로 쉽게 변환, 그 반대도 가
+- 응답을 제어하는 폼과 같은 역할
+
+
+many = True -> 리스트 가능
+
