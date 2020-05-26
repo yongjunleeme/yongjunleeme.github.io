@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-25 09:21:17 +0900
-updated : 2020-05-25 17:57:41 +0900
+updated : 2020-05-26 15:25:39 +0900
 tags    : 
 toc     : true
 public  : true
@@ -84,26 +84,6 @@ $ date
 ```
 
 ## lambda
-
-### 설정
-
-- Author from scratch
-- name -> top-tracks
-- python3.7
-- permissions
-    - create 
-      
-```python
-client_id = os.environ.get('client_id') # 하단 Enviroment Variables에서 client_id 등 계정 기입
-```
-
-```pyhon
-$ pip install requirements.txt -t ./libs
-```
-
-```python
-$ rm -r *.dist-info
-```
 
 ### top_tracks
 
@@ -195,13 +175,13 @@ if __name__=='__main__':
 ```python
 #!/bin/bash
 
-rm -rf ./libs
+rm -rf ./libs 
 pip3 install -r requirements.txt -t ./libs
 
 rm *.zip
 zip top_tracks.zip -r *
 
-aws s3 rm s3://top-tracks-lambda/top_tracks.zip
+aws s3 rm s3://버킷이름/top_tracks.zip  # 버킷이름
 aws s3 cp ./top_tracks.zip s3://top-tracks-lambda/top_tracks.zip
 aws lambda update-function-code --function-name top-tracks --s3-bucket top-tracks-lambda --s3-key top_tracks.zip
 ```
@@ -213,4 +193,31 @@ aws lambda update-function-code --function-name top-tracks --s3-bucket top-track
 
 [install]
 prefix=
+```
+
+### 설정
+
+- create 
+    - 환경변수 설정
+
+```python
+client_id = os.environ.get('client_id') # 하단 Enviroment Variables에서 client_id 등 계정 기입
+```
+
+- Basic settings
+    - 간단명료한 잡들을 병렬처리하는 것이 서버리스에 적합
+
+```pyhon
+$ pip install requirements.txt -t ./libs # t -> target
+# setup.cfg 생성(하단 참조) - 포인터 이슈
+```
+
+```python
+# libs 폴더 내 필요없는 파일 삭제
+$ rm -r *.dist-info
+```
+
+```python
+$ chmod +x deploy.sh
+$ ./deploy.sh
 ```
