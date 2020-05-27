@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-26 12:15:01 +0900
+updated : 2020-05-27 16:53:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -761,6 +761,74 @@ Q = Queue()
 dir(Q)
 
 ```
+
+### 큐의 활용
+
+- 자료를 생성하는 작업과 그 자료를 이용하는 작업이 비동기적으로 일어나는 경우
+- 자료를 생성하는 작업이 여러 곳에서 일어나는 경우
+- 자료를 생성하는 작업과 그 자료를 이용하는 작업이 양쪽 다 여러 곳에서 일어나는 경우
+- 자료를 처리하여 새로운 자료를 생성하고, 나중에 그 자료를 또 처리해야 하는 작업의 경우
+
+### 환형 큐
+    - 정해진 개수의 저장 공간을 빙 돌려가며 이용
+    - rear - 데이터 넣는 포인트, front - 데이터 빼는 포인트
+    - 큐 가득 차면?
+        - 더이상 원소를 넣을 수 없음(큐 길이를 기억하고 있어야)
+    - 디큐한 자리까지 데이터가 가득 차면?
+        - 무효가 된 자리를 덮어쓰면 된다.
+        - 한계치를 넘어가면 다시 0으로 돌아간다. 
+
+1. 초기에 front 와 rear 를 공히 -1 로 초기화한 후에,
+(1) enqueue 연산의 경우 rear 를 전진시키고 (+1) 그 위치에 원소를 삽입하고
+(2) dequeue 연산의 경우 front 를 전진시키고 (+1) 그 위치의 원소를 리턴한다.
+이렇게 함으로써 리스트 data 를 인덱스 0 부터 이용하게 되며, front 는 큐에서 가장 앞에 들어 있는 원소 (현재 큐에 들어 있는 원소들 중 가장 먼저 삽입된 원소) 를 가리키고 있지 않고 그보다 하나 작은 인덱스를 가지고 있게된다.
+2. front 와 rear 의 전진에서는 환형 구조를 위하여 1 을 더하는 것 외에도 큐의 크기로 나눈 나머지를 취하는 연산이 수반되어야 함
+
+```python
+class CircularQueue:
+
+    def __init__(self, n):
+        self.maxCount = n
+        self.data = [None] * n
+        self.count = 0
+        self.front = -1
+        self.rear = -1
+
+
+    def size(self):
+        return self.count
+
+    def isEmpty(self):
+        return self.count == 0
+
+    def isFull(self):
+        return self.count == self.maxCount
+
+    def enqueue(self, x):
+        if self.isFull():
+            raise IndexError('Queue full')
+        self.rear = (self.rear+1)% self.maxCount
+        self.data[self.rear] = x
+        self.count += 1
+
+    def dequeue(self):
+        if self.size() == 0:
+            raise IndexError('Queue empty')
+        self.front = (self.front+1) % self.maxCount
+        x = self.data[self.front]
+        self.count -= 1
+        return x
+
+    def peek(self):
+        if self.isEmpty():
+            raise IndexError('Queue empty')
+        return self.data[(self.front+1) % self.maxCount]
+
+
+def solution(x):
+    return 0
+```
+
 
 ## Link 
 
