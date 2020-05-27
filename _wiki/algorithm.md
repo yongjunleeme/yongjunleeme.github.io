@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-26 13:24:14 +0900
+updated : 2020-05-27 18:32:38 +0900
 tags    : 
 toc     : true
 public  : true
@@ -256,6 +256,14 @@ def palindrome(string):
         return False
 ```
 
+- 재귀 안 쓰고 간단하게 회문 판별
+
+```python
+word = input('단어를 입력하세요: ')
+ 
+print(word == word[::-1])
+```
+
 #### 문제
 
 1, 정수 n에 대해
@@ -341,9 +349,35 @@ def fibo_dp(num):
     for index in range(2, num + 1): 
         cache[index] = cache[index - 1] + cache[index - 2] # 캐시로 저장한 숫자 재활용
     return cache[num]
-
 ```
 
+## 퀵 정렬 (quick sort)
+
+- 기준점(pivot 이라고 부름)을 정해서, 기준점보다 작은 데이터는 왼쪽(left), 큰 데이터는 오른쪽(right) 으로 모으는 함수를 작성함
+- 각 왼쪽(left), 오른쪽(right)은 재귀용법을 사용해서 다시 동일 함수를 호출하여 위 작업을 반복함
+- 함수는 왼쪽(left) + 기준점(pivot) + 오른쪽(right) 을 리턴함
+
+### 코드
+
+```python
+def qsort(data):
+    if len(data) <= 1:
+        return data
+    
+    pivot = data[0]
+
+    left = [ item for item in data[1:] if pivot > item ]
+    right = [ item for item in data[1:] if pivot <= item ]
+    
+    return qsort(left) + [pivot] + qsort(right)
+```
+
+### 시간복잡도
+
+- 병합정렬과 유사, 시간복잡도는 O(n log n)
+- 단, 최악의 경우
+    - 맨 처음 pivot이 가장 크거나, 가장 작으면 모든 데이터를 비교하는 상황이 나옴
+    - O( 𝑛2 )
 
 ## Link
 
