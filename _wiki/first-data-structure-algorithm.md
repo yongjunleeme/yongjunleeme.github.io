@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-27 16:53:02 +0900
+updated : 2020-05-28 13:53:37 +0900
 tags    : 
 toc     : true
 public  : true
@@ -770,18 +770,20 @@ dir(Q)
 - 자료를 처리하여 새로운 자료를 생성하고, 나중에 그 자료를 또 처리해야 하는 작업의 경우
 
 ### 환형 큐
-    - 정해진 개수의 저장 공간을 빙 돌려가며 이용
-    - rear - 데이터 넣는 포인트, front - 데이터 빼는 포인트
-    - 큐 가득 차면?
-        - 더이상 원소를 넣을 수 없음(큐 길이를 기억하고 있어야)
-    - 디큐한 자리까지 데이터가 가득 차면?
-        - 무효가 된 자리를 덮어쓰면 된다.
-        - 한계치를 넘어가면 다시 0으로 돌아간다. 
+
+- 정해진 개수의 저장 공간을 빙 돌려가며 이용
+- rear - 데이터 넣는 포인트, front - 데이터 빼는 포인트
+- 큐 가득 차면?
+    - 더이상 원소를 넣을 수 없음(큐 길이를 기억하고 있어야)
+- 디큐한 자리까지 데이터가 가득 차면?
+    - 무효가 된 자리를 덮어쓰면 된다.
+    - 한계치를 넘어가면 다시 0으로 돌아간다. 
 
 1. 초기에 front 와 rear 를 공히 -1 로 초기화한 후에,
 (1) enqueue 연산의 경우 rear 를 전진시키고 (+1) 그 위치에 원소를 삽입하고
 (2) dequeue 연산의 경우 front 를 전진시키고 (+1) 그 위치의 원소를 리턴한다.
-이렇게 함으로써 리스트 data 를 인덱스 0 부터 이용하게 되며, front 는 큐에서 가장 앞에 들어 있는 원소 (현재 큐에 들어 있는 원소들 중 가장 먼저 삽입된 원소) 를 가리키고 있지 않고 그보다 하나 작은 인덱스를 가지고 있게된다.
+이렇게 함으로써 리스트 data 를 인덱스 0 부터 이용하게 되며, front 는 큐에서 가장 앞에 들어 있는 원소 (현재 큐에 들어 있는 원소들 중 가장 먼저 삽입된 원소) 를 가리키고 있지 않고 그보다 하나 작은 인덱스를 가지고 있게 된다.
+
 2. front 와 rear 의 전진에서는 환형 구조를 위하여 1 을 더하는 것 외에도 큐의 크기로 나눈 나머지를 취하는 연산이 수반되어야 함
 
 ```python
@@ -827,6 +829,63 @@ class CircularQueue:
 
 def solution(x):
     return 0
+```
+
+### 우선순위 큐
+
+- 원소들의 우선순위에 따라 큐에서 빠져나오는 방식
+    - 예: 운영체제의 CPU 스케줄러
+
+#### 2가지 큐의 구현
+
+- Enqueue 할 때 우선순위 순서를 유지하도록
+- Dequeue 할 때 우선순위 높은 것을 선택
+    - Enqueue가 더 유리하다
+    - 모든 원소를 쳐다볼 필요 없다. 우선순위가 있기 때문에
+
+
+- 선형 배열 이용
+- 연결 리스트 이용
+    - 시간 유리. 요소 삽입 시 배열에 비해 수월. 배열은 다른 요소들까지 각각 자리를 밀어야 하지만 연결리스트는 끊고 들어가면 되므로 
+    - 메모리 불리. 배열보다 많이 차지
+
+
+#### 더블연결리스트 우선수위 큐
+
+- 작은 수가 우선순위가 높다는 가정
+- while 1 조건 - 끝을 만나지 않았을 조건, 2 조건 우선순위를 비교하는 조건
+- getAt() 메서드를 이용하지 않음
+    - 왜? 계속 세면서 나가야 하므로
+- 예: [1,2,4,6,8,10] 인데 5를 넣는다면?
+    - 이 순환문이 하는 일은 큐의 앞쪽부터 시작해서 처음으로 `newNode.data`보다 같거나 큰 데이터가 ㄱ나타나는 노드를 찾ㅇㅏ 그 직전의 것을 `curr`에 담는 것
+    - 처음으로 `newNode.data < curr.next.data`를 만족하지 못하는 경우는 `curr.next.data`가 6인 경우
+    - `curr`는 원소 4를 가지는 노드를 가리킨다. 이 노드의 다음에 원소 5를 가지는 노드를 삽입
+
+```python
+class PriorityQueue:
+
+    def __init__(self):
+        self.queue = DoublyLinkedList()
+
+
+    def size(self):
+        return self.queue.getLength()
+
+    def isEmpty(self):
+        return self.size() == 0
+
+    def enqueue(self, x):
+        newNode = Node(x)
+        curr = self.queue.head ## 문제
+        while curr.next.data != None and newNode.data < curr.next.data: ## 문제
+            curr = curr.next
+        self.queue.insertAfter(curr, newNode) ## 문제
+    
+    def dequeue(self):
+        return self.queue.popAt(self.queue.getLength())
+
+    def peek(self):
+        return self.queue.getAt(self.queue.getLength()).data
 ```
 
 
