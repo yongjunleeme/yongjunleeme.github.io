@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 21:46:27 +0900
-updated : 2020-05-29 15:04:19 +0900
+updated : 2020-05-29 16:39:37 +0900
 tags    : 
 toc     : true
 public  : true
@@ -92,12 +92,26 @@ latex   : false
 
 ## Deploy
 
+### 제가 만든 서버가 동시접속자를 몇명이나 견딜 수 있는지 어떻게 아나요?
+
+- 현업에선 품질팀에서 성능검증을 통해 품질 검증 후 상용망에 적용합니다.
+- Jmeter같은 simulator 활용하여 부하테스트
+- [AWS 기반 부하 테스트](https://aws.amazon.com/ko/blogs/korea/how-to-loading-test-based-on-aws/)
+
+### 웹서비스를 실제 운영하다 보면 크로스스크립트, 클릭 인젝션 같은 공격이 들어올 때가 있다던데 AWS에서 막을 방법이 있을까요?
+
+- 어플리케이션 단의 공격 이전 인프라 단에서 막는 장비들이 있습니다.
+- AWS shield(DDoS), WAF(Web Application Firewall), CloudFront(CDN)
+- Market place에서 UTM솔루션 구매(Sophos, Fortinet 등)
+- DNS 제공해주는 Gabia, Cloudflare 등을 이용하면 WAF 제공
+
+= ### 질문 =
+
 - 대규모 트래픽 처리한 경험?
 - Docker, 사용이유? Container, Image
 - 클라우드 컴퓨팅
 - AWS Lambda?
 - 람다 함수와 파라미터 관련 event, context
-- 내 서버의 API가 10000명의 동시접속자가 있다고 가정해보자, 견딜수있나?
 - Kubernetes
 - Serverless
 - 쓰로틀
@@ -366,6 +380,24 @@ latex   : false
 - B+ Tree
 
 ## 운영체제
+
+### 프로세스와 스레드 차이
+
+- 프로세스 : 자신만의 고유 공간과 자원을 할당받아 사용
+- 스레드 : 다른 스레드와 공간과 자원을 공유하면서 사용
+
+- 프로세스 메모리상에서 실행 중인 프로그램의 인스턴스를 말하며, 스레드는 이 프로세스 안세서 실행되는 흐름의 단위다.
+    - 프로세스마다 최소 하나의 스레드를 가지며 주소공간을 할당받는다(code, data, heap, stack).
+    - 스레드는 이중에 stack만 할당받고 나머지 영역은 스레드끼리 공유한다.
+
+
+### 멀티 프로세스로 처리 가능한데 멀티 스레드로 처리하는 이유?
+
+- 프로세스를 생성해 자원을 할당하는 시스템 콜이 감소하면서 자원의 효율적 관리가 가능하다.
+- 프로세스간 통신(IPC)보다 스레드 사이 통신 비용이 적다.
+- 하지만 멀티스레드는 공유자원으로 발생하는 문제 해결을 위해 동기화에 신경써야 한다.
+
+
 
 
 ## 기타
