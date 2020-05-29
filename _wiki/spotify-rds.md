@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-22 17:58:13 +0900
+updated : 2020-05-29 21:26:55 +0900
 tags    : 
 toc     : true
 public  : true
@@ -18,9 +18,9 @@ latex   : false
 ```python
 $ pip install awscli
 
-"aws 홈페이 내 IAM → 사용자 → 사용자 추가
-"프로그래밍 방식 액세스 체크 ( CLI 허용여부)
-"정책 → AdministratorAccess 체크
+# aws 홈페이 내 IAM → 사용자 → 사용자 추가
+# 프로그래밍 방식 액세스 체크 ( CLI 허용여부)
+# 정책 → AdministratorAccess 체크
 
 $ aws configure
 
