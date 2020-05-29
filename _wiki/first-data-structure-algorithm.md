@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-28 13:53:37 +0900
+updated : 2020-05-29 11:55:43 +0900
 tags    : 
 toc     : true
 public  : true
@@ -888,6 +888,31 @@ class PriorityQueue:
         return self.queue.getAt(self.queue.getLength()).data
 ```
 
+## 트리
+
+### 설명
+
+- 정점(node)과 간선(edge)을 이용하여 데이터의 배치 형태를 추상화한 자료구조
+- 이진 트리
+    - 모든 노드의 차수가 2 이하인 트리
+    - 포화 이진 트리
+        - 모든 레벨에서 노드들이 모두 채워져 있는 이진 트리
+    - 완전 이진 트리
+        - 높이 k인 완전 이진 트리
+        - 레벨 k - 2까지는 모든 노드가 2개의 자식을 가진 포화 이진 트리
+        - 레벨 k - 1에서는 왼쪽부터 노드가 순차적으로 채워져 있는 이진 트리
+
+<img width="594" alt="6" src="https://user-images.githubusercontent.com/48748376/83216014-376f3e80-a1a3-11ea-938b-27dbf309ed27.png">
+
+<img width="639" alt="1" src="https://user-images.githubusercontent.com/48748376/83215996-31795d80-a1a3-11ea-8985-09076d5a1748.png">
+
+<img width="695" alt="2" src="https://user-images.githubusercontent.com/48748376/83216006-350ce480-a1a3-11ea-9e38-37e81d1f51c0.png">
+
+<img width="661" alt="3" src="https://user-images.githubusercontent.com/48748376/83216007-35a57b00-a1a3-11ea-85f4-e0e3fc599784.png">
+
+<img width="639" alt="4" src="https://user-images.githubusercontent.com/48748376/83216009-363e1180-a1a3-11ea-9f11-f08740cd4c39.png">
+
+<img width="692" alt="5" src="https://user-images.githubusercontent.com/48748376/83216012-36d6a800-a1a3-11ea-84bd-82acb4d6daba.png">
 
 ## Link 
 
