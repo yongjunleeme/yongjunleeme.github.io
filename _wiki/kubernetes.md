@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-30 10:08:27 +0900
-updated : 2020-05-30 12:56:26 +0900
+updated : 2020-05-30 13:54:57 +0900
 tags    : 
 toc     : true
 public  : true
@@ -185,6 +185,8 @@ latex   : false
 
 ### 참고
 
+- [Security on AWS :: 이경수 솔루션즈아키텍트](https://www.slideshare.net/awskorea/security-on-aws-kyungsoo-lee)
+
 - [AWS 계정의 IAM 사용자 생성](https://docs.aws.amazon.com/ko_kr/IAM/latest/UserGuide/id_users_create.html)
 - [AWS에서 멀티 팩터 인증(MFA) 사용하기](https://docs.aws.amazon.com/ko_kr/IAM/latest/UserGuide/id_credentials_mfa.html)
 - [VPC 및 서브넷](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_Subnets.html)
@@ -205,12 +207,9 @@ latex   : false
 - Sophos -Market place에서 UTM솔루션
 - Fortinet
  
-
-
-
-
 ## Link
 
+- [클라우드직무멘토]
 
 
 
