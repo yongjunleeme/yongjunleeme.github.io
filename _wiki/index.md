@@ -82,6 +82,7 @@ regenerate: true
 * [[s3]]
 * [[spark]]
 * [[lambda]]
+* [[kubernetes]]
 
 ### vim
 
