@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-05-13 09:35:12 +0900
+updated : 2020-05-30 17:47:15 +0900
 tags    : 
 toc     : true
 public  : true
@@ -16,6 +16,36 @@ latex   : false
 > 개인이 보는 용도의 낙서장입니다;
 
 ## 운영체제
+
+### CPU 시장 점유
+
+- IBM 대형컴퓨터, PC
+    - IBM의 CPU -> Intel
+    - IBM의 OS -> MicroSoft
+        - MS-DOS(Disk operating system) -> DOS의 원래 주인은 CPM
+        - 83's -> IBM이 MS 밀어줘서 CPM은 사라짐
+        - 90년대 CISCO > MS > Intel > IBM
+            - Intel 2년 반 동안 주식 3번 스플릿 -> 8배 성장
+        - 2000년
+- Intel - IA64로 PC 시장 석권, 서버 시장까지 진출
+    - HP 백기 투항
+    - IA64가 들어가는 Itanium, Itanium2 CPU 설계 엔지니어 600명(50명은 HP)
+- 실리콘 그래픽스 - MIPS - RISC 프로세서
+    - 쥬라기공원만드는 데 워크스테이션 제공했지만 인텔에게 밀림
+    - 임베디드 프로세서로 전환
+- 썬 - SPARC -> 서버용 CPU 강자였지만 인텔에게 밀림
+    - 오라클에 흡수
+- IBM - PowerPC -> 10년 전 애플에 들어감
+    - IBM + 모토롤라 + 애플 -> PowerPC
+    - 인텔에게 밀려서 나머지는 손털고 IBM만 씀
+- 애플 ARM의 ISA 라이선스만 가져와서 나머지 자체 설계
+- 삼성 ARM의 설계를 가져와서 제조만 자체 (로얄티 애플보다 많이 주겠지)
+
++ 버전 업
+    - 세대가 발전 -> 내부 설계가 변한 것
+    - 공정기술이 발전 -> 실리콘 와이어의  람다(미니멈 피처사이즈)가 줄어드는
+
++ 128b processor -> 플레이스테이션3
 
 ### OS Overview
 
@@ -118,12 +148,10 @@ latex   : false
 - 가상 주소와 메인 메모리의 실제 주소 사이의 동적 매핑을 제공
 
 
+### 운영체제 역사
 
-Ia64 - 600명 cpu디자이너
+Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영체제) -> Multiprogrammed Batch Systems(멀티 태스킹) -> Time Sharing Systems
 
-Mips - 실리콘그래픽스
-
-람다 - 미니멈 피처 사이즈
 
 ## 컴퓨터구조
 
@@ -232,7 +260,7 @@ Mips - 실리콘그래픽스
 - 스토어 - 레지스터에 있는 것 메모리로
 
 - 베이스 어드레싱 - 레지스터 상수를 더해서
-- RS 베이스 레지스터에 저장된 32비트 부소에 ㅅ어드레스를 더하는데 이 어드레스를 오프셋이라고 한다. 이것이 디스플레이스먼트
+- RS 베이스 레지스터에 저장된 32비트 부소에 어드레스를 더하는데 이 어드레스를 오프셋이라고 한다. 이것이 디스플레이스먼트
 
 ### 4
 
