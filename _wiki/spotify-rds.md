@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-29 21:26:55 +0900
+updated : 2020-05-29 23:14:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -13,7 +13,9 @@ latex   : false
 * TOC
 {:toc}
 
-## aws cli
+## Background
+
+### aws cli 설정
 
 ```python
 $ pip install awscli
@@ -24,48 +26,29 @@ $ pip install awscli
 
 $ aws configure
 
-"홈페이지에 나온 ID와 액세스 키 입력
-"데이터 리전 입력 - ap-norhest-2
-"output format -> 엔터 (None)
+# 홈페이지에 나온 ID와 액세스 키 입력
+# 데이터 리전 입력 - ap-norhest-2
+# output format -> 엔터 (None)
 
 $ aws —-help
 ```
 
-### deploy.sh
+### `deploy.sh`
+
+- `>`, `>>` 문법
+    - command > file  → 기존 지우고 저장
+    - 예) $ python example.py > test.txt
+    - command >> file  → 기존 안 지우고 이어서 저장
 
 ```python
-"command > file  → 기존 지우고 저장
-"예) $ python example.py > test.txt
-"command >> file  → 기존 안 지우고 이어서 저장
-
 $ vim run.sh  
-"자동 실행될 커맨드 명령어 작성
+# 자동 실행될 커맨드 명령어 작성
 
 $ chmod +x run.sh  
-"권한 설정
+# 권한 설정
 
 $ ./run.sh
-"실행
-```
-
-## RDS
-
-### command
-
-```python
-$ mysql --help
-
-"RDS 접속
-$ mysql -h fastcampus.c2i2ypp7xnkb.ap-northeast-2.rds.amazonaws.com -P 3306 -u yongjunlee -p
-
-"DATABASE 생성
-mysql> CREAE DATABASE production;
-
-"DATABASE 연결
-$ mysql -h fastcampus.c2i2ypp7xnkb.ap-northeast-2.rds.amazonaws.com -P 3306 -D production -u yongjunlee -p
-
-"TABLE 생성
-mysql> CREATE TABLE people (first_name VARCHAR(20), last_name VARCHAR(20), age INT);
+# 실행
 ```
 
 ### ERD
@@ -81,10 +64,6 @@ Attributes: 엔터티의 속성 (성, 이름)
 
 <img width="1319" alt="11" src="https://user-images.githubusercontent.com/48748376/81815764-5f389280-9565-11ea-8511-3cd434f39ca4.png">
 
-- ERD 예시
-
-<img width="510" alt="22" src="https://user-images.githubusercontent.com/48748376/81815778-63fd4680-9565-11ea-9e99-47224b962db4.png">
-
 - 티켓마스터 ERD
 
 <img width="839" alt="33티켓마스터" src="https://user-images.githubusercontent.com/48748376/81815781-6495dd00-9565-11ea-8c1b-4ae9152cae3d.png">
@@ -93,7 +72,27 @@ Attributes: 엔터티의 속성 (성, 이름)
 
 <img width="1219" alt="55" src="https://user-images.githubusercontent.com/48748376/81815786-65c70a00-9565-11ea-846f-e21d65a60f3f.png">
 
-### code
+## RDS에서 pymysql 사용해 DB 호출
+
+### RDS에서 테이블 생성 
+
+```python
+$ mysql --help
+
+# RDS 접속
+$ mysql -h fastcampus.c2i2ypp7xnkb.ap-northeast-2.rds.amazonaws.com -P 3306 -u yongjunlee -p
+
+# DATABASE 생성
+mysql> CREAE DATABASE production;
+
+# DATABASE 연결
+$ mysql -h fastcampus.c2i2ypp7xnkb.ap-northeast-2.rds.amazonaws.com -P 3306 -D production -u yongjunlee -p
+
+# TABLE 생성
+mysql> CREATE TABLE people (first_name VARCHAR(20), last_name VARCHAR(20), age INT);
+```
+
+### 테이블 호출
 
 ```python
 $ pip install pymysql --user
@@ -126,103 +125,19 @@ def main():
 
     cursor.execute("SHOW TABLES")
     print(cursor.fetchall())
+    
+    # table 출력 형태
+    # (('artist_genres',),('artists',),('people,'))
 
     print("success")
-    sys.exit(0)
-
-    headers = get_headers(client_id, client_secret)
-
-    ## Spotify Search API
-    params = {
-        "q": "BTS",
-        "type": "artist",
-        "limit": "5"
-    }
-
-    r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
-    try:
-        r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
-    except:
-        logging.error(r.text)
-        sys.exit(1)
-
-    r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
-    if r.status_code != 200:
-        logging.error(r.text)
-
-        if r.status_code == 429:
-
-            retry_after = json.loads(r.headers)['Retry-After']
-            time.sleep(int(retry_after))
-
-            r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
-
-        ## access_token expired
-        elif r.status_code == 401:
-
-            headers = get_headers(client_id, client_secret)
-            r = requests.get("https://api.spotify.com/v1/search", params=params, headers=headers)
-
-        else:
-            sys.exit(1)
-
-
-    # Get BTS' Albums
-
-    r = requests.get("https://api.spotify.com/v1/artists/3Nrfpe0tUJi4K4DXYWgMUX/albums", headers=headers)
-
-    raw = json.loads(r.text)
-
-    total = raw['total']
-    offset = raw['offset']
-    limit = raw['limit']
-    next = raw['next']
-
-    albums = []
-    albums.extend(raw['items'])
-
-    ## 난 100개만 뽑아 오겠다
-    while next:
-
-        r = requests.get(raw['next'], headers=headers)
-        raw = json.loads(r.text)
-        next = raw['next']
-        print(next)
-
-        albums.extend(raw['items'])
-        count = len(albums)
-    print(len(albums))
-
-def get_headers(client_id, client_secret):
-
-    endpoint = "https://accounts.spotify.com/api/token"
-    encoded = base64.b64encode("{}:{}".format(client_id, client_secret).encode('utf-8')).decode('ascii')
-
-    headers = {
-        "Authorization": "Basic {}".format(encoded)
-    }
-
-    payload = {
-        "grant_type": "client_credentials"
-    }
-
-    r = requests.post(endpoint, data=payload, headers=headers)
-
-    access_token = json.loads(r.text)['access_token']
-
-    headers = {
-        "Authorization": "Bearer {}".format(access_token)
-    }
-
-    return headers
 
 if __name__=='__main__':
     main()
 ```
 
-## database 
+### SQL 명령어
 
-### create
+#### create
 
 ```python
 mysql> CREATE TABLE artists(id VARCHAR(255), name VARCHAR(255), followers INTEGER, popularity INTEGER, url VARCHAR(255), image_url VARCHAR(255), PRIMARY KEY(id)) ENGINE=InnoDB DEFAULT CHARSET='utf8';
@@ -234,7 +149,7 @@ mysql> CREATE TABLE artist_genres (artist_id VARCHAR(255), genre VARCHAR(255)) E
 mysql> show create table artists;
 ```
 
-### insert
+#### insert
 
 ```python
 mysql> INSERT INTO artist_genres (artist_id, genre) VALUES ('1234', 'pop');
@@ -242,7 +157,7 @@ mysql> INSERT INTO artist_genres (artist_id, genre) VALUES ('1234', 'pop');
 mysql> INSERT INTO artist_genres (artist_id, genre) VALUES ('1234', 'pop');
 ```
 
-### delete
+#### delete
 
 ```python
 mysql> DELETE FROM artist_genres;
@@ -250,7 +165,7 @@ mysql> DELETE FROM artist_genres;
 mysql> DROP TABLE artist_genres;
 ```
 
-### update
+#### update
 
 - unique key 추가
 
@@ -267,7 +182,7 @@ mysql>UPDATE artist_genres SET genre='pop' where artist_id = '1234';
 mysql>UPDATE artist_genres SET genre='pop' where artist_id = '1234';
 ```
 
-### replace
+#### replace
 
 - 컬럼 추가
 
@@ -297,7 +212,7 @@ INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'pop', 'UK
 mysql>REPLACE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'pop', 'UK');
 ```
 
-### insert ignore
+#### insert ignore
 
 - 기존 데이터에 있으면 무시
 
@@ -307,7 +222,7 @@ mysql>INSERT IGNORE INTO artist_genres (artist_id, genre, country) VALUES ('1234
 mysql>INSERT IGNORE INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'FR');
 ```
 
-### duplicate key update
+#### duplicate key update
 
 - replace와 비슷하지만 지우지 않고 업데이트
 - 실제 코딩 시 거의 이것만 쓴다
@@ -316,7 +231,7 @@ mysql>INSERT IGNORE INTO artist_genres (artist_id, genre, country) VALUES ('1234
 mysql>INSERT INTO artist_genres (artist_id, genre, country) VALUES ('1234', 'rock', 'FR') ON DUPLICATE KEY UPDATE artist_id='1234', genre='rock', country='FR';
 ```
 
-### id autoincrement
+#### id autoincrement
 
 ```python
 mysql>id primary_key auto_increment
@@ -326,9 +241,9 @@ mysql>id primary_key auto_increment
 mysql> alter table artist_genres drop column country;
 ```
 
-## pymysql 데이터 핸들링
+### pymysql 데이터 핸들링
 
-### {}.format
+#### {}.format으로 데이터 자동 입력
 
 ```python
 ...
@@ -354,28 +269,22 @@ def main():
     conn.commit()
     
     sys.exit(0)
-
-    headers = get_headers(client_id, client_secret)
-
-    ## Spotify Search API
-    params = {
-        "q": "BTS",
-        "type": "artist",
-        "limit": "5"
-    }
-...
 ```
 
-### Dictionary, json
+## 데이터 핸들링
+
+### tip
+
+- 키값을 모를 때
 
 ```python
 raw = json.loads(r.text)
 print(raw['artist'].keys()) # 키 출력해서 다음 뎁스로 넘어간다
 ```
 
-### duplicate record 핸들링
-
 - 에러나면 sys.exit(0) 놓고 위에 프린트 찍어가며 디버깅
+
+### 하드코딩 
 
 ```python
 ...
@@ -407,7 +316,7 @@ def main():
     artist_raw = raw['artists']['items'][0]
     if artist_raw['name'] == params['q']:
 
-        artist.update(
+        artist.update( # update -> 딕셔너리 한 번데 업데이트하는 함수
             {
                 'id': artist_raw['id'],
                 'name': artist_raw['name'],
@@ -554,6 +463,8 @@ mysql> SELECT COUNT(*) FROM artists;
 ```
 
 ### Batch 
+
+- RDS에서 SQL 통해 id를 가져온 다음 0~49번쨰, 50~99번째,... 50개씩 batch
 
 ```python
 ...
