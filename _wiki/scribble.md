@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-05-30 17:47:15 +0900
+updated : 2020-05-31 14:44:53 +0900
 tags    : 
 toc     : true
 public  : true
@@ -152,6 +152,100 @@ latex   : false
 
 Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영체제) -> Multiprogrammed Batch Systems(멀티 태스킹) -> Time Sharing Systems
 
+### Process
+
+- 실행 중인 한 프로그램의 인스턴스
+- 프로그램은 정적인 개념, 스테이트가 없다
+- 프로세스 라이프 사이클?
+    - 더블클릭하는 순간 각각의 프로세스 생성
+    - 메모리에 로드되면 실행할 준비상태인 레디
+    - Time Sharing에 의해 자신의 차례가 오면 실행 상태
+    - IO를 요청하면 이벤트를 기다리는 블록 상태
+    - 실행을 마치면 약간의 상태정보만 살아있는 좀비 상태
+    - 부모 클래스에 의해 컬렉션되는 하비스트가 실행되면 완전히 사라진다
+- 각 프로세스는 개별 버추얼 메모리, 독립적, CPU의 할당 경쟁
+    - 자신이 혼자 CPU를 Exclusive하게 사용한다는 일루젼
+        - 멀티태스킹으로 일정시간을 주고 돌아가는데 정지 후 다시 시작이 거의 연속적
+    - 메모리도 혼자 사용한다는 일루젼
+        - Private Adress Space -> Virtual Memory
+            - 메인메모리(DRAM)의 물리적 한계를 벗어나서 얼마든지 큰 공간을 차지할 수 있다
+
+#### Private Address Spaces
+
+- 피지컬 어드레스 - DRAM의 주소
+    - 각 주소는 바이트마다 
+- 버우얼 어드레스 - 버추멀 메모리의 주소
+    - CPU 내 프로그램 카운터, 명령어, 데이터의 주소 
+- 하드웨어 Translation의 의해 Private Address를 DRAM의 주소로 변경
+
+
+사진 
+
+- Heap, Stack - 다이내믹 데이터
+    - 프로그램 실행 중에 자기 공간이 생겼다가 없어졌다
+    - 멜록하면 생성 프리하면 사라짐
+- Shared Library - 다이내믹 라이브러리(.DLL 파일)
+    - 예: printf는 모든 프로세스가 가져다 쓰도록 - 링킹
+- Heap -> Static - 집이 항상 있다
+
+#### Life and Scope of an Object
+
+##### Life vs scope
+
+- 메모리 공간을 차지하고 있으면 -> Live
+- 살아있으나 스콥에 없으면 -> Live but not visible
+
+##### 로컬 변수
+
+- 포멀 parameter - 함수 내 선언, Actual parameter - 그 반대
+- 블록 스콥
+- 함수 실행 시 로컬 변수 메모리 할당 -> **스택 프레임**에 푸시, 함수 종료 시 팝
+- Static(함수 내) - 스콥은 로컬이지만 스택이 아닌 스테틱에 저장되므로 함수가 사라져도 메모리를 차지하고 있다. 다시 불러올 때 메모리를 다시 할당하지 않아도 된다.
+- Global - 스콥은 프로그램 전체, 메모리 고정 할당
+    - Static(글로벌) - 스콥은 파일 내부, 특정 파일 내에서만 접근 가능해야 할 때 용이
+
+#### Linux Run-time Memory Image
+
+#### Context Switching
+
+한 프로세스 내에서 사용자 프로세스와 커널 프로세스을 오감
+Mode bit - 사용자 모드인지 커널 모드인지 확인
+익셉션 - 사용자 모드에서 커널로 들어가는 유일한 경우
+    - 인터럽트도 광의의 익셉션
+    - 시스템 콜 - 트랩
+- Context
+    - 레지스터 내용 저장, 프로그램 카운터 저장 - 다음 스테이트 트랜스레이션할 때 여기서부터 시작
+    - preemped -> 잠시 중지
+    - 프로세스 컨트롤 블록의 레지스터를 보통 Context라고 부름
+- Context Switching
+
+
+
+#### Process Contrul Block
+
+
+
+### Thread
+
+### Mutual Exclusion and Synchronization
+
+### Deadlock and Starvation
+
+### Memory Management
+
+### Virtual Memory
+
+### Uniprocessor Scheduling
+
+### Multiprocessor and Realtime Scheduling
+
+### IO
+
+### File Manamement
+
+### Embedded OS
+
+### Distributed OS
 
 ## 컴퓨터구조
 
