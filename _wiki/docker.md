@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-03-18 14:59:57 +0900
-updated : 2020-05-29 19:02:45 +0900
+updated : 2020-05-31 18:37:06 +0900
 tags    : 
 toc     : true
 public  : true
@@ -204,5 +204,6 @@ $ sudo docker run -d -p 8000:8000 yongjunleeme/hivibe:0.1
 
 ## Link
 
+- [Docker로 프로젝트 배포하기](https://velog.io/@devmin/Docker-deployment)
 - [Wecode](https://stackoverflow.com/c/wecode/questions/275)
 - [Docker 소개](https://bcho.tistory.com/805)
