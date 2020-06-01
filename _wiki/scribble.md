@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-05-31 14:44:53 +0900
+updated : 2020-06-01 18:09:07 +0900
 tags    : 
 toc     : true
 public  : true
@@ -167,28 +167,25 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
     - 자신이 혼자 CPU를 Exclusive하게 사용한다는 일루젼
         - 멀티태스킹으로 일정시간을 주고 돌아가는데 정지 후 다시 시작이 거의 연속적
     - 메모리도 혼자 사용한다는 일루젼
-        - Private Adress Space -> Virtual Memory
-            - 메인메모리(DRAM)의 물리적 한계를 벗어나서 얼마든지 큰 공간을 차지할 수 있다
+- 프로세스가 제공하는 두 가지 key abstractions
+    - Logical control flow, Private address space
+    - Private Address Space -> Virtual Memory
+        - 버추얼 메모리 - OS는 각 프로세스에 Private spaceㅇ를 제공
+        - 메인메모리(DRAM)의 물리적 한계를 벗어나서 얼마든지 큰 공간을 차지할 수 있다
 
 #### Private Address Spaces
 
 - 피지컬 어드레스 - DRAM의 주소
     - 각 주소는 바이트마다 
-- 버우얼 어드레스 - 버추멀 메모리의 주소
+- 버추얼 어드레스 - 버추멀 메모리의 주소
     - CPU 내 프로그램 카운터, 명령어, 데이터의 주소 
 - 하드웨어 Translation의 의해 Private Address를 DRAM의 주소로 변경
-
-
-사진 
-
 - Heap, Stack - 다이내믹 데이터
     - 프로그램 실행 중에 자기 공간이 생겼다가 없어졌다
     - 멜록하면 생성 프리하면 사라짐
 - Shared Library - 다이내믹 라이브러리(.DLL 파일)
     - 예: printf는 모든 프로세스가 가져다 쓰도록 - 링킹
 - Heap -> Static - 집이 항상 있다
-
-#### Life and Scope of an Object
 
 ##### Life vs scope
 
@@ -219,11 +216,7 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
     - 프로세스 컨트롤 블록의 레지스터를 보통 Context라고 부름
 - Context Switching
 
-
-
-#### Process Contrul Block
-
-
+#### Process Control Block
 
 ### Thread
 
