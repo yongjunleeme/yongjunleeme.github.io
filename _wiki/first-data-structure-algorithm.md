@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-06-02 09:58:51 +0900
+updated : 2020-06-02 10:37:42 +0900
 tags    : 
 toc     : true
 public  : true
@@ -914,45 +914,6 @@ class PriorityQueue:
 
 <img width="692" alt="5" src="https://user-images.githubusercontent.com/48748376/83216012-36d6a800-a1a3-11ea-84bd-82acb4d6daba.png">
 
-### 이진 트리의 순회(Traversal)
-
-- 깊이 우선 순회(depth first traversal)
-    - 중위 순회(in-order traversal)
-    - 전위 순회(pre-order traversal)
-    - 후위 순회(post-order traversal)
-- 넓이 우선 순회(breadth first traversal)
-
-#### 중위 우선 순회
-
-<img width="647" alt="스크린샷 2020-06-02 오전 9 28 31" src="https://user-images.githubusercontent.com/48748376/83467509-0fd6e980-a4b5-11ea-8a06-faca769c49e7.png">
-
-```python
-class Node
-
-    def inorder(self):
-        traversal = []
-        if self.left:
-            traversal += self.left.inorder()
-        traversal.append(self.data)
-        if self.right:
-            traversal += self.right.inorder()
-        return traversal
-```
-
-```python
-class binary Tree:
-    def inorder(self):
-        if self.root:
-            return self.toor.inonder()
-        else:
-            return []
-```
-
-<img width="658" alt="스크린샷 2020-06-02 오전 9 37 00" src="https://user-images.githubusercontent.com/48748376/83467512-11a0ad00-a4b5-11ea-91d9-5a8d1c0ef22b.png">
-
-
-<img width="639" alt="스크린샷 2020-06-02 오전 9 39 04" src="https://user-images.githubusercontent.com/48748376/83467515-12d1da00-a4b5-11ea-8fb5-4956477bc705.png">
-
 ### 이진 트리의 구현 
 
 #### `depth()`, `size()`
@@ -990,6 +951,47 @@ class BinaryTree:
         else:
             return 0
 ```
+### 이진 트리의 순회(Traversal)
+
+- 깊이 우선 순회(depth first traversal)
+    - 중위 순회(in-order traversal)
+    - 전위 순회(pre-order traversal)
+    - 후위 순회(post-order traversal)
+    - 자기 자신을 중간에 방문 - 중위, 자기 자신을 먼저 방문 - 전위
+- 넓이 우선 순회(breadth first traversal)
+
+#### 중위 우선 순회
+
+<img width="647" alt="스크린샷 2020-06-02 오전 9 28 31" src="https://user-images.githubusercontent.com/48748376/83467509-0fd6e980-a4b5-11ea-8a06-faca769c49e7.png">
+
+```python
+class Node
+
+    def inorder(self):
+        traversal = []
+        if self.left:
+            traversal += self.left.inorder() # 1 leftsubtree
+        traversal.append(self.data) # 2 자기 자신
+        if self.right:
+            traversal += self.right.inorder() # rightsubtree
+        return traversal
+```
+
+```python
+class binary Tree:
+    def inorder(self):
+        if self.root:
+            return self.toor.inonder()
+        else:
+            return []
+```
+
+<img width="658" alt="스크린샷 2020-06-02 오전 9 37 00" src="https://user-images.githubusercontent.com/48748376/83467512-11a0ad00-a4b5-11ea-91d9-5a8d1c0ef22b.png">
+
+
+<img width="639" alt="스크린샷 2020-06-02 오전 9 39 04" src="https://user-images.githubusercontent.com/48748376/83467515-12d1da00-a4b5-11ea-8fb5-4956477bc705.png">
+#### 전위 우선 순회
+
 
 ## Link 
 
