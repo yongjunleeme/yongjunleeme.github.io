@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-05-29 11:55:43 +0900
+updated : 2020-06-02 09:58:51 +0900
 tags    : 
 toc     : true
 public  : true
@@ -913,6 +913,83 @@ class PriorityQueue:
 <img width="639" alt="4" src="https://user-images.githubusercontent.com/48748376/83216009-363e1180-a1a3-11ea-9f11-f08740cd4c39.png">
 
 <img width="692" alt="5" src="https://user-images.githubusercontent.com/48748376/83216012-36d6a800-a1a3-11ea-84bd-82acb4d6daba.png">
+
+### 이진 트리의 순회(Traversal)
+
+- 깊이 우선 순회(depth first traversal)
+    - 중위 순회(in-order traversal)
+    - 전위 순회(pre-order traversal)
+    - 후위 순회(post-order traversal)
+- 넓이 우선 순회(breadth first traversal)
+
+#### 중위 우선 순회
+
+<img width="647" alt="스크린샷 2020-06-02 오전 9 28 31" src="https://user-images.githubusercontent.com/48748376/83467509-0fd6e980-a4b5-11ea-8a06-faca769c49e7.png">
+
+```python
+class Node
+
+    def inorder(self):
+        traversal = []
+        if self.left:
+            traversal += self.left.inorder()
+        traversal.append(self.data)
+        if self.right:
+            traversal += self.right.inorder()
+        return traversal
+```
+
+```python
+class binary Tree:
+    def inorder(self):
+        if self.root:
+            return self.toor.inonder()
+        else:
+            return []
+```
+
+<img width="658" alt="스크린샷 2020-06-02 오전 9 37 00" src="https://user-images.githubusercontent.com/48748376/83467512-11a0ad00-a4b5-11ea-91d9-5a8d1c0ef22b.png">
+
+
+<img width="639" alt="스크린샷 2020-06-02 오전 9 39 04" src="https://user-images.githubusercontent.com/48748376/83467515-12d1da00-a4b5-11ea-8fb5-4956477bc705.png">
+
+### 이진 트리의 구현 
+
+#### `depth()`, `size()`
+
+```python
+class Node:
+    def __init__(self, item):
+        self.data = item
+        self.left = None
+        self.right = None
+
+    def size(self):
+        l = self.left.size() if self.left else 0
+        r = self.right.size() if self.right else 0
+        return l + r + 1
+
+    def depth(self):
+        l = self.left.depth() if self.left else 0
+        r = self.right.depth() if self.right else 0
+        return max([l, r]) + 1
+
+class BinaryTree:
+    def __init__(self, r):
+        self.root = r
+
+    def size(self):
+        if self.root:
+            return self.root.size()
+        else:
+            return 0
+
+    def depth(self):
+        if self.root:
+            return self.root.depth()
+        else:
+            return 0
+```
 
 ## Link 
 
