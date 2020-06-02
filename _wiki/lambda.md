@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-25 09:21:17 +0900
-updated : 2020-05-26 15:25:39 +0900
+updated : 2020-06-01 19:28:19 +0900
 tags    : 
 toc     : true
 public  : true
@@ -182,8 +182,8 @@ rm *.zip
 zip top_tracks.zip -r *
 
 aws s3 rm s3://버킷이름/top_tracks.zip  # 버킷이름
-aws s3 cp ./top_tracks.zip s3://top-tracks-lambda/top_tracks.zip
-aws lambda update-function-code --function-name top-tracks --s3-bucket top-tracks-lambda --s3-key top_tracks.zip
+aws s3 cp ./top_tracks.zip s3://버킷이름/top_tracks.zip
+aws lambda update-function-code --function-name top-tracks --s3-bucket 버킷이름 --s3-key top_tracks.zip
 ```
 
 #### setup.cfg
@@ -197,12 +197,6 @@ prefix=
 
 ### 설정
 
-- create 
-    - 환경변수 설정
-
-```python
-client_id = os.environ.get('client_id') # 하단 Enviroment Variables에서 client_id 등 계정 기입
-```
 
 - Basic settings
     - 간단명료한 잡들을 병렬처리하는 것이 서버리스에 적합
