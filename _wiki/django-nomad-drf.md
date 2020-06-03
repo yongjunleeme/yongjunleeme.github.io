@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-05-27 22:01:52 +0900
+updated : 2020-06-02 22:35:14 +0900
 tags    : 
 toc     : true
 public  : true
@@ -171,6 +171,77 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
+```
+
+### [1.5 ListAPIView](https://github.com/nomadcoders/airbnb-api/commit/852b4c851ff02735a5d9499c19328762bc2e68d8)
+
+- 리스트가 아니라 1개 호출
+- url에 pk 써주고 serializer에서 field가 아닌 exclude를 써준 후 뷰에서 RetrieveAPIView 불러오고 쿼리셋 선언하고 serializer_class에 serializer 불러오면 끝
+
+
+```python
+# urls.py
+urlpatterns = [
+    path("<int:pk>/", views.SeeRoomView.as_view()),
+]
+```
+
+```python
+# serlalizer.py
+class BigRoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        exclude = () # fields가 아닌 exclude
+```
+
+```python
+# views.py
+class SeeRoomView(RetrieveAPIView):
+
+    queryset = Room.objects.all()
+    serializer_class = BigRoomSerializer
+```
+
+
+
+#### Reference
+
+- [Classy Class-Based Views](http://ccbv.co.uk/) - 장고 클래스 기반 뷰의 디테일한 정보
+- [Classy Django REST Framework](http://www.cdrf.co/) - DRF 클래스 기반 뷰 종류별 선언할 수 있는 변수 총정리
+
+
+### [1.6 ModelViewSet](https://github.com/nomadcoders/airbnb-api/commit/14321042d1337a9478ad75c24d5ca4632a05e4e3)
+
+#### viewset
+    - 그냥 api 완성
+    - url 제공 - rooms, rooms/1 모두 자동으로
+    - PUT, DELETE 메소드까지 제공
+    - 그러나 모든 기능이 on 되어 있어서 비즈니스로직 (viewset actions](https://www.django-rest-framework.org/api-guide/viewsets/) 구현해야 할 수도
+
+
+```python
+# urls.py
+from rest_framework.routers import DefaultRouter
+from . import viewsets
+
+router = DefaultRouter()
+router.register("", viewsets.RoomViewset, basename="room")
+
+urlpatterns = router.urls
+```
+
+```python
+# viewset.py
+
+from rest_framework import viewsets
+from .models import Room
+from .serializers import BigRoomSerializer
+
+
+class RoomViewset(viewsets.ModelViewSet):
+
+    queryset = Room.objects.all()
+    serializer_class = BigRoomSerializer
 ```
 
 
