@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-01 18:09:07 +0900
+updated : 2020-06-03 13:27:15 +0900
 tags    : 
 toc     : true
 public  : true
@@ -217,6 +217,46 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
 - Context Switching
 
 #### Process Control Block
+
+- 스테이트 - 메모리, 레지스터
+    - 메모리 - 실제 메모리, 레지스터 - 가상 메모리
+- 레지스터의 스테이트 -> Context
+    - OS -> 레지스터의 스테이트를 커널에 저장
+        - Process Countrol Block - 프로세스와 관련된 정보 관리
+            - 프로세스의 ID, 실행상태, 프로세스의 우선순위 등의 스테이트 관리
+- 용도 : 중단되기 전 마지막 명령부터 시작
+    - 스케쥴링에 관련된 정보
+    - 시그널: 프로세스간 통신의 메시지
+- 프리빌리지 레벨 정보
+    - 예: 커널 프로세스는 어떤 접근도 가능
+- 메모리 정보
+    - 세그먼트 : 버추얼 메모리(텍스트, 힙, 스택 등)의 논리적 조각
+    - 세그먼트 사이 갭이 존재할 수 있으므로 링크드리스트로 관리
+    - 페이지테이블: DRAM에는 어디로 저장 되어 있는지 페이징으로 구분
+        - 버추얼보다 작은 실제 메모리와의 트랜스레이션을 위해
+- 리소스 관리
+    - 메모리 제외한 요소(예: print) 동시 사용 불가능
+    - unlock, lock 상태 관리
+
+#### Program Status Word(PSW)
+
+- 특정 레지스터가 프로세스의 실행 스테이트 정보를 관리
+    - 예: EEFALGS 레지스터(x86 프로세서) - CPU가 현재 실행하는 프로세스 관리하는 스페셜 레지스터
+
+#### Queung Diagram
+
+- Two-state process model : runnign, not running
+    - 실제 1개만 수행 가능하므로 not runnging 프로세스들은 대기하면서 큐가 만들어져
+- 디스패처 : 커널에서 스케쥴링 담당하는 코드
+
+<img width="1129" alt="스크린샷 2020-06-03 오후 1 25 27" src="https://user-images.githubusercontent.com/48748376/83595734-ca421b80-a59d-11ea-80e4-fbb116ae1f3e.png">
+
+#### Process Creation and Termination
+
+3강 26분
+
+
+
 
 ### Thread
 
