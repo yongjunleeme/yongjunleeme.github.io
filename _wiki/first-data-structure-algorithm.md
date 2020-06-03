@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-06-02 10:37:42 +0900
+updated : 2020-06-03 09:48:45 +0900
 tags    : 
 toc     : true
 public  : true
@@ -960,7 +960,9 @@ class BinaryTree:
     - 자기 자신을 중간에 방문 - 중위, 자기 자신을 먼저 방문 - 전위
 - 넓이 우선 순회(breadth first traversal)
 
-#### 중위 우선 순회
+#### 깊이 우선 순회
+
+##### 중위 우선 순회
 
 <img width="647" alt="스크린샷 2020-06-02 오전 9 28 31" src="https://user-images.githubusercontent.com/48748376/83467509-0fd6e980-a4b5-11ea-8a06-faca769c49e7.png">
 
@@ -978,7 +980,7 @@ class Node
 ```
 
 ```python
-class binary Tree:
+class binaryTree:
     def inorder(self):
         if self.root:
             return self.toor.inonder()
@@ -988,9 +990,40 @@ class binary Tree:
 
 <img width="658" alt="스크린샷 2020-06-02 오전 9 37 00" src="https://user-images.githubusercontent.com/48748376/83467512-11a0ad00-a4b5-11ea-91d9-5a8d1c0ef22b.png">
 
-
 <img width="639" alt="스크린샷 2020-06-02 오전 9 39 04" src="https://user-images.githubusercontent.com/48748376/83467515-12d1da00-a4b5-11ea-8fb5-4956477bc705.png">
-#### 전위 우선 순회
+
+#### 넓이 우선 순회(breadth first traversal)
+
+- 원칙
+    - 수준(level)이 낮은 노드를 우선으로 방문
+    - 같은 수준의 노드들 사이에는
+        - 부모 노드의 방문 순서에 따라 방문
+        - 왼쪽 자식 노드를 오른쪽 자식보다 먼저 방문
+- 재귀적 방법이 적합한가? No
+    - 한 노드를 방문했을 때
+        - 나중에 방문할 노드들을 순서대로 기록해 두어야
+        - 큐를 이용하면 어떨까?
+
+<img width="671" alt="스크린샷 2020-06-03 오전 9 36 12" src="https://user-images.githubusercontent.com/48748376/83583446-585ad980-a57f-11ea-9ec6-902a7574a9ab.png">
+
+<img width="663" alt="스크린샷 2020-06-03 오전 9 41 39" src="https://user-images.githubusercontent.com/48748376/83583451-5c86f700-a57f-11ea-898c-2c3a0e3d2395.png">
+
+
+##### 알고리즘 구현
+
+- 1. (초기화) traversal <- 빈 리스트, q <- 빈 큐
+- 2. 빈 트리가 아니면, root node를 q에 추가(enqueue)
+- 3. q가 비어 있지 않은 동안
+    - 3.1. node <- q에서 원소를 추출(dequeue)
+    - 3.2. node를 방문
+    - 3.3. node의 왼쪽, 오른쪽 자식(있으면)들을 q에 추가
+- 4. q가 빈 큐가 되면 모든 노드 방문 완료
+
+
+
+
+
+
 
 
 ## Link 
