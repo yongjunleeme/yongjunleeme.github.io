@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-05-29 10:09:56 +0900
+updated : 2020-06-03 12:34:23 +0900
 tags    : 
 toc     : true
 public  : true
@@ -428,6 +428,79 @@ def qsort(data):
 - 단, 최악의 경우
     - 맨 처음 pivot이 가장 크거나, 가장 작으면 모든 데이터를 비교하는 상황이 나옴
     - O( 𝑛2 )
+
+## 병합 정렬(merge sort)
+
+### 설명
+
+- 재귀용법을 활용한 정렬 알고리즘
+    - 리스트를 절반으로 잘라 비슷한 크기의 두 부분 리스트로 나눈다.
+    - 각 부분 리스트를 재귀적으로 합병 정렬을 이용해 정렬한다.
+    - 두 부분 리스트를 다시 하나의 정렬된 리스트로 합병한다.
+    - [참조-위키피디아](https://ko.wikipedia.org/wiki/%ED%95%A9%EB%B3%91_%EC%A0%95%EB%A0%AC)
+
+### 알고리즘
+
+- mergesplit 함수 만들기
+    - 만약 리스트 갯수가 한개이면 해당 값 리턴
+    - 그렇지 않으면, 리스트를 앞뒤, 두 개로 나누기
+    - left = mergesplit(앞)
+    - right = mergesplit(뒤)
+    - merge(left, right)
+- merge 함수 만들기
+    - 리스트 변수 하나 만들기 (sorted)
+    - left_index, right_index = 0
+    - while left_index < len(left) or right_index < len(right):
+        - 만약 left_index 나 right_index 가 이미 left 또는 right 리스트를 다 순회했다면, 그 반대쪽 데이터를 그대로 넣고, 해당 인덱스 1 증가
+        - if left[left_index] < right[right_index]:
+        - sorted.append(left[left_index])
+        - left_index += 1
+    - else:
+        - sorted.append(right[right_index])
+        - right_index += 1
+
+### 코드
+
+```python
+def merge(left, right):
+    merged = list()
+    left_index, right_index = 0, 0
+    
+    # case1 - left/right 둘 다 있을 때
+    while len(left) > left_index and len(right) > right_index:
+        if left[left_lndex] > right[right_index]:
+            merged.append(right[right_index])
+            right_index += 1
+        else:
+            merged.append(left[left_index])
+            left_index += 1
+    
+    # case2 - left 데이터가 없을 때
+    while len(left) > left_index:
+        merged.append(left[left_index])
+        left_index += 1
+    
+    # case3 - right 데이터가 없을 때
+    while len(right) > right_index:
+        merged.append(right[right_index])
+        right_index += 1
+    
+    return merged
+    
+def mergesplit(data):
+    if len(data) <= 1:
+        return data
+    medium = int(len(data) / 2)
+    left = mergesplit(data[:medium])
+    right = mergesplit(data[medium:])
+    return merge(left, right)
+```
+
+### 시간복잡도
+
+<img width="821" alt="스크린샷 2020-06-03 오후 12 33 46" src="https://user-images.githubusercontent.com/48748376/83592948-8697e380-a596-11ea-90f9-566838dc6068.png">
+
+
 
 ## Link
 
