@@ -82,7 +82,9 @@ regenerate: true
 * [[s3]]
 * [[spark]]
 * [[lambda]]
+* [[modelling]]
 * [[kubernetes]]
+* [[cloud-comento-project]]
 
 ### vim
 
