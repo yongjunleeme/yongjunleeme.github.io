@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-03 14:24:49 +0900
-updated : 2020-06-04 15:53:08 +0900
+updated : 2020-06-04 16:04:24 +0900
 tags    : 
 toc     : true
 public  : true
@@ -19,7 +19,6 @@ latex   : false
 - 메일 형식으로
     - CC는 누구까지 달아야 할까
     - 주간업무 수준
-- nat instance ami - 퍼블릭을 통해 프라이빗에 접근한다?
 
 ### 클라우드 환경 구성
 
@@ -40,8 +39,6 @@ latex   : false
     - 권한 설정
         - 그룹 생성
             - AdminstratorAccess 선택
-
-<img width="997" alt="스크린샷 2020-06-03 오후 2 43 18" src="https://user-images.githubusercontent.com/48748376/83616470-d8eef980-a5c2-11ea-8496-6de5268a4a3a.png">
 
 <img width="939" alt="1" src="https://user-images.githubusercontent.com/48748376/83724170-c59f6500-a67a-11ea-8b02-7cfe81070276.png">
 
@@ -84,10 +81,6 @@ private subnet B 10.0.3.0/24
 - Public Subnet & Private Subnet
     - 퍼블릭 - Nat 인스턴스를 통해 Private Subnet의 인스턴스가 인터넷 가능하도록 만듦
     - 프라이빗 - 외부와 차단 인터넷 inbound/outbound 불가능, 다른 서브넷과 연결만 가능
-
-- vpc 생성
-
-<img width="867" alt="스크린샷 2020-06-03 오후 4 17 58" src="https://user-images.githubusercontent.com/48748376/83616486-ddb3ad80-a5c2-11ea-8678-fc14b831d6a4.png">
 
 <img width="970" alt="3" src="https://user-images.githubusercontent.com/48748376/83724181-ca641900-a67a-11ea-9f61-f6cc69a8cf57.png">
 
@@ -219,8 +212,6 @@ private subnet B 10.0.3.0/24
 - 개인 계정 ex)admin을 생성한 후 비밀번호를 설정하여 로그인할 때 id와 pw를 통해 접속 (1인 1계정 사용 이유: log가 남기 때문에 장애 발생시 책임의 소재를 명확히 할 수 있다.)
 - ssh 접속시 비밀번호 로그인 허용 설정
 
-- 계정생성
-
 ```python
 # 루트로 계정 변경
 $ sudo -i 
@@ -263,36 +254,8 @@ PasswordAuthentication yes  # 이 부분 주석 해제
 $ service sshd restart
 ```
 
-
-
-
-<img width="951" alt="스크린샷 2020-06-03 오후 5 23 18" src="https://user-images.githubusercontent.com/48748376/83616497-e2786180-a5c2-11ea-936f-8d131b9e835d.png">
-
-
-<img width="1060" alt="스크린샷 2020-06-03 오후 5 30 13" src="https://user-images.githubusercontent.com/48748376/83616510-e6a47f00-a5c2-11ea-9228-e5651081c45c.png">
-
-- Add Storage - [Volume Type](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ebs-volume-types.html) - General Purpose SSD(범용) 선택
-
-
-<img width="1055" alt="스크린샷 2020-06-03 오후 5 31 06" src="https://user-images.githubusercontent.com/48748376/83616512-e7d5ac00-a5c2-11ea-9e1b-a21ab1470c22.png">
-
-
--[Tag](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/Using_Tags.html) - Skip
-
-
-- [Security Group](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/security-group-rules-reference.html)
-    - 기본 정책 Inbound Deny All / Outbound Any Open(아웃바운드는 보안그룹이 아니라 Network ACL기능 사용)
-    - 내 아이피 설정 방법 기록
-
-
-- [Key-pair 설정](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
-
-- 연결 설정부터 다시 기록
-
-
 ##### Link
 
 - [클라우드 코멘토]
-- [5-1. NAT 서버 생성(1)](https://tech.cloud.nongshim.co.kr/2018/10/16/%ec%b4%88%eb%b3%b4%ec%9e%90%eb%a5%bc-%ec%9c%84%ed%95%9c-aws-%ec%9b%b9%ea%b5%ac%ec%b6%95-5-1-nat-%ec%84%9c%eb%b2%84-%ec%83%9d%ec%84%b11/)
 
 
