@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-06-03 09:48:45 +0900
+updated : 2020-06-04 13:15:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1011,18 +1011,116 @@ class binaryTree:
 
 ##### 알고리즘 구현
 
-- 1. (초기화) traversal <- 빈 리스트, q <- 빈 큐
-- 2. 빈 트리가 아니면, root node를 q에 추가(enqueue)
-- 3. q가 비어 있지 않은 동안
-    - 3.1. node <- q에서 원소를 추출(dequeue)
-    - 3.2. node를 방문
-    - 3.3. node의 왼쪽, 오른쪽 자식(있으면)들을 q에 추가
-- 4. q가 빈 큐가 되면 모든 노드 방문 완료
+- (초기화) traversal <- 빈 리스트, q <- 빈 큐
+- 빈 트리가 아니면, root node를 q에 추가(enqueue)
+- q가 비어 있지 않은 동안
+    - node <- q에서 원소를 추출(dequeue)
+    - node를 방문
+    - node의 왼쪽, 오른쪽 자식(있으면)들을 q에 추가
+- q가 빈 큐가 되면 모든 노드 방문 완료
+
+```python
+class BinaryTree:
+    def __init__(self, r):
+        self.root = r
+
+    def bft(self):
+        q = ArrayQueue()
+        traversal = []
+        if self.root:
+            q.enqueue(self.root)
+        while not q.isEmpty():
+            node = q.dequeue()
+            traversal.append(node.data)
+            if node.left:
+                q.enqueue(node.left)
+            if node.right:
+                q.enqueue(node.right)
+        return traversal
+```
+
+### 이진 탐색 트리
+
+- 모든 노드에 대해서,
+    - 왼쪽 서브트리에 있는 데이터는 모두 현재 노드의 값보다 작고
+    - 오른쪽 서브트리에 있는 데이터는 모두 현재 노드의 값보다 크다
+
+- 정렬된 배열을 이용한 이진탐색과 비교
+    - 장점: 데이터 원소의 추가, 삭제가 용이
+    - 단점: 공간 소요가 큼
+
+- 이진 탐색 트리의 추상적 자료구조
+    - 각 노드를 키, 밸류 상으
 
 
+```python
+class BinSearchTree:
+    def lookup(self, key):
+        if self.root:
+            return self.root.lookup(key)
+        else:
+            return None, None # 찾은 노드, 부모 노드
+```
 
+```python
+class Node:
+    def lookup(self, key, parent=None):
+        if key < self.key:
+            if self.left:
+                return self.left.lookup(key, self)
+            else:
+                reutnr None, None
+```
 
+#### 이진 탐색 트리 원소 삽입 연산 구현
 
+```python
+class Node:
+    def __init__(self, key, data):
+        self.key = key
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def insert(self, key, data):
+        if key < self.key:
+            if self.left:
+                self.left.insert(key, data)
+            else:
+                self.left = Node(key, data)
+        elif key > self.key:
+            if self.right:
+                self.right.insert(key, data)
+            else:
+                self.right = Node(key, data)
+        else:
+            raise KeyError('Key %s already.' % key)
+
+    def inorder(self):
+        traversal = []
+        if self.left:
+            traversal += self.left.inorder()
+        traversal.append(self)
+        if self.right:
+            traversal += self.right.inorder()
+        return traversal
+
+class BinSearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key, data):
+        if self.root:
+            self.root.insert(key, data)
+        else:
+            self.root = Node(key, data)
+
+    def inorder(self):
+        if self.root:
+            return self.root.inorder()
+        else:
+            return []
+```
 
 
 
