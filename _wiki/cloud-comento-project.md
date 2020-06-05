@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-03 14:24:49 +0900
-updated : 2020-06-04 16:04:24 +0900
+updated : 2020-06-04 19:49:50 +0900
 tags    : 
 toc     : true
 public  : true
@@ -220,7 +220,7 @@ $ sudo -i
 $ useradd admin
 
 # 비밀번호 입력
-$ passwd
+$ passwd admin
 
 # 생성된 계정 확인
 $ cat /etc/passwd
