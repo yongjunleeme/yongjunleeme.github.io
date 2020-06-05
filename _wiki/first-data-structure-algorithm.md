@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-06-04 13:15:36 +0900
+updated : 2020-06-05 10:27:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1122,7 +1122,50 @@ class BinSearchTree:
             return []
 ```
 
+#### 이진 탐색 트리에서 원소 삭제
 
+- 키를 이용해서 노드를 찾는다
+    - 해당 키의 노드가 없으면, 삭제할 것도 없음
+    - 찾은 노드의 부도 노드도 알고 있어야 함
+- 찾은 노드를 제거하고도 이진 탐색 트리 성질을 만족하도록 트리의 구조를 정리
+    - 삭제되는 노드가
+        - 말단(leaf) 노드인 경우
+            - 그냥 그 노드를 없애면 됨
+            - 부모 노드의 링크를 조정(좌? 우?)
+            - 삭제되는 노드가 root node인 경우?
+                - 트리 전체를 삭제
+        - 자식을 하나 가지고 있는 경우
+            - 삭제되는 노드 자리에 그 자식을 대신 배치
+                - 자식이 좌? 우?
+                - 부모 노드의 링크를 조정(좌? 우?)
+                - 삭제되는 노드가 root node인 경우?
+                    - 대신 들어오는 자식이 새로 root가 됨
+        - 자식을 둘 가지고 있는 경우
+            - 삭제되는 노드보다 바로 다음 (큰) 키(작은도 가능)를 가지는 노드를 찾아
+            - 그 노드를 삭제되는 노드 자리에 대신 배치하고 이 노드를 대신 삭제
+            - Successor
+                - 삭제될 노드보다 1 큰 노드
+                - 삭제될 노드의 오른쪽에서 가장 작은 노드
+
+<img width="580" alt="스크린샷 2020-06-05 오전 10 15 30" src="https://user-images.githubusercontent.com/48748376/83826534-1a90b900-a717-11ea-8241-e2b2f460bab4.png">
+
+- 이진 탐색 트리가 별로 효율적이지 못한 경우
+     - 선형 탐색과 동일한 복잡도
+
+<img width="573" alt="스크린샷 2020-06-05 오전 10 22 16" src="https://user-images.githubusercontent.com/48748376/83826540-1d8ba980-a717-11ea-9727-4be3af620415.png">
+
+
+- 보다 나은 성능을 보이는 이진 탐색 트리들
+    - 높이의 균형을 유지함으로써 O(logn)의 탐색 복잡도 보장
+    - 삽입, 삭제 연산이 보다 복잡
+        - [AVL tree](https://ko.wikipedia.org/wiki/AVL_%ED%8A%B8%EB%A6%AC)
+        - [Red-black tree](https://ko.wikipedia.org/wiki/%EB%A0%88%EB%93%9C-%EB%B8%94%EB%9E%99_%ED%8A%B8%EB%A6%AC)
+
+
+```python
+
+
+```
 
 ## Link 
 
