@@ -114,6 +114,3 @@ regenerate: true
 * [[함께자라기]]
 * [[손에잡히는빔]]
 
-### incomplete
-
-- [[decorator]]
