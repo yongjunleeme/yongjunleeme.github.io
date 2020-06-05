@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-06-03 12:34:23 +0900
+updated : 2020-06-05 13:14:23 +0900
 tags    : 
 toc     : true
 public  : true
@@ -496,9 +496,138 @@ def mergesplit(data):
     return merge(left, right)
 ```
 
+```python
+import random
+
+data_list = random.sample(range(100), 10)
+mergesplit(data_list)
+```
+
 ### 시간복잡도
 
 <img width="821" alt="스크린샷 2020-06-03 오후 12 33 46" src="https://user-images.githubusercontent.com/48748376/83592948-8697e380-a596-11ea-90f9-566838dc6068.png">
+
+
+## 그래프 이해
+
+###  그래프 (Graph) 관련 용어
+- 노드 (Node): 위치를 말함, 정점(Vertex)라고도 함
+- 간선 (Edge): 위치 간의 관계를 표시한 선으로 노드를 연결한 선이라고 보면 됨 (link 또는 branch 라고도 함)
+- 인접 정점 (Adjacent Vertex) : 간선으로 직접 연결된 정점(또는 노드)
+- 참고 용어
+    - 정점의 차수(Degree): 무방향 그래프에서 하나의 정점에 인접한 정점의 수
+    - 진입 차수(In-Degree): 방향 그래프에서 외부에서 오는 간선의 수
+    - 진출 차수(Out-Degree): 방향 그래프에서 외부로 향하는 간선의 수
+    - 경로 길이(Path Length): 경로를 구성하기 위해 사용된 간선의 수
+    - 단순 경로 Simple Path): 처음 정점과 끝 정점을 제외하고 중복된 정점이 없는 경로
+    - 사이클(Cycle): 단순 경로의 시작 정점과 종료 정점이 동일한 경우
+
+### 그래프 (Graph) 종류
+
+- 가중치 그래프 (Weighted Graph) 또는 네트워크 (Network)
+    - 간선에 비용 또는 가중치가 할당된 그래프
+
+<img width="347" alt="1" src="https://user-images.githubusercontent.com/48748376/83836059-68182080-a72d-11ea-8dc4-0f0fc370de44.png">
+
+- 연결 그래프 (Connected Graph) 와 비연결 그래프 (Disconnected Graph)
+    - 연결 그래프 (Connected Graph)
+        - 무방향 그래프에 있는 모든 노드에 대해 항상 경로가 존재하는 경우
+    - 비연결 그래프 (Disconnected Graph)
+        - 무방향 그래프에서 특정 노드에 대해 경로가 존재하지 않는 경우
+
+<img width="463" alt="2" src="https://user-images.githubusercontent.com/48748376/83836061-6a7a7a80-a72d-11ea-9868-ffea77b712b5.png">
+
+
+- 사이클 (Cycle) 과 비순환 그래프 (Acyclic Graph)
+    - 사이클 (Cycle)
+        - 단순 경로의 시작 노드와 종료 노드가 동일한 경우
+    - 비순환 그래프 (Acyclic Graph)
+        - 사이클이 없는 그래프
+
+<img width="466" alt="3" src="https://user-images.githubusercontent.com/48748376/83836064-6b131100-a72d-11ea-83da-65141dc65870.png">
+
+- 완전 그래프 (Complete Graph)
+    - 그래프의 모든 노드가 서로 연결되어 있는 그래프
+
+<img width="432" alt="4" src="https://user-images.githubusercontent.com/48748376/83836065-6baba780-a72d-11ea-98b8-425e616b7555.png">
+
+### 그래프와 트리의 차이
+
+- 트리는 그래프에 속한 종류라고 볼 수 있음
+
+<img width="638" alt="5" src="https://user-images.githubusercontent.com/48748376/83836067-6c443e00-a72d-11ea-8fce-b6e437c78f3a.png">
+
+
+## 그래프 알고리즘
+
+### 깊이 우선 탐색 (Depth-First Search)
+
+#### BFS 와 DFS 란?
+
+- 대표적인 그래프 탐색 알고리즘
+    - 너비 우선 탐색 (Breadth First Search): 정점들과 같은 레벨에 있는 노드들 (형제 노드들)을 먼저 탐색하는 방식
+    - 깊이 우선 탐색 (Depth First Search): 정점의 자식들을 먼저 탐색하는 방식
+
+- BFS/DFS 방식 이해를 위한 예제
+    - BFS 방식: A - B - C - D - G - H - I - E - F - J
+        - 한 단계씩 내려가면서, 해당 노드와 같은 레벨에 있는 노드들 (형제 노드들)을 먼저 순회함
+    - DFS 방식: A - B - D - E - F - C - G - H - I - J
+        - 한 노드의 자식을 타고 끝까지 순회한 후, 다시 돌아와서 다른 형제들의 자식을 타고 내려가며 순화함
+
+
+<img width="730" alt="스크린샷 2020-06-05 오후 1 10 29" src="https://user-images.githubusercontent.com/48748376/83836427-5a16cf80-a72e-11ea-93f8-6a7c44dd5d59.png">
+
+
+#### 파이썬으로 그래프를 표현하는 방법
+
+```python
+graph = dict()
+
+graph['A'] = ['B', 'C']
+graph['B'] = ['A', 'D']
+graph['C'] = ['A', 'G', 'H', 'I']
+graph['D'] = ['B', 'E', 'F']
+graph['E'] = ['D']
+graph['F'] = ['D']
+graph['G'] = ['C']
+graph['H'] = ['C']
+graph['I'] = ['C', 'J']
+graph['J'] = ['I']
+```
+
+<img width="736" alt="스크린샷 2020-06-05 오후 1 11 37" src="https://user-images.githubusercontent.com/48748376/83836432-5e42ed00-a72e-11ea-93ea-2abffad620b9.png">
+
+#### DFS 알고리즘 구현
+
+- 자료구조 스택과 큐를 활용함
+    - need_visit 스택과 visited 큐, 두 개의 자료 구조를 생성
+- BFS 자료구조는 두 개의 큐를 활용하는데 반해, DFS 는 스택과 큐를 활용한다는 차이가 있음을 인지해야 함
+
+```python
+def dfs(graph, start_node):
+    visited, need_visit = list(), list()
+    need_visit.append(start_node)
+    
+    while need_visit:
+        node = need_visit.pop()
+        if node not in visited:
+            visited.append(node)
+            need_visit.extend(graph[node])
+    
+    return visited
+```
+
+```python
+dfs(graph, 'A')
+```
+
+#### 시간 복잡도
+
+- 일반적인 DFS 시간 복잡도
+    - 노드 수: V
+    - 간선 수: E
+        - 위 코드에서 while need_visit 은 V + E 번 만큼 수행함
+- 시간 복잡도: O(V + E)
 
 
 
