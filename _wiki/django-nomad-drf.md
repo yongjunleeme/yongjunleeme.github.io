@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-06-02 22:35:14 +0900
+updated : 2020-06-04 22:44:13 +0900
 tags    : 
 toc     : true
 public  : true
@@ -243,5 +243,27 @@ class RoomViewset(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = BigRoomSerializer
 ```
+
+### [1.7 Bye Bye ViewSet](https://github.com/nomadcoders/airbnb-api/commit/f2c32baa9b307df5f73d557ae2cf152c72d4c33a)
+
+### [2.0 ListRoomsView & SeeRoomView](https://github.com/nomadcoders/airbnb-api/commit/ee78a1cceaab0735e92caeae6abdde5a822a82a6)
+
+### [2.1 Create Room part One](https://github.com/nomadcoders/airbnb-api/commit/db494d5f585511aa0a3620b3a84b215b2ac79bc3)
+
+### [2.2 Create Room part Two](https://github.com/nomadcoders/airbnb-api/commit/d502905179d671b143006b0c731a843c2dcd308d)
+
+- create, update, save 메소드 커스터마이징
+- create 메소드를 직접 콜하면 안 된다
+    - save 메소드를 쓰면 create, update 등을 감지할 것
+    - create 메소드를 쓰면 반드시 instance를 리턴해야
+
+```python
+def create(self, validated_data): # validataed_data -> dict list
+    return Comment.objects.create(**validated_data)
+```
+
+
+
+
 
 
