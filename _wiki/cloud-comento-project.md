@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-03 14:24:49 +0900
-updated : 2020-06-04 19:49:50 +0900
+updated : 2020-06-05 16:08:59 +0900
 tags    : 
 toc     : true
 public  : true
@@ -55,9 +55,6 @@ latex   : false
 
 <img width="944" alt="2" src="https://user-images.githubusercontent.com/48748376/83724179-c9cb8280-a67a-11ea-80f4-2ebe9bdf4306.png">
 
-##### Link
-
-- [IAM 유저 및 MFA 생성하기](https://tech.cloud.nongshim.co.kr/2018/10/11/%EC%B4%88%EB%B3%B4%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-aws-%EC%9B%B9%EA%B5%AC%EC%B6%95-2-iam-%EC%9C%A0%EC%A0%80-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0/)
 
 #### [VPC 구축](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_Subnets.html)
 
@@ -156,10 +153,6 @@ private subnet B 10.0.3.0/24
 
 <img width="662" alt="9" src="https://user-images.githubusercontent.com/48748376/83724194-ce903680-a67a-11ea-9449-03431a237e30.png">
 
-##### Link
-
-- [네트워크 구성하기(VPC, Subnet, Route Table, Internet Gateway)](https://tech.cloud.nongshim.co.kr/2018/10/16/4-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ea%b5%ac%ec%84%b1%ed%95%98%ea%b8%b0vpc-subnet-route-table-internet-gateway/)
-- [가장쉽게 VPC 개념잡기](https://medium.com/harrythegreat/aws-%EA%B0%80%EC%9E%A5%EC%89%BD%EA%B2%8C-vpc-%EA%B0%9C%EB%85%90%EC%9E%A1%EA%B8%B0-71eef95a7098)
 
 #### [Bation host와 NAT instance 생성](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_NAT_Instance.html)
 
@@ -168,7 +161,7 @@ private subnet B 10.0.3.0/24
     - 외부에서 접근 가능하도록 Public IP 부여
 
 - NAT instance
-    - NAT Gateway 유료(0.059$ -> 1달 43.896$)이므로 Nat Instange로 대체
+    - NAT Gateway 유료(1시간 0.059$ -> 1달 43.896$)이므로 Nat Instance로 대체
     - 비용문제로 Nat instance를 Bastion Host로 사용
 
 - VPC 퍼블릭 서브넷에 있는 네트워크 주소 변환(NAT) 인스턴스를 사용
@@ -257,5 +250,6 @@ $ service sshd restart
 ##### Link
 
 - [클라우드 코멘토]
-
-
+- [IAM 유저 및 MFA 생성하기](https://tech.cloud.nongshim.co.kr/2018/10/11/%EC%B4%88%EB%B3%B4%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-aws-%EC%9B%B9%EA%B5%AC%EC%B6%95-2-iam-%EC%9C%A0%EC%A0%80-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0/)
+- [네트워크 구성하기(VPC, Subnet, Route Table, Internet Gateway)](https://tech.cloud.nongshim.co.kr/2018/10/16/4-%eb%84%a4%ed%8a%b8%ec%9b%8c%ed%81%ac-%ea%b5%ac%ec%84%b1%ed%95%98%ea%b8%b0vpc-subnet-route-table-internet-gateway/)
+- [가장쉽게 VPC 개념잡기](https://medium.com/harrythegreat/aws-%EA%B0%80%EC%9E%A5%EC%89%BD%EA%B2%8C-vpc-%EA%B0%9C%EB%85%90%EC%9E%A1%EA%B8%B0-71eef95a7098)
