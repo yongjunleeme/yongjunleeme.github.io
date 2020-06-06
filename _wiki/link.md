@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-04-05 12:40:04 +0900
-updated : 2020-05-23 16:17:05 +0900
+updated : 2020-06-05 16:10:24 +0900
 tags    : 
 toc     : true
 public  : true
@@ -22,7 +22,7 @@ latex   : false
 
 - [인터넷이 동작하는 아주 구체적인 원리](https://parksb.github.io/article/36.html?fbclid=IwAR15UeD4WM0Z0TZ4TTjjKGIfR3qnQiXPdEKWh73_2uPaSP12Qi51QjSm-Dw)
 - [네트워크의 기본 'OSI 7계층'··· 한번에 이해하고 외우는 방법](http://www.ciokorea.com/news/36536#csidxa7b8fb7c6c7e34a85f2253bf8c1b283)
-
+- [가장쉽게 VPC 개념잡기](https://medium.com/harrythegreat/aws-%EA%B0%80%EC%9E%A5%EC%89%BD%EA%B2%8C-vpc-%EA%B0%9C%EB%85%90%EC%9E%A1%EA%B8%B0-71eef95a7098)
 
 ## Programming Languge
 
