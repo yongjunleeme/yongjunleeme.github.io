@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-30 10:08:27 +0900
-updated : 2020-05-30 13:54:57 +0900
+updated : 2020-06-05 14:50:49 +0900
 tags    : 
 toc     : true
 public  : true
@@ -88,7 +88,6 @@ latex   : false
         - 검수망은 업무 외 시간에 꺼놓는다 -> 람다
         - 커맨드도 조심히 쳐야 한다.
 
-
 #### 클라우드 운영자 장점
 
 - 워라벨 -> 안정적인 시스템이라면 힘든 업무 X
@@ -131,20 +130,13 @@ latex   : false
 - 인프라 운영 CSR(Customer Service Request)
 - CSP
 
-#### 면접 팁
-
-- 답변은 두괄식으로 간결하게 핵심
-    - 뭐 잘해요? 자바 잘해요. 끝이 아니라 
-- 마지막 말은 '감사합니다'면 충분    
-- 조직에 잘 어울리겠다는 자세
-
-## 동시 접속자 몇 명이나 견디는지
+#### 동시 접속자 몇 명이나 견디는지 어떻게 알 수 있나?
 
 - 품질 검증
 
-프론트 - 룰을 만들어서 필터링 ->WAF
+- 프론트 - 룰을 만들어서 필터링 ->WAF
     -> 솔직히 비싸다
-백엔드 - 캐싱 서비스 CDN
+- 백엔드 - 캐싱 서비스 CDN
 - 가드 듀티?
 - UTM AWS와 협력해서 올린다
     - 시스코 회사 이름이고 침입탐지 게이트웨이 
@@ -153,60 +145,6 @@ latex   : false
     - 딥시큐리티 -> ITS 구매해서 서버마다 에이전트를 깐다 
       에이전트 개수당 10만원?
 
-## 과제
-
-### 고객사 시스템 구축
-
-- 협업해서 개발하고 프로젝트님은 빠지고 데브옵스팀은 남는다
-- 메일 형식으로
-    - CC는 누구까지 달아야 할까
-    - 주간업무 수준
-- nat instance ami - 퍼블릭을 통해 프라이빗에 접근한다?
-
-
-#### 주제: 클라우드 환경 구성 (AWS Free tier 계정 활용)
-
-- 1. 쿠버네티스 기반의 Elastic Kubernetes Service를 운영하기 전, AWS 클라우드 환경을 구축합니다.
-- 2. 하나의 VPC에 이중화된 subnet을 구성한 후 Bastion host 를 생성합니다.
-    - 1) AWS free tier 계정 생성
-    - 2) AWS IAM 계정 생성과 MFA 설정
-    - 3) VPC 구축
-    - 4) Bastion host와 NAT instance 생성과 security group 설정
-
-#### 요구사항
-
-2. AWS IAM User 생성과 MFA 설정
-1. 본인이 사용할 IAM User 생성(AdministratorAccess) 후 MFA 설정(보안을 위해 Root 계정으로 로그인 금지)
-2. 멘토가 사용할 IAM User를 생성(과제 체크용입니다.)
-- 권한 : AdministratorAccess
-- AWS Management Console 액세스 유형 선택 후 비밀번호 재설정 필요 체크
-
-<img width="1005" alt="스크린샷 2020-05-30 오후 12 53 20" src="https://user-images.githubusercontent.com/48748376/83318977-efb8e780-a274-11ea-8de3-abdea614653e.png">
-
-### 참고
-
-- [Security on AWS :: 이경수 솔루션즈아키텍트](https://www.slideshare.net/awskorea/security-on-aws-kyungsoo-lee)
-
-- [AWS 계정의 IAM 사용자 생성](https://docs.aws.amazon.com/ko_kr/IAM/latest/UserGuide/id_users_create.html)
-- [AWS에서 멀티 팩터 인증(MFA) 사용하기](https://docs.aws.amazon.com/ko_kr/IAM/latest/UserGuide/id_credentials_mfa.html)
-- [VPC 및 서브넷](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_Subnets.html)
-- [Amazon VPC용 IPv4 시작하기](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/getting-started-ipv4.html)
-- [NAT 인스턴스](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_NAT_Instance.html)
-
-<img width="913" alt="KakaoTalk_Photo_2020-05-30-12-13-19" src="https://user-images.githubusercontent.com/48748376/83318549-eded2500-a270-11ea-84ea-5e5c81b06279.png">
-
-- [Amazon EC2 설정](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html)
-- [보안 그룹 작업](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/working-with-security-groups.html)
-
-
-## 모르는 단어
-
-- Jmeter
-- AWS shield(DDoS)
-- WAF(Web Application Firewall)
-- Sophos -Market place에서 UTM솔루션
-- Fortinet
- 
 ## Link
 
 - [클라우드직무멘토]
