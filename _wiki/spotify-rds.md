@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-13 22:04:38 +0900
-updated : 2020-05-29 23:14:36 +0900
+updated : 2020-06-02 19:41:12 +0900
 tags    : 
 toc     : true
 public  : true
@@ -92,7 +92,7 @@ $ mysql -h fastcampus.c2i2ypp7xnkb.ap-northeast-2.rds.amazonaws.com -P 3306 -D p
 mysql> CREATE TABLE people (first_name VARCHAR(20), last_name VARCHAR(20), age INT);
 ```
 
-### 테이블 호출
+### sql문으로 테이블 호출
 
 ```python
 $ pip install pymysql --user
@@ -243,7 +243,7 @@ mysql> alter table artist_genres drop column country;
 
 ### pymysql 데이터 핸들링
 
-#### {}.format으로 데이터 자동 입력
+#### {}.format으로 데이터 입력
 
 ```python
 ...
@@ -270,8 +270,6 @@ def main():
     
     sys.exit(0)
 ```
-
-## 데이터 핸들링
 
 ### tip
 
@@ -392,12 +390,29 @@ def insert_row(cursor, data, table):
     # sys.exit(0)
     cursor.execute(sql, list(data.values())*2) # insert into values, duplicate key update values 2개 넣어야 해서 *2
 
-
+def get_headers(client_id, client_secret):
+    endpoint = "https://accounts.spotify.com/api/token"
+    encoded = base64.b64encode("{}:{}".format(client_id, client_secret).encode('utf-8')).decode('ascii')
+    headers = {
+        "Authorization": "Basic {}".format(encoded)
+    }
+    payload = {
+        "grant_type": "client_credentials"
+    }
+    r = requests.post(endpoint, data=payload, headers=headers)
+    access_token = json.loads(r.text)['access_token']
+    headers = {
+        "Authorization": "Bearer {}".format(access_token)
+    }
+    return headers
+    
 if __name__=='__main__':
     main()
 ```
 
 ### csv 데이터 삽입
+
+- csv파일의 artist name 토대로 이후 artist_id 저장
 
 ```python
 ...
