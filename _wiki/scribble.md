@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-03 13:27:15 +0900
+updated : 2020-06-05 13:50:33 +0900
 tags    : 
 toc     : true
 public  : true
@@ -253,9 +253,35 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
 
 #### Process Creation and Termination
 
-3강 26분
+- Process spawning
+    - 프로세스 생성
+        - 부모 프로세스가 포크를 통해 차일드 프로세스 생성
+- Process termination
+    - 의도된 종료(예:로그아웃)
+    - 의도되지 않은 종료(예:자기에게 할당된 영역이 아닌 다른 영역 침범)
+    - 메인 함수 마지막에는 자동으로 Exit
+
+#### fork: Creating new processes
+
+- UNIX -> ios, 리눅스 등 파생
+    - ID, 차일드 프로세스 생성, 시그널 통해 메시지 전달 가능
+- int fork
+    - 차일드 프로스세의 pid 리턴
+    - 생성된 순간에는 자기와 차일드가 같다(복사)
+        - 실행하면 각각 같은 코드를 실행하지만 리턴값이 다르다
+            - 누가 먼저 실행되는지는 그때그떄 다르다
+        - call once return twice
+        - 차일드 프로세스는 0을 리턴
+        - 부모 프로세스는 차일드 프로세스의 pid를 리턴
+- 포크 이후 또 포크 -> 하이라키 생성
+- Process graph
+    - 각 horizontal arrow - 프로세스 플로우
+    - 각 vertical arrow - 포크 실행 후 새로운 분기
+
+<img width="495" alt="스크린샷 2020-06-05 오후 1 46 36" src="https://user-images.githubusercontent.com/48748376/83838181-723d1d80-a733-11ea-94b6-dd7433fb27fd.png">
 
 
+#### exit: Destroying Process
 
 
 ### Thread
