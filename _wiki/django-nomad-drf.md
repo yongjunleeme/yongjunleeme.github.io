@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-06-06 23:48:30 +0900
+updated : 2020-06-07 20:51:43 +0900
 tags    : 
 toc     : true
 public  : true
@@ -95,7 +95,7 @@ def list_rooms(request):
 
 - [Api-guide](https://www.django-rest-framework.org/api-guide/views/)
 - [Throttling](https://www.django-rest-framework.org/api-guide/throttling/) - 요청에 제한을 걸 수 있는 방법
-    - [참고블로그(https://ssungkang.tistory.com/entry/Django-Throttling)]
+    - [참고블로그](https://ssungkang.tistory.com/entry/Django-Throttling)
 
 ```python
 from rest_framework.decorators import api_view
@@ -114,8 +114,7 @@ def list_rooms(request):
 ### [1.3 Serializers part Two](https://github.com/nomadcoders/airbnb-api/commit/322dc866e7cb3548a9e119000245372b70b96a3b)
 
 - [Serializers](https://www.django-rest-framework.org/api-guide/serializers/)
-- [공식문서 번역 블로그](https://brownbears.tistory.com/71)
-
+    - [공식문서 번역 블로그](https://brownbears.tistory.com/71)
 - 외래키로 이어진 데이터 가져오는 방법
 - 위처럼 모델을 나열하지 않고 필드명만 써줘도 된다
 
@@ -184,9 +183,9 @@ REST_FRAMEWORK = {
 
 ### [1.5 ListAPIView](https://github.com/nomadcoders/airbnb-api/commit/852b4c851ff02735a5d9499c19328762bc2e68d8)
 
-- 리스트가 아니라 1개 호출
-- url에 pk 써주고 serializer에서 field가 아닌 exclude를 써준 후 뷰에서 RetrieveAPIView 불러오고 쿼리셋 선언하고 serializer_class에 serializer 불러오면 끝
-
+- 리스트가 아니라 pk로 호출(RetrieveAPIView)
+    - 왜 이름이 retrieve? 
+        - retrieve - to get stored informaion from a computer
 
 ```python
 # urls.py
@@ -217,15 +216,16 @@ class SeeRoomView(RetrieveAPIView):
 
 - [Classy Class-Based Views](http://ccbv.co.uk/) - 장고 클래스 기반 뷰의 디테일한 정보
 - [Classy Django REST Framework](http://www.cdrf.co/) - DRF 클래스 기반 뷰 종류별 선언할 수 있는 변수 총정리
-
+- [APIView, Mixins, generics APIView, ViewSet을 알아보자](https://ssungkang.tistory.com/entry/Django-APIView-Mixins-generics-APIView-ViewSet%EC%9D%84-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90)
 
 ### [1.6 ModelViewSet](https://github.com/nomadcoders/airbnb-api/commit/14321042d1337a9478ad75c24d5ca4632a05e4e3)
 
 #### viewset
+
     - 그냥 api 완성
     - url 제공 - rooms, rooms/1 모두 자동으로
     - PUT, DELETE 메소드까지 제공
-    - 그러나 모든 기능이 on 되어 있어서 비즈니스로직 (viewset actions](https://www.django-rest-framework.org/api-guide/viewsets/) 구현해야 할 수도
+    - 그러나 모든 기능이 on 되어 있어서 비즈니스로직 [viewset actions](https://www.django-rest-framework.org/api-guide/viewsets/) 구현해야 할 경우가 생길 수도 있음
 
 
 ```python
