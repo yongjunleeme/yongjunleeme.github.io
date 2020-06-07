@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-06-04 22:44:13 +0900
+updated : 2020-06-06 23:48:30 +0900
 tags    : 
 toc     : true
 public  : true
@@ -42,6 +42,7 @@ cls.fakers[code].seed_instance(random.randint(1, 10000)) 로 수정
 
 ### [1.0 APIs the Django Way](https://github.com/nomadcoders/airbnb-api/commit/05122a1646d411438be9c24e4eadcc320827a174)
 
+- [공식문서](https://docs.djangoproject.com/en/3.0/topics/serialization/)
 - 쿼리셋을 JSON으로 변환할 수 없다
 - For문을 돌려도 JSON 변환 안 된다
 
@@ -85,13 +86,16 @@ def list_rooms(request):
     return Response()
 ```
 
-
 ### [1.2 Serializers](https://github.com/nomadcoders/airbnb-api/commit/f352b8466566921099c9492c161d3ed9fef6b5f9)
+
 
 - [Serializers](https://www.django-rest-framework.org/)
     - 쿼리셋과 같은 복잡한 데이터를 JSON, XML로 쉽게 변환, 그 반대도 가
     - 응답을 제어하는 폼과 같은 역할
 
+- [Api-guide](https://www.django-rest-framework.org/api-guide/views/)
+- [Throttling](https://www.django-rest-framework.org/api-guide/throttling/) - 요청에 제한을 걸 수 있는 방법
+    - [참고블로그(https://ssungkang.tistory.com/entry/Django-Throttling)]
 
 ```python
 from rest_framework.decorators import api_view
@@ -108,6 +112,9 @@ def list_rooms(request):
 ```
 
 ### [1.3 Serializers part Two](https://github.com/nomadcoders/airbnb-api/commit/322dc866e7cb3548a9e119000245372b70b96a3b)
+
+- [Serializers](https://www.django-rest-framework.org/api-guide/serializers/)
+- [공식문서 번역 블로그](https://brownbears.tistory.com/71)
 
 - 외래키로 이어진 데이터 가져오는 방법
 - 위처럼 모델을 나열하지 않고 필드명만 써줘도 된다
@@ -147,6 +154,8 @@ class ListRoomView(APIView):
 #### ListAPIView
 
 - 대단히 간단하다...
+- [GenericAPIView](https://www.django-rest-framework.org/api-guide/generic-views/#genericapiview)
+
 
 ```python
 ## rooms/views.py
