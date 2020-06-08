@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-06-05 13:14:23 +0900
+updated : 2020-06-08 15:33:43 +0900
 tags    : 
 toc     : true
 public  : true
@@ -629,7 +629,90 @@ dfs(graph, 'A')
         - 위 코드에서 while need_visit 은 V + E 번 만큼 수행함
 - 시간 복잡도: O(V + E)
 
+### 너비 우선 탐색 (Breadth-First Search)
 
+#### BFS/DFS 방식 이해를 위한 예제
+
+- BFS 방식: A - B - C - D - G - H - I - E - F - J
+    - 한 단계씩 내려가면서, 해당 노드와 같은 레벨에 있는 노드들 (형제 노드들)을 먼저 순회함
+- DFS 방식: A - B - D - E - F - C - G - H - I - J
+    - 한 노드의 자식을 타고 끝까지 순회한 후, 다시 돌아와서 다른 형제들의 자식을 타고 내려가며 순화함
+
+<img width="734" alt="스크린샷 2020-06-08 오후 3 26 46" src="https://user-images.githubusercontent.com/48748376/83999221-47560200-a99d-11ea-8585-b2c0cb655a58.png">
+
+#### 파이썬으로 그래프를 표현하는 방법
+
+<img width="735" alt="스크린샷 2020-06-08 오후 3 28 11" src="https://user-images.githubusercontent.com/48748376/83999233-4b821f80-a99d-11ea-96b5-f588d6bde7c0.png">
+
+```python
+graph = dict()
+
+graph['A'] = ['B', 'C']
+graph['B'] = ['A', 'D']
+graph['C'] = ['A', 'G', 'H', 'I']
+graph['D'] = ['B', 'E', 'F']
+graph['E'] = ['D']
+graph['F'] = ['D']
+graph['G'] = ['C']
+graph['H'] = ['C']
+graph['I'] = ['C', 'J']
+graph['J'] = ['I']
+```
+
+#### BFS 알고리즘 구현
+
+- 자료구조 큐를 활용함
+- need_visit 큐와 visited 큐, 두 개의 큐를 생성
+
+<img width="727" alt="스크린샷 2020-06-08 오후 3 29 17" src="https://user-images.githubusercontent.com/48748376/83999236-4c1ab600-a99d-11ea-92a1-d9359122bc71.png">
+
+```python
+data = [1, 2, 3]
+data.extend([4, 5])
+
+def bfs(graph, start_node):
+    visited = list()
+    need_visit = list()
+    
+    need_visit.append(start_node)
+    
+    while need_visit:
+        node = need_visit.pop(0)
+        if node not in visited:
+            visited.append(node)
+            need_visit.extend(graph[node])
+    
+    return visited
+    
+bfs(graph, 'A')
+```
+
+<img width="729" alt="스크린샷 2020-06-08 오후 3 29 39" src="https://user-images.githubusercontent.com/48748376/83999239-4cb34c80-a99d-11ea-9102-c7b44a8483c4.png">
+
+#### 시간 복잡도
+
+- 일반적인 BFS 시간 복잡도
+    - 노드 수: V
+    - 간선 수: E
+        - 위 코드에서 while need_visit 은 V + E 번 만큼 수행함
+    - 시간 복잡도: O(V + E)
+
+```python
+def bfs(graph, start_node):
+    visited = list()
+    need_visit = list()
+    
+    need_visit.append(start_node)
+    count = 0
+    while need_visit:
+        count += 1
+        node = need_visit.pop(0)
+        if node not in visited:
+            visited.append(node)
+            need_visit.extend(graph[node])
+    print (count)
+    return visited
+```
 
 ## Link
 
