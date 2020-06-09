@@ -53,7 +53,7 @@ regenerate: true
 * [[django-project-commerce]]
 * [[django-rest-framwork-example]]
 * [[django-nomad-drf]]
-* [[flask-basic]]
+* [[flask-example]]
 
 #### two scoops of django
 
@@ -70,21 +70,16 @@ regenerate: true
 * [[my-sql-install]]
 * [[docker]]
 * [[sql-command]]
-* [[linux]]
+* [[linux-command]]
 * [[jekyll-install]]
 
 ### aws
 
 * [[aws-basic]]
 * [[spotify-api]]
-* [[spotify-rds]]
-* [[dynamo-db]]
-* [[s3]]
-* [[spark]]
-* [[lambda]]
-* [[modelling]]
-* [[kubernetes]]
-* [[cloud-comento-project]]
+* [[zeplin-example]]
+* [[cloud-background]]
+* [[cloud-comento-config]]
 
 ### vim
 

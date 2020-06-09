@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-05 13:50:33 +0900
+updated : 2020-06-09 15:52:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -283,6 +283,13 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
 
 #### exit: Destroying Process
 
+- atexit() - 나중에 exit을 실행할 때 실행할 함수를 미리 레지스터    
+    - 특정 함수를 실행하고 바로 죽는다
+    - `atexite(cleanup)`
+
+#### Five-State Process Model
+
+1
 
 ### Thread
 
