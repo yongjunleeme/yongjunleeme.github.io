@@ -77,7 +77,7 @@ regenerate: true
 
 * [[aws-basic]]
 * [[spotify-api]]
-* [[zeplin-example]]
+* [[zeppelin-example]]
 * [[cloud-background]]
 * [[cloud-comento-config]]
 
