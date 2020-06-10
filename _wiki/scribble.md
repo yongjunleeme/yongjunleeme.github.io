@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-09 15:52:36 +0900
+updated : 2020-06-10 14:40:51 +0900
 tags    : 
 toc     : true
 public  : true
@@ -289,7 +289,51 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
 
 #### Five-State Process Model
 
-1
+<img width="1158" alt="1" src="https://user-images.githubusercontent.com/48748376/84226305-6038f180-ab1c-11ea-82c3-2823a8da8250.png">
+
+- Ready Queue - 메모리에 있으며 대기하는 프로세스들
+- Block Queue - IO 리소스마다 다른 이벤트별 대기하는 프로세스들
+
+#### Suspended Processes
+
+- suspend 2가지 의미 혼용
+    - interrupt 시 프로세스 중단 시 suspend, pause
+    - 메모리 바깥으로 쫓아내는 -> swapping
+- Swapping
+    - 프로세스가 갑자기 많아졌는데 모든 프로세스가 IO 요청 -> 모든 프로세스 블록상태 -> CPU가 모두 블록상태라 할당할 수 없다 -> 강제로 블록상태를 일단 바깥에서 기다려
+- Suspended Process
+    - 메모리에서 쫓겨나서 Suspended State에
+- page fault - CPU가 프로세스 액세스하려는데 디램(메인 메모리)에 없는 것
+    - exceptino이 되어서 CPU가 아닌 운영체제가 디스크에서 메인메모리로 프로세스를 가져온 다음 page fault난 명령부터 다시 실행
+
+<img width="1140" alt="스크린샷 2020-06-10 오후 1 37 00" src="https://user-images.githubusercontent.com/48748376/84231085-5321ff80-ab28-11ea-835e-9ea6c0938cd7.png">
+
+
+#### Interrupt, Exception
+
+
+- Exception
+    - 현재 프로세스의 특정 명령에서 발생한 예외상황
+    - Internel하다고 표현- CPU 내에서 발생하므로
+    - OS 코드로 들어가는 모든 것 -> Exception의 Interrupt를 통해서만 커널로 들어간다
+    - Sychronous
+        - Traps
+            - 명령어 실행 마치자마자 발생(예: 디버깅, 시스템콜)
+        - Faults
+            - 명령어를 다 마치지 못한 것 (예: page fault)
+        - Aborts
+
+- Interrupt
+    - Exception과 달리 CPU 외부 이벤트(프로세스와 상관 없음)
+        - 예) 키보드 누르면 Interrupt -> 그러나 CPU에겐 한 세월
+        - 예) 리부트
+    - 매 클럭사이클마다 CPU는 Interrupt 체크
+    - Asychronous
+        - 졸다가 언제 파워버튼 무릎으로 누를지 아무도 모른다
+- 모든 이벤트 번호가 있다 -> Interrupt vector, exception vector
+    - 특정 이벤트 정의한 핸들러 -> Interrupt handler, exception handler
+        - 펌웨어 - OS와 하드웨어를 연결하는 브릿지 
+
 
 ### Thread
 
