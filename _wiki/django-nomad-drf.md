@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-06-07 20:51:43 +0900
+updated : 2020-06-09 23:29:55 +0900
 tags    : 
 toc     : true
 public  : true
@@ -225,7 +225,7 @@ class SeeRoomView(RetrieveAPIView):
     - 그냥 api 완성
     - url 제공 - rooms, rooms/1 모두 자동으로
     - PUT, DELETE 메소드까지 제공
-    - 그러나 모든 기능이 on 되어 있어서 비즈니스로직 [viewset actions](https://www.django-rest-framework.org/api-guide/viewsets/) 구현해야 할 경우가 생길 수도 있음
+    - 그러나 모든 기능이 on 되어 있어서 비즈니스로직 [viewset actions](https://www.django-rest-framework.org/api-guide/viewsets/) 구현해야 할 수도
 
 
 ```python
@@ -261,18 +261,58 @@ class RoomViewset(viewsets.ModelViewSet):
 
 ### [2.2 Create Room part Two](https://github.com/nomadcoders/airbnb-api/commit/d502905179d671b143006b0c731a843c2dcd308d)
 
-- create, update, save 메소드 커스터마이징
-- create 메소드를 직접 콜하면 안 된다
+
+- [공식](https://www.django-rest-framework.org/api-guide/serializers/)
+- create
+    - create 메소드를 직접 콜하면 안 된다
     - save 메소드를 쓰면 create, update 등을 감지할 것
     - create 메소드를 쓰면 반드시 instance를 리턴해야
 
 ```python
-def create(self, validated_data): # validataed_data -> dict list
-    return Comment.objects.create(**validated_data)
+# serializer.py
+class WriteRoomSerializer(serializers.Serializer):
+
+    name = serializers.CharField(max_length=140)
+    address = serializers.CharField(max_length=140)
+    price = serializers.IntegerField()
+    beds = serializers.IntegerField(default=1)
+    lat = serializers.DecimalField(max_digits=10, decimal_places=6)
+    lng = serializers.DecimalField(max_digits=10, decimal_places=6)
+    bedrooms = serializers.IntegerField(default=1)
+    bathrooms = serializers.IntegerField(default=1)
+    check_in = serializers.TimeField(default="00:00:00")
+    check_out = serializers.TimeField(default="00:00:00")
+    instant_book = serializers.BooleanField(default=False)
+
+    def create(self, validated_data):
+        return Room.objects.create(**validated_data)
 ```
 
 
+```python
+## views.py
+@api_view(["GET", "POST"])
+def rooms_view(request):
+    if request.method == "GET":
+        rooms = Room.objects.all()[:5]
+        serializer = ReadRoomSerializer(rooms, many=True).data
+        return Response(serializer)
+    elif request.method == "POST":
+        if not request.user.is_authenticated: # 이렇게 인증 안 해주면 에러
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        serializer = WriteRoomSerializer(data=request.data)
+        if serializer.is_valid():
+            room = serializer.save(user=request.user)  # create()가 아니라 save()
+            room_serializer = ReadRoomSerializer(room).data
+            return Response(data=room_serializer, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
+```
+
+### [2.3 Room Detail GET](https://github.com/nomadcoders/airbnb-api/commit/de21510bbf93a506e81d4be816a47541bc15b01d)
+
+- [공식](https://www.django-rest-framework.org/api-guide/validators/)
 
 
 
