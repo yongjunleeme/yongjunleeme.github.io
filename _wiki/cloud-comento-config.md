@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-03 14:24:49 +0900
-updated : 2020-06-05 16:08:59 +0900
+updated : 2020-06-10 17:56:07 +0900
 tags    : 
 toc     : true
 public  : true
@@ -73,7 +73,7 @@ private subnet B 10.0.3.0/24
         - VPC IPv4 주소의 범위를 [CIDR(Classless Inter-Domain Routing)](https://tools.ietf.org/html/rfc4632) 블록 형태로 지정(예: 10.0.0.0/16)
             - 사설망 대역 : 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
             - CIDR 블록 - IP 범위를 지정하는 방식(VPC 내 자원들은 VPC의 CIDR 범위 내에서 ip를 할당받음)
-            - 라우터 테이블의 기본 규칙이 VPC CIDR 블록에서 찾기 때문에 사설망이 아닌 CIDR을 사용하면 인터넷과 연결되 라우트 규칙을 정의하더라도 통신 불가
+            - 라우터 테이블의 기본 규칙이 VPC CIDR 블록에서 찾기 때문에 사설망이 아닌 CIDR을 사용하면 인터넷과 연결돼 라우트 규칙을 정의하더라도 통신 불가
             - 각 서브넷은 단일 가용 영역 내 존재해서 다른 가용 영역 장애 격리 가능
 - Public Subnet & Private Subnet
     - 퍼블릭 - Nat 인스턴스를 통해 Private Subnet의 인스턴스가 인터넷 가능하도록 만듦
