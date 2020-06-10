@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 20:19:47 +0900
-updated : 2020-06-09 18:48:33 +0900
+updated : 2020-06-09 19:08:13 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1337,21 +1337,7 @@ aws lambda update-function-code --function-name top-tracks --s3-bucket 버킷이
 prefix=
 ```
 
-### 설정
-
-
-- Basic settings
-    - 간단명료한 잡들을 병렬처리하는 것이 서버리스에 적합
-
-```pyhon
-$ pip install requirements.txt -t ./libs # t -> target
-# setup.cfg 생성(하단 참조) - 포인터 이슈
-```
-
-```python
-# libs 폴더 내 필요없는 파일 삭제
-$ rm -r *.dist-info
-```
+#### 실행
 
 ```python
 $ chmod +x deploy.sh
@@ -1359,7 +1345,7 @@ $ ./deploy.sh
 ```
 
 
-## 
+## ahena
 
 ```
 athena data load -> artist avf metrics 
