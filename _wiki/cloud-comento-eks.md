@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-10 18:21:56 +0900
-updated : 2020-06-10 19:53:25 +0900
+updated : 2020-06-10 20:00:04 +0900
 tags    : 
 toc     : true
 public  : true
@@ -30,7 +30,7 @@ latex   : false
 
 #### 쿠버네티스 클러스터 아키텍처
 
-1
+<img width="543" alt="1" src="https://user-images.githubusercontent.com/48748376/84260161-87131a00-ab54-11ea-97d9-2b3e832e010f.png">
 
 - 여러 대의 서버가 하나의 클러스터로 연결
 - 쿠버네티스 마스터 -> 컨트롤 플레인이 실행됨, 클러스터의 두뇌
@@ -57,7 +57,7 @@ latex   : false
 - Deployment에서 몇 개의 파드가 얼마 만큼의 자원을 사용할지 정의한다.
 - Pod는 각각의 WorkerNode에 배포되고 서비스를 통해 외부에 노출된다. (사람들이 인터넷을 통해 접근할 수 있게 외부로 노출)
 
-2
+<img width="440" alt="2" src="https://user-images.githubusercontent.com/48748376/84260167-8a0e0a80-ab54-11ea-96e2-4e7d91161974.png">
 
 #### Ngnix 배포
 
@@ -82,7 +82,7 @@ $ brew install kubernetes-cli
 $ kubectl version --client
 ```
 
-3
+<img width="464" alt="3" src="https://user-images.githubusercontent.com/48748376/84260170-8aa6a100-ab54-11ea-8a5a-2f6f34e4c861.png">
 
 ### IAM에서 EKS 클러스터 역할 생성
 
@@ -91,14 +91,14 @@ $ kubectl version --client
     - 이름 : eksClusterRole
     - 권한 : AmazonEKSClusterPolicy, AmazonEKSServicePolicy
 
-4
+<img width="759" alt="4" src="https://user-images.githubusercontent.com/48748376/84260171-8b3f3780-ab54-11ea-889e-63aa97b15006.png">
 
 ### 보안그룹 생성
 
 - EKS 클러스터 보안그룹
     - 이름 : mission-cluster-sg
 
-5
+<img width="423" alt="5" src="https://user-images.githubusercontent.com/48748376/84260173-8bd7ce00-ab54-11ea-8683-2d7e9293fa08.png">
 
 - 클러스터 엔드포인트 액세스
     - 인터넷에서 Kubernetes 클러스터 엔드포인트로의 퍼블릭 액세스를 제한하거나 완전히 비활성화할 수 있다
@@ -139,7 +139,7 @@ aws eks --region ap-northeast-2 update-kubeconfig --name mission-cluster[클러�
 - 템플릿 지정
 - 준비된 템플릿 > Amazon S3 URL > https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2020-05-08/amazon-eks-nodegroup.yaml
 
-6
+<img width="545" alt="6" src="https://user-images.githubusercontent.com/48748376/84260174-8c706480-ab54-11ea-9047-f6287ffc7c46.png">
 
 #### 스택 세부정보 지정
 
@@ -150,7 +150,7 @@ aws eks --region ap-northeast-2 update-kubeconfig --name mission-cluster[클러�
 - Desired : 1
 - Max : 1
 
-7
+<img width="454" alt="7" src="https://user-images.githubusercontent.com/48748376/84260175-8c706480-ab54-11ea-92d3-766c705df822.png">
 
 - InstanceType : t3.small
 - NodeImageSSMParam : 1.14(Cluster와 동일 버전) NodeVolumeSize : 20
@@ -158,7 +158,7 @@ aws eks --region ap-northeast-2 update-kubeconfig --name mission-cluster[클러�
 - vpcID : mission-vpc
 - subnet : private subnet 선택
 
-8
+<img width="454" alt="8" src="https://user-images.githubusercontent.com/48748376/84260178-8da19180-ab54-11ea-8499-a0b7f06ea57f.png">
 
 #### WorkerNode를 클러스터에 조인
 
@@ -183,7 +183,7 @@ $ kubectl apply -f aws-auth-cm.yaml
 $ kubectl get node
 ```
 
-9
+<img width="367" alt="9" src="https://user-images.githubusercontent.com/48748376/84260176-8d08fb00-ab54-11ea-90aa-e3a65a97482f.png">
 
 ### Nginx deployment 배포
 
