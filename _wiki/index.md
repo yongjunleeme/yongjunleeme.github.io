@@ -80,6 +80,7 @@ regenerate: true
 * [[zeppelin-example]]
 * [[cloud-background]]
 * [[cloud-comento-config]]
+* [[cloud-comento-eks]]
 
 ### vim
 
