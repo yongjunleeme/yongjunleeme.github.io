@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-06-08 15:33:43 +0900
+updated : 2020-06-10 12:48:49 +0900
 tags    : 
 toc     : true
 public  : true
@@ -469,18 +469,18 @@ def merge(left, right):
     # case1 - left/right 둘 다 있을 때
     while len(left) > left_index and len(right) > right_index:
         if left[left_lndex] > right[right_index]:
-            merged.append(right[right_index])
+            merged.append(right[right_index]) # 더 적은 수를 merged에
             right_index += 1
         else:
             merged.append(left[left_index])
             left_index += 1
     
-    # case2 - left 데이터가 없을 때
+    # case2 - left만 남아 있을 때 
     while len(left) > left_index:
         merged.append(left[left_index])
         left_index += 1
     
-    # case3 - right 데이터가 없을 때
+    # case3 - right만 남아 있을 때
     while len(right) > right_index:
         merged.append(right[right_index])
         right_index += 1
