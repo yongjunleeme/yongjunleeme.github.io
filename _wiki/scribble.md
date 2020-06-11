@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-10 14:40:51 +0900
+updated : 2020-06-11 11:44:53 +0900
 tags    : 
 toc     : true
 public  : true
@@ -205,11 +205,10 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 
 #### Context Switching
 
-한 프로세스 내에서 사용자 프로세스와 커널 프로세스을 오감
-Mode bit - 사용자 모드인지 커널 모드인지 확인
-익셉션 - 사용자 모드에서 커널로 들어가는 유일한 경우
+- 한 프로세스 내에서 사용자 프로세스와 커널 프로세스을 오감
+- Mode bit - 사용자 모드인지 커널 모드인지 확인
+- 익셉션 - 사용자 모드에서 커널로 들어가는 유일한 경우
     - 인터럽트도 광의의 익셉션
-    - 시스템 콜 - 트랩
 - Context
     - 레지스터 내용 저장, 프로그램 카운터 저장 - 다음 스테이트 트랜스레이션할 때 여기서부터 시작
     - preemped -> 잠시 중지
@@ -222,7 +221,7 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
     - 메모리 - 실제 메모리, 레지스터 - 가상 메모리
 - 레지스터의 스테이트 -> Context
     - OS -> 레지스터의 스테이트를 커널에 저장
-        - Process Countrol Block - 프로세스와 관련된 정보 관리
+        - Process Control Block - 프로세스와 관련된 정보 관리
             - 프로세스의 ID, 실행상태, 프로세스의 우선순위 등의 스테이트 관리
 - 용도 : 중단되기 전 마지막 명령부터 시작
     - 스케쥴링에 관련된 정보
@@ -316,12 +315,19 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
     - 현재 프로세스의 특정 명령에서 발생한 예외상황
     - Internel하다고 표현- CPU 내에서 발생하므로
     - OS 코드로 들어가는 모든 것 -> Exception의 Interrupt를 통해서만 커널로 들어간다
-    - Sychronous
+    - Sychronous - 순서대로 발생하므로
         - Traps
             - 명령어 실행 마치자마자 발생(예: 디버깅, 시스템콜)
+            - 의도적인 Exception
+            - Return to 'next' instruction
         - Faults
             - 명령어를 다 마치지 못한 것 (예: page fault)
+            - 의도하지 않았지만 recoverable(명령어를 디스크에서 가져온 다음 번에는 Faults가 나올리 없기 때문)
+            - Return to the faulting instruction
         - Aborts
+            - 의도하지 않았고 회복도 불가능한 심각한 에러
+            - 인텔에서는 Aborts를 MCA(Machine Check Aborts)라고 부른다
+                - 예) 패러티 에러
 
 - Interrupt
     - Exception과 달리 CPU 외부 이벤트(프로세스와 상관 없음)
@@ -334,6 +340,10 @@ Mode bit - 사용자 모드인지 커널 모드인지 확인
     - 특정 이벤트 정의한 핸들러 -> Interrupt handler, exception handler
         - 펌웨어 - OS와 하드웨어를 연결하는 브릿지 
 
+#### (Asynchronous) Interrupt
+
+- 프로세스 외부의 특정 이벤트 발생
+- CPU 내 2개 핀(인터럽트 핀, NMI 핀)
 
 ### Thread
 
