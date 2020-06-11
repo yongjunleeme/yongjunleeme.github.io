@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 20:19:47 +0900
-updated : 2020-06-09 19:08:13 +0900
+updated : 2020-06-10 21:27:25 +0900
 tags    : 
 toc     : true
 public  : true
@@ -205,7 +205,14 @@ $ aws configure
 # 데이터 리전 입력 - ap-norhest-2
 # output format -> 엔터 (None)
 
-$ aws —-help
+$ aws help
+```
+
+- 확인
+
+```python
+# vim ~/.aws/credentials (Linux 및 Mac)
+# vim ~/.aws/config (Linux 및 Mac)
 ```
 
 ### `deploy.sh`
