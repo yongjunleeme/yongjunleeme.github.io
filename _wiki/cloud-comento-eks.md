@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-10 18:21:56 +0900
-updated : 2020-06-10 20:00:04 +0900
+updated : 2020-06-11 18:54:06 +0900
 tags    : 
 toc     : true
 public  : true
@@ -32,6 +32,7 @@ latex   : false
 
 <img width="543" alt="1" src="https://user-images.githubusercontent.com/48748376/84260161-87131a00-ab54-11ea-97d9-2b3e832e010f.png">
 
+- [Amazon EKS사용 설명서](chrome-extension://cbnaodkpfinfiipjblikofhlhlcickei/src/pdfviewer/web/viewer.html?file=https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/eks-ug.pdf)
 - 여러 대의 서버가 하나의 클러스터로 연결
 - 쿠버네티스 마스터 -> 컨트롤 플레인이 실행됨, 클러스터의 두뇌
     - 컨테이너 스케줄링, 서비스 관리, API 요청 수행 (파드, 리소스 컨트롤러, 로드밸런서 관리)
@@ -115,20 +116,38 @@ $ kubectl version --client
     - 클러스터 구성
         - 이름 : mission-cluster
         - 버전 : 1.14
-        - 클러스터 서비스 역할 : iam에서 생성한 역할 부여
+        - 클러스터 서비스 역할 : iam에서 생성한 역할
+            - IAM > 역할 > eksClusterRole 클릭하면 번호 나옴
     - 네트워킹 지정
         - vpc : 1차 과제에서 생성한 vpc
         - 서브넷 : 이전에 생성한 subnet 모두 포함
+            - id를 콤마로 구분해서 나열
         - 보안그룹 : mission-cluster-sg
+- [공식](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html)
+    - 서브넷 가용 영역을 최소 2개 이상으로 해야 오류가 안 난다
 
 ```python
-$ aws eks create-cluster --name mission-cluste[클러스터 이름] --kubernetes-version=1.14[버전] –role-arn arn:aws:iam::계정:role/eksClusterRole[클러스터 역할] --resources-vpc-config subnetIds=[생성했던 모든 subnet],securityGroupIds=[cluster의 보안그룹] --region ap-northeast-2
+$ aws eks create-cluster --name mission-cluster[클러스터 이름] --kubernetes-version=1.14[버전] -–role-arn arn:aws:iam::계정:role/eksClusterRole[클러스터 역할] --resources-vpc-config subnetIds=[생성했던 모든 subnet],securityGroupIds=[cluster의 보안그룹] --region ap-northeast-2
+```
+
+```python
+aws eks create-cluster \
+   --region region-code \
+   --name devel \
+   --kubernetes-version 1.16 \
+   --role-arn arn:aws:iam::111122223333:role/eks-service-role-AWSServiceRoleForAmazonEKS-EXAMPLEBKZRQR \
+   --resources-vpc-config subnetIds=subnet-a9189fe2,subnet-50432629,securityGroupIds=sg-f5c54184
 ```
 
 - kubeconfig 파일 생성(kube config update)
+- [공식](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html)
 
 ```python
 aws eks --region ap-northeast-2 update-kubeconfig --name mission-cluster[클러스터 이름]
+```
+
+```python
+aws eks --region region-code update-kubeconfig --name cluster_name
 ```
 
 ### NodeGroup 생성
@@ -165,11 +184,15 @@ aws eks --region ap-northeast-2 update-kubeconfig --name mission-cluster[클러�
 - AWS IAM Authenticator 구성맵 다운로드
 
 ```python
-$ wget https://amazon-eks.s3.us-west-2.amazonaws.com/ cloudformation/2019-11-15/aws-auth-cm.yaml
+$ wget https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2019-11-15/aws-auth-cm.yaml
 ```
 
 - aws-auth-cm.yaml 수정
     - CloudFormation으로 생성된 WorkerNode에 부여된 Role을 NodeInstanceRole 값으로 교체 후 저장
+    - 홈페이지에서 CloudFormation > 리소스 > NodeInstanceRole 
+
+<img width="671" alt="스크린샷 2020-06-11 오후 5 53 19" src="https://user-images.githubusercontent.com/48748376/84365527-8d64cd00-ac0c-11ea-8010-121572f93beb.png">
+
 
 - 구성 적용
 
@@ -183,11 +206,10 @@ $ kubectl apply -f aws-auth-cm.yaml
 $ kubectl get node
 ```
 
-<img width="367" alt="9" src="https://user-images.githubusercontent.com/48748376/84260176-8d08fb00-ab54-11ea-90aa-e3a65a97482f.png">
-
 ### Nginx deployment 배포
 
 - Nginx-Deployment 생성
+    - 띄어쓰기 주의
 
 ```python
 # filename : nginx-deployment.yaml
@@ -213,6 +235,8 @@ spec:
             - containerPort: 80
 ```
 
+<img width="498" alt="스크린샷 2020-06-11 오후 6 52 29" src="https://user-images.githubusercontent.com/48748376/84371568-d15bd000-ac14-11ea-8dbd-476fded3ac00.png">
+
 - Nginx 파드 배포
 
 ```python
@@ -234,11 +258,13 @@ metadata:
 spec:
     ports:
     - port: 80
-        protocol: TCP
+      protocol: TCP
     selector:
         run: my-nginx
     type: LoadBalancer
 ```
+
+<img width="486" alt="스크린샷 2020-06-11 오후 6 52 33" src="https://user-images.githubusercontent.com/48748376/84371578-d456c080-ac14-11ea-9004-84d3155ec947.png">
 
 - Service 배포
 
