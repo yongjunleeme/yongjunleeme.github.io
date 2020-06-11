@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-06-08 12:32:32 +0900
+updated : 2020-06-11 13:28:09 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1138,7 +1138,220 @@ class BinSearchTree:
 
 
 ```python
+class Node:
+    def __init__(self, key, data):
+        self.key = key
+        self.data = data
+        self.left = None
+        self.right = None
 
+    def insert(self, key, data):
+        if key < self.key:
+            if self.left:
+                self.left.insert(key, data)
+            else:
+                self.left = Node(key, data)
+        elif key > self.key:
+            if self.right:
+                self.right.insert(key, data)
+            else:
+                self.right = Node(key, data)
+        else:
+            raise KeyError('Key %s already exists.' % key)
+
+    def lookup(self, key, parent=None):
+        if key < self.key:
+            if self.left:
+                return self.left.lookup(key, self)
+            else:
+                return None, None
+        elif key > self.key:
+            if self.right:
+                return self.right.lookup(key, self)
+            else:
+                return None, None
+        else:
+            return self, parent
+
+    def inorder(self):
+        traversal = []
+        if self.left:
+            traversal += self.left.inorder()
+        traversal.append(self)
+        if self.right:
+            traversal += self.right.inorder()
+        return traversal
+
+    def countChildren(self):
+        count = 0
+        if self.left:
+            count += 1
+        if self.right:
+            count += 1
+        return count
+
+
+class BinSearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, key, data):
+        if self.root:
+            self.root.insert(key, data)
+        else:
+            self.root = Node(key, data)
+
+    def lookup(self, key):
+        if self.root:
+            return self.root.lookup(key)
+        else:
+            return None, None
+
+    def remove(self, key):
+        node, parent = self.lookup(key)
+        if node:
+            nChildren = node.countChildren()
+            # [Case 1]: The simplest case of no children
+            if nChildren == 0:
+                # 만약 parent 가 있으면
+                # node 가 왼쪽 자식인지 오른쪽 자식인지 판단하여 parent.left 또는 parent.right 를 None 으로 하여
+                # leaf node 였던 자식을 트리에서 끊어내어 없앱니다.
+                if parent:
+                    if parent.left == node:
+                        parent.left = None
+                    else:
+                        parent.right = None
+
+                # 만약 parent 가 없으면 (node 는 root 인 경우) self.root 를 None 으로 하여 빈 트리로 만듭니다.
+                else:
+                    self.root = None
+
+            # [Case 2]: When the node has only one child
+            elif nChildren == 1:
+                # 하나 있는 자식이 왼쪽인지 오른쪽인지를 판단하여 그 자식을 어떤 변수가 가리키도록 합니다.
+                # 만약 parent 가 있으면 node 가 왼쪽 자식인지 오른쪽 자식인지 판단하여
+                # 위에서 가리킨 자식을 대신 node 의 자리에 넣습니다.
+                if parent:
+                    if node.left:
+                        if parent.left == node:
+                            parent.left = node.left
+                        else:
+                            parent.right = node.left
+                    else:
+                        if parent.right == node:
+                            parent.right = node.right
+                        else:
+                            parent.right = node.right
+
+                # 만약 parent 가 없으면 (node 는 root 인 경우) self.root 에 위에서 가리킨 자식을 대신 넣습니다.
+                else:
+                    if node.left:
+                        self.root = node.left
+                    else:
+                        self.root = node.right
+
+            # [Case 3]: When the node has both left and right children
+            else:
+                parent = node
+                successor = node.right
+                # parent가 node를 가리키도록 하고,
+                # successor 는 node 의 오른쪽 자식 서브트리의 root노드를 가리키도록 합니다.
+                # successor 로부터 왼쪽 자식의 링크를 반복하여 따라감으로써
+                # 순환문이 종료할 때 successor는 node의 오른쪽 자식 서브트리의 최소값을,
+                # 그리고 parent 는 그 노드의 부모 노드를 가리키도록 찾아냅니다.
+
+                while successor.left:
+                    parent = successor
+                    successor = successor.left
+                # 삭제하려는 노드인 node 에 방금 찾은 successor 의 key 와 data 를 대입합니다.
+                node.key = successor.key
+                node.data = successor.data
+                # 이제, successor 가 parent 의 왼쪽 자식인지 오른쪽 자식인지를 판단하여
+                # 그에 따라 parent.left 또는 parent.right 를 successor 가 가지고 있던 (없을 수도 있지만) 자식을 가리키도록 합니다.
+                if parent.left == successor:
+                    if successor.left:
+                        parent.left = successor.left
+                    elif successor.right:
+                        parent.left = successor.right
+                    else: parent.left = None
+                else:
+                    if successor.left:
+                        parent.right = successor.left
+                    elif successor.right:
+                        parent.right = successor.right
+                    else:
+                        parent.right = None
+            return True
+        else:
+            return False
+
+    def inorder(self):
+        if self.root:
+            return self.root.inorder()
+        else:
+            return []
+```
+
+## 힙(heap)
+
+- 이진 트리의 한 종류(이진 힙 - binary heap)
+    - 루트 노드가 언제나 최댓값 또는 최솟값을 가짐
+        - 최대 힙(max head), 최소 힙(min heap)
+    - 완전 이진 트리여야 함
+
+### Maxheap
+
+- 최대 힙의 예
+    - 자식보다 부모가 큰 값을 가진다
+    - 재귀적으로도 정의됨
+        - 어느 노드를 루트로 하는 서브트리도 모두 최대 힙
+    - 그러나 자식들의 대소관계는 정해지지 않음 - 느슨한 관계
+
+<img width="492" alt="1" src="https://user-images.githubusercontent.com/48748376/84343620-a6a55380-abe3-11ea-99a2-9e0d63b44fb7.png">
+
+- 이진 탐색 트리와의 비교
+    - 원소들은 완전히 크기 순으로 정렬되어 있는가?
+    - 특정 키 값을 가지는 원소를 빠르게 검색할 수 있는가?
+    - 부가의 제약 조건은 어떤 것인가?
+
+- 최대 힙 연산 정의
+    - remove() - 최대 원소(root node)를 반환
+        - 동시에 이 노드를 삭제
+
+
+- 데이터 표현의 설계
+    - 완전 이진 트리이므로 배열로 표현하기 적당
+    - 0이 아닌 1부터 인덱스 시작
+
+```python
+class MaxHeap:
+    def __init__(self):
+        self.data = [None] # 0이 아닌 1부터 시작하므로
+```
+
+<img width="740" alt="2" src="https://user-images.githubusercontent.com/48748376/84343627-aa38da80-abe3-11ea-97c3-0f27161b160b.png">
+
+- 최대 힙에 원소 삽입
+    - 트리의 마지막 자리에 새로운 원소를 임시로 저장
+    - 부모 노드와 키 값을 비교하여 위로, 위로 이동
+
+<img width="866" alt="3" src="https://user-images.githubusercontent.com/48748376/84343630-ab6a0780-abe3-11ea-93c4-22052b8088dc.png">
+
+
+```python
+class MaxHeap:
+    def __init__(self):
+        self.data = [None]
+
+    def insert(self, item):
+        self.data.append(item)
+        i = len(self.data) - 1 
+        while i > 1:
+            if self.data[i] > self.data[(i // 2)]:
+                self.data[i], self.data[(i // 2)] = self.data[(i // 2)], self.data[i]
+                i = i // 2
+            else:
+                break
 
 ```
 
