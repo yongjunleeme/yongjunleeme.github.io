@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-06-11 13:28:09 +0900
+updated : 2020-06-12 11:22:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1331,6 +1331,8 @@ class MaxHeap:
 
 <img width="740" alt="2" src="https://user-images.githubusercontent.com/48748376/84343627-aa38da80-abe3-11ea-97c3-0f27161b160b.png">
 
+#### 최대 힙에 원소 삽입
+
 - 최대 힙에 원소 삽입
     - 트리의 마지막 자리에 새로운 원소를 임시로 저장
     - 부모 노드와 키 값을 비교하여 위로, 위로 이동
@@ -1353,6 +1355,63 @@ class MaxHeap:
             else:
                 break
 
+```
+
+#### 최대 힙에서 원소의 삭제
+
+- 루트 노드의 제거 - 이것이 원소들 중 최댓값 [1]
+- 트리 마지막 자리 노드를 임시로 루트 노드의 자리에 배치 [2]
+- 자식 노드들과의 값 비교와 아래로, 아래로 이동 [3]
+    - 자식이 둘 있다면 더 큰 값부터 아래로, 아래
+        - 더 큰 값이 위로 올라와야 하므로
+
+```python
+class MaxHeap:
+    def remove(self):
+        if len(self.data) > 1: # 0은 안 쓰므로
+            self.data[1], self.data[-1] = self.data[-1], self.data[1] # 2
+            data = self.data.pop(-1) # 1
+            self.maxHeapify(1) # 3
+        else:
+            data = None
+        return data
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+<img width="656" alt="1" src="https://user-images.githubusercontent.com/48748376/84455766-1c1f2b80-ac99-11ea-9bbe-3b5d1274be47.png">
+
+#### 최대, 최소힙의 응용
+
+<img width="637" alt="2" src="https://user-images.githubusercontent.com/48748376/84455770-1fb2b280-ac99-11ea-8202-4b02415c3214.png">
+
+<img width="631" alt="3" src="https://user-images.githubusercontent.com/48748376/84455771-20e3df80-ac99-11ea-8fb5-68e9d754550f.png">
+
+
+#### 힙 정렬
+
+
+```python
+def heapsort(unsorted):
+    H = MaxHeap()
+    for item in unsorted:
+        H.insert(item)
+    sorted = []
+    d = H.remove()
+    while d:
+        sorted.append(d)
+        d = H.remove()
+    return sorted
 ```
 
 ## Link 
