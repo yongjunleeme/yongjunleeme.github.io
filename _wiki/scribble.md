@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-11 11:44:53 +0900
+updated : 2020-06-12 17:41:20 +0900
 tags    : 
 toc     : true
 public  : true
@@ -340,12 +340,57 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
     - 특정 이벤트 정의한 핸들러 -> Interrupt handler, exception handler
         - 펌웨어 - OS와 하드웨어를 연결하는 브릿지 
 
-#### (Asynchronous) Interrupt
+- CPU 내 2개 핀(INT(인터럽트) 핀, NMI(Non Maskable Interrupt) 핀)
+- Interrupt Classification
+    - Maskable Interrupt - interrupt disable 가능(INT 핀에 의해)
+    - Non-Maskable Interrupt - disable 불가능
 
-- 프로세스 외부의 특정 이벤트 발생
-- CPU 내 2개 핀(인터럽트 핀, NMI 핀)
+
+#### UNIX system 5(V) Process Manangement
+
+- 원래 UNIX는 AT&T에서 개발 -> System 5 계열
+    - 다른 학교버전은 UC버클리에서 개발
+- System Process
+    - 유저프로세스에서 익셉션으로 시스템프로세스로 들어가는 게 이니라 원래부터 시스템 프로세스도 있다
+        - 예) administrative 잡(메모리할당, 프로세스 swapping)
+            - 유닉스에서는 디몬이라고 부름(커널 역할, 백그라운드)
+- User Process
+    - 커널과 유저 프로세스를 왔다갔다
+
+- UNIX Process States
+
+<img width="1045" alt="1" src="https://user-images.githubusercontent.com/48748376/84483132-dd5a9700-acd3-11ea-892a-f73ea1fd43ca.png">
+
+<img width="1218" alt="2" src="https://user-images.githubusercontent.com/48748376/84483126-db90d380-acd3-11ea-9fc7-a5bbcfbd9fcf.png">
+
 
 ### Thread
+
+- lightweigh process
+- 하드웨어 스레드와는 다른 스레드
+    - 요즘에 한 코어 내 프로그램카운터 2개 -> CPU 유틸라이제이션 높여
+        - 멀티스레드 -> 여기서 말하는 스레드는 프로세스다
+- OS의 스레드
+    - 대부분의 소프트웨어 애플리케이션은 멀티스레드로 동작
+        - 브라우저에서 탭이 늘어나는 것은 프로세스보다 스레드일 가능성이 크다
+- 프로세스와 달리 스레드는 메모리와 자원을 모두 공유한다
+
+#### 프로세스 특성
+
+- 리소스를 갖고 있는 주체
+    - 메모리(일부) 할당, 파일, I/O 디바이스 할당
+        - 리소스오너십을 갖는다 - 뮤추얼 익스클루젼 - 독립적
+        - 프로세스들은 리소스를 사용하기 위한 경쟁관계
+    - 각 프로세스는 독립적인 버추얼 메모리를 갖는다
+- 스케쥴 유닛
+    - 프로세스단위로 스케쥴링의 우선순위
+    - 실제 - 타임 슬라이싱에 의한 인터리빙, 프로세스 입장 - 연속적으로 실행하는 것처럼 보이고 concurrent(병행 컴퓨팅)한 것처럼 보인다
+- 리소스는 프로세스별로 할당 스케쥴링(CPU)은 스레드별로 할당
+
+#### 멀티스레딩
+
+
+
 
 ### Mutual Exclusion and Synchronization
 
