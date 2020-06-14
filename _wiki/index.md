@@ -81,6 +81,8 @@ regenerate: true
 * [[cloud-background]]
 * [[cloud-comento-config]]
 * [[cloud-comento-eks]]
+* [[cloud-comento-log]]
+
 
 ### vim
 
