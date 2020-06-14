@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-10 18:21:56 +0900
-updated : 2020-06-11 18:54:06 +0900
+updated : 2020-06-13 11:12:34 +0900
 tags    : 
 toc     : true
 public  : true
@@ -22,6 +22,10 @@ latex   : false
     - 구축된 쿠버네티스 환경에 Nginx 서비스를 배포
         - Nginx 서비스 배포
 
+- NACL
+    - 네트워크 ACL은 주고(outbound) 받는(inbound) 트래픽을 제어하는 가상 방화벽입니다. 시큐리티 그룹은 인스턴스의 앞단에서 트래픽을 제어하는 가상 방화벽인 반면, 네트워크 ACL은 서브넷 앞단에서 트래픽을 제어하는 역할을 합니다. 따라서 네트워크 ACL의 규칙을 통과하더라도 시큐리티 그룹의 규칙을 통과하지 못 하면 인스턴스와는 통신하지 못 할 수 있습니다. 
+
+
 ### Kubernetes
 
 - 컨테이너 오케스트레이션 툴(Docker Swarm 같은..)
@@ -33,11 +37,15 @@ latex   : false
 <img width="543" alt="1" src="https://user-images.githubusercontent.com/48748376/84260161-87131a00-ab54-11ea-97d9-2b3e832e010f.png">
 
 - [Amazon EKS사용 설명서](chrome-extension://cbnaodkpfinfiipjblikofhlhlcickei/src/pdfviewer/web/viewer.html?file=https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/eks-ug.pdf)
+
+
+- 크게 마스터와 워커노드로 구분
 - 여러 대의 서버가 하나의 클러스터로 연결
 - 쿠버네티스 마스터 -> 컨트롤 플레인이 실행됨, 클러스터의 두뇌
     - 컨테이너 스케줄링, 서비스 관리, API 요청 수행 (파드, 리소스 컨트롤러, 로드밸런서 관리)
-- 쿠버네티스 워커노드 -> 사용자의 워크로드 실행 마스터의 관리 아래 실제 pod같은
-리소스가 생성되는 노드
+- 쿠버네티스 워커노드 -> 사용자의 워크로드 실행 마스터의 관리 아래 실제 pod같은 리소스가 생성되는 노드
+- 노드 안에 파드 리소스
+
 
 #### 관리형 Kubernetes vs 자체 호스팅
 
@@ -56,7 +64,23 @@ latex   : false
 - Node(=WorkerNode)는 EKS의 NodeGroup.(하나의 컴퓨터라고 생각)
 - 컨테이너(web application 등)를 담은 Pod는 Deployment에 의해 관리된다.
 - Deployment에서 몇 개의 파드가 얼마 만큼의 자원을 사용할지 정의한다.
+    - 파드들은 어떻게 롤아웃될 것인지
+    - cpu나 메모리 어떻게 사용할지
+    - 설명서 느낌
+    - `nginx-deployment.yaml`
 - Pod는 각각의 WorkerNode에 배포되고 서비스를 통해 외부에 노출된다. (사람들이 인터넷을 통해 접근할 수 있게 외부로 노출)
+
+
+- pod는 각자 ip 할당
+    - pod 하나에 하나의 서비스를 담아야 ip를 아껴서 사용할 수 있다
+    - 반대로 우리는 MSA하겠다 다 따로 담을 수도 있다
+    - 내부에 구성, 외부에서 쓸 수 없다
+        - 인터넷으로 접근 가능 - 서비스라는 쿠버네티스 자원
+            - 로드 밸런서 타입
+                - 로드밸런서 -> 서비스 -> 파드로 포워딩
+- 어떻게 마스터와 노드 소통?
+    - kube apiserver의 엔드포인트로 노그그룹과 통신
+
 
 <img width="440" alt="2" src="https://user-images.githubusercontent.com/48748376/84260167-8a0e0a80-ab54-11ea-96e2-4e7d91161974.png">
 
@@ -66,6 +90,28 @@ latex   : false
 - Pod를 LoadBalancer Type의 Service를 통해 배포한다.
 - 자동 생성된 ELB를 통해 Nginx가 배포된 것을 확인한다.
 
+
+#### 모르는 용어
+
+- EKS(Elastic Kubernetes Service)?
+    - Kubernetes Master Plane을 직접 설치하고 운영할 필요 X
+    - AWS에서 Kubernetes를 사용할 수 있게 제공하는 관리형 Kubernetes 서비스
+- ECS(Elastic Container Service) – 관리형 쿠버네티스 이전, 컨테이너 관리서비스(Fargate-서버리스 or EC2)
+- NodeGroup – EKS Master Plane과 통신하며 실제 Pod가 생성되는 Worker Node의 Group Worker Node는 AWS에서 제공하는 Kubernetes 버전 별 최적화 된 AMI를 통해 생성된다.
+    - ex) Cluster version – 1.14 → Worker Node는 1.14 최적화 AMI 사용하여 생성
+- CloudFormation?
+    - Infra as a Code
+    - 인프라 관리 간소화, 복제, 변경
+        - 템플릿(yaml, json)을 생성하여 인프라를 관리하는 AWS Native Service
+
+
+- 개발 검수 운영
+    - 클러스터 버전 워커노드 버전 0.2 이상 차이나면 알아서 워커노드가 자동 업데이트된다
+    - 워커노드 AMI 개발 검수 운영 모두 전부 다시해야
+    - 스크립트 자동화 안 해놓으면
+    - AMI 스크립트 업데이트
+    - 워커노드를 죽였다가 살려야 하므로 저녁에
+    - 전부 계획보고서부터 시작
 
 ## EKS 환경구성
 
@@ -187,6 +233,7 @@ aws eks --region region-code update-kubeconfig --name cluster_name
 $ wget https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2019-11-15/aws-auth-cm.yaml
 ```
 
+- kubectl 접근 권한 설정
 - aws-auth-cm.yaml 수정
     - CloudFormation으로 생성된 WorkerNode에 부여된 Role을 NodeInstanceRole 값으로 교체 후 저장
     - 홈페이지에서 CloudFormation > 리소스 > NodeInstanceRole 
@@ -198,6 +245,11 @@ $ wget https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2019-11-15/a
 
 ```python
 $ kubectl apply -f aws-auth-cm.yaml
+```
+
+```python
+
+# kubectl edit configmap –n kube-system aws-auth
 ```
 
 - 노드 상태 확인
@@ -244,6 +296,7 @@ $ kubectl apply –f nginx-deployment.yaml //배포
 $ kubectl get pod //생성된 파드 확인
 ```
 
+
 - Nginx-Service.yaml 생성 (type : loadbalancer)
 
 ```python
@@ -272,6 +325,10 @@ spec:
 $ kubectl apply –f nginx-service.yaml # 배포
 $ kubectl get service # 배포된 서비스 확인
 # 로드밸런서 타입으로 생성했기 때문에 CLB 타입의 ELB 생성됨
+```
+
+```python
+# kubectl expose deployment/my-nginx --type=LoadBalancer --port=80"
 ```
 
 - 웹에서 `EXTERNAL-IP:80`으로 Nginx 접속 확인
