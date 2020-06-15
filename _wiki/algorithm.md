@@ -3,7 +3,7 @@ layout  : wiki
 title   : algorithm
 summary : 
 date    : 2020-02-10 18:02:44 +0900
-updated : 2020-06-10 12:48:49 +0900
+updated : 2020-06-11 13:55:58 +0900
 tags    : 
 toc     : true
 public  : true
@@ -667,9 +667,6 @@ graph['J'] = ['I']
 <img width="727" alt="스크린샷 2020-06-08 오후 3 29 17" src="https://user-images.githubusercontent.com/48748376/83999236-4c1ab600-a99d-11ea-92a1-d9359122bc71.png">
 
 ```python
-data = [1, 2, 3]
-data.extend([4, 5])
-
 def bfs(graph, start_node):
     visited = list()
     need_visit = list()
