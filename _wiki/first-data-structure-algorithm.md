@@ -3,7 +3,7 @@ layout  : wiki
 title   : first-data-structure-algorithm
 summary : 
 date    : 2020-03-31 21:15:47 +0900
-updated : 2020-06-12 12:55:14 +0900
+updated : 2020-06-16 10:22:57 +0900
 tags    : 
 toc     : true
 public  : true
@@ -705,21 +705,68 @@ def solution(expr):
     - 컴퓨터가 후위 표기법을 사용하면 수식을 만날 때마다 스택에 적용
 
 
-연산자를 만나면 우선 스택에 넣는다.
-연산자를 다시 만나면 스택에 있는 것과 비교해 우선순위가 높은 것을 팝해서 피연산자 뒤에 놓는다.
-그러고 나서 만난 연산자를 스택에 넣는다.
-수식의 끝에 도달하면 연산자를 팝해서 ㅍ피연산자 뒤에 놓는다.
+- 연산자를 만나면 우선 스택에 넣는다.
+- 연산자를 다시 만나면 스택에 있는 것과 비교해 우선순위가 높은 것을 팝해서 피연산자 뒤에 놓는다.
+- 그러고 나서 만난 연산자를 스택에 넣는다.
+- 수식의 끝에 도달하면 연산자를 팝해서 피연산자 뒤에 놓는다.
+- 괄호의 처리
+    - 여는 괄호는 스택에 푸시
+    - 닫는 괄호를 만나면 여는 괄호가 나올 때까찌 pop
+        - 괄호 안에 들어있는 연산을 우선 행하는 효과
+    - 연산자를 만났을 때, 여는 괄호 너머까지 pop하지 않도록
+        - 여는 괄호의 우선순위는 가장 낮게 설정
 
-A+B+C
+##### 중위표현 수식 --> 후위표현 수식
 
-동일한 연산자라도 연산자를 만나면 
+```python
+class ArrayStack:
 
-괄호의 처리
+    def __init__(self):
+        self.data = []
 
-여는 괄호는 스택에 푸시
-닫는 괄호를 만나면 여는 괄호가 나올 때까찌 pop
+    def size(self):
+        return len(self.data)
 
-연산자를 만났을 때, 여는 괄호 너머까지 pop하지 않도
+    def isEmpty(self):
+        return self.size() == 0
+
+    def push(self, item):
+        self.data.append(item)
+
+    def pop(self):
+        return self.data.pop()
+
+    def peek(self):
+        return self.data[-1]
+
+prec = {
+    '*': 3, '/': 3,
+    '+': 2, '-': 2,
+    '(': 1
+}
+
+def solution(S):
+    opStack = ArrayStack()
+    answer = ''
+    for i in S:
+        if i not in prec and i != ')':
+            answer += i
+        elif i == '(':
+            opStack.push(i)
+        elif i == ')':
+            while opStack.peek() != '(':
+                answer += opStack.pop()
+            opStack.pop()
+        elif opStack.isEmpty():
+            oStack.push(i)
+        else:
+            while not opStack.isEmpty() and prec[opStack.peek()] >= prec[i]:
+                answer += opStack.pop()
+            opStack.push(i)
+    while not opStack.isEmpty():
+        answer += opStack.pop()
+    return answer
+```
 
 
 ## 큐
