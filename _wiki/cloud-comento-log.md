@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-13 11:13:11 +0900
-updated : 2020-06-17 17:34:51 +0900
+updated : 2020-06-17 18:04:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -210,7 +210,8 @@ $ kubectl get service
 
 - [EC2] → [로드밸런서] → [Security]탭 클릭 → Security Group ID 클릭 → security group 화면에서 inbound rule 편집
 
-<img width="1079" alt="6" src="https://user-images.githubusercontent.com/48748376/84875240-abc14180-b0c0-11ea-8590-73abeb011915.png">
+<img width="952" alt="6" src="https://user-images.githubusercontent.com/48748376/84878480-db724880-b0c4-11ea-93d5-e92c073d70a0.png">
+
 
 - Kibana web 접근 확인
     - LB DNS:5601
