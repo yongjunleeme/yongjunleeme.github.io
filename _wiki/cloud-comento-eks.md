@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-10 18:21:56 +0900
-updated : 2020-06-13 11:12:34 +0900
+updated : 2020-06-17 13:55:22 +0900
 tags    : 
 toc     : true
 public  : true
@@ -117,8 +117,24 @@ latex   : false
 
 ### [Bastion에 kubectl 설치](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl/)
 
+- [Bation을 kubectl 명령어를 수행하는 workspace로 사용](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl/)
+
+```python
+# 1.8버전의 kubectl 다운로드
+$ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
+
+# 실행 권한 추가
+$ chmod +x ./kubectl
+
+# PATH가 설정된 디렉터리로 변경
+$ sudo mv ./kubectl /usr/local/bin/kubectl
+
+# 설치 확인
+$ kubectl version --client
+```
+
 - 리눅스 버전으로 설치
-    - 안 되어서 brew로 설치함
+    - 위 명령어로 안 되어서 brew로 설치함
 
 ```python
 $ brew install kubectl
@@ -173,16 +189,11 @@ $ kubectl version --client
     - 서브넷 가용 영역을 최소 2개 이상으로 해야 오류가 안 난다
 
 ```python
-$ aws eks create-cluster --name mission-cluster[클러스터 이름] --kubernetes-version=1.14[버전] -–role-arn arn:aws:iam::계정:role/eksClusterRole[클러스터 역할] --resources-vpc-config subnetIds=[생성했던 모든 subnet],securityGroupIds=[cluster의 보안그룹] --region ap-northeast-2
-```
-
-```python
-aws eks create-cluster \
-   --region region-code \
-   --name devel \
-   --kubernetes-version 1.16 \
-   --role-arn arn:aws:iam::111122223333:role/eks-service-role-AWSServiceRoleForAmazonEKS-EXAMPLEBKZRQR \
-   --resources-vpc-config subnetIds=subnet-a9189fe2,subnet-50432629,securityGroupIds=sg-f5c54184
+$ aws eks create-cluster --name mission-cluster[클러스터 이름] \
+--kubernetes-version=1.14[버전] \
+-–role-arn arn:aws:iam::계정:role/eksClusterRole[클러스터 역할] \
+--resources-vpc-config subnetIds=[생성했던 모든 subnet],securityGroupIds=[cluster의 보안그룹] \
+--region ap-northeast-2
 ```
 
 - kubeconfig 파일 생성(kube config update)
@@ -242,14 +253,14 @@ $ wget https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2019-11-15/a
 
 
 - 구성 적용
+- Configmap: EKS Master plane에 조인한 워커노드에 권한 설정. IAM 사용자 및 RBAC 엑세스 추가하여 kubectl 명령어 권한 제한 가능
 
 ```python
 $ kubectl apply -f aws-auth-cm.yaml
 ```
 
 ```python
-
-# kubectl edit configmap –n kube-system aws-auth
+$ kubectl edit configmap –n kube-system aws-auth
 ```
 
 - 노드 상태 확인
@@ -295,7 +306,6 @@ spec:
 $ kubectl apply –f nginx-deployment.yaml //배포
 $ kubectl get pod //생성된 파드 확인
 ```
-
 
 - Nginx-Service.yaml 생성 (type : loadbalancer)
 
