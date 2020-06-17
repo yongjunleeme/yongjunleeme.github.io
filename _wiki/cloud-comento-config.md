@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-03 14:24:49 +0900
-updated : 2020-06-10 17:56:07 +0900
+updated : 2020-06-17 12:15:27 +0900
 tags    : 
 toc     : true
 public  : true
@@ -178,6 +178,9 @@ private subnet B 10.0.3.0/24
 - AMI 선택 > 커뮤니티 AMI > NAT 검색(맨 위의 AMI 사용)
     - AMI : amzn-ami-vpc-nat-hvm-2017.09.1-testlongids.20180307-x86_64-ebs - ami-0185fd13b4270de70
     - 인스턴스 타입 : t2.micro(free-tier)
+    - 네트워크 : mission-vpc
+    - 서브넷 : mission-public-subnet
+- 두 번쨰 페이지
     - 스토리지 추가 : 8GB, gp2
     - 태그 : 미설정
     - 보안 그룹 :
@@ -192,7 +195,7 @@ private subnet B 10.0.3.0/24
 
 <img width="592" alt="10" src="https://user-images.githubusercontent.com/48748376/83724192-cd5f0980-a67a-11ea-9116-19fab7648c3f.png">
 
-- Route Table(Internal-rt)에 추가
+- VPC의 Route Table(Internal-rt)에 추가
     - 대상 0.0.0.0/0, Nat instance
 - 네트워킹 > 소스/대상 확인 변경
 
@@ -204,6 +207,12 @@ private subnet B 10.0.3.0/24
 - 보안상 운영 서버에서 ec2-user 사용 금지
 - 개인 계정 ex)admin을 생성한 후 비밀번호를 설정하여 로그인할 때 id와 pw를 통해 접속 (1인 1계정 사용 이유: log가 남기 때문에 장애 발생시 책임의 소재를 명확히 할 수 있다.)
 - ssh 접속시 비밀번호 로그인 허용 설정
+
+```python
+# ec2 접속
+$ ssh -i keyname ec2-user@탄력IP주소
+```
+
 
 ```python
 # 루트로 계정 변경
