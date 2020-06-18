@@ -83,7 +83,6 @@ regenerate: true
 * [[cloud-comento-eks]]
 * [[cloud-comento-log]]
 
-
 ### vim
 
 * [[practical-vim-1]]
@@ -98,7 +97,7 @@ regenerate: true
 * [[database-basic]]
 * [[web-basic]]
 * [[OS-basic]]
-* [[interview-question]]
+* interview-question
 
 ### copy & paste
 
