@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-06-09 23:29:55 +0900
+updated : 2020-06-16 21:37:51 +0900
 tags    : 
 toc     : true
 public  : true
@@ -313,6 +313,22 @@ def rooms_view(request):
 ### [2.3 Room Detail GET](https://github.com/nomadcoders/airbnb-api/commit/de21510bbf93a506e81d4be816a47541bc15b01d)
 
 - [공식](https://www.django-rest-framework.org/api-guide/validators/)
+- Validate
+    - return해야
 
+```python
+# serializer.py
+...
+    def create(self, validated_data):
+        return Room.objects.create(**validated_data)
+
+    def validate(self, data):
+        check_in = data.get("check_in")
+        check_out = data.get("check_out")
+        if check_in == check_out:
+            raise serializers.ValidationError("Not enough time between changes")
+        else:
+            return data
+```
 
 
