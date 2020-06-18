@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-16 12:11:37 +0900
+updated : 2020-06-17 10:48:10 +0900
 tags    : 
 toc     : true
 public  : true
@@ -425,7 +425,8 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 - 예: 사용자 애플리케이션 입장
     - 여러 기능을 동시에 처리 가능
 - Paraller Processing 
-  
+- 커널 레벨 아닌 유저 레벨에서 스레드 라이브러리를 통해 포크, 스케쥴링 등 가능. 훨씬 빠르다.
+
 #### 스레드 상태
 
 - 스레드 상태
@@ -439,6 +440,15 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
     - Unblock
         - Ready
     - Finish
+
+#### User-Level Threads
+
+- 스레드 라이브러리 - 스레드 생성, 삭제, 스케쥴링...
+
+
+
+
+
 
 
 ### Mutual Exclusion and Synchronization
