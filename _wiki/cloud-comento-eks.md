@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-10 18:21:56 +0900
-updated : 2020-06-17 13:55:22 +0900
+updated : 2020-06-18 23:29:22 +0900
 tags    : 
 toc     : true
 public  : true
@@ -197,7 +197,8 @@ $ aws eks create-cluster --name mission-cluster[클러스터 이름] \
 ```
 
 - kubeconfig 파일 생성(kube config update)
-- [공식](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html)
+    - Nat Instance 접속해서 생성
+    - [공식](https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html)
 
 ```python
 aws eks --region ap-northeast-2 update-kubeconfig --name mission-cluster[클러스터 이름]
@@ -238,6 +239,7 @@ aws eks --region region-code update-kubeconfig --name cluster_name
 
 #### WorkerNode를 클러스터에 조인
 
+- Nat instance에 접속
 - AWS IAM Authenticator 구성맵 다운로드
 
 ```python
