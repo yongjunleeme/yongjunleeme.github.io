@@ -3,7 +3,7 @@ layout  : wiki
 title   : mindset 
 summary : 
 date    : 2020-02-14 21:23:41 +0900
-updated : 2020-05-24 17:50:37 +0900
+updated : 2020-06-19 09:28:25 +0900
 tags    : 
 toc     : true
 public  : true
@@ -26,13 +26,13 @@ latex   : false
 * Whenever you fall, pick something up. – Oswald Avery 
 넘어지면 무언가를 주워라. - 오스왈드 에이버리
 
-* If at first encounter I have no clue what's going on. just spend time learning it.
+* If at first encounter I have no clue what's going on. just spend time learning it. - [기계인간님](https://johngrib.github.io/)
 
-* 경험은 망가뜨린 도구의 수에 비례한다.
+* 경험은 망가뜨린 도구의 수에 비례한다. - [기계인간님](https://johngrib.github.io/)
 
 * 온 세상이 너를 싫어하고 너를 사악하게 여긴다고 해도 네 양심에 거리낄 게 없고 죄가 없다면 네 곁에는 반드시 친구가 있을 거야 - [빨강머리 앤](https://www.netflix.com/title/80136311)
 
-* 다른 사람들이 자신의 똑똑함을 나에게 드러내게 하자.능력이 부족한 사람만이 도움이 필요하다는 사실을 인정하기 두려워하며, 그것이 바로 그들이 능력이 부족한 채로 남아 있는 이유이다.
+* 다른 사람들이 자신의 똑똑함을 나에게 드러내게 하자.능력이 부족한 사람만이 도움이 필요하다는 사실을 인정하기 두려워하며, 그것이 바로 그들이 능력이 부족한 채로 남아 있는 이유이다. - [기계인간님](https://johngrib.github.io/)
 
 * 본립도생(本立道生)’이라는 말이 있어요. 근본이 세워지면 길은 자연히 나온다는 것이지요. 근본이 서 있지 않은 상태에서는, 비슷한 처지의 남을 곁눈질하고 따라갈 수밖에 없어요. 자기 자리, 자기 살림살이가 없는 거지요. - [끝나지 않은 대화 - 이성복](http://www.yes24.com/Product/Goods/14600316)
 
@@ -47,10 +47,14 @@ latex   : false
 * "경험은 얻으려는 것을 못 얻었을 때 생기는 거예요"
 "누구나 업앤다운이 있다. 거기서도 반복 패턴이 있다면 인식을 해야 한다. 금융이나 투자에서는 패턴이 있다." - 하워드 막스
 
-* “Don’t tell me what you think, tell me what you have in your portfolio.”
+* “나는 조직과 관련해 CEO가 하는 일은 점을 찍는 것이라고 생각한다. 점을 찍는다는 것은 좋은 사람을 골라 그 사람에게 일을 맡기는 것을 의미한다. 그 사람이 다시 점을 찍고 그 점이 모여 선이 되면서 조직의 체계가 생긴다. 이렇듯 아메바가 확장하는 것처럼 점을 찍고 점이 만나 선이 그려지다 보면 자연스럽게 면이 만들어진다.” (2007/08, 저서 '돈은 아름다운 꽃이다' 186p~187p)
 
-* 중고차, 웨딩, 부동산, 대출, 자산관리 등 오프라인에 브로커들이 있는 사업은 가능성이 있다고 본다
- 
+* 평소 현주가 자주 하는 말이 ‘돈을 벌려면 소수 편에 서라’는 것인데 20대 중반에 이미 그 원리를 체득한 거죠
+
+* 경영학 이외의 책도 많이 읽었는데, ‘제3의 물결’이 가장 마음에 들어 무려 19번을 읽었다고 한다.
+
+* “Don’t tell me what you think, tell me what you have in your portfolio.” -[박현주](https://namu.wiki/w/%EB%B0%95%ED%98%84%EC%A3%BC)
+
 ## 본받을 생각
 
 ### 20~25년 전의 내게 조언하고 싶은 말들
@@ -62,4 +66,4 @@ latex   : false
 
 ## Links
 
-[기계인간님](https://johngrib.github.io/)
+- [기계인간님](https://johngrib.github.io/)
