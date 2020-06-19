@@ -11,13 +11,13 @@ regenerate: true
 * [[book-log-2020]]
 * [[memo-2020]]
 * [[review-2020]]
-* [[mindset]]
-* [[tip]]
-* [[small-talk-big-idea]]
 * [[scribble]]
 * [[link]]
 * [[review]]
 * [[media]]
+* [[small-talk-big-idea]]
+* [[mindset]] 
+* [[tip]]
 
 ## [[programming-language]]
 
