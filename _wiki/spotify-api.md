@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 20:19:47 +0900
-updated : 2020-06-10 21:27:25 +0900
+updated : 2020-06-19 15:48:58 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1537,6 +1537,45 @@ if __name__=='__main__':
     main()
 
 ```
+
+## 챗봇
+
+- 람다 function 생성
+- api gateway - rest로 생성
+    - 작업(action) - get 생생
+        - lambda 함수 선택, lambda 함수명 기입
+            - Integration request(통합 요청) 클릭
+                - Mapping Templates > Content-Type -> application/json 추가 -> 아니오 선택
+                - Generate template -> Method Request passthrough 선택
+    - 작업(action) - post 선택
+        - lambda 함수 선택, lambda 함수명 기입
+    - 작업(action) - 배포 선택
+        - deployment stage - New Stage 선택
+        - stage name - prod
+- invoke url 복사
+    - [페이스북 개발자 웹사이트](https://developers.facebook.com/) > 마이 앱 > Messenger > Webhooks > Add Callback URL -> 여기에 넣어야 하는데 일단 보류
+    - 액세스 토큰 -> 토큰 생성 복사
+        - AWS 콘솔상 lambda > function code > PAGE_TOKEN에 붙여넣기
+
+```python
+import sys
+PAGE_TOKEN = ''
+VERIFY_TOKEN = 'verify_123'
+
+def lambda_handler(event, context):
+    if 'params' in event.keys():
+        
+        if event['params']['querystring']['hub.verify_token'] == VERIFY_TOKEN:
+            return int(event['params']['querystring']['hub.chanllenge'])
+        else:
+            logging.error('wrong validation token')
+            raise SystemExit
+    else:
+        return None
+```
+
+- webhooks > `req.query['hub.verify_token']` 매칭이 되면 `req.query['hub.challenge']`를 다시 넘겨줘야
+                    
 
 ## Link
 
