@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 20:19:47 +0900
-updated : 2020-06-19 15:48:58 +0900
+updated : 2020-06-19 16:05:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1559,6 +1559,9 @@ if __name__=='__main__':
 
 ```python
 import sys
+import logging
+
+
 PAGE_TOKEN = ''
 VERIFY_TOKEN = 'verify_123'
 
@@ -1574,8 +1577,8 @@ def lambda_handler(event, context):
         return None
 ```
 
-- webhooks > `req.query['hub.verify_token']` 매칭이 되면 `req.query['hub.challenge']`를 다시 넘겨줘야
-                    
+- lambda > api gateway > api endpoint 주소 복사 -> 페북개발자사이트 > Edit Callback URL -> callback URL 붙여넣기
+    - Verify Token -> verify_123
 
 ## Link
 
