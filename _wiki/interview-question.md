@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 21:46:27 +0900
-updated : 2020-06-15 21:54:26 +0900
+updated : 2020-06-20 23:17:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -105,7 +105,6 @@ latex   : false
 - Market place에서 UTM솔루션 구매(Sophos, Fortinet 등)
 - DNS 제공해주는 Gabia, Cloudflare 등을 이용하면 WAF 제공
 
-= ### 질문 =
 
 - 대규모 트래픽 처리한 경험?
 - Docker, 사용이유? Container, Image
@@ -337,7 +336,31 @@ latex   : false
 
 ## Network
 
+### HTTP/3
+
+- TCP
+    - 번거로운 3 Way Handshake
+        - HTTP/1 -> HTTP/2 핸드쉐이크 횟수 최소화
+    -  HOLB(Head of line Blocking)
+        - 주고받은 시퀀스 번호를 참고해 정확한 순서대로 패킷을 재조립해야 한다.
+        - 손실은 그냥 넘어가지 않고 다시 보내야 다음 단계 진행 가능
+        - 이러한 이유로 발생하는 병목현상
+- HTTP/3 - QUIC(Quick UDP Internet Connection)
+    - TCP 문제해결하고 레이턴시 한계를 뛰어넘고자 구글이 개발
+    - 순서가 존재히자 않는 독립적 패킷 사용
+    - 목적지만 정해져 있다면 중간에 어딜가도 상관 없음, 핸드쉐이크 과정 필요 없음
+        - RTT(Round Trip Time) - 3RTT(TCP) -> 1RTT(QUIC)
+            - 첫번쨰 핸드쉐이크에 필요한 정보와 데이터까지 전송
+    - 커스터마이징 용이
+        - 꽉 들어찬 TCP의 헤더와 달리 아무것도 없는 UDP의 헤더
+    - 재전송 모호성을 해결하기 위해 패킷의 헤에 별도 패킷 번호 공간 부여
+    - 클라이언트 IP가 바뀌어도 연결이 유지됨
+        - TCP 연결 끊어지면 다시 3 Way Hanshake거쳐야
+        - 예) wi-fi에서 셀룰러로 전환
+        - QUIC은 Connection ID를 사용해 서버와 연. 이는 랜덤한 값을 뿐 클라이언트 IP와는 무관
+        
 - web server(Apache, Nginx)? 장점?
+- 
 - HTTP 1.0/1.1/2.0/3.0의 특징 (Keepalive -> TCP/IP -> Header Compression -> UDP)
 - 웹브라우저 동작원리(프론트 ->브라우저 -> 백엔드 -> DB -> OS 순으로)
 - HTTP vs HTTPS
@@ -481,3 +504,4 @@ latex   : false
 - [Python 은 call-by-value 일까 call-by-reference 일까](https://www.pymoon.com/entry/Python-%EC%9D%80-callbyvalue-%EC%9D%BC%EA%B9%8C-callbyreference-%EC%9D%BC%EA%B9%8C)
 - [Python 기술 면접 대비](https://shelling203.tistory.com/31)
 - [JSON 웹 토큰 보안](https://code-machina.github.io/2019/09/01/Security-On-JSON-Web-Token.html)
+- [HTTP/3는 왜 UDP를 선택한 것일까?](https://evan-moon.github.io/2019/10/08/what-is-http3/)
