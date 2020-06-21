@@ -78,10 +78,12 @@ regenerate: true
 * [[aws-basic]]
 * [[spotify-api]]
 * [[zeppelin-example]]
-* [[cloud-background]]
-* [[cloud-comento-config]]
-* [[cloud-comento-eks]]
-* [[cloud-comento-log]]
+* [[eks-background]]
+* [[eks-config]]
+* [[eks-creation]]
+* [[eks-log]]
+* [[eks-operation]] 
+
 
 ### vim
 
