@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-06-16 21:37:51 +0900
+updated : 2020-06-21 14:41:59 +0900
 tags    : 
 toc     : true
 public  : true
@@ -92,7 +92,7 @@ def list_rooms(request):
 - [Serializers](https://www.django-rest-framework.org/)
     - 쿼리셋과 같은 복잡한 데이터를 JSON, XML로 쉽게 변환, 그 반대도 가
     - 응답을 제어하는 폼과 같은 역할
-
+    - `class RoomSerializer(serializers.Serializer)` -> 필드 속성까지 선언해줘야
 - [Api-guide](https://www.django-rest-framework.org/api-guide/views/)
 - [Throttling](https://www.django-rest-framework.org/api-guide/throttling/) - 요청에 제한을 걸 수 있는 방법
     - [참고블로그](https://ssungkang.tistory.com/entry/Django-Throttling)
@@ -111,10 +111,21 @@ def list_rooms(request):
     return Response(data=serialized_rooms.data)
 ```
 
+```python
+from rest_framework import serializers
+
+class RoomSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=140)
+    price = serializers.IntegerField()
+    bedrooms = serializers.IntegerField()
+    instant_book = serializers.BooleanField()
+```
+
 ### [1.3 Serializers part Two](https://github.com/nomadcoders/airbnb-api/commit/322dc866e7cb3548a9e119000245372b70b96a3b)
 
 - [Serializers](https://www.django-rest-framework.org/api-guide/serializers/)
     - [공식문서 번역 블로그](https://brownbears.tistory.com/71)
+    - `class RoomSerializer(serializers.ModelSerialzer)` -> 모델 선언, 필드명 간단하게 선언
 - 외래키로 이어진 데이터 가져오는 방법
 - 위처럼 모델을 나열하지 않고 필드명만 써줘도 된다
 
