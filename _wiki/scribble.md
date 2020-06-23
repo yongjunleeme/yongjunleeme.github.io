@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-19 14:00:05 +0900
+updated : 2020-06-23 10:34:33 +0900
 tags    : 
 toc     : true
 public  : true
@@ -476,17 +476,59 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
     - 9년 64배, 10년 100배, 20년 10000배
 - 암달의 법칙
     - 애플리케이션 성능 - 시간, 트루풋 성능 - 초당 실행하는 명령어의 수
-    - n개의 프로세서에서 프로그램 실행할 때
-    - 하나의 애플리케이션를 쪼개서 병렬로 만들어야
-        - inherently serial한 부분이 속도를 좌우한다
+    - n개의 프로세서에서 프로그램 실행할 때 하나의 애플리케이션를 쪼개서 병렬로 만들어야
+        - inherently serial한 부분이 스피드업의 걸림돌
+
+#### Application for Mulicores
+
+- 자바 버추얼 머신 
+    - 싱글 프로세스인데 멀티 스레딩을 구현
+- Solaris - 썬(서버 만드는)의 OS
+
+<img width="1276" alt="스크린샷 2020-06-22 오전 10 35 07" src="https://user-images.githubusercontent.com/48748376/85240730-17662e80-b474-11ea-80b2-c8d6f3294dbc.png">
+
+### Concurrency: Mutual Exclusion and Synchronization
+
+#### Process Interaction
+
+- 싱글 프로세서 시스템
+    - 프로세스 실행은 CPU Utilization 증가를 위해 인터리빙된다.
+        - Concurrent
+    - 프로세스 실행 속도는 예측할 수 없다.
+        - OS의 Interrupts 핸들이나 스케쥴링 정책에 의해 프로세서의 행동이 좌우되므로
+    - The following difficulties arise
+        - Mutual exclusion(상호배타적)
+            - 자원 액세스할 때 상호배타적으로 보장해줘야 한다.
+        - Deadlock
+            - 각각 프로세스 가지고 있는데 각각 남의 자원을 기다리고 있는 상태
+        - Starvation
+            - 자원 스케쥴링하는데 한 프로세스만 소외시키는 상태
+            - (Infinite Postponement) 스케쥴러에 의해 특정 자원의 할당이 무한정 딜레이 되는 것
+        - Race condition
+            - 프로세스 스레드가 어떤 순서로 액세스될지 알 수 없으므로 두 개의 프로세스나 스레드가 레이싱하는 상태 
+                - 프로그래밍 버그에 해당
+            - 글로벌 데이터를 쉐어하는 경우 의도하지 않은 결과가 나왔을 때
+            - 뮤추얼 익스클루전한 크리티컬 섹션으로 묶어 놓아야 한다.
+        - Livelock
+            - 프로세스는 진행되는데 상태의 변화를 만들어내지 못하는 것
+- [인터리빙](https://technote.kr/217)
+
+#### 프로세스 경쟁
+
+- Mutual Exclusion
+    - 하나의 프린터에서 두 가지 프로세스를 수행한다는 가정
+    - nonsharable resource
+        - critical setion을 통해서 한 프로세스만 사용하도록 뮤츄얼 익스클루전을 보장
+        - 애플리케이션 레벨에서 가능한 방법?
+            - Interrupt를 critical 들어갈 때 disale 나올 때 enable시키면 된다
+
+#### Concurrency: Key terminologies
+
+- 크리티컬 섹션을 구현하려면? 인터럽트는 싱글 코어에서는 가능하지만 멀티 코어에서는 제너럴한 솔루션이 될 수 없다.
+- 아토믹 오퍼레이션 - all or nothing, 하나 또는 많은 명령어를 구현하는 함수가 개별적이 되는 것. 실행이 보장거나 아예 실행되지 않는, Concurrent 프로세스에서 아토믹한 개런티가 고립을 보장해주는?
 
 
 
-
-
-
-
-### Mutual Exclusion and Synchronization
 
 ### Deadlock and Starvation
 
