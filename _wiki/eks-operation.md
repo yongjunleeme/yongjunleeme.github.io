@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-22 10:59:48 +0900
-updated : 2020-06-23 18:51:00 +0900
+updated : 2020-06-23 19:03:08 +0900
 tags    : 
 toc     : true
 public  : true
@@ -20,7 +20,10 @@ latex   : false
 - 항목의 대분류, 중분류, 소분류, 정산기준, 확인방법
 
 | 대분류      | 중분류                                                                                        | 정산기준 | 확인방법                                                                                     |
-| 비용 최적화 | Amazon EC2 예약 인스턴스 최적화\n사용률이 낮은 Amazon EC2 인스턴스\n유휴 상태의 Load Balancer | aaa      | https://aws.amazon.com/ko/premiumsupport/technology/trusted-advisor/best-practice-checklist/ |
+| 비용 최적화 | Amazon EC2 예약 인스턴스 최적화<br/>사용률이 낮은 Amazon EC2 인스턴스<br/>유휴 상태의 Load Balancer<br/>사용률이 낮은 Amazond EBS 볼륨<br/>연결되지 않은 탄력적 IP 주소<br/>RDS 유휴 DB 인스턴스<br/>Route 53 지연 시간 리소스 레코드 세트<br/>EC2 예약 인스턴스 임대 만료<br/>사용률이 낮은 Amazone Redshift 클러스터 |https://aws.amazon.com/ko/blogs/korea/check-it-out-new-aws-pricing-calculator-for-ec2-and-ebs/ | https://aws.amazon.com/ko/premiumsupport/technology/trusted-advisor/best-practice-checklist/ |
+|보안|<img width="752" alt="스크린샷 2020-06-23 오후 6 57 16" src="https://user-images.githubusercontent.com/48748376/85390404-c2b1d900-b583-11ea-9df8-4d5574c4fde9.png">||||
+|내결함성|<img width="748" alt="스크린샷 2020-06-23 오후 6 57 24" src="https://user-images.githubusercontent.com/48748376/85390419-c5acc980-b583-11ea-8111-16af7072e855.png">|||||
+|성능|<img width="750" alt="스크린샷 2020-06-23 오후 6 57 34" src="https://user-images.githubusercontent.com/48748376/85390422-c6456000-b583-11ea-883a-8223bcc0a7f1.png">|||||
 
 #### 백업 복구 정책(EC2- lifeCycleManager(volume backup),AMI 등)
 
