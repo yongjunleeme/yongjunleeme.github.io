@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-22 10:59:48 +0900
-updated : 2020-06-23 19:27:18 +0900
+updated : 2020-06-24 21:20:46 +0900
 tags    : 
 toc     : true
 public  : true
@@ -36,8 +36,6 @@ latex   : false
 - 참고 : https://aws.amazon.com/ko/premiumsupport/technology/trusted-advisor/best-practice-checklist/
 - 정산기준 : https://aws.amazon.com/ko/blogs/korea/check-it-out-new-aws-pricing-calculator-for-ec2-and-ebs/ 
 - 확인방법 : https://aws.amazon.com/ko/premiumsupport/technology/trusted-advisor/best-practice-checklist/ 
-
-
 
 #### 백업 복구 정책(EC2- lifeCycleManager(volume backup),AMI 등)
 

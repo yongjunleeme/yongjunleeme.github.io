@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-13 11:13:11 +0900
-updated : 2020-06-17 18:04:02 +0900
+updated : 2020-06-23 22:27:23 +0900
 tags    : 
 toc     : true
 public  : true
@@ -112,9 +112,11 @@ metadata:
 spec:
   ports:
   - name: elasticsearch-rest
-    nodePort: 30920 // Node의 Port port: 9200 // Service의 Port
+    nodePort: 30920
+    port: 9200 
     protocol: TCP
-    targetPort: 9200 // Pod의 Port
+    targetPort: 9200
+  type: NodePort
 ```
 
 ```python
@@ -178,9 +180,9 @@ spec:
         image: elastic/kibana:6.4.0
         env:
         - name: SERVER_NAME
-        value: "kibana.kubenetes.example.com"
+          value: "kibana.kubenetes.example.com"
         - name: ELASTICSEARCH_URL
-        value: "http://elasticsearch- svc.default.svc.cluster.local:9200"
+          value: "http://elasticsearch-svc.default.svc.cluster.local:9200"
         ports:
         - containerPort: 5601
 ---

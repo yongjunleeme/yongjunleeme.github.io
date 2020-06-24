@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-10 18:21:56 +0900
-updated : 2020-06-18 23:29:22 +0900
+updated : 2020-06-23 21:53:55 +0900
 tags    : 
 toc     : true
 public  : true
@@ -295,9 +295,9 @@ spec:
         spec:
             containers:
             - name: my-nginx
-            image: nginx
-            ports:
-            - containerPort: 80
+              image: nginx
+              ports:
+              - containerPort: 80
 ```
 
 <img width="498" alt="스크린샷 2020-06-11 오후 6 52 29" src="https://user-images.githubusercontent.com/48748376/84371568-d15bd000-ac14-11ea-8dbd-476fded3ac00.png">
@@ -339,8 +339,10 @@ $ kubectl get service # 배포된 서비스 확인
 # 로드밸런서 타입으로 생성했기 때문에 CLB 타입의 ELB 생성됨
 ```
 
+- service 명령에 나오는 주소로 접속
+
 ```python
-# kubectl expose deployment/my-nginx --type=LoadBalancer --port=80"
+$ kubectl expose deployment/my-nginx --type=LoadBalancer --port=80"
 ```
 
 - 웹에서 `EXTERNAL-IP:80`으로 Nginx 접속 확인
