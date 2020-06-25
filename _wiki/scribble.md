@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-23 10:34:33 +0900
+updated : 2020-06-25 13:43:52 +0900
 tags    : 
 toc     : true
 public  : true
@@ -525,7 +525,29 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 #### Concurrency: Key terminologies
 
 - 크리티컬 섹션을 구현하려면? 인터럽트는 싱글 코어에서는 가능하지만 멀티 코어에서는 제너럴한 솔루션이 될 수 없다.
+- Atomic
+    - indivisible -> 더이상 쪼갤 수 없는(지금은 쪼개지지만..;)
+    - uninteruuptable -> 중간에 방해할 수 없는
+    - 성공 - 시스템 상태 변경, 실패 - 시스템 상태에 아무런 영향을 끼치지 못함
 - 아토믹 오퍼레이션 - all or nothing, 하나 또는 많은 명령어를 구현하는 함수가 개별적이 되는 것. 실행이 보장거나 아예 실행되지 않는, Concurrent 프로세스에서 아토믹한 개런티가 고립을 보장해주는?
+    - 하드웨어 레벨 atomic operations
+        - 인스트럭션 셋 아키텍처로 지원
+            - Test-and-set, fetch-and-add, compare-and-swap, load-link/store-conditional
+            - 보통 2개의 명령어를 하나로 처리
+        - 이게 없으면 여러 프로세스간 문제를 해결할 수 없다. 
+        - 문제
+            - Busy waiting - 0이 1이 될 때까지 계속 기다리는?
+    - 소프트웨어 레벨
+        - 크리티컬 섹션을 구현
+
+- Special Instruction 장, 단점
+    - 장점
+        - 싱글 프로세서에서 여러 프로세스 또는 여러 프로세서가 메모리를 쉐어 가능
+        - 심플하고 쉽게 verify
+        - 여러 크리티컬 섹션을 서포트할 수 있고 각 크리티컬 섹션은 자신의 변수에 의해 정의될 수 있다.
+    - 단점
+        - 
+
 
 
 
