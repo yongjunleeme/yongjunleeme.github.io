@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-25 13:43:52 +0900
+updated : 2020-06-26 13:22:42 +0900
 tags    : 
 toc     : true
 public  : true
@@ -76,48 +76,56 @@ latex   : false
 ##### Microprocessor : 한 개의 칩 프로세서 (예: Intel i7, Pentium IV, AMD Aholon, SUN Ultrasparc, ARM, MIPS, ...)
 
 ##### ISA (Instruction Set Architecture)
-    - 레지스터나 메모리와 같은 머신의 스테이트를 비저블하게 만들고 머신의 명령어를 정의한다.
-    - Examples
-        - X86 - 인텔의 32비트 ISA
-        - 모바일은 Arm의 SoC(System on Chip) -(cpu gpu 등 통합)의 ISA
+
+- 레지스터나 메모리와 같은 머신의 스테이트를 비저블하게 만들고 머신의 명령어를 정의한다.
+- Examples
+    - X86 - 인텔의 32비트 ISA
+    - 모바일은 Arm의 SoC(System on Chip) -(cpu gpu 등 통합)의 ISA
 
 ##### Microarchitectur
-    - ISA에 따라 구현한 하드웨어
-    - 파이프라이닝, 캐시, 브랜치, 프레딕션, 버퍼
+
+- ISA에 따라 구현한 하드웨어
+- 파이프라이닝, 캐시, 브랜치, 프레딕션, 버퍼
 
 ##### CISC(Complex Instruction Set Computer)
-    - 80년대 중반까지 아키텍처 (예: x86)
-    - 큰 사이즈의 ISA
-    - 많은 명령어 포맷들, 각기 다른 사이즈의 명령어들 
+
+- 80년대 중반까지 아키텍처 (예: x86)
+- 큰 사이즈의 ISA
+- 많은 명령어 포맷들, 각기 다른 사이즈의 명령어들 
 
 ##### RISC(Reduced Instruction Set Computer)
-    - 80년대 이래 만들어진 대부분의 아키텍쳐(예: MIPS, ARM, PowerPC, Alpha, ...)
-    - 로드-스토어 구조
-        - 오직 레지스터로 컴퓨테이션
-    - 작은 사이즈의 ISA
-    - 각 명령어 심플, 고정된 사이즈
+
+- 80년대 이래 만들어진 대부분의 아키텍쳐(예: MIPS, ARM, PowerPC, Alpha, ...)
+- 로드-스토어 구조
+    - 오직 레지스터로 컴퓨테이션
+- 작은 사이즈의 ISA
+- 각 명령어 심플, 고정된 사이즈
 
 ##### Word
-    - Defaul data size for computation
-    - GPR & ALU 데이터 사이즈
-        - GPR(General Purpose Registers), ALU(Arithmetic and Logic Unit)
-    - 워드 사이즈는 프로세서(8b, 16b, 32b, or 64b)에 의해 결정
+
+- Defaul data size for computation
+- GPR & ALU 데이터 사이즈
+    - GPR(General Purpose Registers), ALU(Arithmetic and Logic Unit)
+- 워드 사이즈는 프로세서(8b, 16b, 32b, or 64b)에 의해 결정
 
 ##### Address (or pointer)
-    - 메모리의 위치를 가리킨다
-    - 각 주소는 바이트를 가리킨다(byte addressable)
-    - 32b 주소라면 2의 32승 바이트 = 4GB
-    - 256MB 메모리라면, 적어도 28비트 어드레스가 필요하다(2의 28승은 256MB)
+
+- 메모리의 위치를 가리킨다
+- 각 주소는 바이트를 가리킨다(byte addressable)
+- 32b 주소라면 2의 32승 바이트 = 4GB
+- 256MB 메모리라면, 적어도 28비트 어드레스가 필요하다(2의 28승은 256MB)
 
 ##### Caches
-    - Faster but smaller memory close to processor
-        - 빠르고 작은 SRAMs, 그러나 비싸다
+
+- Faster but smaller memory close to processor
+    - 빠르고 작은 SRAMs, 그러나 비싸다
 
 ##### Interrupt
-    - 프로세서의 시퀀싱(특정 명령어들의 순서)을 정지하게 만드는 I/O 장치들의 메커니즘
-    - 프로세서보다 느린 I/O 장치들의 프로세서 이용을 개선하기 위한 방법
-    - 외부 이벤트나 잘못된 상태(Exceptions)에 의해 절차의 제어가 강제된다(Handler).
-    - 외부 인터럽트는 외부 이벤트나 비동기에 의해 발생
+
+- 프로세서의 시퀀싱(특정 명령어들의 순서)을 정지하게 만드는 I/O 장치들의 메커니즘
+- 프로세서보다 느린 I/O 장치들의 프로세서 이용을 개선하기 위한 방법
+- 외부 이벤트나 잘못된 상태(Exceptions)에 의해 절차의 제어가 강제된다(Handler).
+- 외부 인터럽트는 외부 이벤트나 비동기에 의해 발생
 
 #### OS Basic
 
@@ -137,18 +145,17 @@ latex   : false
 ##### Virtual Memory
 
 - 피지컬 메인 메모리와 관계없이 논리적 관점에서 주어지는 프로그램 어드레스
-- 여러 사용자의 잡이 동시에 메인 메모리를 사용해해 하는 요구사항을 충족 
+- 여러 사용자의 잡이 동시에 메인 메모리를 사용해야 하는 요구사항을 충족 
 - 실제 디램(피지컬 메모리)보다 용량이 훨씬 크다. 
-- 예: CPU 내부 주소는 모두 가상 메모
+- 예: CPU 내부 주소는 모두 가상 메모리
 
 ##### Paging
 
 - 고정 사이즈 블록들의 프로세스를 허용?
 - 프로그램은 가상 주소를 통해 워드를 참조
-- 가상 주소와 메인 메모리의 실제 주소 사이의 동적 매핑을 제공
+- 가상 주소와 메인 메모리 실제 주소 사이의 동적 매핑을 제공
 
-
-### 운영체제 역사
+#### 운영체제 역사
 
 Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영체제) -> Multiprogrammed Batch Systems(멀티 태스킹) -> Time Sharing Systems
 
@@ -170,7 +177,7 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 - 프로세스가 제공하는 두 가지 key abstractions
     - Logical control flow, Private address space
     - Private Address Space -> Virtual Memory
-        - 버추얼 메모리 - OS는 각 프로세스에 Private spaceㅇ를 제공
+        - 버추얼 메모리 - OS는 각 프로세스에 Private space를 제공
         - 메인메모리(DRAM)의 물리적 한계를 벗어나서 얼마든지 큰 공간을 차지할 수 있다
 
 #### Private Address Spaces
@@ -310,7 +317,6 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 
 #### Interrupt, Exception
 
-
 - Exception
     - 현재 프로세스의 특정 명령에서 발생한 예외상황
     - Internel하다고 표현- CPU 내에서 발생하므로
@@ -344,7 +350,6 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 - Interrupt Classification
     - Maskable Interrupt - interrupt disable 가능(INT 핀에 의해)
     - Non-Maskable Interrupt - disable 불가능
-
 
 #### UNIX system 5(V) Process Manangement
 
@@ -520,14 +525,14 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
     - nonsharable resource
         - critical setion을 통해서 한 프로세스만 사용하도록 뮤츄얼 익스클루전을 보장
         - 애플리케이션 레벨에서 가능한 방법?
-            - Interrupt를 critical 들어갈 때 disale 나올 때 enable시키면 된다
+            - Interrupt를 critical 들어갈 때 disale, 나올 때 enable시키면 된다
 
 #### Concurrency: Key terminologies
 
 - 크리티컬 섹션을 구현하려면? 인터럽트는 싱글 코어에서는 가능하지만 멀티 코어에서는 제너럴한 솔루션이 될 수 없다.
 - Atomic
     - indivisible -> 더이상 쪼갤 수 없는(지금은 쪼개지지만..;)
-    - uninteruuptable -> 중간에 방해할 수 없는
+    - uninteruptable -> 중간에 방해할 수 없는
     - 성공 - 시스템 상태 변경, 실패 - 시스템 상태에 아무런 영향을 끼치지 못함
 - 아토믹 오퍼레이션 - all or nothing, 하나 또는 많은 명령어를 구현하는 함수가 개별적이 되는 것. 실행이 보장거나 아예 실행되지 않는, Concurrent 프로세스에서 아토믹한 개런티가 고립을 보장해주는?
     - 하드웨어 레벨 atomic operations
@@ -546,8 +551,31 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
         - 심플하고 쉽게 verify
         - 여러 크리티컬 섹션을 서포트할 수 있고 각 크리티컬 섹션은 자신의 변수에 의해 정의될 수 있다.
     - 단점
-        - 
+        - Busy-waiting
+        - 어떤 프로세스가 들어올지 모르므로 Starvation이 발생할 수도 있다
+        - 데드락 발생할 수도
 
+#### 세마포
+
+- 뮤추얼 익스클루젼 어떻게?
+    - 싱글프로세서면 인터럽트되지만 멀티프로세서면 안 되고
+    - 아토믹 오퍼레이션은 크리티컬 섹션이 가능하지만 위와 같은 문제가 있기에
+    - 이상적인 개념이 없을까 해서 나온 것이 세마포
+- 세마포
+    - 리소스 액세스를 제어하기 위한 단순한 추상화를 제공하는 변수?
+    - 자원의 개수로 이니셜라이즈됨
+    - 오퍼레이션 2가지
+        - P -> 변수를 디크리먼트(Wait operation - 2, 1, 0이 되면 0 다음에는 기다려야 하므로)
+        - V -> 변수를 인크리먼트, 쓰고 돌려준다(Signal operation)
+- 세마포 타입
+    - Binary
+        - 0(locked, unavaliable), 1(unlocked, avaliable)
+    - Counting
+        - n값 가능
+- busy wating은 없고 queue가 있다
+- Strong/Weak 세마포
+    - String - 큐의 FIFO
+    - Weak - 아무나 웨이크업 시키는
 
 
 
