@@ -84,7 +84,6 @@ regenerate: true
 * [[eks-log]]
 * [[eks-operation]] 
 
-
 ### vim
 
 * [[practical-vim-1]]
@@ -99,7 +98,7 @@ regenerate: true
 * [[database-basic]]
 * [[web-basic]]
 * [[OS-basic]]
-* interview-question
+* [[interview-question]]
 
 ### copy & paste
 
