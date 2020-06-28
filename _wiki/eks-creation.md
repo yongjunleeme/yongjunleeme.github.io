@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-10 18:21:56 +0900
-updated : 2020-06-23 21:53:55 +0900
+updated : 2020-06-27 19:24:45 +0900
 tags    : 
 toc     : true
 public  : true
@@ -103,21 +103,15 @@ latex   : false
     - Infra as a Code
     - 인프라 관리 간소화, 복제, 변경
         - 템플릿(yaml, json)을 생성하여 인프라를 관리하는 AWS Native Service
-
-
 - 개발 검수 운영
     - 클러스터 버전 워커노드 버전 0.2 이상 차이나면 알아서 워커노드가 자동 업데이트된다
-    - 워커노드 AMI 개발 검수 운영 모두 전부 다시해야
-    - 스크립트 자동화 안 해놓으면
-    - AMI 스크립트 업데이트
-    - 워커노드를 죽였다가 살려야 하므로 저녁에
-    - 전부 계획보고서부터 시작
+        - 워커노드 AMI 개발 검수 운영 모두 전부 다시해야
 
 ## EKS 환경구성
 
 ### [Bastion에 kubectl 설치](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl/)
 
-- [Bation을 kubectl 명령어를 수행하는 workspace로 사용](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl/)
+- [Bastion을 kubectl 명령어를 수행하는 workspace로 사용](https://kubernetes.io/ko/docs/tasks/tools/install-kubectl/)
 
 ```python
 # 1.8버전의 kubectl 다운로드
@@ -130,18 +124,6 @@ $ chmod +x ./kubectl
 $ sudo mv ./kubectl /usr/local/bin/kubectl
 
 # 설치 확인
-$ kubectl version --client
-```
-
-- 리눅스 버전으로 설치
-    - 위 명령어로 안 되어서 brew로 설치함
-
-```python
-$ brew install kubectl
-or
-$ brew install kubernetes-cli
-
-# 확인
 $ kubectl version --client
 ```
 
@@ -236,6 +218,88 @@ aws eks --region region-code update-kubeconfig --name cluster_name
 - subnet : private subnet 선택
 
 <img width="454" alt="8" src="https://user-images.githubusercontent.com/48748376/84260178-8da19180-ab54-11ea-8499-a0b7f06ea57f.png">
+
+#### eksctl로 cluster 생성
+
+- 위 방법이 안 되어서 이 방법을 사용
+- 기존의 Kubeconfig 기록 삭제
+
+```python
+$ cd
+$ rm –rf ./kube
+```
+
+<img width="688" alt="11" src="https://user-images.githubusercontent.com/48748376/85919906-4c2a1980-b8aa-11ea-84a3-8ce2593b1fda.png">
+
+- EC2 Role 생성 후 Bastion ec2에 부여 – Role Name : `mission-admin-Role`
+
+<img width="940" alt="22" src="https://user-images.githubusercontent.com/48748376/85919910-51876400-b8aa-11ea-82fa-5ff852c8b6cb.png">
+
+- EC2 Role 생성 후 Bastion ec2에 부여
+    – Role Name : mission-admin-Role EC2에 Role 부여된 것 확인(.aws/credentials에 AccessKey가 등록되어 있기 때문에 EC2에 Role을 부여한 이후에도 Role이 변경되지 않는다. 따라서 .aws/credentials를 다른 이름으로 변경해야 한다.)
+
+```python
+$ .aws/credentials 수정 전
+$ aws sts get-caller-identity
+```
+
+<img width="472" alt="33" src="https://user-images.githubusercontent.com/48748376/85919912-53512780-b8aa-11ea-9806-2284f57497c3.png">
+
+- EC2 Role 생성 후 Bastion ec2에 부여
+    - Role Name : mission-admin-Role EC2에 Role 부여된 것 확인
+
+```python
+$ .aws/credentials 파일 이름 변경하여 access key 인식 안하게 설정
+$ cd .aws
+$ mv credentials credentials.old
+```
+
+<img width="534" alt="44" src="https://user-images.githubusercontent.com/48748376/85919913-53e9be00-b8aa-11ea-9395-aa6c33c562f5.png">
+
+```python
+$ .aws/credentials 수정 후 EC2에 부여한 Role이 보이는 것 확인
+$ aws sts get-caller-identity
+```
+
+<img width="817" alt="55" src="https://user-images.githubusercontent.com/48748376/85919914-53e9be00-b8aa-11ea-84da-27ff7f6a494a.png">
+
+- WorkerNode용 Key 생성
+
+```python
+$ cd
+$ cd .ssh
+$ ssh-keygen
+$ 모두 enter
+```
+
+<img width="904" alt="66" src="https://user-images.githubusercontent.com/48748376/85919915-54825480-b8aa-11ea-9269-f6fc5ff8e710.png">
+
+- 생성된 공개키를 사용중인 EC2 리전으로 업로드(만약 Key is not in valid OpenSSH public key format 에러가 난다면 key 생성 무시하고 기존의 Bastion key로 진행 가능)
+
+```python
+$ aws ec2 import-key-pair --key-name "mission-key" --public-key-material file://~/.ssh/id_rsa.pub
+```
+
+- eksctl 명령어 이용하여 eks cluster와 workerNode 생성
+
+```python
+$ eksctl create cluster --name mission-cluster --version 1.14 --region ap-northeast-2 --nodegroup-name mission-wn --node-type t3.medium --nodes 1 --nodes-min 1 --nodes-max 1 --ssh-access --ssh-public-key mission-key --managed
+```
+
+<img width="931" alt="77" src="https://user-images.githubusercontent.com/48748376/85919918-55b38180-b8aa-11ea-965e-6ebb55a16dfb.png">
+
+- 모두 수행후 cluster 삭제
+
+```python
+$ eksctl delete cluster --region=ap-northeast-2 --name=mission-cluster 
+```
+
+<img width="865" alt="88" src="https://user-images.githubusercontent.com/48748376/85919917-551aeb00-b8aa-11ea-90af-5dcef306694c.png">
+
+- CloudFormation : eksctl 관련 stack 2개 삭제 확인
+- vpc : eksctl 관련 vpc 삭제 확인
+- NAT gateway : NAT Gateway 미생성 확인(요금 비싸므로 반드시 확인하여 있다면 삭제)
+
 
 #### WorkerNode를 클러스터에 조인
 

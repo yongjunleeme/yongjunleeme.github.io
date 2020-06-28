@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-06-03 14:24:49 +0900
-updated : 2020-06-17 12:15:27 +0900
+updated : 2020-06-27 18:39:56 +0900
 tags    : 
 toc     : true
 public  : true
@@ -154,7 +154,7 @@ private subnet B 10.0.3.0/24
 <img width="662" alt="9" src="https://user-images.githubusercontent.com/48748376/83724194-ce903680-a67a-11ea-9449-03431a237e30.png">
 
 
-#### [Bation host와 NAT instance 생성](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_NAT_Instance.html)
+#### [Bastion host와 NAT instance 생성](https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_NAT_Instance.html)
 
 - Bastion Host
     - 내부와 외부 네트워크 사이에서 게이트 역할을 하는 Host
