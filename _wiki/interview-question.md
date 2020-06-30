@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 21:46:27 +0900
-updated : 2020-06-29 15:53:23 +0900
+updated : 2020-06-30 21:31:17 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,7 +12,6 @@ latex   : false
 ---
 * TOC
 {:toc}
-
 
 ## Database
 
@@ -82,10 +81,119 @@ latex   : false
         - 소티드셋 - 랭킹에 쓰기 좋다.
         - API limitter - 초당 몇 개만 써라
 
-- Redis 관련해서 책/교육 쓰셨는지
-47:52 Q16. 최근 추천할만한 Redis책? 이것이 Redis다- http://bit.ly/2RmeWHq
-48:52 Q17. Redis 강의 자주 하시는지
-49:46 Q18. slideShare: https://www.slideshare.net/charsyam2/presentations > cache key, 대규모 서비스를 설계하는 기술 기초/중급
+#### 레디스 랭킹API에 쓰면
+
+- 보통 랭킹은 디비에 유저 스코어 저장하고 오더 바이로 정렬 후 읽어오기
+- 개수가 많아지면 속도문제 발생
+- 레디스는 소티드셋을 쓰면 랭킹 구현 가능
+    - 덤으로 리플리케이션도 가능
+    - 다만 한계에 종속될 수도
+        - 저장할 id가 1개당 100byte라고 하면
+            - 10명 1k
+            - 10000명 1M
+            - 10조면 1TB
+
+#### 레디스 장점
+
+- 레디스 자료구조가 Atomic하기 때문에 해당 Race Condition을 피할 수 있다.
+    - 그래도 잘못 짜면 발생함
+
+
+#### 레디스 사용처
+
+- 리모트 데이터 스토어
+    - A서버, B서버, C서버에서 데이터를 공유하고 싶을 때
+- 한 대에서만 필요하다면 전역 변수를 쓰면 되지 않을까?
+    - 레디스 자체가 Atomic을 보장해준다.
+- 주로 많이 쓰는 곳들
+    - 인증 토큰 통을 저장
+    - 랭킹 보드로 사용
+    - 유저 API Limit
+    - 잡큐
+        - 리시트로 많이 쓴다
+
+#### Redis Collections
+
+- Strings(키, 밸류)
+    - 기본사용법
+        - Set <Key> <Value>
+        - Get <Key>
+        - mset <key1> <value1> <key2> <value2> ...
+        - mget <key1 <key2> ...
+- List(삽입 시 헤드와 테일은 빠르지만 중간은 느리다)
+    - 기본사용법
+        - Lpush <Key> <A>
+            - Key: <A>
+        - Rpush <Key> <B>
+            - Key: <A, B>
+        - Lpush <Key> <C>
+            - Key: <C, A, B>
+        - pop
+            - 꺼내올 떄, LPOP, RPOP
+- Set
+    - 기본사용법
+        - SADD <Key> <Value>
+            - Value가 이미 Key에 있으면 추가되지 않는다.
+        - SMEMBERS <Key>
+            - 모든 Value를 돌려줌
+                - '모든'이 들어간 명령은 주의해서 써야
+        - SISMEMBER <Key> <Value>
+            - value가 존재하면 1, 없으면 0
+    - 보통 특정 유저를 Follow하는 목록을 저장할 때 많이 쓴다. 유니크하므로
+- Sorted Set
+    - Set은 순서가 없지만 Sorted Set은 Score를 줘서 순서를 보장할 수 있다
+    - 기본사용법
+        - ZADD <Key> <Score> <Value>
+            - Value가 이미 Key에 있으면 해당 Score로 변경된다.
+            - 스코어 값 순서대로 정렬되어서 저장된다.
+        - ZRANGE <Key> <StartIndex> <EndIndex>
+            - 해당 Index 범위 값을 모두 돌려줌
+            - Zrange testkey 0 -1
+                - 모든 범위를 가져옴
+                - 번호가 인덱스, -1이 끝을 의미
+    - 유저 랭킹보드로 사용할 수 있음
+    - 소티드 셋의 스코어는 정수형이 아니라 더블 타입이므로 주의해야
+        - 실수가 표현할 수 없는 정수값들이 존재
+        - 간혹 발생하는 내가 왜 그랬을까의 대표적 사례
+    - Sorted Sets - 정렬이 필요한 값이 필요하다면?
+        - `select * from rank order by score limit 50, 20;`
+            - zrange rank 50 70
+        - `select * from rank order by score desc limit 50, 20;`
+            - Zrevrange rank 50 70
+                - 뒤에서부터 순서를 매긴다.
+- Hash
+    - Key 밑에 sub key가 존재
+    - 키밸류 안에 다시 키밸류가 존재
+    - 기본 사용법
+        - Hmset <Key> <subkey1> <value1> <subkey2> <value2>
+        - Hgetall <Key>
+            - 해당 key의 모든 subkey와 value를 가져옴
+        - Hget <Key> <subkey>
+        - Hmget <Key> <subkey1> <subkey2> ...
+
+#### Collection 주의사항
+
+- 하나의 컬렉션에 너무 많은 아이템을 담으면 좋지 않음
+    - 10000개 이하 몇천 개 수준으로 유지하는 게 좋음
+- Expire는 Collection의 item 개별로 걸리지 않고 전체 Collection에 대해서만 걸림
+    - Expire - 삭제
+    - 즉 해당 10000개의 아이템을 가진 Collection에 expire가 걸려 있다면 그 시간 후에 10000개의 아이템이 모두 삭제
+
+#### 레디스 운영
+
+- 메모리 관리를 잘하자
+    - In-memory이므로 피지컬 메모리 이상 사용하면 당연히 문제 발생
+        - 바로 죽지 않고 Swap 일어난다
+        - Swap - 메모리 꽉차면 디스크로 내리고 비면 다시 메모리로 올리고
+        - Swap이 한 번이라도 있다면 해당 메모리 Page 접근 시마다 느려짐
+        - Swap이 없다면?
+    - Maxmemory를 설정하더라도 이보다 더 사용할 가능성이 큼
+    - RSS 값을 모니터링해야 함
+- O(N) 관련 명령어는 주의하자
+
+33분
+
+
 
 #### 참고할만한 sample 설정?
 
@@ -106,6 +214,20 @@ latex   : false
 
 - 오픈소스를 쓴다면 코드를 꼭 봐라.
 - 알고 넘어가는 것/ 에러를 근본적으로 해결하는 태도가 중요하다
+
+### Memcached와 Redis의 차이
+
+- Memcached
+    - 명료함을 위해
+    - 멀티스레드 지원, 스케일업을 통한 작업 처리 가능
+    
+- Redis
+    - 다양한 용도
+    - 싱글 스레드
+    - 다양한 데이터 구조 활용 가능
+    - 스냅샷 - 특정 시점 저장 보관 가능
+
+### 스케일 아웃, 스케일 업 
 
 #### 스케일 아웃
 
@@ -194,10 +316,10 @@ latex   : false
 - Market place에서 UTM솔루션 구매(Sophos, Fortinet 등)
 - DNS 제공해주는 Gabia, Cloudflare 등을 이용하면 WAF 제공
 
+### 질문들
 
 - 대규모 트래픽 처리한 경험?
 - Docker, 사용이유? Container, Image
-- 클라우드 컴퓨팅
 - AWS Lambda?
 - 람다 함수와 파라미터 관련 event, context
 - Kubernetes
@@ -391,9 +513,7 @@ latex   : false
 - GCC(GNU Compiler Collection)이란 (파이썬 엔진과 연관지어서)
 - 파이썬 인터프리터가 기존 컴파일러 언어에 비해서 퍼포먼스가 낮은데도 불구하고 파이썬이 주언어인 이유?
 
-이 의문에 가장 중요한 대답은 "생산성이 높기 때문"이다. 이는 부인할 수 없는 현실이다. 또한 "먼저 개발하라! 그리고 나서 성능을 개선하라."는 취지에 가장 부합하는 언어이다. 개발을 먼저 할 시 장점은 협업 시(디자인, 기획 등) 비교하여 성능을 높이기 용이하다.
-
-플랫폼 독립적 언어, 개발 기간 다축에 초점을 맞춘 언어 
+- 플랫폼 독립적 언어, 개발 기간 단축에 초점을 맞춘 언어 
 예- 윈도우에서 개발한 코드로 맥과 리눅스에서 실행 가능 - OS에 인터르리터가 설치돼 있으므로, C는 컴파일 다시 진행해야
 
 - 스크립트 언어 vs 컴파일 언어
@@ -412,8 +532,6 @@ latex   : false
 - Private Class, Public Class?
 
 ## API
-
-### REST API / REST 탄생 배경 / RESTful
 
 ### 서로 다른 API로 요청이 동시에 들어오면서 해당 API들이 내 DB의 같은테이블 하나를조회한다고 가정했을때, 병목현상이 생길텐데 어떻게 처리할 것인가?
 
@@ -447,7 +565,10 @@ latex   : false
         - TCP 연결 끊어지면 다시 3 Way Hanshake거쳐야
         - 예) wi-fi에서 셀룰러로 전환
         - QUIC은 Connection ID를 사용해 서버와 연. 이는 랜덤한 값을 뿐 클라이언트 IP와는 무관
-        
+
+
+### 질문들
+
 - web server(Apache, Nginx)? 장점?
 - 
 - HTTP 1.0/1.1/2.0/3.0의 특징 (Keepalive -> TCP/IP -> Header Compression -> UDP)
@@ -524,8 +645,6 @@ latex   : false
 - 하지만 멀티스레드는 공유자원으로 발생하는 문제 해결을 위해 동기화에 신경써야 한다.
 
 
-
-
 ## 기타
 
 - CDN 써보았는지? 개념은?
@@ -569,18 +688,6 @@ latex   : false
 - CVS, SVN, Git
 - 웹 서버(Web Server)와 웹 어플리케이션 서버(WAS)의 차이
 - Servlet과 JSP
-
-### Memcached와 Redis의 차이
-
-- Memcached
-    - 명료함을 위해
-    - 멀티스레드 지원, 스케일업을 통한 작업 처리 가능
-    
-- Redis
-    - 다양한 용도
-    - 싱글 스레드
-    - 다양한 데이터 구조 활용 가능
-    - 스냅샷 - 특정 시점 저장 보관 가능
 - Maven과 Gradle의 차이 
   
   
@@ -593,4 +700,5 @@ latex   : false
 - [Python 은 call-by-value 일까 call-by-reference 일까](https://www.pymoon.com/entry/Python-%EC%9D%80-callbyvalue-%EC%9D%BC%EA%B9%8C-callbyreference-%EC%9D%BC%EA%B9%8C)
 - [Python 기술 면접 대비](https://shelling203.tistory.com/31)
 - [JSON 웹 토큰 보안](https://code-machina.github.io/2019/09/01/Security-On-JSON-Web-Token.html)
+- [강대명님 강의](https://www.slideshare.net/charsyam2/presentations)
 - [HTTP/3는 왜 UDP를 선택한 것일까?](https://evan-moon.github.io/2019/10/08/what-is-http3/)
