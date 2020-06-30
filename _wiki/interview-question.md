@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 21:46:27 +0900
-updated : 2020-06-30 21:31:17 +0900
+updated : 2020-07-01 00:13:46 +0900
 tags    : 
 toc     : true
 public  : true
@@ -186,14 +186,39 @@ latex   : false
         - 바로 죽지 않고 Swap 일어난다
         - Swap - 메모리 꽉차면 디스크로 내리고 비면 다시 메모리로 올리고
         - Swap이 한 번이라도 있다면 해당 메모리 Page 접근 시마다 느려짐
-        - Swap이 없다면?
     - Maxmemory를 설정하더라도 이보다 더 사용할 가능성이 큼
+        - jemalloc? 때문에 레디스는 자기가 사용하는 메모리 크기를 정확하게 알 수 없기 때문에
     - RSS 값을 모니터링해야 함
+    - 메모리 관리
+        - 큰 모메로 사용하는 인스턴스 하나보다 적은 메모리 인스턴스 여러 개가 더 안전하다.
+            - 라이트가 헤비한 레디스는 포크를 해서 최대 메모리를 2배까지 쓸 수 있다.
+            - 24기가면 48기가를 소모, 8기가면 16기가를 소모
+    - 메모리 부족할 때는?
+        - 좀더 메모리 많은 장비로 Migration
+        - 있는 데이터 줄이기
+            - 다만 Swap 사용중이라면 프로세스 재시작해야 함
+        - 메모리 줄이기 위한 설정
+            - 기본적인 Collection 틀
+                - Hash -> HashTable
+                - Sorted Set -> Skeplist와 HashTable
+                - Set -> HashTable
+                - 해당 자료 구조들은 메모리를 많이 사용함
+            - Ziplist를 이용하자
+                - In-memory 특성상 적은 개수라면 선형 탐색을 하더라도 빠르다.
+                - List, hash, sorted set 등을 ziplist로 대체해서 처리함는 설정이 존재
 - O(N) 관련 명령어는 주의하자
+    - 싱글스레드라 한 번에 한 명령만 처리
+        - 긴 시간이 필요한 명령을 수행하면? 망한다.
+        - 초당 10만TPS 처리하는데 1개만 1초 걸려도 끝장
+    - 대표적인 O(N) 명령어들
+        - KEYS
+            - 한 번에 모든 데이터 가져오는 명령
+            - scan 명령으로 하나의 긴 명령을 짧은 여러 번 명령으로 바꿀 수 있다
+        - FLUSHALL, FLUSHDB
+        - Delete Collections
+        - Get All Collections
 
-33분
-
-
+48
 
 #### 참고할만한 sample 설정?
 
