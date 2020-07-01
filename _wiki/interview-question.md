@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-11 21:46:27 +0900
-updated : 2020-07-01 00:13:46 +0900
+updated : 2020-07-01 20:12:58 +0900
 tags    : 
 toc     : true
 public  : true
@@ -217,8 +217,60 @@ latex   : false
         - FLUSHALL, FLUSHDB
         - Delete Collections
         - Get All Collections
+            - Collection의 모든 item을 가져와야 할 때?
+                - Collection의 일부만 거져오거나
+                    - Sorted Set
+                - 큰 Collection을 작은 여러 개의 Collection으로 나눠서 저장
+                    - Userranks -> Userrank1, Userrank2, Userrank3
+                    - 하나당 몇천 개 안쪽으로 저장하는 게 좋음
 
-48
+#### Redis Replication
+
+- Async Replication
+    - Replication Lag이 발생할 수 있다.
+    - A 데이터 바뀌면 B 데이터에게 쏴주는데 그 틈에 생긴 변화
+    - 많이 벌어지면 슬레이브가 마스터와 연결을 끊어버린 후 일정 기간 이후 다시 연결되면서 부하
+- `'Replicaof'(>=5.0.0) or 'slaveof'` 명령으로 설정 가능(마스터, 슬레이브가 바뀐 용어)
+    - Replicaof hostname port
+- DBMS로 보면 statement replication이 유사
+- Replication 설정 과정
+    - Secondary에 replicaof or slaveof 명령을 전달
+        - 마스터의 호스트 IP, 도메인 어드레스, 포트
+    - Secondary는 Primary에 sync 명령 전달
+    - Primary는 현재 메모리 상태를 저장하기 위해
+        - Fork
+    - Fork한 프로세서는 현재 메모리 정보를 디스크에 덤프
+    - 해당 정보를 secondary에 전달
+    - Fork 이후의 데이터를 Secondary에 계속 전달
+- Redis Replication 시 주의할 점
+    - Replication 과정에서 포크가 발생하므로 메모리 부족이 발생할 수 있다
+    - Redis-cli --rdb 명령은 현재 상태의 메모리 스냅샷을 가져오므로 같은 문제를 발생시킴
+    - AWS나 클라우드의 Redis는 좀 다르게 구현되어서 해당 부분이 좀더 안정적
+    - 많은 대수의 레디스 서버가 Replica를 두고 있다면
+        - 네트워크 이슈나 사람의 작업으로 동시에 replication이 재시도되도록 하면 문제가 발생할 수 있다
+        - ex) 같은 네트웍 안에 30GB를 쓰는 Redis Master 100대 정도가 리클리케이션을 동시에 재시작하면 어떤 일이 벌어질 수 있을까?
+
+#### redis.conf 권장 설정 Tip
+
+- Maxclient 설정 50000
+- RDB/AOF 설정 off
+- 특정 커맨드 disable
+    - Keys
+    - AWS의 ElasticCache는 이미 하고 있음
+- 전체 장애의 90% 이상이 KEYS와 SAVE 설정을 사용해서 발생
+
+#### Redis 데이터 분산
+
+- 데이터의 특성에 따라 선택할 수 있는 방법이 달라진다.
+    - Cache일 때는 우아한 Redis?
+    - Persistent 해야만 안 우아한 Redis!
+        - Open the hellgate
+- 데이터 분산 방법
+    - Application
+        - Consistent Hashing
+            - twemproxy를 사용하는 방법으로 쉽게 사용 가능
+        - Sharding
+    - Redis Cluster
 
 #### 참고할만한 sample 설정?
 
@@ -358,19 +410,35 @@ latex   : false
 
 ## DevOps
 
+### Elastic Load Balancing으로 트래픽 분산해보기
+
+- EC2 -> Scale UP -> 시스템 중단 문제 -> Scale Out
+- Elastic Load Balancing
+- Classic Load Balancer
+- Application Load Balancer
+    - HTTP, HTTPS
+- Network Load Balancer
+    - TCP, UDP
+
+### Instance Schedular
+
+- scheduler-cli
+- hibernate
+- cross-account
+
 ### 소프트웨어 생명 주기 관련 데브옵스의 역할, 하는 일
 
 - 개발과 운영(서버, DB, 네트워크)이 하나로
     - 소규모 업데이트 자주, 마이크로 서비스
 - 개발 라이프사이클을 이해하고 개발과 운영 양쪽에 충분한 지식과 경험을 보유한 사람?
 
-
 #### CI/CD
 
 - 지속적 통합 지속적 전달
+
     - 지속적 통합은 자동화된 빌드 및 테스트가 수행된 후, 개발자가 코드 변경 사항을 중앙 리포지토리에 정기적으로 병합하는 데브옵스 소프트웨어 개발 방식
     - 지속적 전달(Continuous Delivery)은 프로덕션에 릴리스하기 위한 코드 변경이 자동으로 준비되는 소프트웨어 개발 방식
-
+        - 좀더 자주, 작은 단위까지 배포
 
 ## 암호화
 
