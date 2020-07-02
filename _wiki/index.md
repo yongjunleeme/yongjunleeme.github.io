@@ -57,11 +57,11 @@ regenerate: true
 
 #### two scoops of django
 
-* [[tsd-5]]
+tsd-5
 
 #### tdd with python
 
-* [[tdd-3-website-test]]
+tdd-3-website-test
 
 ## [[tool]]
 
