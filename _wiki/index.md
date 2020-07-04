@@ -68,6 +68,7 @@ tdd-3-website-test
 * [[github-basic-1]]
 * [[mini-conda]]
 * [[my-sql-install]]
+* [[postgresql-config]]
 * [[docker]]
 * [[sql-command]]
 * [[linux-command]]
