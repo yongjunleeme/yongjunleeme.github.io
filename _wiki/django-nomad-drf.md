@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-06-21 14:41:59 +0900
+updated : 2020-07-05 15:48:55 +0900
 tags    : 
 toc     : true
 public  : true
@@ -181,6 +181,9 @@ class ListRoomsView(ListAPIView):
 
 #### Pagination
 
+- `settings.py` 설정
+    - [rest_framework default 설정](https://ssungkang.tistory.com/entry/Django-restframework-default-%EC%84%A4%EC%A0%95?category=366160)
+
 ```python
 ## confing/settings.py
 # Django Rest Framework
@@ -219,9 +222,7 @@ class SeeRoomView(RetrieveAPIView):
 
     queryset = Room.objects.all()
     serializer_class = BigRoomSerializer
-```
-
-
+``` 
 
 #### Reference
 
@@ -233,11 +234,13 @@ class SeeRoomView(RetrieveAPIView):
 
 #### viewset
 
-    - 그냥 api 완성
-    - url 제공 - rooms, rooms/1 모두 자동으로
-    - PUT, DELETE 메소드까지 제공
-    - 그러나 모든 기능이 on 되어 있어서 비즈니스로직 [viewset actions](https://www.django-rest-framework.org/api-guide/viewsets/) 구현해야 할 수도
-
+- 그냥 api 완성
+- url 제공 - `rooms`, `rooms/1/` 모두 자동으로
+    - basename에 적은 이름이 기존 url에 붙어서 나오니 api root를 확인해야
+        - 기본 주소로 접속하면 Api Root를 알려준다
+- PUT, DELETE 메소드까지 제공
+- Pagination 등도 제공
+- 그러나 모든 기능이 on 되어 있어서 비즈니스로직 [viewset actions](https://www.django-rest-framework.org/api-guide/viewsets/) 구현해야 할 수도
 
 ```python
 # urls.py
@@ -262,6 +265,112 @@ class RoomViewset(viewsets.ModelViewSet):
 
     queryset = Room.objects.all()
     serializer_class = BigRoomSerializer
+```
+
+- ViewSet actions, 공식문서 내용
+- [공식문서 번역 블로그 Viewset](https://brownbears.tistory.com/82)
+
+
+```python
+class UserViewSet(viewsets.ViewSet):
+    """
+    Example empty viewset demonstrating the standard
+    actions that will be handled by a router class.
+
+    If you're using format suffixes, make sure to also include
+    the `format=None` keyword argument for each action.
+    """
+
+    def list(self, request):
+        pass
+
+    def create(self, request):
+        pass
+
+    def retrieve(self, request, pk=None):
+        pass
+
+    def update(self, request, pk=None):
+        pass
+
+    def partial_update(self, request, pk=None):
+        pass
+
+    def destroy(self, request, pk=None):
+        pass
+```
+
+- [Introspecting ViewSet actions](https://www.django-rest-framework.org/api-guide/viewsets/#introspecting-viewset-actions)
+- ViewSet의 속성
+    - `Basename` - 생성된 URL 이름을 위한 베이스
+    - `action` - 현재 액션 이름(예: list, create)
+    - `detail` - 현재 액션이 디테일 뷰나 리스트로 설정돼 있다면 불리언으로 표현?
+    - `suffix` - 뷰셋 타입의 접미사 - `detail` 속성을 반영?
+    - `name` - 뷰셋 이름, `suffix`와는 상호배타적인 인자
+    - `description` - 뷰셋의 개별 뷰에 관한 설명
+
+```python
+def get_permissions(self):
+    """
+    Instantiates and returns the list of permissions that this view requires.
+    """
+    if self.action == 'list':
+        permission_classes = [IsAuthenticated]
+    else:
+        permission_classes = [IsAdmin]
+    return [permission() for permission in permission_classes]
+```
+
+- [Marking extra actions for routing](https://www.django-rest-framework.org/api-guide/viewsets/#marking-extra-actions-for-routing)
+
+```python
+from django.contrib.auth.models import User
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from myapp.serializers import UserSerializer, PasswordSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    A viewset that provides the standard actions
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    @action(detail=True, methods=['post'])
+    def set_password(self, request, pk=None):
+        user = self.get_object()
+        serializer = PasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            user.set_password(serializer.data['password'])
+            user.save()
+            return Response({'status': 'password set'})
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False)
+    def recent_users(self, request):
+        recent_users = User.objects.all().order_by('-last_login')
+
+        page = self.paginate_queryset(recent_users)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(recent_users, many=True)
+        return Response(serializer.data)
+```
+
+- 데코레이터의 인자에 라우트된 뷰를 추가할 수도 있다.
+- 메소드는 get이 디폴트로 라우트 되고 다른 메소드는 추가해서 사용
+- 아래와 같이 2가지 액션을 추가하면 URL은 `^users/{pk}/set_password/$`, `^users/{pk}/unset_password/$`
+- 액션을 추가하라면 `.get_extra_action()` 메소드를 사용
+
+```python
+    @action(detail=True, methods=['post'], permission_classes=[IsAdminOrIsSelf])
+    def set_password(self, request, pk=None):
+       ...
 ```
 
 ### [1.7 Bye Bye ViewSet](https://github.com/nomadcoders/airbnb-api/commit/f2c32baa9b307df5f73d557ae2cf152c72d4c33a)
@@ -342,4 +451,11 @@ def rooms_view(request):
             return data
 ```
 
+### [2.4 Room Detail DELETE PUT part One](https://github.com/nomadcoders/airbnb-api/commit/4d6d41df504ec9a24ed2287a7dc968ae0c54d410)
+
+
+
+## Link
+
+- [에어비앤비 앱 클론 코딩](https://nomadcoders.co/airbnb-native/lectures/965)
 
