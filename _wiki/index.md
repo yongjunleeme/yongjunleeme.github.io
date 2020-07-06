@@ -70,6 +70,7 @@ tdd-3-website-test
 * [[my-sql-install]]
 * [[postgresql-config]]
 * [[docker]]
+* [[nginx-uwsgi-django-docker]]
 * [[sql-command]]
 * [[linux-command]]
 * [[jekyll-install]]
