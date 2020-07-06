@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-05 21:28:27 +0900
-updated : 2020-07-06 00:07:37 +0900
+updated : 2020-07-06 12:30:34 +0900
 tags    : 
 toc     : true
 public  : true
@@ -189,13 +189,13 @@ $ cd /var/log/nginx
 $ tail -f /var/log/nginx/access.log
 ```
 
-## Docker, Mysql
+## Docker
+
+### Mysql
 
 - ec2에서 설치
 
 ```python
-$ mkdir docker-server
-
 # docker 설치
 $ curl -fsSL https://get.docker.com/ | sudo sh
 
@@ -208,15 +208,337 @@ $ sudo uwermod -aG docker username
 
 - MySQL docker pull
     - [Docker Hub](https://hub.docker.com/_/mysql)
-
 ```python
 $ docker pull mysql
+```
+
+- 실행
+
+```python
+$ docker run -it --rm --name mysql-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_PASSWORD=password mysql
+```
+
+- 확인
+
+```python
+$ docker ps
+```
+
+- `settings.py` 변경
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
+        'NAME': 'mysql-db',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4'},
+    }
+}
+```
+
+### Redis
+
+```python
+$ docker run --rm --name some-redis -d -p 6379:6379 redis
+```
+
+- `settinsg.py`
+
+```python
+CACHES = {
+        "default": {
+        "BACKEND" : "django_redis.cache.RedisCache",
+        "LOCATION" : "redis://127.0.0.1",
+        "OPTIONS": {
+            "CLIENT_CLASS" : "django_redis.client.DefaultClient",
+        }
+    }
+}
+```
+
+### Django
+
+- 도커서버 폴더생성, 프로젝트 이동
+
+```python
+$ mkdir docker-server
+$ mv projectname/ docker-server/
+```
+
+- Dockerfile 생성
+
+```python
+$ cd docker-server
+$ vim Dockerfile
+```
+
+```python
+# /docker-server/server_dev/Dockerfile
+FROM python:3
+
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get -y update
+RUN apt-get -y install vim
+
+# docker 안에서 vi 설치 안해도됨
+RUN mkdir /srv/docker-server # docker안에 srv/docker-server 폴더 생성
+ADD . /srv/docker-server # 현재 디렉토리를 srv/docker-server 폴더에 복사
+
+WORKDIR /srv/docker-server # 작업 디렉토리 설정
+
+RUN pip install --upgrade pip
+RUN pip install -r ./projectname/requirements.txt
+
+EXPOSE 8000 CMD ["python", "./projectname/manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+- `requirements.txt` -> `pip freeze > requirements.txt`로 생성
+    - 버전 호환 안 되는 라이브러리 있으면 수동 점검해야
+- Docker 빌드
+    - -t는 이름 붙이는 옵션 - projectname/django
+    - .은 이미지를 만들 경로
+
+```python
+$ docker build -t projectname/django .
+```
+
+- 이미지 확인
+
+```python
+$ docker image list
+```
+
+- 도커 실행
+    - -p 옵션으로 서버 포트(호스트 포트)와 도커 포트를 맞춰준다.
+
+```python
+$ docker run -p 8000:8000 projectname/django
+```
+
+### Nginx
+
+```python
+# ~/docker-server/nginx/nginx.conf
+user root;
+worker_processes auto;
+pid /run/nginx.pid;
+
+events {
+    worker_connections 1024;
+    # multi_accept on;
+}
+
+http {
+
+    ##
+    # Basic Settings
+    ##
+
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    # server_tokens off;
+    # server_names_hash_bucket_size 64;
+    # server_name_in_redirect off;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    ##
+    # SSL Settings
+    ##
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+    ssl_prefer_server_ciphers on;
+
+    ##
+    # Logging Settings
+    ##
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    ##
+    # Gzip Settings
+    ##
+
+    gzip on;
+    gzip_disable "msie6";
+
+    # gzip_vary on;
+    # gzip_proxied any;
+    # gzip_comp_level 6;
+    # gzip_buffers 16 8k;
+    # gzip_http_version 1.1;
+    # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    ##
+    # Virtual Host Configs
+    ##
+
+    # include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}
+```
+
+```python
+# ~/docker-server/nginx/nginx-app.conf
+upstream uwsgi {
+    server unix:/srv/docker-server/apps.sock;
+}
+
+server {
+    listen 80;
+    server_name localhost;
+    charset utf-8;
+    client_max_body_size 128M;
+
+    location / {
+        uwsgi_pass       uwsgi;
+        include          uwsgi_params;
+    }
+
+    location /media/ {
+        alias /srv/docker-server/.media/;
+    }
+
+    location /static/ {
+        alias /srv/docker-server/.static/;
+    }
+}
+```
+
+```python
+# ~/docker_server/nginx/Dockerfile
+FROM nginx:latest
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx-app.conf /etc/nginx/sites-available/
+
+RUN mkdir -p /etc/nginx/sites-enabled/\
+    && ln -s /etc/nginx/sites-available/nginx-app.conf /etc/nginx/sites-enabled/
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+- 빌드
+
+```python
+$ docker build -t projectname/nginx .
+```
+
+- 실행
+
+```python
+$ docker run -p 80:80 projectname/nginx
+```
+
+### Docker-compose
+
+- 여러 개의 이미지를 관리하는 툴, 두 개의 이미지를 연결
+- nginx docker + django docker
+- 설치
+
+```python
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.25.0-rc2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+
+- `docker-compose` 명령으로 실행 확인
+- Dokerfile처럼 docker-compose.yml을 사용해 설정
+
+```python
+# ~/docker-server/docker-compose.yml
+
+version: '3'
+services:
+
+    nginx:
+        container_name: nginx
+        build: ./nginx
+        image: projectname/nginx
+        restart: always
+        ports:
+          - "80:80"
+        volumes:
+          - ./projectname:/srv/docker-server
+          - ./log:/var/log/nginx
+        depends_on:
+          - django
+
+    django:
+        container_name: django
+        build: ./projectname
+        image: docker-server/django
+        restart: always
+        command: uwsgi --ini uwsgi.ini
+        volumes:
+          - ./server_dev:/srv/docker-server
+          - ./log:/var/log/uwsgi
+```
+
+- Dockerfile 설정 
+  
+```python
+# ~/docker_server/nginx/Dockerfile
+FROM nginx:latest
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx-app.conf /etc/nginx/sites-available/
+
+RUN mkdir -p /etc/nginx/sites-enabled/\
+    && ln -s /etc/nginx/sites-available/nginx-app.conf /etc/nginx/sites-enabled/
+
+#EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+- uwsgi.ini 파일 생성
+
+```python
+# ~/docker-server/server_dev/uwsgi.ini
+[uwsgi]
+socket = /srv/docker-server/apps.sock
+master = true
+
+processes = 1
+threads = 2
+
+chdir = /srv/docker-server
+module = projectname.wsgi
+
+logto = /var/log/uwsgi/uwsgi.log
+log-reopen = true
+
+vacuum = true
+```
+
+- 빌드
+    - -d는 데몬
+    - run이 아닌 up/down
+
+```python
+$ docker-compoase up -d --build
+```
+
+- 확인
+
+```python
+$ docker-compose ps
 ```
 
 
 ## Link
 
 - [Nginx와 uWSGI 설치해서 연결하기 + docker로 mysql 띄우기](https://cholol.tistory.com/485?category=651593)
-- [django, nginx 도커로 구동하기]([https://cholol.tistory.com/489?category=651593](https://cholol.tistory.com/489?category=651593))
-- [docker로 mysql, redis 실행. Django와 연결]([https://cholol.tistory.com/476?category=651593](https://cholol.tistory.com/476?category=651593))
+- [django, nginx 도커로 구동하기](https://cholol.tistory.com/489)
+- [docker로 mysql, redis 실행. Django와 연결](https://cholol.tistory.com/476)
 
