@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-07-05 15:48:55 +0900
+updated : 2020-07-07 22:31:33 +0900
 tags    : 
 toc     : true
 public  : true
@@ -381,7 +381,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
 ### [2.2 Create Room part Two](https://github.com/nomadcoders/airbnb-api/commit/d502905179d671b143006b0c731a843c2dcd308d)
 
-
 - [공식](https://www.django-rest-framework.org/api-guide/serializers/)
 - create
     - create 메소드를 직접 콜하면 안 된다
@@ -389,45 +388,49 @@ class UserViewSet(viewsets.ModelViewSet):
     - create 메소드를 쓰면 반드시 instance를 리턴해야
 
 ```python
-# serializer.py
-class WriteRoomSerializer(serializers.Serializer):
+# filename: serializer.py
 
-    name = serializers.CharField(max_length=140)
-    address = serializers.CharField(max_length=140)
-    price = serializers.IntegerField()
-    beds = serializers.IntegerField(default=1)
-    lat = serializers.DecimalField(max_digits=10, decimal_places=6)
-    lng = serializers.DecimalField(max_digits=10, decimal_places=6)
-    bedrooms = serializers.IntegerField(default=1)
-    bathrooms = serializers.IntegerField(default=1)
-    check_in = serializers.TimeField(default="00:00:00")
-    check_out = serializers.TimeField(default="00:00:00")
-    instant_book = serializers.BooleanField(default=False)
+from rest_framework import serializers
+from .models import Customer
 
+class ReadCustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = "__all__"
+
+class WriteCustomerSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=50)
+    password = serializers.CharField(max_length=100)
+    
     def create(self, validated_data):
-        return Room.objects.create(**validated_data)
+        return Customer.objects.create(**validated_data)
 ```
 
-
 ```python
-## views.py
+# filename: views.py
+
+from .serializer import ReadCustomerSerializer, WriteCustomerSerializer
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
 @api_view(["GET", "POST"])
-def rooms_view(request):
+def customer_view(request):
     if request.method == "GET":
-        rooms = Room.objects.all()[:5]
-        serializer = ReadRoomSerializer(rooms, many=True).data
+        customer = Customer.objects.all()
+        serializer = ReadCustomerSerializer(customer, many=True).data
         return Response(serializer)
     elif request.method == "POST":
-        if not request.user.is_authenticated: # 이렇게 인증 안 해주면 에러
+        if not request.user.is_authenticated:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        serializer = WriteRoomSerializer(data=request.data)
+        serializer = WriteCustomerSerializer(data=request.data)
         if serializer.is_valid():
-            room = serializer.save(user=request.user)  # create()가 아니라 save()
-            room_serializer = ReadRoomSerializer(room).data
-            return Response(data=room_serializer, status=status.HTTP_200_OK)
+            customer = serializer.save(customer=request.customer) # create 메소르 직접 콜하면 안 되고 save 메소드를 쓰면 시리얼라이즈에 정의된 create나 update를 선택적으로 불러온다
+            customer_serializer = ReadCustomerSerializer(customer).data
+            return Response(data=customer_serializer, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
 ```
 
 ### [2.3 Room Detail GET](https://github.com/nomadcoders/airbnb-api/commit/de21510bbf93a506e81d4be816a47541bc15b01d)
@@ -453,7 +456,100 @@ def rooms_view(request):
 
 ### [2.4 Room Detail DELETE PUT part One](https://github.com/nomadcoders/airbnb-api/commit/4d6d41df504ec9a24ed2287a7dc968ae0c54d410)
 
+```python
+class RoomView(APIView):
+    def get_room(self, pk):
+        try:
+            room = Room.objects.get(pk=pk)
+            return room
+        except Room.DoesNotExist:
+            return None
 
+    def get(self, request, pk):
+        room = self.get_room(pk)
+        if room is not None:
+            serializer = ReadRoomSerializer(room).data
+            return Response(serializer)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request):
+        customer = self.get_customer(pk)
+        if customer is not None:
+            if customer.name != request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+            serializer = WriteCustomerSerializer(
+                customer, data=request.data, partial=True
+            )
+            if serializer.is_valid():
+                customer = serializer.save()
+                return Response(ReadCustomerSerializer(customer).data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response()
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+            
+    def delete(self, request, pk):
+        room = self.get_room(pk)
+        if room is not None:
+            if room.user != request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+            room.delete()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+```
+
+### [2.5 Room Detail PUT part Two](https://nomadcoders.co/airbnb-native/lectures/970)
+
+```python
+class WriteCustomerSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=50)
+    password = serializers.CharField(max_length=100)
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get("name", instance.name)
+        instance.password = validated_data.get("password", instance.password)
+        instance.save()
+        return instance
+```
+
+### [2.6 MeView and user_detail](https://nomadcoders.co/airbnb-native/lectures/972)
+
+```python
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework import status
+from .models import User
+from .serializers import ReadUserSerializer, WriteUserSerializer
+
+class MeView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response(ReadUserSerializer(request.user).data)
+
+    def put(self, request):
+        serializer = WriteUserSerializer(request.user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response()
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+def user_detail(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+        return Response(ReadUserSerializer(user).data)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+```
 
 ## Link
 
