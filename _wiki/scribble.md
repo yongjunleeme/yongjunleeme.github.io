@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-06-26 13:22:42 +0900
+updated : 2020-07-08 12:27:29 +0900
 tags    : 
 toc     : true
 public  : true
@@ -557,6 +557,7 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 
 #### 세마포
 
+- [세마포 작동원리, Busy-wation 나무위키](https://namu.wiki/w/%EC%84%B8%EB%A7%88%ED%8F%AC%EC%96%B4)
 - 뮤추얼 익스클루젼 어떻게?
     - 싱글프로세서면 인터럽트되지만 멀티프로세서면 안 되고
     - 아토믹 오퍼레이션은 크리티컬 섹션이 가능하지만 위와 같은 문제가 있기에
@@ -565,7 +566,7 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
     - 리소스 액세스를 제어하기 위한 단순한 추상화를 제공하는 변수?
     - 자원의 개수로 이니셜라이즈됨
     - 오퍼레이션 2가지
-        - P -> 변수를 디크리먼트(Wait operation - 2, 1, 0이 되면 0 다음에는 기다려야 하므로)
+        - P -> 요청 -> 변수를 디크리먼트(Wait operation - 2, 1, 0이 되면 0 다음에는 기다려야 하므로)
         - V -> 변수를 인크리먼트, 쓰고 돌려준다(Signal operation)
 - 세마포 타입
     - Binary
@@ -574,8 +575,13 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
         - n값 가능
 - busy wating은 없고 queue가 있다
 - Strong/Weak 세마포
-    - String - 큐의 FIFO
+    - String - 큐의 FIFO - 가장 오래된 것부터 웨이크업
     - Weak - 아무나 웨이크업 시키는
+- 크리티컬 섹션에서는 시리얼라이즈되어야 한다
+
+<img width="1256" alt="스크린샷 2020-07-08 오후 12 14 43" src="https://user-images.githubusercontent.com/48748376/86871160-b5b0f000-c114-11ea-85a8-d9c5b660a039.png">
+
+<img width="1247" alt="스크린샷 2020-07-08 오후 12 14 33" src="https://user-images.githubusercontent.com/48748376/86871169-ba75a400-c114-11ea-9037-cae22dd4b417.png">
 
 
 
