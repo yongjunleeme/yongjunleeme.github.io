@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-07-07 22:31:33 +0900
+updated : 2020-07-08 20:41:08 +0900
 tags    : 
 toc     : true
 public  : true
@@ -517,6 +517,12 @@ class WriteCustomerSerializer(serializers.Serializer):
 
 ### [2.6 MeView and user_detail](https://nomadcoders.co/airbnb-native/lectures/972)
 
+### [2.7 MeView PUT](https://github.com/nomadcoders/airbnb-api/commit/118908ad4db98526111ce6b0f5705c7f7c607742)
+
+- Permissions
+    - [공식](https://www.django-rest-framework.org/api-guide/permissions/)
+    - [Django REST Framework -Permissions](https://dean-kim.github.io/rest_framework/2017/05/22/Django-REST-Framework-Permissions.html)
+
 ```python
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -550,6 +556,164 @@ def user_detail(request, pk):
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 ```
+
+### [2.8 Magic + FavsView](https://github.com/nomadcoders/airbnb-api/commit/6849428754f659dc961ce3aee0bf8f1ecaf9d8bc)
+
+- `read_only_fields` - get에 쓸 필드 할당하고 Serializer를 get, post 한꺼번에 사용
+
+```python
+class RoomSerializer(serializers.ModelSerializer):
+
+    user = RelatedUserSerializer()
+
+    class Meta:
+        model = Room
+        exclude = ("modified",)
+        read_only_fields = ("user", "id", "created", "updated")
+
+```
+
+```python
+from rest_framework import serializers
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Room
+from .serializers import RoomSerializer
+
+
+class RoomsView(APIView):
+    def get(self, request):
+        rooms = Room.objects.all()[:5]
+        serializer = RoomSerializer(rooms, many=True).data
+        return Response(serializer)
+
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        serializer = RoomSerializer(data=request.data)
+        if serializer.is_valid():
+            room = serializer.save(user=request.user)
+            room_serializer = RoomSerializer(room).data
+            return Response(data=room_serializer, status=status.HTTP_200_OK)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RoomView(APIView):
+    def get_room(self, pk):
+        try:
+            room = Room.objects.get(pk=pk)
+            return room
+        except Room.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        room = self.get_room(pk)
+        if room is not None:
+            serializer = RoomSerializer(room).data
+            return Response(serializer)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk):
+        room = self.get_room(pk)
+        if room is not None:
+            if room.user != request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+            serializer = RoomSerializer(room, data=request.data, partial=True)
+            if serializer.is_valid():
+                room = serializer.save()
+                return Response(RoomSerializer(room).data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response()
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        room = self.get_room(pk)
+        if room is not None:
+            if room.user != request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+            room.delete()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+```
+
+### [2.9 FavsView part Two](https://github.com/nomadcoders/airbnb-api/commit/9f9d44c8614ed0fc1ffc1230b933660007885a1b)
+
+
+### [2.10 Creating Account](https://github.com/nomadcoders/airbnb-api/commit/c2af2ca510cc9387619eee864a85ffe54dfe43e1)
+
+- 패스워드 설정
+
+```python
+from rest_framework import serializers
+from .models import User
+
+class UserSerializer(serializers.ModelSerializer):
+
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "avatar",
+            "superhost",
+            "password",
+        )
+        read_only_fields = ("id", "superhost", "avatar")
+
+    def validate_first_name(self, value):
+        return value.upper()
+
+    def create(self, validated_data):
+        password = validated_data.get("password")
+        user = super().create(validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+```
+
+```python
+class UsersView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            new_user = serializer.save()
+            return Response(UserSerializer(new_user).data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+```
+
+### [2.11 Log In (JWT)](https://github.com/nomadcoders/airbnb-api/commit/b2badc5651be7f3862c4af0cfcb723e29bc0a44e)
+
+
+- [authenticate 공식](https://docs.djangoproject.com/en/3.0/topics/auth/default/)
+- [인증(Authentication)과 인가(Authorization)](https://velog.io/@aaronddy/%EC%9D%B8%EC%A6%9DAuthentication%EA%B3%BC-%EC%9D%B8%EA%B0%80Authorization)
+- [JWT](https://jwt.io/)
+    - 민감한 데이터(패스워드, 이메일, 유저이름)를 JWT에 넣으면 안 되고 식별 가능한 데이터(예: ID)를 넣어야 한다. 누구나 JWT를 해독할 수 있기 때문
+        - 토큰 안의 정보를 아무도 못보게 만드는 게 목적이 아니라 아무도 건드리지 않았는지 판단하는 게 목적
+    - settings.py 직접 import하면 안 되고 `from django.conf import settings` 
+
+### [2.12 JWT Decoding and Auth](https://github.com/nomadcoders/airbnb-api/commit/b5c8990172b2ee5dd65298daafdfb0b956c686a0)
+
+- [Custom authentication 공식](https://www.django-rest-framework.org/api-guide/authentication/#custom-authentication)
+
+- [restframework용 simple JWT](https://github.com/SimpleJWT/django-rest-framework-simplejwt)
+
+
+### [2.14 Manual Pagination]https://github.com/nomadcoders/airbnb-api/commit/6439a0303edbf529cf1c4d4de6a72c387103e868
+
+
 
 ## Link
 
