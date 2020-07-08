@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-07-08 20:41:08 +0900
+updated : 2020-07-09 00:05:50 +0900
 tags    : 
 toc     : true
 public  : true
@@ -700,19 +700,118 @@ class UsersView(APIView):
 - [authenticate 공식](https://docs.djangoproject.com/en/3.0/topics/auth/default/)
 - [인증(Authentication)과 인가(Authorization)](https://velog.io/@aaronddy/%EC%9D%B8%EC%A6%9DAuthentication%EA%B3%BC-%EC%9D%B8%EA%B0%80Authorization)
 - [JWT](https://jwt.io/)
-    - 민감한 데이터(패스워드, 이메일, 유저이름)를 JWT에 넣으면 안 되고 식별 가능한 데이터(예: ID)를 넣어야 한다. 누구나 JWT를 해독할 수 있기 때문
-        - 토큰 안의 정보를 아무도 못보게 만드는 게 목적이 아니라 아무도 건드리지 않았는지 판단하는 게 목적
+    - 민감한 데이터(패스워드, 이메일, 유저이름)를 JWT에 넣으면 안 되고 식별 가능한 데이터(예: pk)를 넣어야 한다. 누구나 JWT를 해독할 수 있기 때문. 공식 사이트에서 토큰 넣고 Decode -> pk 나옴
+        - 토큰 안의 정보를 아무도 못보게 만드는 게 목적이 아니라 토큰을 아무도 건드리지 않았는지 판단하는 게 목적
     - settings.py 직접 import하면 안 되고 `from django.conf import settings` 
+
+```python
+$ pip install pyjwt
+```
+
+```python
+import jwt
+from django.conf import settings
+from django.contrib.auth import authenticate
+
+@api_view(["POST"])
+def login(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    if not username or not password:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        encoded_jwt = jwt.encode(
+            {"id": user.pk}, settings.SECRET_KEY, algorithm="HS256"
+        )
+        return Response(data={"token": encoded_jwt})
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+```
 
 ### [2.12 JWT Decoding and Auth](https://github.com/nomadcoders/airbnb-api/commit/b5c8990172b2ee5dd65298daafdfb0b956c686a0)
 
 - [Custom authentication 공식](https://www.django-rest-framework.org/api-guide/authentication/#custom-authentication)
+- 참고 - [restframework용 simple JWT](https://github.com/SimpleJWT/django-rest-framework-simplejwt)
+- 헤더에 {'Authorization': 'X-JWT 토큰'} 넣어 get으로 MeView로 보낸다
 
-- [restframework용 simple JWT](https://github.com/SimpleJWT/django-rest-framework-simplejwt)
+```python
+# filename :config/authentication.py 
+
+import jwt
+from django.conf import settings
+from rest_framework import authentication
+from users.models import User
 
 
-### [2.14 Manual Pagination]https://github.com/nomadcoders/airbnb-api/commit/6439a0303edbf529cf1c4d4de6a72c387103e868
+class JWTAuthentication(authentication.BaseAuthentication):
+    def authenticate(self, request):
+        try:
+            token = request.META.get("HTTP_AUTHORIZATION")
+            if token is None:
+                return None
+            xjwt, jwt_token = token.split(" ")
+            decoded = jwt.decode(jwt_token, settings.SECRET_KEY, algorithms=["HS256"])
+            pk = decoded.get("pk")
+            user = User.objects.get(pk=pk)
+            return (user, None)
+        except (ValueError, jwt.exceptions.DecodeError, User.DoesNotExist):
+            return None
+```
 
+```python
+# filename: config/settings.py
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "config.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+}
+```
+
+```python
+class MeView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response(UserSerializer(request.user).data)
+
+    def put(self, request):
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response()
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+```
+
+
+### [2.14 Manual Pagination](https://github.com/nomadcoders/airbnb-api/commit/6439a0303edbf529cf1c4d4de6a72c387103e868)
+
+- url뒤에 `/?page=1` 붙여서 테스트
+
+```python
+from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
+
+class OwnPagination(PageNumberPagination):
+    page_size = 20
+
+
+class RoomsView(APIView):
+    def get(self, request):
+        paginator = OwnPagination()
+        rooms = Room.objects.all()
+        results = paginator.paginate_queryset(rooms, request)
+        serializer = RoomSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+```
+
+### [2.15 Searching Part One](https://github.com/nomadcoders/airbnb-api/commit/b0e32969e0d25622f934ce3e5dd405f7f7afdfff)
 
 
 ## Link
