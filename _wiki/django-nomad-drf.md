@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-07-09 19:52:37 +0900
+updated : 2020-07-09 23:16:29 +0900
 tags    : 
 toc     : true
 public  : true
@@ -1000,11 +1000,153 @@ class RoomSerializer(serializers.ModelSerializer):
         - action의 url 주소는 함수명
             - 주소명 변경을 원하면 action(url_path='')로
 
+```python
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from rest_framework import permissions
+from .models import Room
+from .serializers import RoomSerializer
+from .permissions import IsOwner
+
+class RoomViewSet(ModelViewSet):
+
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+
+    def get_permissions(self):
+        if self.action == "list" or self.action == "retrieve":
+            permission_classes = [permissions.AllowAny]
+        elif self.action == "create":
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [IsOwner]
+        return [permission() for permission in permission_classes]
+
+    @action(detail=False)
+    def search(self, request):
+        max_price = request.GET.get("max_price", None)
+        min_price = request.GET.get("min_price", None)
+        beds = request.GET.get("beds", None)
+        bedrooms = request.GET.get("bedrooms", None)
+        bathrooms = request.GET.get("bathrooms", None)
+        filter_kwargs = {}
+        if max_price is not None:
+            filter_kwargs["price__lte"] = max_price
+        if min_price is not None:
+            filter_kwargs["price__gte"] = min_price
+        if beds is not None:
+            filter_kwargs["beds__gte"] = beds
+        if bedrooms is not None:
+            filter_kwargs["bedrooms__gte"] = bedrooms
+        if bathrooms is not None:
+            filter_kwargs["bathrooms__gte"] = bathrooms
+        paginator = self.paginator
+        try:
+            rooms = Room.objects.filter(**filter_kwargs)
+        except ValueError:
+            rooms = Room.objects.all()
+        results = paginator.paginate_queryset(rooms, request)
+        serializer = RoomSerializer(results, many=True)
+        return paginator.get_paginated_response(serializer.data)
+```
+
 ### [3.5 Users Viewset](https://github.com/nomadcoders/airbnb-api/commit/5eb108e1990f7217f2d8275624c0d414f9a34b02)
+
+```python
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAdminUser, AllowAny
+
+class UsersViewSet(ModelViewSet):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_permissions(self):
+        permission_classes = []
+        if self.action == "list":
+            permission_classes = [IsAdminUser]
+        elif self.action == "create" or self.action == "retrieve":
+            permission_classes = [AllowAny]
+
+        return [permission() for permission in permission_classes]
+```
 
 ### [3.6 Permissions And Login](https://github.com/nomadcoders/airbnb-api/commit/de5850328bfbef935b891898eb5600fb7609954b)
 
 ### [3.7 Favs](https://github.com/nomadcoders/airbnb-api/commit/a257d5db6b37d4207ea8656e510891d1eac5c600)
+
+```python
+import jwt
+from django.conf import settings
+from django.contrib.auth import authenticate
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework import status
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAdminUser, AllowAny
+from rooms.serializers import RoomSerializer
+from rooms.models import Room
+from .models import User
+from .serializers import UserSerializer
+from .permissions import IsSelf
+
+
+class UsersViewSet(ModelViewSet):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_permissions(self):
+
+        if self.action == "list":
+            permission_classes = [IsAdminUser]
+        elif (
+            self.action == "create"
+            or self.action == "retrieve"
+            or self.action == "favs"
+        ):
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsSelf]
+        return [permission() for permission in permission_classes]
+
+    @action(detail=False, methods=["post"])
+    def login(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        if not username or not password:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            encoded_jwt = jwt.encode(
+                {"pk": user.pk}, settings.SECRET_KEY, algorithm="HS256"
+            )
+            return Response(data={"token": encoded_jwt, "id": user.pk})
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    @action(detail=True)
+    def favs(self, request, pk):
+        user = self.get_object()
+        serializer = RoomSerializer(user.favs.all(), many=True).data
+        return Response(serializer)
+
+    @favs.mapping.put
+    def toggle_favs(self, request, pk):
+        pk = request.data.get("pk", None)
+        user = self.get_object()
+        if pk is not None:
+            try:
+                room = Room.objects.get(pk=pk)
+                if room in user.favs.all():
+                    user.favs.remove(room)
+                else:
+                    user.favs.add(room)
+                return Response()
+            except Room.DoesNotExist:
+                pass
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+```
 
 ### [3.8 Conclusions](https://github.com/nomadcoders/airbnb-api/commit/686130776ae35639d34efabc2399c018a1c1b059)
 
