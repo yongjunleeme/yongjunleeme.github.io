@@ -33,7 +33,6 @@ regenerate: true
 * [[concurrency]]
 * [[crawling-wecode-1]]
 * [[scrapping-options]]
-* [[snippet]]
 
 ### [[django]]
 
@@ -54,14 +53,6 @@ regenerate: true
 * [[django-rest-framwork-example]]
 * [[django-nomad-drf]]
 * [[flask-example]]
-
-#### two scoops of django
-
-tsd-5
-
-#### tdd with python
-
-tdd-3-website-test
 
 ## [[tool]]
 
@@ -92,15 +83,11 @@ tdd-3-website-test
 
 ## [[study]]
 
+* [[os]]
 * [[data-structure]] 
 * [[first-data-structure-algorithm]]
 * [[algorithm]]
 * [[classic-algorithm]] 
-* [[dev-common-sense]]
-* [[database-basic]]
-* [[web-basic]]
-* [[OS-basic]]
-* [[interview-question]]
 * [[ad-fraud]]
 
 ### copy & paste
@@ -115,3 +102,14 @@ tdd-3-website-test
 * [[함께자라기]]
 * [[손에잡히는빔]]
 
+## incomplete
+
+* interview-question
+
+#### two scoops of django
+
+* tsd-5
+
+#### tdd with python
+
+* tdd-3-website-test
