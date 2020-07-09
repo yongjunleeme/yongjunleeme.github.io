@@ -3,7 +3,7 @@ layout  : wiki
 title   : term
 summary : 
 date    : 2020-02-19 16:01:29 +0900
-updated : 2020-07-08 12:27:29 +0900
+updated : 2020-07-09 12:27:44 +0900
 tags    : 
 toc     : true
 public  : true
@@ -583,8 +583,22 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 
 <img width="1247" alt="스크린샷 2020-07-08 오후 12 14 33" src="https://user-images.githubusercontent.com/48748376/86871169-ba75a400-c114-11ea-9037-cae22dd4b417.png">
 
+#### Producer / Consumer
 
+- 상황
+    - Producer - 데이터를 생성해서 버퍼에 삽입
+    - Consumer - 버퍼에서 하나씩 끄집어내서 consume
+    - 여러 개의 프로듀서가 생성하고 하나의 컨슈머가 소비
+- 문제
+    - 생산자는 꽉찬 버퍼에 더이상 삽입할 수 없다.
+    - 소비자는 비어 있는 버퍼를 더이상 리무브할 수 없다.
 
+- 컨슈머가 0이 되기 전에 프로듀서가 실행 되어서 컨슈머는 0인 줄알고 계속 기다리는데 컨슈머는 1이어서 계속 실행하므로 싱크로나이제셔인이 맞지 않게 된다.
+- 보조 변수 m을 둬서 해결
+
+<img width="709" alt="스크린샷 2020-07-09 오후 12 21 46" src="https://user-images.githubusercontent.com/48748376/86993567-494ef300-c1df-11ea-930d-5056e1263f51.png">
+
+<img width="673" alt="스크린샷 2020-07-09 오후 12 21 39" src="https://user-images.githubusercontent.com/48748376/86993575-4d7b1080-c1df-11ea-9252-92092869f948.png">
 
 ### Deadlock and Starvation
 
