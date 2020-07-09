@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-05-22 21:23:57 +0900
-updated : 2020-07-09 00:05:50 +0900
+updated : 2020-07-09 19:52:37 +0900
 tags    : 
 toc     : true
 public  : true
@@ -792,6 +792,7 @@ class MeView(APIView):
 
 ### [2.14 Manual Pagination](https://github.com/nomadcoders/airbnb-api/commit/6439a0303edbf529cf1c4d4de6a72c387103e868)
 
+- [Pagination](https://www.django-rest-framework.org/api-guide/pagination/#pagination)
 - url뒤에 `/?page=1` 붙여서 테스트
 
 ```python
@@ -813,6 +814,212 @@ class RoomsView(APIView):
 
 ### [2.15 Searching Part One](https://github.com/nomadcoders/airbnb-api/commit/b0e32969e0d25622f934ce3e5dd405f7f7afdfff)
 
+- [Filtering](https://www.django-rest-framework.org/api-guide/filtering/)
+
+```python
+@api_view(["GET"])
+def room_search(request):
+    max_price = request.GET.get("max_price", None)
+    min_price = request.GET.get("min_price", None)
+    beds = request.GET.get("beds", None)
+    bedrooms = request.GET.get("bedrooms", None)
+    bathrooms = request.GET.get("bathrooms", None)
+    filter_kwargs = {}
+    if max_price is not None:
+        filter_kwargs["price__lte"] = max_price
+    if min_price is not None:
+        filter_kwargs["price__gte"] = min_price
+    if beds is not None:
+        filter_kwargs["beds__gte"] = beds
+    if bedrooms is not None:
+        filter_kwargs["bedrooms__gte"] = bedrooms
+    if bathrooms is not None:
+        filter_kwargs["bathrooms__gte"] = bathrooms
+    paginator = OwnPagination()
+    try:
+        rooms = Room.objects.filter(**filter_kwargs)
+    except ValueError:
+        rooms = Room.objects.all()
+    results = paginator.paginate_queryset(rooms, request)
+    serializer = RoomSerializer(results, many=True)
+    return paginator.get_paginated_response(serializer.data)
+```
+
+### [2.16 Searching Part Two](https://github.com/nomadcoders/airbnb-api/commit/d459f76600a9f6bb03a7a8d8781ce116c9d49851)
+
+
+```python
+...
+    lat = request.GET.get("lat", None)
+    lng = request.GET.get("lng", None)
+...    
+    if lat is not None and lng is not None:
+        filter_kwargs["lat__gte"] = float(lat) - 0.005
+        filter_kwargs["lat__lte"] = float(lat) + 0.005
+        filter_kwargs["lng__gte"] = float(lng) - 0.005
+        filter_kwargs["lng__lte"] = float(lng) + 0.005
+```
+
+### [3.0 This is super important. Watch this](https://github.com/nomadcoders/airbnb-api/commit/a143f0917c6b303a71dcf083ddc4fd8a17f6a668)
+
+- dynamic field - 페이이를 요청하는 유저에 따라 바뀌는 핖드
+- [SerializerMethodField](https://www.django-rest-framework.org/api-guide/fields/#serializermethodfield) - 함수
+    - 함수명 앞에 `get_`을 붙여줘야 함 
+- views에서 context = {'request': request} -> request로 누가 요청하는지 등의 정보를 알 수 있다
+
+```python
+class RoomSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer()
+    is_fav = serializers.SerializerMethodField()
+    
+    def get_is_fav(self, obj):
+    request = self.context.get("request")
+    if request:
+        user = request.user
+        if user.is_authenticated:
+            return obj in user.favs.all()
+    return False
+```
+
+```python
+class RoomsView(APIView):
+    def get(self, request):
+        paginator = OwnPagination()
+        rooms = Room.objects.all()
+        results = paginator.paginate_queryset(rooms, request)
+        serializer = RoomSerializer(results, many=True, context={"request": request})
+        return paginator.get_paginated_response(serializer.data)
+```
+
+### [3.1 RoomViewSet permissions](https://github.com/nomadcoders/airbnb-api/commit/0be8f0efe8ab40eaa15b11fddeed3aa36307ef41)
+
+- [Viewset](https://www.django-rest-framework.org/api-guide/viewsets/#introspecting-viewset-actions)
+- Viewset이 모두 지원하지만 인증되지 않은 유저도 정보를 바꿀 수 있다.
+- `get_permission`을 사용해서 조정
+    - list - GET - /rooms
+    - create - POST - /rooms
+    - retrieve - get - /rooms/1
+
+### [3.2 RoomViewSet IsOwner](https://github.com/nomadcoders/airbnb-api/commit/ab702bda7d57451d1d450c6bc08fa54737fc8303)
+
+- [Custom Permission](https://www.django-rest-framework.org/api-guide/permissions/#custom-permissions)
+    - `has_object_permission(self, request, view, obj)` - `get_object` 메소드를 덮어쓰거나 자신만의 뷰를 만들고 싶을 때? 인스턴스 수준의 Permission 
+        - 하나의 오브젝트에 접근할 필요가 있을 때 사용
+        - 별도 호출 과정 필요
+    - `has_permission` - 뷰 수준의 permission 
+        - 요청이 들어올 떄 자동 실행
+        
+```python
+# filename : rooms/urls.py
+from rest_framework.routers import DefaultRouter
+from . import views
+
+app_name = "rooms"
+router = DefaultRouter()
+router.register("", views.RoomViewSet)
+
+urlpatterns = router.urls
+```
+
+```python
+# filename : rooms/permissions.py
+from rest_framework.permissions import BasePermission
+
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, room):
+        return room.user == request.user
+```
+
+```python
+# filename: rooms/views.py
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import permissions
+from .models import Room
+from .serializers import RoomSerializer
+from .permissions import IsOwner
+
+class RoomViewSet(ModelViewSet):
+
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+
+    def get_permissions(self):
+
+        if [[self.action]] == "list" or self.action == "retrieve":
+            permission_classes = [permissions.AllowAny]
+        elif self.action == "create":
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [IsOwner]
+        return [permission() for permission in permission_classes]
+```
+
+### [3.3 I Will Marry DRF (Create Room Logic)](https://github.com/nomadcoders/airbnb-api/commit/166df6196b0b73c18f4e3d19b4d01c6078cd9282)
+
+- [Writable nested representations](https://www.django-rest-framework.org/api-guide/serializers/#writable-nested-representations)
+- [get_serializer_context](http://www.cdrf.co/3.9/rest_framework.viewsets/ModelViewSet.html)
+    - 추가적인 Context를 serializer로 전달
+
+```python
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        return {
+            'request': self.request,
+            'format': self.format_kwarg,
+            'view': self
+        }
+```
+
+- (read_only=True)
+
+```python
+from rest_framework import serializers
+from users.serializers import UserSerializer
+from .models import Room
+
+class RoomSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(read_only=True)
+    is_fav = serializers.SerializerMethodField()
+    
+    def create(self, validated_data):
+        print(self.context.get("request").user)
+        request = self.context.get("request")
+        room = Room.objects.create(**validated_data, user=request.user)
+        return room
+``` 
+
+### [3.4 Including search in Viewset](https://nomadcoders.co/airbnb-native/lectures/1023)
+
+- [Marking extra actions for routing](https://www.django-rest-framework.org/api-guide/viewsets/#marking-extra-actions-for-routing)
+    - action을 정할 때 detail 설정해야
+        - True -> /rooms/1, False -> rooms/
+        - action의 url 주소는 함수명
+            - 주소명 변경을 원하면 action(url_path='')로
+
+### [3.5 Users Viewset](https://github.com/nomadcoders/airbnb-api/commit/5eb108e1990f7217f2d8275624c0d414f9a34b02)
+
+### [3.6 Permissions And Login](https://github.com/nomadcoders/airbnb-api/commit/de5850328bfbef935b891898eb5600fb7609954b)
+
+### [3.7 Favs](https://github.com/nomadcoders/airbnb-api/commit/a257d5db6b37d4207ea8656e510891d1eac5c600)
+
+### [3.8 Conclusions](https://github.com/nomadcoders/airbnb-api/commit/686130776ae35639d34efabc2399c018a1c1b059)
+
+- aws 엘라스틱빈토크로 배포 시 설정에 반드시 아래 내용 넣어야
+    - 안 넣으면 AWS에서 헤더의 내용을 삭제
+    - [Apache mod_wsgi specific configuration](https://www.django-rest-framework.org/api-guide/authentication/#apache-mod_wsgi-specific-configuration)
+- Debug = False일 때는 JSONRenderer를 작동해서 유저가 DRF 화면 볼 수 없도록?
+
+```python
+# config/settings.py
+if not DEBUG:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
+        "rest_framework.renderers.JSONRenderer",
+    ]
+```
 
 ## Link
 
