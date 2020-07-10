@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-09 12:26:50 +0900
-updated : 2020-07-09 12:27:42 +0900
+updated : 2020-07-10 11:36:22 +0900
 tags    : 
 toc     : true
 public  : true
@@ -539,7 +539,7 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
             - 보통 2개의 명령어를 하나로 처리
         - 이게 없으면 여러 프로세스간 문제를 해결할 수 없다. 
         - 문제
-            - Busy waiting - 0이 1이 될 때까지 계속 기다리는?
+            - Busy waiting - 0이 1이 될 때까지 계속 기다리는데 들어갈 수 있는지 계속 확인을 하니깐 자원 낭비
     - 소프트웨어 레벨
         - 크리티컬 섹션을 구현
 
@@ -597,6 +597,15 @@ Serial Processing(운영체제 없을 때) -> Simple Batch Systems(최초 운영
 <img width="709" alt="스크린샷 2020-07-09 오후 12 21 46" src="https://user-images.githubusercontent.com/48748376/86993567-494ef300-c1df-11ea-930d-5056e1263f51.png">
 
 <img width="673" alt="스크린샷 2020-07-09 오후 12 21 39" src="https://user-images.githubusercontent.com/48748376/86993575-4d7b1080-c1df-11ea-9252-92092869f948.png">
+
+- 세마포로 비지 웨이팅해결 가능하지만 프로그램 구현이 쉽지 않기 때문에 대안으로 나온 것이 Monitor, 메시지 패싱
+- Monitor - 프로그래밍 언어 내에서 제공하는 컨스트럭처
+    - 한 번에 하나의 프로세스만 모니터 안에서 실행 가능(뮤추얼 익스클루전 자동) 
+    - 모니터에 정의된 프로시저에 의해서만 액세스 가능
+    - 컨디션 변수 정의
+        - C wait - 콜링 프로세스는 컨디션 c에서 대기
+        - C Signal - 같은 컨디션에서 블록된 프로세스를 웨이크업시킨다
+
 
 ### Deadlock and Starvation
 
