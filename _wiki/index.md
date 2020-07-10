@@ -89,6 +89,8 @@ regenerate: true
 * [[algorithm]]
 * [[classic-algorithm]] 
 * [[ad-fraud]]
+* [[redis-operation]]
+* [[redis-py]]
 
 ### copy & paste
 
