@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-10 12:28:05 +0900
-updated : 2020-07-12 23:12:11 +0900
+updated : 2020-07-12 23:52:32 +0900
 tags    : 
 toc     : true
 public  : true
@@ -936,6 +936,79 @@ b'BZh91AY&SY\xdaM\x1eu\x01\x11o\x91\x80@\x002l\x87\'  # ... [truncated]
 >>> rblob == blob
 True
 ```
+
+#### Using Hiredis
+
+- redis-py는 [REdis Serialization Protocol](https://redis.io/topics/protocol) 또는 RESP를 따른다
+- 로우 바이트스트링에서 파이썬 오브젝트로 컨버팅
+    - "OK" -> "+OK\r\n"
+- [RESP arrays](https://redis.io/topics/protocol#resp-arrays) 와 같은 다른 데이터 타입보다 복잡
+- 파싱이 궁금하다면 [.read_response()](https://github.com/andymccurdy/redis-py/blob/cfa2bc9/redis/connection.py#L289)
+- C 라이브러리 [Hiredis](https://github.com/redis/hiredis) 는 LRANGE와 같은 레디스 커맨스의 속도를 높여줄 것
+    - 여기서는 파이썬 래퍼로 Hiredis의 부분인 [hiredis-py](https://github.com/redis/hiredis-py) 사용
+
+```python
+$ python -m pip install hiredis
+```
+
+- 파이썬 파서 대신 HiredisParser를 사용
+
+```python
+# redis/utils.py
+try:
+    import hiredis
+    HIREDIS_AVAILABLE = True
+except ImportError:
+    HIREDIS_AVAILABLE = False
+
+
+# redis/connection.py
+if HIREDIS_AVAILABLE:
+    DefaultParser = HiredisParser
+else:
+    DefaultParser = PythonParser
+```
+
+#### Using Enterprise Redis Applications
+
+- [Amazon ElastiCache for Redis](https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/WhatIs.html)
+- [Microsoft’s Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/)
+- 엔드포인트에 DNS를 넣는다 
+- AWS 
+
+```python
+$ export REDIS_ENDPOINT="demo.abcdef.xz.0009.use1.cache.amazonaws.com"
+$ redis-cli -h $REDIS_ENDPOINT
+```
+
+- Azure
+- [SSL(port 6380)](https://docs.microsoft.com/en-us/azure/azure-cache-for-redis/cache-how-to-redis-cli-tool) 을 사용 
+
+```python
+$ export REDIS_ENDPOINT="demo.redis.cache.windows.net"
+$ redis-cli -h $REDIS_ENDPOINT -p 6380 -a <primary-access-key>
+```
+
+- -h flag는 호스로 로컬호스트(127.0.0.1)이 디폴트
+
+```python
+>>> import os
+>>> import redis
+
+>>> # Specify a DNS endpoint instead of the default localhost
+>>> os.environ["REDIS_ENDPOINT"]
+'demo.abcdef.xz.0009.use1.cache.amazonaws.com'
+>>> r = redis.Redis(host=os.environ["REDIS_ENDPOINT"])
+```
+
+- `r.get()` 등의 커맨드 사용 가능
+
+#### 참고
+
+- [server-side Lua scripting](https://redis.io/commands/eval)
+- [sharding](https://redis.io/topics/partitioning)
+- [master-slave replication](https://redis.io/topics/replication)
+- [updated protocol, RESP3](http://antirez.com/news/125)
 
 ## Link
 
