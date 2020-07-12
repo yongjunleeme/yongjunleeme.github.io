@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-10 12:28:05 +0900
-updated : 2020-07-11 10:49:08 +0900
+updated : 2020-07-12 23:12:11 +0900
 tags    : 
 toc     : true
 public  : true
@@ -222,6 +222,8 @@ OK
 - L or R이 붙는 것은 방향을 뜻
 - B가 붙는 것은 Blocking. 블로킹 오퍼레이션은 실행 중에 다른 오퍼레이션에게 인터럽트될 수 없다.
 
+### 참고할 공식문서들
+
 #### [sets](https://redis.io/topics/data-types-intro#redis-sets)
 
 #### [geospatial items](https://redis.io/commands#geo)
@@ -273,7 +275,7 @@ True
 b'Nassau'
 ```
 
-- 6라인의 b'Nassau'는 파이썬의 [bytes](https://docs.python.org/3/library/stdtypes.html#bytes) 타입이지 스트링이 아니다. 이에 `r.get("Bahamas").decode("utf-8")`을 호출해야 원하는 값을 얻을 수 있을 것이다.
+- 6라인의 b'Nassau'는 파이썬의 [bytes](https://docs.python.org/3/library/stdtypes.html#bytes) 이지 스트링이 아니다. `r.get("Bahamas").decode("utf-8")`을 호출해야 원하는 값을 얻을 수 있을 것이다.
 - redis-py 명령어는 레디스 커맨드와 비슷
     - `r.mset()`, `r.get()`은 레디스 API의 MSET, GET과 같다.
     - `r.hgetall()`은 HGETALL
@@ -404,8 +406,9 @@ True
 - 유저가 구매버튼을 클릭했을 때 어떤 일이 일어날까?
 - 재고에서 구매량이 1 늘어나고 수량이 1 줄어든다
 - `.hincrby()`를 사용
+    - [hincrby](https://redis.io/commands/hincrby)
     - 스트링을 base-10 64비트 signed integer로 interpret
-    - 이는 다른 데이터 구조에서 증가, 감소와 관련된 커맨드를 적용하는 것과 같다(INCR, INCRBY, INCRBYFLOAT, ZINCRBY, and HINCRBYFLOAT)
+    - 다른 데이터 구조에서 증가, 감소와 관련된 커맨드를 적용하는 것과 같다(INCR, INCRBY, INCRBYFLOAT, ZINCRBY, and HINCRBYFLOAT)
     - 스트링이 int로 표현되지 않은면 에러가 날 것
 
 ```python
@@ -416,6 +419,8 @@ b'199'
 >>> r.hincrby("hat:56854717", "npurchased", 1)
 1
 ```
+
+#### Pyhat.com Part 1
 
 - step 1 : 재고에 아이템이 있는지 또는 백엔드에서 다른 방법으로 exception을 raise하는지 체크
     - `.hget()`으로 재고 체크
@@ -481,9 +486,9 @@ def buyitem(r: redis.Redis, itemid: int) -> None:
 
 - `pipe.watch(itemid)`는 값의 변화를 모니터링
 - `r.hget(itemid, "quantity")`를 통해 인벤토리를 체크
-- 유저가 재고를 체크하고 구매를 시도할 때 인벤토리에 접근한다면 레디스는 레러를 리턴하고 redis-py는 WatchError를 발생시킨다. 
-- `.hincrby()`(Line 20, 21)를 호출 하기 전 `.hget()`을 호출해 itemid의 변화가 일어난다면 whilt true의 결과로서 전체 프로세스를 다시 시작한다.
-- 데이터베이스 getting과 setting 오퍼레이션을 통해 클라이언트에게 타임 컨슈밍 토털 락을 거는 것보다 레디스가 클라이언트에게 알려주고 유저는 인벤토리를 다시 체크하는 것
+- 유저가 재고를 체크하고 구매를 시도할 때 다른 유저가 인벤토리에 접근한다면 레디스는 에러를 리턴하고 redis-py는 WatchError를 발생시킨다. 
+- `.hincrby()`(Line 20, 21)를 호출 하기 전 `.hget()`을 호출해 itemid의 변화가 일어난다면 whilt true의 전체 프로세스를 다시 시작한다.
+- 데이터베이스 getting과 setting 오퍼레이션을 통해 클라이언트에게 타임 컨슈밍 토털 락을 거는 것보다 레디스가 클라이언트에게 알려주고 유저는 인벤토리를 다시 체크하는 것이 최적화된 방법
 - 아래는 클라이언트 측과 서버 측 오퍼레이션 사이의 차이를 이해하는 키
 
 ```python
@@ -500,10 +505,437 @@ pipe.execute()
 ```
 
 - 클라이언트는 `pipe.hincrby(itemid, "quantity", -1)`의 결과를 즉시 사용할 수 없는데 이유는 파이프라인의 메소드가 파이프 인스턴스 자체를 리턴하기 때문이다.
-- `hncrby()`가 결과를 반환하는 반면 클라인턴 사이트의 전ㅌ체 트랜잭션이 마칠 때까지 즉시 참조를 할 수 없다?
-- There’s a catch-22: this is also why you can’t put the call to .hget() into the transaction block. If you did this, then you’d be unable to know if you want to increment the npurchased field yet, since you can’t get real-time results from commands that are inserted into a transactional pipeline.
-- Finally, if the inventory sits at zero, then we UNWATCH the item ID and raise an OutOfStockError (Line 27), ultimately displaying that coveted Sold Out page that will make our hat buyers desperately want to buy even more of our hats at ever more outlandish prices:
+- `hincrby()`가 결과를 반환하는 반면 트랜잭션이 마칠 때까지 클라인터 사이드는 참조할 수 없다.
+- 만약 `hget()`을 썼다면 실시간 결과를 얻을 수 없었을 
+- 결국 인벤토리가 0일 때 item idㅇ를 UNWATCH하고 OutOfStockError 발생
 
+```python
+else:
+    # Stop watching the itemid and raise to break out
+    pipe.unwatch()
+    raise OutOfStockError(
+        f"Sorry, {itemid} is out of stock!"
+    )
+```
+
+#### Using Key Expiry
+
+- 키를 삭제하면 대응되는 값도 자동적으로 삭제 설정
+
+```python
+>>> from datetime import timedelta
+
+>>> # setex: "SET" with expiration
+>>> r.setex(
+...     "runner",
+...     timedelta(minutes=1),
+...     value="now you see me, now you don't"
+... )
+True
+```
+
+- 남은 시간 측정
+
+```python
+>>> r.ttl("runner")  # "Time To Live", in seconds
+58
+>>> r.pttl("runner")  # Like ttl, but milliseconds
+54368
+```
+
+#### PyHats.com, Part 2
+
+- 수백 개의 아이템을 몇 초 내에 봇으로 구매하는 유저 등장
+- 멀티플 HTTPS 커넥션의 IP 주소 스트림을 처리하고 소비자(or watcher)와 같은 클라이언트를 생성
+- watcher는 IP 주소의 스트림을 모니터링하는데 짧은 시간 내 의심스러운 요청 등을 감시
+- 미들웨어는 모든 들어오는 IP addresses를 레디스 리스트의 `.lpush()`로 밀어 넣는다. 
+
+```python
+>>> r = redis.Redis(db=5)
+>>> r.lpush("ips", "51.218.112.236")
+1
+>>> r.lpush("ips", "90.213.45.98")
+2
+>>> r.lpush("ips", "115.215.230.176")
+3
+>>> r.lpush("ips", "51.218.112.236")
+4
+```
+
+- `.lpush()`는 리스트의 길이를 리턴
+- 같은 클라이언트의 요청을 시뮬레이션
+- 아래는 다른 목적의 클라언트를 생성, 무한 루프, ips 리스트를 blocking left-pop [BLPOP](https://redis.io/commands/blpop)
+
+
+```python
+# New shell window or tab
+
+import datetime
+import ipaddress
+
+import redis
+
+# Where we put all the bad egg IP addresses
+blacklist = set()
+MAXVISITS = 15
+
+ipwatcher = redis.Redis(db=5)
+
+while True:
+    _, addr = ipwatcher.blpop("ips")
+    addr = ipaddress.ip_address(addr.decode("utf-8"))
+    now = datetime.datetime.utcnow()
+    addrts = f"{addr}:{now.minute}"
+    n = ipwatcher.incrby(addrts, 1)
+    if n >= MAXVISITS:
+        print(f"Hat bot detected!:  {addr}")
+        blacklist.add(addr)
+    else:
+        print(f"{now}:  saw {addr}")
+    _ = ipwatcher.expire(addrts, 60)
+```
+
+- ipwatcher는 새로운 IPs가 레디스 리스트 ips에 푸시되는 것을 기다리는 consumer와 같다
+- b”51.218.112.236”와 같이 bytes로된 주소를 받아 적절한 address object으로 만든다
+
+```python
+_, addr = ipwatcher.blpop("ips")
+addr = ipaddress.ip_address(addr.decode("utf-8"))
+```
+
+- 주소와 시간(분)을 스크링 키로 만들고
+- ipwatcher가 증가하는 응답을 카운트
+
+```python
+now = datetime.datetime.utcnow()
+addrts = f"{addr}:{now.minute}"
+n = ipwatcher.incrby(addrts, 1)
+```
+
+- MAXVISITS보다 주소가 많아지면 웹스크래퍼가 [tulip bubble](https://en.wikipedia.org/wiki/Tulip_mania)을 만드는 것과 같다.
+- `ipwatcher.exper(addrts, 60)`으로 60초 후 expire하는 것은 수상한one-time page viewers를 막기 위해?
+
+```python
+2019-03-11 15:10:41.489214:  saw 51.218.11236
+2019-03-11 15:10:41.490298:  saw 115.215.230.176
+2019-03-11 15:10:41.490839:  saw 90.213.45.98
+2019-03-11 15:10:41.491387:  saw 51.218.112.236
+```
+
+- `blpop()`(BLPOP)은 아이템이 리스트에서 이용 가능할 떄까지 블록한 다음 이를 꺼낼 것인데 파이썬의 [Queue.get()](https://docs.python.org/3/library/queue.html#queue.Queue.get)과 비슷하다. 
+- ipwatcher는 주어진 시간 내에 15회 이상 요청을 보내는 hot-bot의 IP 주소를 분류할 것이다.
+
+```python
+for _ in range(20):
+    r.lpush("ips", "104.174.118.18")
+```
+
+```python
+2019-03-11 15:15:43.041363:  saw 104.174.118.18
+2019-03-11 15:15:43.042027:  saw 104.174.118.18
+2019-03-11 15:15:43.042598:  saw 104.174.118.18
+2019-03-11 15:15:43.043143:  saw 104.174.118.18
+2019-03-11 15:15:43.043725:  saw 104.174.118.18
+2019-03-11 15:15:43.044244:  saw 104.174.118.18
+2019-03-11 15:15:43.044760:  saw 104.174.118.18
+2019-03-11 15:15:43.045288:  saw 104.174.118.18
+2019-03-11 15:15:43.045806:  saw 104.174.118.18
+2019-03-11 15:15:43.046318:  saw 104.174.118.18
+2019-03-11 15:15:43.046829:  saw 104.174.118.18
+2019-03-11 15:15:43.047392:  saw 104.174.118.18
+2019-03-11 15:15:43.047966:  saw 104.174.118.18
+2019-03-11 15:15:43.048479:  saw 104.174.118.18
+Hat bot detected!:  104.174.118.18
+Hat bot detected!:  104.174.118.18
+Hat bot detected!:  104.174.118.18
+Hat bot detected!:  104.174.118.18
+Hat bot detected!:  104.174.118.18
+Hat bot detected!:  104.174.118.18
+```
+
+- 콘트롤 C를 누르고 blacklist를 쳐보면 IP 주소가 블랙리스트에 올라간 것을 확인
+
+
+```python
+>>> blacklist
+{IPv4Address('104.174.118.18')}
+```
+
+- [ClassDojo](https://engineering.classdojo.com/blog/2015/02/06/rolling-rate-limiter/) 에서 소티드 셋을 사용한 Crafty 솔루션이 있다.
+
+#### Persistence and Snapshotting
+
+- 레디스는 메모리에서 읽고 쓰기 때문에 빠르지만 디스크에 저장도 가능 [snapshotting](https://redis.io/topics/persistence#snapshotting)
+    - 주된 용도는 파이너리 포맷으로 백업, 데이터는 재구조화될 수 있다.
+    - 필요할 때 메모리로 다시 불러올 수 있다.
+- 아래 `save` 항목이 디스크에 저장하는 설정
+    - `save <second> <changes>`
+
+```python
+# /etc/redis/6379.conf
+
+port              6379
+daemonize         yes
+save              60 1
+bind              127.0.0.1
+tcp-keepalive     300
+dbfilename        dump.rdb
+dir               ./
+rdbcompression    yes
+```
+
+- 위 설정은 아래 sample Redis config file에 비해서는 공격적인 설정
+
+```python
+# Default redis/redis.conf
+save 900 1
+save 300 10
+save 60 10000
+```
+
+- RDB 스냅샷은 전체 데이터베이스 캡처
+- dbfilename, dir, rdbcompression으로 이름, 위치 설정
+
+```python
+# /etc/redis/6379.conf
+
+port              6379
+daemonize         yes
+save              60 1
+bind              127.0.0.1
+tcp-keepalive     300
+dbfilename        dump.rdb
+dir               ./
+rdbcompression    yes
+```
+
+```python
+$ file -b dump.rdb
+data
+```
+
+- [BGSAVE](https://redis.io/commands/bgsave)로 저장도 가능
+
+```python
+127.0.0.1:6379> BGSAVE
+Background saving started
+```
+
+- 확인
+
+```python
+>>> r.lastsave()  # Redis command: LASTSAVE
+datetime.datetime(2019, 3, 10, 21, 56, 50)
+>>> r.bgsave()
+True
+>>> r.lastsave()
+datetime.datetime(2019, 3, 10, 22, 4, 2)
+```
+
+- RDB 스냅샷은 부모 프로세스가 [fork()](http://man7.org/linux/man-pages/man2/fork.2.html)를 통해 자식 프로세스가 디스크에 저장되도록 하므로 빠른 수행이 가능하다. BGSAVE도 마찬가지
+- SAVE는 그렇지 않으므로 특별한 이유가 아니면 쓰지 말아야
+- RDB의 대안으로 [AOP(append-only-file)](https://redis.io/topics/persistence#append-only-file)
+    - 레디스 커맨드를 디스크에 실시간으로 저장
+    - 필요하면 커맨드 기반으로 다시 시스템을 만들 수 있다
+
+#### Serialization Workarounds
+
+- 레디스 해시와 파이썬 딕셔너리 비교
+
+```python
+127.0.0.1:6379> hset mykey field1 value1
+
+r.hset("mykey", "field1", "value1")
+```
+
+1
+
+
+- 레디스에서 리스트나 네스티드 딕셔너리 같은 값을 호출하려면?
+    - restaurant_484272가 네스티드되어 있으므로 오류
+
+```python
+restaurant_484272 = {
+    "name": "Ravagh",
+    "type": "Persian",
+    "address": {
+        "street": {
+            "line1": "11 E 30th St",
+            "line2": "APT 1",
+        },
+        "city": "New York",
+        "state": "NY",
+        "zip": 10016,
+    }
+}
+```
+
+```python
+>>> r.hmset(484272, restaurant_484272)
+Traceback (most recent call last):
+# ...
+redis.exceptions.DataError: Invalid input of type: 'dict'.
+Convert to a byte, string or number first.
+```
+
+- 레디스에서 네스티드 키를 통해 호출할 두 가지 방법
+    - `json.dumps()`와 같이 값을 스트링으로 시리얼라이즈
+    - delimiter를 사용
+
+##### Option 1: Serialize the Values Into a String
+
+```python
+>>> import json
+>>> r.set(484272, json.dumps(restaurant_484272))
+True
+```
+
+- `.get()`을 호출하면 bytes 오브젝트가 리턴되므로 deserialize해야
+- `json.dumps()`와 `json.loads()`는 반대, 각각 시리얼라이징과 디시리얼라이징
+
+```python
+>>> from pprint import pprint
+>>> pprint(json.loads(r.get(484272)))
+{'address': {'city': 'New York',
+             'state': 'NY',
+             'street': '11 E 30th St',
+             'zip': 10016},
+ 'name': 'Ravagh',
+ 'type': 'Persian'}
+```
+
+- 다른 시리얼라이즈 프로토콜인 [ymal](https://github.com/yaml/pyyaml)
+
+```python
+>>> import yaml  # python -m pip install PyYAML
+>>> yaml.dump(restaurant_484272)
+'address: {city: New York, state: NY, street: 11 E 30th St, zip: 10016}\nname: Ravagh\ntype: Persian\n'
+```
+
+##### Option 2: Use a Delimiter in Key Strings
+
+```python
+from collections.abc import MutableMapping
+
+def setflat_skeys(
+    r: redis.Redis,
+    obj: dict,
+    prefix: str,
+    delim: str = ":",
+    *,
+    _autopfix=""
+) -> None:
+    """Flatten `obj` and set resulting field-value pairs into `r`.
+
+    Calls `.set()` to write to Redis instance inplace and returns None.
+
+    `prefix` is an optional str that prefixes all keys.
+    `delim` is the delimiter that separates the joined, flattened keys.
+    `_autopfix` is used in recursive calls to created de-nested keys.
+
+    The deepest-nested keys must be str, bytes, float, or int.
+    Otherwise a TypeError is raised.
+    """
+    allowed_vtypes = (str, bytes, float, int)
+    for key, value in obj.items():
+        key = _autopfix + key
+        if isinstance(value, allowed_vtypes):
+            r.set(f"{prefix}{delim}{key}", value)
+        elif isinstance(value, MutableMapping):
+            setflat_skeys(
+                r, value, prefix, delim, _autopfix=f"{key}{delim}"
+            )
+        else:
+            raise TypeError(f"Unsupported value type: {type(value)}")
+```
+
+```python
+>>> r.flushdb()  # Flush database: clear old entries
+>>> setflat_skeys(r, restaurant_484272, 484272)
+
+>>> for key in sorted(r.keys("484272*")):  # Filter to this pattern
+...     print(f"{repr(key):35}{repr(r.get(key)):15}")
+...
+b'484272:address:city'             b'New York'
+b'484272:address:state'            b'NY'
+b'484272:address:street:line1'     b'11 E 30th St'
+b'484272:address:street:line2'     b'APT 1'
+b'484272:address:zip'              b'10016'
+b'484272:name'                     b'Ravagh'
+b'484272:type'                     b'Persian'
+
+>>> r.get("484272:address:street:line1")
+b'11 E 30th St'
+```
+
+#### Encryption
+
+- 레디스 서버로 보내기 전 대칭 암호화 
+- [cryptography](https://github.com/pyca/cryptography/) 예시
+- 민감한 cardholder data (CD) 데이터를 어느 서버에도 플레인텍스트로 저장하지 말아야
+- 레디스에 캐시로 저장하기 전에 시리얼라이즈할 수 있고 [Fernet](https://cryptography.io/en/latest/fernet/) 으로 암호화
+    - CBC 모델에서 AES 128 암호화. [cryptograpgy docs](https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/)
+
+```python
+$ python -m pip install cryptography
+```
+
+```python
+>>> import json
+>>> from cryptography.fernet import Fernet
+
+>>> cipher = Fernet(Fernet.generate_key())
+>>> info = {
+...     "cardnum": 2211849528391929,
+...     "exp": [2020, 9],
+...     "cv2": 842,
+... }
+
+>>> r.set(
+...     "user:1000",
+...     cipher.encrypt(json.dumps(info).encode("utf-8"))
+... )
+
+>>> r.get("user:1000")
+b'gAAAAABcg8-LfQw9TeFZ1eXbi'  # ... [truncated]
+
+>>> cipher.decrypt(r.get("user:1000"))
+b'{"cardnum": 2211849528391929, "exp": [2020, 9], "cv2": 842}'
+
+>>> json.loads(cipher.decrypt(r.get("user:1000")))
+{'cardnum': 2211849528391929, 'exp': [2020, 9], 'cv2': 842}
+```
+
+- info에 리스트가 포함되어 있으므로 스트링으로 시리얼라이즈
+- cipher 오브젝트를 사용해서 암호화, 복호화
+- 복호화된 bytes를 `json.loads()`로 디시리얼라이즈해서 dict로 변환
+
+#### Compression
+
+- 비용 효율적인 대역폭에 관심이 있다면 손실없는 compression과 decompression을 고려
+- 아래 bzip2 compression 알고리즘으로 2000개가 넘는 팩터에 의한 커넥션으로 가는 bytes의 수를 줄일 수 있다?
+
+```python
+>>> import bz2
+
+>>> blob = "i have a lot to talk about" * 10000
+>>> len(blob.encode("utf-8"))
+260000
+
+>>> # Set the compressed string as value
+>>> r.set("msg:500", bz2.compress(blob.encode("utf-8")))
+>>> r.get("msg:500")
+b'BZh91AY&SY\xdaM\x1eu\x01\x11o\x91\x80@\x002l\x87\'  # ... [truncated]
+>>> len(r.get("msg:500"))
+122
+>>> 260_000 / 122  # Magnitude of savings
+2131.1475409836066
+
+>>> # Get and decompress the value, then confirm it's equal to the original
+>>> rblob = bz2.decompress(r.get("msg:500")).decode("utf-8")
+>>> rblob == blob
+True
+```
 
 ## Link
 
