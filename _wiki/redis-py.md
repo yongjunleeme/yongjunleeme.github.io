@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-10 12:28:05 +0900
-updated : 2020-07-12 23:52:32 +0900
+updated : 2020-07-13 13:51:54 +0900
 tags    : 
 toc     : true
 public  : true
@@ -44,7 +44,7 @@ $ mkdir -p /etc/redis/
 $ touch /etc/redis/6379.conf
 ```
 
-- `vim /etc/redis/6379.conf` 아래 내용 기록
+- `vim /etc/redis/6379.conf` 내용 기록
     - 더 많은 설정은 redis.conf file을 참고
     - daemonize - 백그라운드에서 서버구동 여부
 
@@ -61,6 +61,8 @@ dbfilename        dump.rdb
 dir               ./
 rdbcompression    yes
 ```
+
+- 서버 실행
 
 ```python
 $ redis-server /etc/redis/6379.conf
@@ -141,6 +143,7 @@ OK
 - `.__gititem__()`이 아니라 `.get()`을 쓴 이유는 레디스가 no key를 찾을 때 null-like 값을 리턴하기 때문
 
 ```python
+>>> capitals.update({
 ...     "Lebanon": "Beirut",
 ...     "Norway": "Oslo",
 ...     "France": "Paris",
@@ -177,7 +180,7 @@ False
 
 #### Hash
 
-- 가장 위에 있는 키 아래 키 밸류 구조로 매핑된 형태?
+- 가장 위에 있는 키 아래 키 밸류 구조로 매핑된 형태
 
 ```python
 127.0.0.1:6379> HSET realpython url "https://realpython.com/"
@@ -281,7 +284,7 @@ b'Nassau'
     - `r.hgetall()`은 HGETALL
     - [몇 가지 예외](https://github.com/andymccurdy/redis-py#api-reference)
 - 아래 예제에는 인자가 없지만 사용 가능한 인자는 [여기](https://github.com/andymccurdy/redis-py/blob/b940d073de4c13f8dfb08728965c6ac7c183c935/redis/client.py#L605)를 참고
-    - localhost:6397은 redis 서버 인스턴스를 로컬에서 유지할 때 필요한 hostnam:port 페어
+    - localhost:6379는 redis 서버 인스턴스를 로컬에서 유지할 때 필요한 hostname:port 페어
     - db 파라미터는 데이터베이스 이름
         - 다수의 데이터베이스 운영 가능하며 각각 int로 식별
         - 최대치는 16
@@ -368,8 +371,6 @@ hats = {f"hat:{random.getrandbits(32)}": i for i in (
 >>> r = redis.Redis(db=1)
 ```
 
-- `.hmset()`(hash multi-set)을 사용해 각 딕셔너리를 호출
-- 'field'는 nested 딕셔너리 중 어떤 키에도 일치한다
 - [pipelining](https://redis.io/topics/pipelining) 은 레디스 서버에서 데이터를 읽거나 쓸 때 round-trip transaction을 없애는 방법
     - 만약 `r.hmset()`을 세 번 호출하면 각 로우를 3번 앞뒤로 왔다갔다 해야 하지만
     - `pipe.hmset()`을 사용하면 파이프라인에서 모든 커맨드는 클라이언트 사이드에 버퍼되고 파이프를 사용해 한 번에 보내진다.
@@ -406,6 +407,7 @@ True
 - 유저가 구매버튼을 클릭했을 때 어떤 일이 일어날까?
 - 재고에서 구매량이 1 늘어나고 수량이 1 줄어든다
 - `.hincrby()`를 사용
+    - 값을 증가시킨다
     - [hincrby](https://redis.io/commands/hincrby)
     - 스트링을 base-10 64비트 signed integer로 interpret
     - 다른 데이터 구조에서 증가, 감소와 관련된 커맨드를 적용하는 것과 같다(INCR, INCRBY, INCRBYFLOAT, ZINCRBY, and HINCRBYFLOAT)
@@ -428,7 +430,7 @@ b'199'
     - [transcation](https://redis.io/topics/transactions) 블록을 사용(all or nothing)
     - 레디스 파이프라인은 transactinoal pipline 클래스가 디폴트
     - MULTI로 시작, EXEC로 끝
-- step 3 : 1, 2 스템 사이의 인벤토리 내 변화를 알려라.([race condition](https://realpython.com/python-concurrency/#threading-version))
+- step 3 : 1, 2 스텝 사이의 인벤토리 내 변화를 알려라.([race condition](https://realpython.com/python-concurrency/#threading-version))
 
 ```python
 127.0.0.1:6379> MULTI
@@ -437,7 +439,7 @@ b'199'
 127.0.0.1:6379> EXEC
 ```
 
-- step 3 : 유저 A가 남은 하나의 모자를 확인하고 트랜스액션이 처리되는 동시에 유저 B도 하나의 모자가 남은 것을 확인한다면? 두 유저에게 모두 구매가 허용되는 곤란한 상황
+- step 3 : 유저 A가 남은 하나의 모자를 확인하는 트랜스액션이 처리되는 동시에 유저 B도 하나의 모자가 남은 것을 확인한다면? 두 유저에게 모두 구매가 허용되는 곤란한 상황
 - [optimistic locking](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) 데이터베이스를 잠그는 것과 달리 데이터의 변화를 모니터링하는 것. 만약 충돌이 난다면 함수는 전체 과정을 다시 시도한다.
     - `.watch()`를 사용하는 최적화된 locking이 [check-and-set](https://redis.io/topics/transactions#cas) 을 제공
 - 유저가 buy now나 구매 버튼을 클릭하면 언제든 `buyitem()`을 호출
@@ -495,7 +497,7 @@ def buyitem(r: redis.Redis, itemid: int) -> None:
 nleft = r.hget(itemid, "quantity")
 ```
 
-- 파이썬 할당은 `r.hget()`을 클라이언트측으로 가져온다. 반대로 파이프를 호출하는 메소드는 커맨드를 하나로 만들어 효율적인 버퍼를 수행한다.
+- 파이썬 할당은 `r.hget()`의 값을 클라이언트측으로 가져온다. 반대로 파이프에서 버퍼를 호출하는 메소드는 커맨드를 하나로 만들고 이를 싱글 리퀘스트로 서버에 보낸다.
 
 ```python
 pipe.multi()
@@ -504,10 +506,10 @@ pipe.hincrby(itemid, "npurchased", 1)
 pipe.execute()
 ```
 
+- 어떤 데이터도 트랜스액션 파이프라인 중간에 클라이언트 측으로 돌아오지 않는다.
 - 클라이언트는 `pipe.hincrby(itemid, "quantity", -1)`의 결과를 즉시 사용할 수 없는데 이유는 파이프라인의 메소드가 파이프 인스턴스 자체를 리턴하기 때문이다.
-- `hincrby()`가 결과를 반환하는 반면 트랜잭션이 마칠 때까지 클라인터 사이드는 참조할 수 없다.
-- 만약 `hget()`을 썼다면 실시간 결과를 얻을 수 없었을 
-- 결국 인벤토리가 0일 때 item idㅇ를 UNWATCH하고 OutOfStockError 발생
+- 만약 `hget()`을 트랙잭션 블록에 두었다면 증가량을 실시간으로 받아볼 수 없었을 것 
+- 인벤토리가 0일 때 item id를 UNWATCH하고 OutOfStockError 발생
 
 ```python
 else:
@@ -543,12 +545,27 @@ True
 54368
 ```
 
+```python
+>>> r.get("runner")  # Not expired yet
+b"now you see me, now you don't"
+
+>>> r.expire("runner", timedelta(seconds=3))  # Set new expire window
+True
+>>> # Pause for a few seconds
+>>> r.get("runner")
+>>> r.exists("runner")  # Key & value are both gone (expired)
+0
+```
+
+<img width="699" alt="스크린샷 2020-07-13 오후 12 40 47" src="https://user-images.githubusercontent.com/48748376/87268768-3f423280-c506-11ea-8fcf-c8b7de6f4972.png">
+
+
 #### PyHats.com, Part 2
 
 - 수백 개의 아이템을 몇 초 내에 봇으로 구매하는 유저 등장
 - 멀티플 HTTPS 커넥션의 IP 주소 스트림을 처리하고 소비자(or watcher)와 같은 클라이언트를 생성
 - watcher는 IP 주소의 스트림을 모니터링하는데 짧은 시간 내 의심스러운 요청 등을 감시
-- 미들웨어는 모든 들어오는 IP addresses를 레디스 리스트의 `.lpush()`로 밀어 넣는다. 
+- 미들웨어는 모든 들어오는 IP addresses를 `.lpush()`로 밀어 넣는다. 
 
 ```python
 >>> r = redis.Redis(db=5)
@@ -563,9 +580,8 @@ True
 ```
 
 - `.lpush()`는 리스트의 길이를 리턴
-- 같은 클라이언트의 요청을 시뮬레이션
+- 같은 클라이언트의 요청을 시뮬레이션했지만 잠재적으로 많은 클라이언트가 같은 데이터베이스에 요청을 할 것
 - 아래는 다른 목적의 클라언트를 생성, 무한 루프, ips 리스트를 blocking left-pop [BLPOP](https://redis.io/commands/blpop)
-
 
 ```python
 # New shell window or tab
@@ -595,15 +611,14 @@ while True:
     _ = ipwatcher.expire(addrts, 60)
 ```
 
-- ipwatcher는 새로운 IPs가 레디스 리스트 ips에 푸시되는 것을 기다리는 consumer와 같다
-- b”51.218.112.236”와 같이 bytes로된 주소를 받아 적절한 address object으로 만든다
+- [BRPOP, BLPOP, BRPOPLPUSH](https://knight76.tistory.com/entry/redis-BRPOP-BLPOP-BRPOPLPUSH)
 
 ```python
 _, addr = ipwatcher.blpop("ips")
 addr = ipaddress.ip_address(addr.decode("utf-8"))
 ```
 
-- 주소와 시간(분)을 스크링 키로 만들고
+- 주소와 시간(분)을 스트링 키로 만들고
 - ipwatcher가 증가하는 응답을 카운트
 
 ```python
@@ -613,7 +628,6 @@ n = ipwatcher.incrby(addrts, 1)
 ```
 
 - MAXVISITS보다 주소가 많아지면 웹스크래퍼가 [tulip bubble](https://en.wikipedia.org/wiki/Tulip_mania)을 만드는 것과 같다.
-- `ipwatcher.exper(addrts, 60)`으로 60초 후 expire하는 것은 수상한one-time page viewers를 막기 위해?
 
 ```python
 2019-03-11 15:10:41.489214:  saw 51.218.11236
@@ -622,7 +636,7 @@ n = ipwatcher.incrby(addrts, 1)
 2019-03-11 15:10:41.491387:  saw 51.218.112.236
 ```
 
-- `blpop()`(BLPOP)은 아이템이 리스트에서 이용 가능할 떄까지 블록한 다음 이를 꺼낼 것인데 파이썬의 [Queue.get()](https://docs.python.org/3/library/queue.html#queue.Queue.get)과 비슷하다. 
+- `blpop()`(BLPOP)은 파이썬의 [Queue.get()](https://docs.python.org/3/library/queue.html#queue.Queue.get)과 비슷하다. 
 - ipwatcher는 주어진 시간 내에 15회 이상 요청을 보내는 hot-bot의 IP 주소를 분류할 것이다.
 
 ```python
@@ -663,10 +677,10 @@ Hat bot detected!:  104.174.118.18
 
 - [ClassDojo](https://engineering.classdojo.com/blog/2015/02/06/rolling-rate-limiter/) 에서 소티드 셋을 사용한 Crafty 솔루션이 있다.
 
-#### Persistence and Snapshotting
+### Persistence and Snapshotting
 
 - 레디스는 메모리에서 읽고 쓰기 때문에 빠르지만 디스크에 저장도 가능 [snapshotting](https://redis.io/topics/persistence#snapshotting)
-    - 주된 용도는 파이너리 포맷으로 백업, 데이터는 재구조화될 수 있다.
+    - 주된 용도는 바이너리 포맷으로 백업, 데이터는 재구조화될 수 있다.
     - 필요할 때 메모리로 다시 불러올 수 있다.
 - 아래 `save` 항목이 디스크에 저장하는 설정
     - `save <second> <changes>`
@@ -738,7 +752,7 @@ datetime.datetime(2019, 3, 10, 22, 4, 2)
     - 레디스 커맨드를 디스크에 실시간으로 저장
     - 필요하면 커맨드 기반으로 다시 시스템을 만들 수 있다
 
-#### Serialization Workarounds
+### Serialization Workarounds
 
 - 레디스 해시와 파이썬 딕셔너리 비교
 
@@ -748,8 +762,7 @@ datetime.datetime(2019, 3, 10, 22, 4, 2)
 r.hset("mykey", "field1", "value1")
 ```
 
-1
-
+<img width="661" alt="1" src="https://user-images.githubusercontent.com/48748376/87271052-09ed1300-c50d-11ea-8aae-92782e9590a1.png">
 
 - 레디스에서 리스트나 네스티드 딕셔너리 같은 값을 호출하려면?
     - restaurant_484272가 네스티드되어 있으므로 오류
@@ -782,7 +795,7 @@ Convert to a byte, string or number first.
     - `json.dumps()`와 같이 값을 스트링으로 시리얼라이즈
     - delimiter를 사용
 
-##### Option 1: Serialize the Values Into a String
+#### Option 1: Serialize the Values Into a String
 
 ```python
 >>> import json
@@ -812,7 +825,7 @@ True
 'address: {city: New York, state: NY, street: 11 E 30th St, zip: 10016}\nname: Ravagh\ntype: Persian\n'
 ```
 
-##### Option 2: Use a Delimiter in Key Strings
+#### Option 2: Use a Delimiter in Key Strings
 
 ```python
 from collections.abc import MutableMapping
@@ -868,7 +881,7 @@ b'484272:type'                     b'Persian'
 b'11 E 30th St'
 ```
 
-#### Encryption
+### Encryption
 
 - 레디스 서버로 보내기 전 대칭 암호화 
 - [cryptography](https://github.com/pyca/cryptography/) 예시
@@ -910,7 +923,7 @@ b'{"cardnum": 2211849528391929, "exp": [2020, 9], "cv2": 842}'
 - cipher 오브젝트를 사용해서 암호화, 복호화
 - 복호화된 bytes를 `json.loads()`로 디시리얼라이즈해서 dict로 변환
 
-#### Compression
+### Compression
 
 - 비용 효율적인 대역폭에 관심이 있다면 손실없는 compression과 decompression을 고려
 - 아래 bzip2 compression 알고리즘으로 2000개가 넘는 팩터에 의한 커넥션으로 가는 bytes의 수를 줄일 수 있다?
@@ -937,7 +950,7 @@ b'BZh91AY&SY\xdaM\x1eu\x01\x11o\x91\x80@\x002l\x87\'  # ... [truncated]
 True
 ```
 
-#### Using Hiredis
+### Using Hiredis
 
 - redis-py는 [REdis Serialization Protocol](https://redis.io/topics/protocol) 또는 RESP를 따른다
 - 로우 바이트스트링에서 파이썬 오브젝트로 컨버팅
@@ -969,7 +982,7 @@ else:
     DefaultParser = PythonParser
 ```
 
-#### Using Enterprise Redis Applications
+### Using Enterprise Redis Applications
 
 - [Amazon ElastiCache for Redis](https://docs.aws.amazon.com/ko_kr/AmazonElastiCache/latest/red-ug/WhatIs.html)
 - [Microsoft’s Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/)
@@ -1003,7 +1016,7 @@ $ redis-cli -h $REDIS_ENDPOINT -p 6380 -a <primary-access-key>
 
 - `r.get()` 등의 커맨드 사용 가능
 
-#### 참고
+### 참고
 
 - [server-side Lua scripting](https://redis.io/commands/eval)
 - [sharding](https://redis.io/topics/partitioning)
