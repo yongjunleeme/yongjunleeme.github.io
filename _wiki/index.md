@@ -23,6 +23,8 @@ regenerate: true
 
 ### [[python]]
 
+* [[crawling-wecode-1]]
+* [[scrapping-options]]
 * [[class-advanced]]
 * [[data-model]]
 * [[sequence]]
@@ -31,8 +33,9 @@ regenerate: true
 * [[closure-decorator]]
 * [[object-reference]]
 * [[concurrency]]
-* [[crawling-wecode-1]]
-* [[scrapping-options]]
+* [[concurrency-parallelism]]
+* [[concurrency-threading]]
+* [[concurrency-asyncio]]
 
 ### [[django]]
 
