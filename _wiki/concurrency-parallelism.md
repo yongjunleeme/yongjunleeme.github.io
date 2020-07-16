@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-14 11:16:22 +0900
-updated : 2020-07-14 13:17:46 +0900
+updated : 2020-07-15 12:23:36 +0900
 tags    : 
 toc     : true
 public  : true
@@ -15,19 +15,20 @@ latex   : false
 
 ## Background
 
+
+
 - 프로세서가 주어진 시간 간격에서 처리할 명령어 개수
     - KHz(초당 1천번), MHz(초당 100만번), GHz(초당 1억번)
-- 클럭 올리려는 물리적 도전은 전력 소모에 따른 열 방생 등의 이유로 한계
-- 한 프로세스 내 여러 코어인 멀티코어 칩과 하위 클럭 사용 가능
+- 프로세스 한 개의 클럭 올리려는 물리적인 도전은 전력 소모에 따른 열 방생 등의 이유로 한계
+- 한 프로세스 내 여러 코어인 멀티코어 칩과 하위 클럭으로 성능 보완
 - 일반적인 병렬화
-    - 병렬(Parallelism)과 동시성(Concurrency) 차이
+    - 병렬화(Parallelism)와 동시성(Concurrency) 차이
         - 병렬 프로그램은 여러 프로세스들이 태스크를 동시에 실행
         - 동시성 프로그램은 여러 프로세스를 하나의 스케쥴러가 제어
             - 동시성 프로그램은 경쟁이 발생하면 CPU 스케쥴러가 제어
 
 <img width="634" alt="1" src="https://user-images.githubusercontent.com/48748376/87383456-391a8780-c5d4-11ea-826e-0577bca95166.png">
 
-![2](https://user-images.githubusercontent.com/48748376/87383492-50f20b80-c5d4-11ea-883b-bb75029877f7.jpeg)
 
 ## 설명
 
@@ -101,16 +102,4 @@ latex   : false
 ## Link
 
 - [파이썬 병렬 프로그래밍](http://www.yes24.com/Product/Goods/32946076)
-- [Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/)
-
-
-
-
-
-
-
-
-
-
-
 
