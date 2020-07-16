@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-14 13:24:19 +0900
-updated : 2020-07-15 20:42:23 +0900
+updated : 2020-07-15 21:14:47 +0900
 tags    : 
 toc     : true
 public  : true
@@ -33,7 +33,7 @@ latex   : false
 - 입출력 처리가 완료될 떄까지 기다릴 것인지(Blocking) 혹은 시작만 해두고 다음 작업을 계속 진행할 것이지(Non-blocking) 여부
 - I/O 작업이 완료된 이후에 연결해서 진행할 후속 작업이 있는 경우, 폴링이나 콜백 함수를 사용
 - Blocking I/O를 사용했어도 이 부분이 별도의 채널을 통한 작업으로 이뤄지고 어떤 프로그램의 주 실행흐름을 막지 않았다면, 이는 비동기에 해당
-- 직접 제어할 수 없는 IO, 멀티스레드를 대상으로
+- 직접 제어할 수 없는 IO, 멀티스레드를 대상으로 함
 
 ### Async Framework
 
@@ -87,7 +87,7 @@ asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
     - 그러나 다음 루프로 호출이 지연되는 콜백도 있다.
         - 이전 반복에서 지연된 I/O 콜백은 이 시점에서 호출됨
     - idle handles
-    - prepare handes - 루프가 I/O를 차단(block)하기 직전에 준비 핸들이 콜백을 호출함
+    - prepare handles - 루프가 I/O를 차단(block)하기 직전에 준비 핸들이 콜백을 호출함
     - Poll for I/O
         - I/O를 차단하기 전에 루프는 얼마나 오래 차단해야 하는지 폴링 타임아웃을 계산
         - 루프가 I/O를 차단
@@ -120,7 +120,7 @@ asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
      - 통제권을 받은 이벤트 루프는 다음 작업을 실행
      - 모든 이벤트 루프는 필수적으로 주어진 이벤트 타입과 매치된 함수가 연결되기 전에 발생하는 이벤트를 기다려야 한다. 예) 웹서버
 - 코루틴
-    - 이벤트 루프의 작업은 코루틴으로 이뤄져 있다. 응답이 지연되는 코루틴은 이벤트 루프에 통제권이 넘어가며 멈췄던 부분부터 기존 상태에서부터 다시 남은 작업을 완료하는 함수 
+    - 이벤트 루프의 작업은 코루틴으로 이뤄져 있다. 응답이 지연되는 코루틴은 이벤트 루프에 통제권이 넘어가며 기존 상태에서부터 다시 남은 작업을 완료한다.
 
 ![3](https://user-images.githubusercontent.com/48748376/87383922-74698600-c5d5-11ea-9446-99b564429794.jpg)
 
@@ -170,7 +170,7 @@ countasync.py executed in 1.01 seconds.
 ```
 
 - `time.sleep()`은 블로킹 함수이지만 `asyncio.sleep()`은 논 블로킹 함수
-- `time.sleep()`이나 다른 블로킹 호출은 비동기 파이썬 코드와는 양립 불가능하다. 블로킹 시에 다른 모든 트랙은 스톱이기 때문이다.
+- `time.sleep()`이나 다른 블로킹 호출은 비동기 파이썬 코드와는 양립 불가능하다. 블로킹 시 다른 모든 트랙이 스톱이기 때문이다.
 
 ### The Rules of Async IO
 
