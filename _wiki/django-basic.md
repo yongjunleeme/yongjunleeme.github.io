@@ -3,7 +3,7 @@ layout  : wiki
 title   : django-basic 
 summary : 
 date    : 2020-04-20 19:50:09 +0900
-updated : 2020-05-07 17:54:47 +0900
+updated : 2020-07-17 20:54:27 +0900
 tags    : 
 toc     : true
 public  : true
@@ -690,6 +690,263 @@ class TagAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag, TagAdmin)
 ```
+
+## 이미지 업로드
+
+```python
+# pip install pillow
+# models.py
+
+import os
+import uuid
+
+def image_upload_to(instance, filename):
+    ext = filename.split('.')[-1]
+    return os.path.join(instance.UPLOAD_PATH, "%s.%s" % (uuid.uuid4(), ext))
+    # 16자리 고유한 아이디 생성
+
+class Image(BaseModel):
+    UPLOAD_PATH = 'user-upload'
+
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=image_upload_to)
+    order = models.SmallIntegerField() # image numbering
+
+    class Meta:
+        ordering = ['order']
+```
+
+```python
+# settings.py
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# urls.py
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+## Admin 활용
+
+### 모델 데이터 선택적 수정
+
+```pyrhon
+# models.py
+class Employees(models.Model):
+    class Meta:
+        managed = False
+        db_table = 'employees'
+        verbose_name = '직원명단'
+    
+    def __str__(self):
+        return 'ID: %d, Name: %s' % (self.emp_no, self.first_name)
+```
+
+### admin.py 설정 
+
+```python
+# admin.py
+from django.contrib import admin
+from .models import Employees
+
+class DisplayEmployee(admin.ModelAdmin):
+    list_display = ('emp_no', 'first_name', 'last_name') # 리스트 기능
+    search_fields = ['first_name'] # 검색 기능
+    list_filter =('gender') # 필터 기능
+    ordering = ('last_name', 'hire_date')
+    
+admin.site.register(Employees, DisplayEmployee)
+```
+
+### django-admin-rangefilter
+
+```python
+$ pip install django-admin-rangefilter
+```
+
+```python
+# settings.py
+
+INSTALLED_APP += [
+'rangefilter'
+]
+```
+
+```python
+# admin.py
+from django.contrib import admin
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
+from .models import Employees
+
+class DisplayEmployee(admin.ModelAdmin):
+    list_display = ('emp_no', 'first_name', 'last_name') 
+    search_fields = ['first_name'] 
+    list_filter =('gender', ('bitrh_date', DateRangeFilter)) ##
+    ordering = ('last_name', 'hire_date')
+    readonly_fields = ['name', 'photo']
+    
+admin.site.register(Employees, DisplayEmployee)
+```
+
+### admin 라이브러리
+
+- admin ui 변경할 수 있는 라이브러리
+    - Django Suit
+    - Django Jet
+    - django-grappelli
+
+```python
+$ pip install django-grappelli 
+```
+
+```python
+# settings.py
+# admin 위에 위치해야
+
+INSTALLED_APPS = [
+    'grapelli',
+    'django.contrib.admin',
+    ...
+]
+
+TEMPLATES = [
+    {
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+            ]
+        }
+    }
+]
+```
+
+```python
+# urls.py
+from django.urls import include
+
+urlpatterns = [
+    path('grappelli/', include('grappelli.urls')),
+    path('admin/', admin.site.urls),
+]
+```
+
+```python
+$ python manage.py collectstatic
+```
+
+### Django admin actions
+
+- CSV로 EXPORT
+- Graph로 시각화
+- Mass Update
+
+```python
+$ pip install django-adminactions
+```
+
+```python
+# settinsg.py
+INSTALLED_APPS =[
+    'adminactinos',
+]
+```
+
+```python
+# urls.py
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import include, path
+
+urlpatterns = [
+    path('adminactinos/', include('adminactions.urls')), # Graph
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+import adminactions.actions as actinos
+actions.add_to_site(admin.site)
+
+```
+
+### Settings.py 분리
+
+- settings 폴더 생성 후 분리
+    - base.py
+    - dev.py
+    - prod.py (프로덕션)
+- 필요한 환경에 따라 환경변수에 등록
+
+```python
+$ export DJANGO_SETTING_MODULE=fastoffice.setting.dev 
+```
+
+#### django-admin-env-notice
+
+```python
+$ pip install django-admin-env-notice
+```
+
+```python
+# base.py(settings.py의 베이스 파일)
+# admin 위에 위치
+
+INSTALLED_APPS =[
+    'django_admin_emv_notice',
+    'django.contrib.admin',
+]
+
+
+TEMPLATES = [
+    {
+        'OPTIONS': {
+            'context_processors': [
+                'django_admin_env_notice.context_processors.from_settings',
+            ]
+        }
+    }
+]
+```
+
+```python
+# dev.py(setting.py의 개발버전 분리 파일)
+
+from .base import *
+
+DEBUG = True
+ENVIRONMENT_NAME = 'Dev Server'
+ENVIRONMENT_COLOR = '#FF222'
+
+# ENVIRONMENT_ADMIN_SELECTOR = 'grp-header'
+# ENVIRONMENT_FLOAT = True
+```
+
+### fake admin
+
+- 보안상 어드민 로그인 시도 로그로 남기고 싶을 떄?
+
+```python
+$ pip install django-admin-honeypot
+```
+
+```python
+INSTALLED_APPS += [
+    'admin_honeypot',
+]
+```
+
+```python
+# urls.py
+
+urlpatterns = [
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('secret/', admin.site.urls)
+]
+```
+
+- 마이그레이트
+
 
 ## Link
 
