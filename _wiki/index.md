@@ -55,6 +55,7 @@ regenerate: true
 * [[django-project-commerce]]
 * [[django-rest-framwork-example]]
 * [[django-nomad-drf]]
+* [[drf-throttle-filter-test]]
 * [[flask-example]]
 
 ## [[tool]]
@@ -68,6 +69,7 @@ regenerate: true
 * [[sql-command]]
 * [[linux-command]]
 * [[jekyll-install]]
+* [[dev-environment]]
 
 ### aws
 
@@ -94,6 +96,7 @@ regenerate: true
 * [[ad-fraud]]
 * [[redis-operation]]
 * [[redis-py]]
+* [[data-engineering-background]]
 
 ### copy & paste
 
