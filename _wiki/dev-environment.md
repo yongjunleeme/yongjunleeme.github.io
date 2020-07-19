@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-18 17:07:16 +0900
-updated : 2020-07-18 18:52:52 +0900
+updated : 2020-07-19 14:29:31 +0900
 tags    : 
 toc     : true
 public  : true
@@ -67,22 +67,10 @@ $ pyenv virtualenv 3.7.7 가상환경이름
 $ pyenv activate 가상환경이름
 ```
 
+## Link
+
 - [가장 보통의 파이썬 개발 환경(pyenv + pipenv + black + flit)](https://jonnung.dev/python/2019/11/23/ordinary-python-development-environment/)
 - [새 맥북으로 이사가기, 설정하기](https://johngrib.github.io/wiki/migrate-to-new-macbook/)
 
-## zshrc
-
-~/.zshrc
-
-solarize oh my zsh
-
-powerlevel9k
-
-material theme
 
 
-
-```python
-
-
-```
