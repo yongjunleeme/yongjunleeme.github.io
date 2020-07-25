@@ -3,7 +3,7 @@ layout  : wiki
 title   : class-advanced
 summary : 
 date    : 2020-04-19 16:36:19 +0900
-updated : 2020-05-10 14:13:37 +0900
+updated : 2020-07-25 23:22:20 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,6 +12,180 @@ latex   : false
 ---
 * TOC
 {:toc}
+
+## Real Python - instance class and static methods demystified
+
+```python
+class MyClass:
+    def method(self):
+        return 'instance method called', self
+
+    @classmethod
+    def classmethod(cls):
+        return 'class method called', cls
+
+    @staticmethod
+    def staticmethod():
+        return 'static method called'
+```
+
+### 인스턴스 메소드
+
+데코레이터가 없는 기본 메소드. 클래스의 인스턴스를 호출할 때 self를 인자로 받는다.  동일 오브젝트의 다른 메소드와 속성에 self를 통해 접근 가능하다. 인스턴스 메소드는 오브젝트의 상태를 바꿀 수 있을 뿐만 아니라 `self.__class__' 속성을 통해 클래스 자체에 접근할 수 있다. 이는 인스턴스 메소드가 클래스의 상태를 바꿀 수 있다는 뜻이다.
+
+### 클래스 메소드
+
+self 파라미터 대신에 클래스를 연결하는 cls 파라미터를 받는다. 오브젝트 인스턴스가 아니다. cls 인자로만 클래스에 접근할 수 있고 오브젝트 인스턴스의 상태를 바꿀 수 없기 때문이다. 그러나 클래스 인스턴스를 통해 클래스의 상태를 변경할 수 있다.
+
+### 스테틱 메소드
+
+스테틱메소드는 오브젝트의 상태와 클래스의 상태 모두 변경할 수 없다. 데이터 접근에 제한적이다.
+
+```python
+>>> obj = MyClass()
+>>> obj.method()
+('instance method called', <MyClass instance at 0x10205d190>)
+```
+
+### 예시
+
+#### 인스턴스 메소드
+
+self 인자를 통해 오브젝트 인스턴스에 접근(<Myclass instance>). 메소드가 호출될 때 파이썬이 self 인자를 인스턴스 오브젝트(obj)로 바꾼다.
+
+```python
+>>> MyClass.method(obj)
+('instance method called', <MyClass instance at 0x10205d190>)
+```
+
+첫번째 인스턴스를 생성하지 않고 메소드를 호출할 수 있을까? self.__class__ 속성을 통해서 인스턴스 메소드가 클래스 자체에 접근할 수 있다. 
+
+#### 클래스 메소드
+
+```python
+>>> obj.classmethod()
+('class method called', <class MyClass at 0x101a2f4c8>)
+```
+
+classmethod()를 호출하면 <MyClass instance> 오브젝트가 아닌 <class MyClass> 오브젝트를 보여준다. 이는 클래스 자체를 말한다. (파이썬은 모두 오브젝트다. 심지어 클래스도)
+
+MyClass.classmethod()를 호출할 때 어떻게 파이썬이 자동적으로 클래스의 첫 번째 인자로서 클래스를 전달할까? 인스턴스 메소드의 self 파라미터와 똑같이 작동하는 것이다.
+
+#### 스테틱 메소드
+
+```python
+>>> obj.staticmethod()
+'static method called'
+```
+
+일부 개발자들은 오브젝트 인스턴스에서 스테틱메소드 호출이 가능하다는 사실에 놀란다. 스테틱 메소드는 self나 cls 인자 없이  사용되는데 이는 클래스의 상태와 인스턴스의 상태에 모두 접근할 수 없다는 의미다. 보통 함수처럼 작동할 뿐 클래스의 네임스페이스(그리고 모든 인스턴스)에 속하지 않는다.
+
+```python
+>>> MyClass.classmethod()
+('class method called', <class MyClass at 0x101a2f4c8>)
+
+>>> MyClass.staticmethod()
+'static method called'
+
+>>> MyClass.method()
+TypeError: unbound method method() must
+    be called with MyClass instance as first
+    argument (got nothing instead)
+```
+
+#### 인스턴스 메소드에서 self를 무시한다면?
+
+인자 없이 classmethod()와 staticmethod()는 호출이 되지만 인스턴스 메소드인 method()는 TypeError가 나온다. 오브젝트 인스턴스를 만들지 않았고 인스턴스 함수를 호출하지도 않았기 때문인데 이는 파이썬이 self 인자를 채울 수 없다는 뜻이다. 
+
+### Why
+
+```python
+class Pizza:
+    def __init__(self, ingredients):
+        self.ingredients = ingredients
+
+    def __repr__(self):
+        return f'Pizza({self.ingredients!r})'
+```
+
+```python
+>>> Pizza(['cheese', 'tomatoes'])
+Pizza(['cheese', 'tomatoes'])
+```
+
+#### 클래스메소드를 쓰는 이유
+
+```python
+class Pizza:
+    def __init__(self, ingredients):
+        self.ingredients = ingredients
+
+    def __repr__(self):
+        return f'Pizza({self.ingredients!r})'
+
+    @classmethod
+    def margherita(cls):
+        return cls(['mozzarella', 'tomatoes'])
+
+    @classmethod
+    def prosciutto(cls):
+        return cls(['mozzarella', 'tomatoes', 'ham'])
+```
+
+- [Don’t Repeat Yourself (DRY)]([https://en.wikipedia.org/wiki/Don't_repeat_yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself))을 위한 방법
+- 클래스 이름을 변경해도 클래스 메소드를  사용하면 바뀐 Consturtor 이름을 몰라도 된다?
+
+```python
+>>> Pizza.margherita()
+Pizza(['mozzarella', 'tomatoes'])
+
+>>> Pizza.prosciutto()
+Pizza(['mozzarella', 'tomatoes', 'ham'])
+```
+
+- 파이썬은 클래스에서 오직 하나의 `__init__`메소드를 허용한다. 클래스 메소드를 사용하면 다른 construcrot를 추가할 수 있다. 
+
+#### 스테틱메소드를 언제 써야 하나
+
+```python
+import math
+
+class Pizza:
+    def __init__(self, radius, ingredients):
+        self.radius = radius
+        self.ingredients = ingredients
+
+    def __repr__(self):
+        return (f'Pizza({self.radius!r}, '
+                f'{self.ingredients!r})')
+
+    def area(self):
+        return self.circle_area(self.radius)
+
+    @staticmethod
+    def circle_area(r):
+        return r ** 2 * math.pi
+```
+
+- area() 내에서 곧장 계산하지 않고 circla_area() 스테틱 메소드로 나눠서 사용
+
+```python
+>>> p = Pizza(4, ['mozzarella', 'tomatoes'])
+>>> p
+Pizza(4, ['mozzarella', 'tomatoes'])
+>>> p.area()
+50.26548245743669
+>>> Pizza.circle_area(4)
+50.26548245743669
+```
+
+- 스테틱메소드는 클래스나 인스턴스의 상태에 접근할 수 없으므로 다른 것들에 대해 독립적일 수 있다. circle_area()는 클래스나 클래스 인스턴스를 수정할 수 없다.
+- 이러한 제한은 파이썬 런타임에 의해 강제된 제한인데 자연스럽게 정해진 경계 내에서 개발하도록 유도된다. 설계에 어긋나는 우발적인 변경을 방지할 수 있다.
+- 테스트 코드도 쉽게 작성 가능하다. 나머지 클래스에 독립적이므로. 
+- 또한 향후 유지보수를 더 쉽게 만든다.
+
+
+
 
 ## 클래스
 
@@ -286,5 +460,6 @@ print('Static : ', student_4.is_scholarship_st(student_4))
 
 ## Link
 
+- [Python's Instance, Class, and Static Methods Demystified]([https://realpython.com/instance-class-and-static-methods-demystified/](https://realpython.com/instance-class-and-static-methods-demystified/))
 - [파이썬 웹 개발](https://www.fastcampus.co.kr/dev_online_pyweb)
 - [파이썬 코딩 도장](https://dojang.io/mod/page/view.php?id=2378)
