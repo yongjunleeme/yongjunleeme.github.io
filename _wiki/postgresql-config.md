@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-03 18:00:55 +0900
-updated : 2020-07-03 19:37:06 +0900
+updated : 2020-07-25 23:26:03 +0900
 tags    : 
 toc     : true
 public  : true
@@ -103,6 +103,10 @@ CREATE DATABASE name [ [ WITH ] [ OWNER [=] user_name ]
 
 ```python
 postgres=# \c dbname yongjunlee
+
+or
+
+psql postgres
 ```
 
 #### table 생성
