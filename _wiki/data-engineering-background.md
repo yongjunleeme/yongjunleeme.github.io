@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-18 09:54:47 +0900
-updated : 2020-08-01 13:45:27 +0900
+updated : 2020-08-17 14:49:02 +0900
 tags    : 
 toc     : true
 public  : true
@@ -633,6 +633,482 @@ WHERE userid = 251 ) WHERE N = 1
 SELECT JSON_EXTRACT_PATH_TEXT
 ('{"f2":{"f3":1},"f4":{"f5":99,"f6":"star"}}','f4', 'f6');
 ```
+
+#### 숙제
+
+- [깃헙](https://github.com/yongjunleeme/data-engineering-study/blob/master/sql_week3.ipynb)
+
+
+## Airflow
+
+### Quick Airflow Intro
+
+- Airflow is a platform for data pipelines in Python (beyond a scheduler)
+    - Not just a scheduler but also also a worker(s)
+        - Provides a web UI as well
+- Airflow is a cluster of servers
+    - DAG and scheduling info are stored in a DB (SQLite is used by default)
+        - MySQL or Postgres is preferred for real production usage
+- DAG -> ETL
+    - 태스크로 구성
+    - 오퍼레이터의 인스턴스
+- 단점
+    - 서버 늘어나면 유지보수 복잡해진다
+    - GCP provides “Cloud Composer”를 쓰면 편하다
+
+### DAG Common Configuration Example
+
+```python
+from datetime import datetime, timedelta
+from airflow import DAG
+default_args = {
+   'owner': '',
+   'start_date': datetime(2020, 8, 7, hour=0, minute=00), # 백필할 때, 인크리멘탈 업데이트할 때 유용(복잡도는 상승) 
+   'end_date': datetime(2020, 8, 31, hour=23, minute=00),
+   'email': [''],
+   'retries': 1, # 리트라이 횟수
+   'retry_delay': timedelta(minutes=3), # 3분 기다렸다가 리트라이
+}
+```
+
+```python
+test_dag = DAG(
+   "dag_v1", # DAG name, 웹 UI에 나옴, 유니크해야
+   # schedule (same as cronjob)
+   schedule_interval="0 9 * * *", # 매일 9시 0분에 실행하라, year는 생략 상태
+   # common settings
+   default_args=default_args  # timezone 파라미터는 설치 시 환경파일에 지정, 기본은 UTC
+)
+```
+
+<img width="707" alt="스크린샷 2020-08-16 오후 11 28 33" src="https://user-images.githubusercontent.com/48748376/90336672-50f08b80-e018-11ea-9ae2-c1cd8a585345.png">
+
+```python
+t1 = BashOperator(
+   task_id='print_date',
+   bash_command='date',
+   dag=test_dag)
+t2 = BashOperator(
+   task_id='sleep',
+   bash_command='sleep 5',
+   retries=3,
+   dag=test_dag)
+t3 = BashOperator(
+   task_id='ls',
+   bash_command='ls /tmp',
+   dag=test_dag)
+   
+t1 >> t2 # t1이 끝나면 t2를 실행하라, t2.set_upstream(t1)
+t1 >> t3 # t1이 끝나면 t3를 실행하라, t3.set_upstream(t1)
+```
+
+아래 설치 명령들은 우분투를 기반으로 한다.
+
+http://www.marknagelberg.com/getting-started-with-airflow-using-docker/
+
+## Docker 설치
+
+먼저 Docker를 설치하기 위헤 apt 패키지 매니저 자체를 업데이트하고 설치를 진행한다.
+
+```python
+$ sudo apt-get update
+$ sudo apt install -y docker.io
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+$ docker --version
+```
+
+다음으로 hello-world를 실행하여 설치가 제대로 되었는지 확인한다. 출력문에 "Hello from Docker!"가 있어야 한다.
+
+```python
+$ sudo docker run hello-world
+```
+
+## Airflow 설치
+
+먼저 dags 폴더를 하나 만든다. 이 폴더 아래 Python으로 만든 DAG 코드가 존재해야 한다.
+
+```python
+$ pwd
+/home/ubuntu/
+$ mkdir dags
+$ ls -tl
+total 4
+drwxrwxr-x 2 ubuntu ubuntu 4096 Aug  3 02:43 dags
+```
+
+### Docker를 이용해 Airflow 설치
+
+간단 설치 방법:
+
+```python
+$ sudo docker pull puckel/docker-airflow
+```
+
+Airflow가 설치된 Docker 이미지 이름을 보는 방법 (puckel/docker-airflow를 찾는다)
+
+```python
+$ sudo docker images 
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+puckel/docker-airflow   latest              ce92b0f4d1d5        5 months ago        797MB
+hello-world             latest              bf756fb1ae65        7 months ago        13.3kB
+```
+
+더 자세히 설치하려면 https://medium.com/@xnuinside/quick-guide-how-to-run-apache-airflow-cluster-in-docker-compose-615eb8abd67a를 참고
+
+### Airflow 실행
+
+다음으로 이 폴더를 dags 폴더로 지정해서 Airflow를 실행한다.
+
+```python
+sudo docker run -d -p 8080:8080 -v /home/ubuntu/dags:/usr/local/airflow/dags puckel/docker-airflow webserver
+```
+
+### Airflow 웹서버 방문
+
+http://호스트이름:8080/
+
+![](images/airflow-docker.png)
+
+
+## 기타 
+
+### Airflow Container 실행 중단하기
+
+먼저 Airflow Docker instance의 이름을 알아낸다. "sudo docker ps"를 명령을 실행하여 NAMES 컬럼밑에 나오는 이름을 기억한다. 여기서는 angry_wu인데 매번 바뀐다는 점에 유의한다.
+
+```python
+$ sudo docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                                        NAMES
+a56dbb111b5b        puckel/docker-airflow   "/entrypoint.sh webs…"   21 minutes ago      Up 21 minutes       5555/tcp, 8793/tcp, 0.0.0.0:8080->8080/tcp   angry_wu
+```
+
+이 이름을 가지고 중단한다
+
+```python
+$ sudo docker stop angry_wu
+```
+
+### data-engineering repo내의 HelloWorld.py를 Airflow로 올리기
+
+/home/ubuntu에서 아래를 실행
+
+```python
+$ git clone https://github.com/keeyong/data-engineering.git
+```
+
+다음으로 data-engineering/dags/HelloWorld.py를 /home/ubuntu/dags 폴더로 복사
+
+```python
+cp data-engineering/dags/HelloWorld.py /home/ubuntu/dags/
+```
+
+Airflow를 중단하기 위해 Docker Container의 이름을 알아낸다.
+
+```python
+$ sudo docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                                        NAMES
+a56dbb111b5b        puckel/docker-airflow   "/entrypoint.sh webs…"   21 minutes ago      Up 21 minutes       5555/tcp, 8793/tcp, 0.0.0.0:8080->8080/tcp   angry_wu
+
+$ sudo docker stop angry_wu
+```
+
+Airflow를 재실행한다.
+
+```python
+sudo docker run -d -p 8080:8080 -v /home/ubuntu/dags:/usr/local/airflow/dags puckel/docker-airflow webserver
+```
+
+### 이미 실행된 Airflow Docker Container를 같은 인자로 다시 재실행하고 싶다면 
+awesome_shaw가 Container의 이름인 경우 아래와 같이 실행한다.
+
+```python
+sudo docker restart awesome_shaw
+```
+
+### Docker 내 Airflow DAG 폴더로 이동하기
+
+이는 DAG 개발을 위해서 필요하다. 먼저 "sudo docker ps"를 명령을 실행하여 NAMES 컬럼밑에 나오는 이름을 기억한다. 
+
+```python
+$ sudo docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                                        NAMES
+a56dbb111b5b        puckel/docker-airflow   "/entrypoint.sh webs…"   21 minutes ago      Up 21 minutes       5555/tcp, 8793/tcp, 0.0.0.0:8080->8080/tcp   angry_wu
+```
+
+이 이름을 가지고 "sudo docker exec -ti"으로 컨테이너 안으로 이동한다.
+
+```python
+$ sudo docker exec -ti angry_wu bash
+airflow@a56dbb111b5b:~$ pwd
+/usr/local/airflow
+airflow@a56dbb111b5b:~$ cd dags
+```
+
+#### 개발
+
+여기에서 ls -tl과 같은 명령을 실행해보면 HelloWorld.py를 볼 수 있어야 한다 (앞서 과정을 거쳤다면). 새로운 DAG 개발을 원한다면 여기서 파이썬 코드 파일을 만든다. 근데 Docker는 기본적으로 아무런 에디터 설치가 되어 있지 않다. 아래와 같이 vim을 설치해 사용한다:
+
+```python
+apt-get update
+apt-get install vim
+```
+
+#### Airflow 명령 실행
+
+여기서 여러가지 airflow 명령어들을 실행해볼 수 있다. 예를 들어 list_dags를 실행하면 현재 설치되어 있는 모든 DAG들이 리스트된다.
+
+```python
+airflow@a56dbb111b5b:~$ airflow list_dags
+-------------------------------------------------------------------
+DAGS
+-------------------------------------------------------------------
+example_bash_operator
+example_branch_dop_operator_v3
+example_branch_operator
+example_complex
+example_external_task_marker_child
+example_external_task_marker_parent
+example_http_operator
+example_passing_params_via_test_command
+example_pig_operator
+example_python_operator
+example_short_circuit_operator
+example_skip_dag
+example_subdag_operator
+example_subdag_operator.section-1
+example_subdag_operator.section-2
+example_trigger_controller_dag
+example_trigger_target_dag
+example_xcom
+latest_only
+latest_only_with_trigger
+test_utils
+tutorial
+my_first_dag
+```
+
+ - "airflow list_tasks DAG이름"을 실행하면 DAG에 속한 태스크들의 이름이 모두 나열된다. 
+ - 특정 태스트를 실행하고 싶다면 예를 들어 task ID가 print_hello라면 "airflow test DAG이름 print_hello 2020-08-09" 이렇게 실행하면 된다. 여기서 주의할 점은 2020-08-09의 경우 DAG의 start_date보다는 뒤어야 하지만 현재 시간보다 미래이면 안된다.
+ 
+#### Docker Container의 내용을 저장하기
+
+- https://stackoverflow.com/questions/44480740/how-to-save-a-docker-container-state
+
+## Airflow Deepdive
+
+### 4주차 리뷰
+
+- 변수 설정 기능
+    - Connction 설정도 가능
+- secret_key로 네이밍하면 저절로 암호화
+
+<img width="1157" alt="스크린샷 2020-08-17 오전 10 16 26" src="https://user-images.githubusercontent.com/48748376/90348923-c5581880-e072-11ea-8c3d-144e1d4b6dc4.png">
+
+- Docker 명령 리뷰
+
+```python
+sudo docker run -d -p 8080:8080 -v /home/ubuntu/dags:/usr/local/airflow/dags puckel/docker-airflow webserver
+```
+
+- /home/ubuntu/dags의 내용이 docker container내의 /usr/local/airflow/dags로 미러링이 됨
+- 예를 들어 /home/ubuntu/dags에 있는 파일의 내용을 바꾸는대로 바로 반영이 됨
+
+### Airflow Operation, Variables and Connections
+
+#### DAG Configuration Example
+
+- dag 인자를 딕셔너리롤 만들어서 할당
+
+```python
+from datetime import datetime, timedelta
+
+from airflow import DAG
+default_args = {
+   'owner': 'keeyong',
+   'start_date': datetime(2020, 8, 7, hour=0, minute=00),
+   'end_date': datetime(2020, 8, 31, hour=23, minute=00),
+   'email': ['keeyonghan@hotmail.com'],
+   'retries': 1,
+   'retry_delay': timedelta(minutes=3),
+}
+
+dag = DAG(
+   "dag_v1", # DAG name
+   # schedule (same as cronjob)
+   schedule_interval="0 9 * * *", 
+   # common settings
+   default_args=default_args 
+)
+```
+
+- 주의할 점
+- Note that Airflow will run the first job at start_date + interval.
+    - start_date에 바로 시작이 아니라 start_date + interval에 처음 시작 
+    - A daily dag with the start_date '2020-07-26 01:00' starts at 2020-07-27 01:00.
+- Start_date 이해하기(catchup 설정은 디폴트가 true)
+    - 2020-08-10 02:00:00로 start date로 설정된 daily job이 있다
+        - catchup이 True로 설정되어 있다고 가정 (디폴트가 True)
+    - 지금 시간이 2020-08-13 20:00:00이고 처음으로 이 job이 활성화되었다
+        - 질문: 이 경우 이 job은 몇번 실행될까?
+            - 2020-08-10 02:00:00 -> 2020 08 11 실행
+            - 2020-08-11 02:00:00 -> 2020 08 12 실행
+            - 2020-08-12 02:00:00 -> 2020 08 13 실행
+            - 2020-08-13 02:00:00 -> 2020 08 14 실행
+
+#### Important DAG parameters (not task parameters)
+
+- 꼭 DAG의 파라미터로 써줘야 한다
+    - max_active_runs: # of DAGs instance
+        - 실행할 DAG의 수
+    - concurrency: # of tasks that can run in parallel 
+    - catchup # whether to backfill past runs
+        - 이전 시점 실행 여부, 디폴트가 true
+
+#### Operators - PythonOperator
+
+- 파라미터를 넘기려면 `provide_context = True`
+    - params 딕셔너리 넘겨야
+    - excution_date는 start_date와 같이 실행 시간, 실제 실행 시점은 interval을 더해야
+
+```python
+load_nps = PythonOperator(
+   dag=dag,
+   task_id='task_id',
+   python_callable=python_func,
+   params={
+       'table': 'delighted_nps',
+       'schema': 'raw_data'
+   },
+   provide_context=True
+)
+
+from airflow.exceptions import AirflowException
+
+def python_func(**cxt):
+  table = cxt["params"]["table"]
+  schema = cxt["params"]["schema"]
+  ex_date = cxt["execution_date"]
+
+  # do what you need to do
+  ...
+```
+
+#### How to Trigger DAGs
+
+- 스케쥴과 상관 없이 UI에서 Trigger
+
+<img width="859" alt="1" src="https://user-images.githubusercontent.com/48748376/90352499-8b8d0f00-e07e-11ea-8fe3-83f6c109dadb.png">
+
+
+- How to Trigger a DAG - From Terminal
+- Airflow 도커 컨테이너에 접근한 다음
+    - airflow list_dags
+    - airflow list_tasks (DAG이름)
+    - airflow test DAG이름 Task이름 날짜
+        - 날짜는 YYYY-MM-DD
+            - start_date보다 과거이거나 오늘 날짜보다 미래인 경우 실행 안됨
+    - airflow test second_assignment_v3 extract 2020-08-09
+
+#### Instructions to follow
+
+- Airflow 컨테이너가 실행중이라면 일단 중단. 컨테이너 이름을 찾아 아래 명령 실행
+
+```python
+$ sudo docker stop (컨테이너이름)
+```
+
+- keeyong/data-engineering repo를 Airflow 서버에서 다운로드
+    - 이미 다운받았다면 data-engineering 폴더안에서 git pull 실행
+
+```python
+$ git clone https://github.com/keeyong/data-engineering
+```
+
+- 이 repo의 dags 폴더를 가지고 Docker container를 실행
+- Docker run 할때 —name [이름] -> 이름 지정 가능
+
+```python
+$ sudo docker run -d -p 8080:8080 -v /home/ubuntu/data-engineering/dags:/usr/local/airflow/dags puckel/docker-airflow webserver
+```
+
+```python
+$ sudo docker run --name yongjunlee -it -d -p 8080:8080 -v /home/ubuntu/data-engineering/dags:/usr/local/airflow/dags puckel/docker-airflow webserver
+```
+
+
+- 해당 docker  container의 이름을 찾아서 container안으로 이동
+- 컨테이너 이름 찾기
+
+```python
+$ sudo docker ps
+```
+
+- 컨테이너 안으로 이동하기
+
+```python
+$ sudo docker exec -ti (컨테이너이름) bash
+```
+
+- 여기서 필요한 2개의 파이썬 모듈을 설치
+
+```python
+$ pip install botocore
+$ pip install boto3
+```
+
+- 컨테이너를 빠져나와서 컨테이너를 재시작
+
+```python
+$ sudo docker restart (컨테이너이름)
+```
+
+- Airflow 웹서버 접근: http://(airflow서버이름):8080/
+
+<img width="935" alt="1" src="https://user-images.githubusercontent.com/48748376/90355711-2807df00-e088-11ea-8e5a-d32da18b164b.png">
+
+
+<img width="939" alt="2" src="https://user-images.githubusercontent.com/48748376/90355710-276f4880-e088-11ea-82dd-d11a56590736.png">
+
+<img width="908" alt="3" src="https://user-images.githubusercontent.com/48748376/90355706-25a58500-e088-11ea-90f7-4471eb8d86a1.png">
+
+- Variables
+    - csv_url = https://s3-geospatial.s3-us-west-2.amazonaws.com/name_gender.csv
+    - iam_role_for_copy_access_token = arn:aws:iam::080705373126:role/redshift.read.s3
+
+- Redshift 테이블 생성
+
+```python
+CREATE TABLE (본인스키마).customer_variants (
+    customer_id int,
+    variant varchar(8),
+    primary key (customer_id)
+);
+CREATE TABLE (본인스키마).customer_interactions (
+    customer_id int,
+    datestamp date,
+    item_id int,
+    clicked int,
+    purchased int ,
+    paidamount int,
+    primary key(customer_id, datestamp, item_id, clicked,purchased)
+);
+
+CREATE TABLE (본인스키마).item_features (
+    item_id int,
+    quality float,
+    popularity varchar(16),
+    price int,
+    primary key(item_id)
+);
+CREATE TABLE (본인스키마).customer_features (
+      customer_id int,
+     engagement_level varchar(16),
+     gender varchar(16),
+     PRIMARY KEY (customer_id)
+);
+```
+
 
 ## Link
 
