@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2020-07-18 09:54:47 +0900
-updated : 2020-08-17 14:49:02 +0900
+updated : 2020-08-23 23:08:45 +0900
 tags    : 
 toc     : true
 public  : true
@@ -925,10 +925,10 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 default_args = {
-   'owner': 'keeyong',
+   'owner': 'yongjun',
    'start_date': datetime(2020, 8, 7, hour=0, minute=00),
    'end_date': datetime(2020, 8, 31, hour=23, minute=00),
-   'email': ['keeyonghan@hotmail.com'],
+   'email': ['yongjun@mail.com'],
    'retries': 1,
    'retry_delay': timedelta(minutes=3),
 }
@@ -955,6 +955,7 @@ dag = DAG(
             - 2020-08-11 02:00:00 -> 2020 08 12 실행
             - 2020-08-12 02:00:00 -> 2020 08 13 실행
             - 2020-08-13 02:00:00 -> 2020 08 14 실행
+- 타임존 변경 원하면 airflow.ctg 파일에서 변경 가능
 
 #### Important DAG parameters (not task parameters)
 
@@ -1108,6 +1109,32 @@ CREATE TABLE (본인스키마).customer_features (
      PRIMARY KEY (customer_id)
 );
 ```
+
+#### Airflow Installation on Ubuntu
+
+- [install](https://github.com/keeyong/data-engineering/blob/master/docs/Airflow%20Installation.md)
+- 포스트그레스 연결 시 프로덕션에서는 마스터가 아닌 슬레이브를 만들어서 연결하는 것이 더 안전하다
+
+- airflow.cfg -> dags_folder
+
+- Task의 현재 디렉토리는?
+    - Airflow Dag 디렉토리가 Task의 현재 디렉토리
+    - Task 코드안에서 다음을 실행해보면 분명히 알 수 있음
+
+```python
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+logging.info(dir_path)
+```
+
+## Productionizing Airflow
+
+<img width="692" alt="1" src="https://user-images.githubusercontent.com/48748376/90980242-2f9e1b00-e595-11ea-91e1-1c82b6538e2d.png">
+
+<img width="684" alt="2" src="https://user-images.githubusercontent.com/48748376/90980247-3331a200-e595-11ea-8e1d-5962d9d320a4.png">
+
+<img width="643" alt="3" src="https://user-images.githubusercontent.com/48748376/90980249-33ca3880-e595-11ea-973d-2a3f8222a065.png">
 
 
 ## Link
