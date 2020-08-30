@@ -57,6 +57,7 @@ regenerate: true
 * [[django-nomad-drf]]
 * [[drf-throttle-filter-test]]
 * [[flask-example]]
+* [[django-performance]]
 
 ## [[tool]]
 
@@ -96,7 +97,7 @@ regenerate: true
 * [[ad-fraud]]
 * [[redis-operation]]
 * [[redis-py]]
-* [[data-engineering-background]]
+* data-engineering-background
 
 ### copy & paste
 
