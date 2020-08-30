@@ -98,6 +98,7 @@ regenerate: true
 * [[redis-operation]]
 * [[redis-py]]
 * data-engineering-background
+* [[stock]]
 
 ### copy & paste
 
