@@ -36,6 +36,8 @@ regenerate: true
 * [[concurrency-parallelism]]
 * [[concurrency-threading]]
 * [[concurrency-asyncio]]
+* [[numpy]]
+* [[pandas]]
 
 ### [[django]]
 
@@ -97,8 +99,9 @@ regenerate: true
 * [[ad-fraud]]
 * [[redis-operation]]
 * [[redis-py]]
-* data-engineering-background
+* [[data-engineering-background]]
 * [[stock]]
+* [[systrader]]
 
 ### copy & paste
 
