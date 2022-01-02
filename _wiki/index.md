@@ -8,7 +8,6 @@ regenerate: true
 
 ## [[diary]]
 
-* [[test]]
 * [[book-log-2020]]
 * [[memo-2020]]
 * [[review-2020]]
