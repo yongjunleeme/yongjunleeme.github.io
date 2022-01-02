@@ -73,6 +73,7 @@ regenerate: true
 * [[linux-command]]
 * [[jekyll-install]]
 * [[dev-environment]]
+* [[vim-settings]]
 
 ### aws
 
