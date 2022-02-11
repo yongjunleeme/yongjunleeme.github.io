@@ -275,9 +275,6 @@ components
 "yyp는 레지스터를 사용하고 :t.는 사용하지 않는다"
 ```
 
-
-
-
 ## Link
 
 - [Practical Vim](http://www.yes24.com/Product/Goods/36686205)

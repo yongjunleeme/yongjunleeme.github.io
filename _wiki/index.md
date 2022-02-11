@@ -6,26 +6,26 @@ public  : true
 regenerate: true
 ---
 
-## [[diary]]
+## diary
 
-* [[book-log-2020]]
-* [[memo-2020]]
-* [[review-2020]]
-* [[scribble]]
-* [[link]]
-* [[review]]
-* [[media]]
-* [[small-talk-big-idea]]
-* [[mindset]] 
-* [[tip]]
+## cs
 
-## [[programming-language]]
+### operating system
 
-### [[python]]
+* [[OS-1-Introduction-to-Operating-Systems]]
+* [[OS-2-System-Structure-Program-Execution]]
 
-* [[crawling-wecode-1]]
-* [[scrapping-options]]
+### network 
+
+## programming-language
+
+### python
+
+* [[algorithm]]
+* [[classic-algorithm]] 
 * [[class-advanced]]
+* [[data-structure]] 
+* [[first-data-structure-algorithm]]
 * [[data-model]]
 * [[sequence]]
 * [[first-class-functions]]
@@ -36,49 +36,12 @@ regenerate: true
 * [[concurrency-parallelism]]
 * [[concurrency-threading]]
 * [[concurrency-asyncio]]
-* [[numpy]]
-* [[pandas]]
-
-### [[django]]
-
-* [[django-wecode-1]]
-* [[django-wecode-2-encryption]]
-* [[django-wecode-3-modelling]] 
-* [[django-debugging-tool]]
-* [[django-debugging-example]]
-* [[code-review]]
-* [[unit-test]]
-* [[django-initial-settings]]
-* [[django-ORM]]
-* [[django-ORM-2]]
-* [[django-ORM-3]]
-* [[django-cache]]
-* [[django-basic]]
-* [[django-project-commerce]]
-* [[django-rest-framwork-example]]
-* [[django-nomad-drf]]
-* [[drf-throttle-filter-test]]
-* [[flask-example]]
-* [[django-performance]]
-
-## [[tool]]
-
-* [[github-basic-1]]
-* [[mini-conda]]
-* [[my-sql-install]]
-* [[postgresql-config]]
-* [[docker]]
 * [[nginx-uwsgi-django-docker]]
-* [[sql-command]]
-* [[linux-command]]
-* [[jekyll-install]]
-* [[dev-environment]]
-* [[vim-settings]]
+
+## tool
 
 ### aws
 
-* [[aws-basic]]
-* [[spotify-api]]
 * [[zeppelin-example]]
 * [[eks-background]]
 * [[eks-config]]
@@ -90,40 +53,10 @@ regenerate: true
 
 * [[practical-vim-1]]
 
-## [[study]]
+## study
 
-* [[os]]
-* [[data-structure]] 
-* [[first-data-structure-algorithm]]
-* [[algorithm]]
-* [[classic-algorithm]] 
 * [[ad-fraud]]
 * [[redis-operation]]
 * [[redis-py]]
 * [[data-engineering-background]]
-* [[stock]]
-* [[systrader]]
 
-### copy & paste
-
-* [[django-sql-cheatsheet]]
-* [[link-serverless]] 
-
-## [[media]]
-
-### [[book]]
-
-* [[함께자라기]]
-* [[손에잡히는빔]]
-
-## incomplete
-
-* interview-question
-
-#### two scoops of django
-
-* tsd-5
-
-#### tdd with python
-
-* tdd-3-website-test
