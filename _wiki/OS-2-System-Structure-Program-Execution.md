@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-12 00:43:32 +0900
-updated : 2022-02-12 00:50:57 +0900
+updated : 2022-02-13 00:28:27 +0900
 tags    : 
 toc     : true
 public  : true
@@ -117,7 +117,6 @@ latex   : false
 
 
 ## 컴퓨터 시스템 구조
-![[os_2_1.png]] 
  
 - Computer
 	- CPU
@@ -157,16 +156,10 @@ latex   : false
 
 
 ### Mode bit
-
-![[os_2_2.png]]
  
 ### Timer
-
-![[os_2_3.png]]
  
 ### Device Controller
-
-![[os_2_4.png]]
  
 - CPU가 I/O에 작업을 맡길 때
 	- I/O device 제어 레지스터(device controller)가 제어를 담당한다.
@@ -177,8 +170,6 @@ latex   : false
 		- CPU가 직접 일하는 게 아니라 메모리의 Instruction을 받아서 일하는 것처럼 디바이스를 실행하는 메뉴얼은 펌웨어에 있다?
 	
 ### I/O 수행
-
-![[os_2_5.png]]
  
 - I/O는 운영체제를 통해서만 접근 가능
 - 사용자프로그램이 운영체제에 부탁하는 것 --> System call
@@ -189,10 +180,7 @@ latex   : false
 	- Exception: 프로그램이 오류를 범한 경우
 	- System call: 프로그램이 커널 함수를 호출하는경우
 
-
 ### Interrupt
-
-![[os_2_6.png]]
 
 - 현대의 운영체제는 인터럽트에 의해 구동됨
 	- 인터럽트가 들어올 때만 CPU가 운영체제에 넘어감
@@ -208,8 +196,6 @@ latex   : false
 
 ### 동기식 입출력과 비동기식 입출력
 
-![[os_2_7.png]]
-
 Synchronous I/O
 - 동기식으로 번역이 불충분(예: 립싱크의 싱크)
 - 상황에 따라 의미가 다르게 쓰인다.
@@ -217,28 +203,20 @@ Synchronous I/O
 ASynchronous I/O
 - 인터럽트로 작업 완료를 알림
 
-
 ### DMA
-
-![[os_2_8.png]]
 
 ### 서로 다른 입출력 명령어
 
-![[os_2_9.png]]
 - 메모리 접근 명령어, I/O 접근 명령어 따로
 - Memory Mapped I/O: 메모리 주소와 I/O 접근 주소 연속적으로
   
 ### 저장장치 계층 구조
-
-![[os_2_10.png]]
  
 - Primary(Executable): CPU 직접 접근 가능(바이트 단위여야 한다)
 - Secondary: CPU 직접 접근 불가능(바이트 단위가 아니라 섹터단위라서)
 - 캐시 메모리 : CPU 1클락당 하나 처리하는데 DRAM 접근하려면 10~100클락까지 걸리므로 속도 완충
 
 ### 프로그램의 실행(메모리 로드)
-
-![[os_2_11.png]]
 
 - 실행파일을 실행하면 버추얼메모리에 올라가고 이후 메모리로 올라가 프로세스가 된다.
 - 실행 시 독자적인 버추얼 메모리 주소 공간이 생긴다.
@@ -248,8 +226,6 @@ ASynchronous I/O
 
 
 ### 커널 주소 공간의 내용
-
-![[os_2_12.png]] 
  
 PCB(Process Control Block): 프로그램이 돌아가면 이를 관리하기 위한 자료구조가 커널에 만들어지는데 이것이 PCB다.
 Stack: 커널 코드를 함수로 사용하므로 스택, 사용자 프로그램마다 스택을 따로 씀
@@ -259,3 +235,4 @@ Stack: 커널 코드를 함수로 사용하므로 스택, 사용자 프로그램
 ## Source
 
 - [이화여대 반효경 교수님 운영체제 강의](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
+
