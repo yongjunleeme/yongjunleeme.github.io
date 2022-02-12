@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-12 23:52:05 +0900
-updated : 2022-02-13 00:28:50 +0900
+updated : 2022-02-13 00:42:07 +0900
 tags    : 
 toc     : true
 public  : true
@@ -13,7 +13,7 @@ latex   : false
 * TOC
 {:toc}
 
-# 동시성과 병렬성
+## 동시성과 병렬성
 
 - 동시성(concurrency)이란 컴퓨터가 같은 시간에 여러 다른 작업을 처리하는 것처럼 보이는 것을 뜻한다. 예를 들어 CPU 코어가 하나뿐인 컴퓨터에서 운영체제는 유일한 프로세서 코어에서 실행되는 프로그램을 아주 빠르게 변경할 수 있다. 이렇게 하면 여러 프로그램이 번갈아가며 실행되면서 프로그램이 동시에 수행되는 것 같은 착각을 불러일으킬 수 있다.
 - 병렬성(parallelism)이란 같은 시간에 여러 다른 작업을 실제로 처리하는 것을 뜻한다. CPU 코어가 여러 개인 컴퓨터는 여러 프로그램을 동시에 실행할 수 있다.
@@ -860,4 +860,5 @@ else:
 
 ## Link
 
-- [effective python](https://github.com/yongjunleeme/effectivepython/tree/master/example_code)
+- [effective python](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728)
+

@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-12 23:51:40 +0900
-updated : 2022-02-13 00:28:50 +0900
+updated : 2022-02-13 00:41:59 +0900
 tags    : 
 toc     : true
 public  : true
@@ -600,8 +600,6 @@ def index_file(handle):
                 yield offset
 ```
 
-# Generator(제네레이터)
-
 ## 31. 인자에 대해 이터레이션할 떄는 방어적이 돼라
 
 제너레이터가 반환하는 이터레이터는 제너레이터 함수의 본문에서 yield가 반환하는 값들로 이뤄진 집합을 만들어낸다.
@@ -825,8 +823,6 @@ print('Filter:      ', list(filter_result))
 filter_false_result = itertools.filterfalse(evens, values)
 print('Filter false:', list(filter_false_result))
 ```
-
-# 클래스와 인터페이스
 
 ## 37. 내장 타입을 여러 단계로 내포시키기보다는 클래스를 합성하라
 
@@ -1165,7 +1161,7 @@ class BinaryTree(ToDictMixin):
 
 ...
 
-# [44. 세터와 게터 메서드 대신 평범한 애트리뷰트를 사용하라](https://github.com/yongjunleeme/effectivepython/blob/master/example_code/item_44.py)
+## [44. 세터와 게터 메서드 대신 평범한 애트리뷰트를 사용하라](https://github.com/yongjunleeme/effectivepython/blob/master/example_code/item_44.py)
 
 클래스가 시간이 지남에 따라 진화하기 때문에 클래스를 설계할 때는 클래스를 호출하는 쪽에 영향을 미치지 않음을 보장하는 것이 중요하다.
 나중에 애트리뷰트가 설정될 때 특별한 기능을 수행해야 한다면, 애트리뷰트를 @property 데코레이터와 대응하는 setter 애트리뷰트로 옮겨갈 수 있다. 다음 코드는 Registor라는 새 하위 클래스를 만든다. Registor에서 voltage 프로퍼티에 값을 대입하면 current 값이 바뀐다. 코드가 제대로 작동하려면 세터와 게터의 이름이 우리가 의도한 프로퍼티 이름과 일치해야 한다.
@@ -1896,5 +1892,6 @@ else:
 
 ## Link
 
-- [effective python](https://github.com/yongjunleeme/effectivepython/tree/master/example_code)
+- [effective python](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728)
+
 

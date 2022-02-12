@@ -183,7 +183,7 @@ print('\n'.join(top.traceback.format()))
 
 스택 트레이스는 프로그램에서 메모리를 소모하는 일반적인 함수나 클래스의 구체적인 용례를 파악할 때 중요한 도구다.
 
-## [82. 커뮤니티에서 만든 모듈을 어디서 찾을 수 있는지 알아두라]
+## 82. 커뮤니티에서 만든 모듈을 어디서 찾을 수 있는지 알아두라
 
 `python3 -m pip`를 사용해 pip를 호출하면 패키지가 시스템에 설치된 파이썬 버전에 맞게 설치되도록 보장할 수 있다.
 
@@ -271,5 +271,5 @@ def aaa(word, dictionary):
 
 ## Link
 
-- [effective python](https://github.com/yongjunleeme/effectivepython/tree/master/example_code)
+- [effective python](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728)
 

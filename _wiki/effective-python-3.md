@@ -1557,5 +1557,5 @@ for count in (1_000, 2_000, 3_000, 4_000, 5_000):
 
 ## Link
 
-- [effective python](https://github.com/yongjunleeme/effectivepython/tree/master/example_code)
+- [effective python](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728)
 
