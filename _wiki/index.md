@@ -32,7 +32,7 @@ regenerate: true
 
 ## programming-language
 
-## java
+### java
 
 * [[effective-java-1]]
 * [[effective-java-2]]

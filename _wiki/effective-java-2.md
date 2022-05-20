@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-05-20 17:17:24 +0900
-updated : 2022-05-20 17:19:13 +0900
+updated : 2022-05-20 17:41:20 +0900
 tags    : 
 toc     : true
 public  : true
@@ -19,26 +19,24 @@ latex   : false
 - 생성자와 별도로 객체를 생성하는 메서드
 
 장점
-- 1. 이름을 가질 수 있다.
-- 2. 호출될 때마다 인스턴스를 새로 생성하지는 않아도 된다.
+- 1) 이름을 가질 수 있다.
+- 2) 호출될 때마다 인스턴스를 새로 생성하지는 않아도 된다.
 	- 인스턴스 통제 클래스
 		- 싱글턴 가능
 		- 인스턴스화 불가 가능
 		- 동치인 인스턴스가 단 하나임을 보장 가능
-- 3. 반환 타입의 하위 타입 객체를 반환할 수 있는 능력이 있다.
+- 3) 반환 타입의 하위 타입 객체를 반환할 수 있는 능력이 있다.
 	- 굳이 클래스를 만들지 않고 인터페이스에서 정적 팩토리 메서드를 얻을 수 있다.
-- 4. 입력 매개변수에 따라 매번 다른 클래스의 객체를 반환할 수 있다.
-- 5. 정적 팩터리 메서드를 작성하는 시점에는 반환할 객체의 클래스가 존재하지 않아도 된다. 
+- 4) 입력 매개변수에 따라 매번 다른 클래스의 객체를 반환할 수 있다.
+- 5) 정적 팩터리 메서드를 작성하는 시점에는 반환할 객체의 클래스가 존재하지 않아도 된다. 
 
 - [예제 참고](https://coder-in-war.tistory.com/entry/Java-28-%EC%A0%95%EC%A0%81-%ED%8C%A9%ED%86%A0%EB%A6%AC-%EB%A9%94%EC%84%9C%EB%93%9C)
 
 # 아이템 2. 생성자에 매개변수가 많다면 빌더를 고려하라  
 
-## [Java Beans](https://github.com/jbloch/effective-java-3e-source-code/blob/master/src/effectivejava/chapter2/item2/javabeans/NutritionFacts.java)
-
-## [Builder](https://github.com/jbloch/effective-java-3e-source-code/blob/master/src/effectivejava/chapter2/item2/builder/NutritionFacts.java)
-
-## [hierarchicalbuilder](https://github.com/jbloch/effective-java-3e-source-code/tree/master/src/effectivejava/chapter2/item2/hierarchicalbuilder "hierarchicalbuilder")
+[Java Beans](https://github.com/jbloch/effective-java-3e-source-code/blob/master/src/effectivejava/chapter2/item2/javabeans/NutritionFacts.java)
+[Builder](https://github.com/jbloch/effective-java-3e-source-code/blob/master/src/effectivejava/chapter2/item2/builder/NutritionFacts.java)
+[hierarchicalbuilder](https://github.com/jbloch/effective-java-3e-source-code/tree/master/src/effectivejava/chapter2/item2/hierarchicalbuilder "hierarchicalbuilder")
 
 - 빌더 패턴은 계층적으로 설계된 클래스와 함께 쓰기 좋다.
 - 하위 클래스의 메서드가 상위 클래스의 메서드가 정의한 반환 타입이 아닌, 그 하위 타입을 환하는 기능을 공변반환 타이핑(covariant return typing)이라 한다. 이 기능을 이용해 클라이언트가 형변환에 신경 쓰지 않고도 빌더를 사용할 수 있다.
