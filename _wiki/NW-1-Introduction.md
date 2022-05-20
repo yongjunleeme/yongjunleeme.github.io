@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:10:25 +0900
-updated : 2022-02-13 00:10:25 +0900
+updated : 2022-05-20 17:03:25 +0900
 tags    : 
 toc     : true
 public  : true
@@ -13,7 +13,7 @@ latex   : false
 * TOC
 {:toc}
 
-# 요약
+## 요약
 ## 1.1 인터넷이란 무엇인가
 ### 1.1.1 인터넷의 구성요소
 
@@ -290,7 +290,7 @@ botnet: 디도스 어택을 위한 오염된 컴퓨터들의 집합
 4) IP spoofing
 Host가 다른 Source인 척
 
-# 목차
+## 목차
 컴퓨터 네트워크와 인터넷
 
 - 1.1 인터넷이란 무엇인가?

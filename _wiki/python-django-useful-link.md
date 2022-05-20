@@ -20,6 +20,7 @@ latex   : false
 - [one Liners](https://wiki.python.org/moin/Powerful%20Python%20One-Liners)
 - [실용 python](https://wikidocs.net/book/4673?fbclid=IwAR2UWFdJA-_JImd1AEmGLbe2Y3KhxJVIHehCYdDPvh9wYyePSBUAsYAHQSA)
 
+
 # django
 
 - [django - QuerySet Api reference by kimdoky님](https://kimdoky.github.io/django/2020/02/03/django-queryset-api/)

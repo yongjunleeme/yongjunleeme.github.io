@@ -13,7 +13,8 @@ latex   : false
 * TOC
 {:toc}
 
- ## Virtualization
+## Virtualization
+
 Virtualization의 핵심은 일루젼
 컴퓨터 역사는 Virtualization의 역사다.
 
@@ -32,8 +33,8 @@ VMM(virtual machine monitor) 버추얼 머신 모니터
 캐시- locality(Spatial 예) array[0], array[1], Temporal 예)for-loop)
 
 환상의 만남
-1) 메모리 기술(다양한 메모리 소자 속도, 가격, 용량 트레이드 오프)
-2) locality
+- 1) 메모리 기술(다양한 메모리 소자 속도, 가격, 용량 트레이드 오프)
+- 2) locality
 
 SRAM 액세스 시간? 10 nano초 이하
 DRAM 액세스 시간? 100 nano초 이하 
@@ -43,12 +44,14 @@ SRAM과 DRAM 가상화 - 캐시는 하드웨어로 동작. OS 소프트웨어 �
 DRAM과 하드디스크 가상화 - OS과 관여, 정말 디스크로 가는 것은 느리니 프로그램으로 막아야 하니깐?
 
 ## Two Aspects of Virtualization
-1) 기능
+
+- 1) 기능
 - 하드웨어: MMU(Memory management unit)과 exception 메커니즘(Page fault)
 	- MMU: 프로그램 주소를 주면 그 주소가 피지컬에서 어디있는지 트랜스레이션
 	- page fault: 메인 메모리에 내용이 없으면 하드 디스크에서 가져와야 하는데 그때 Page fault를 알려주는 역할
 - 소프트웨어: OS가 제어하는 버추얼 메모리의 프로세스?
-2) 성능
+
+- 2) 성능
 - 메모리 참조 최적화 
 	- Temporal locality
 	- Spatial locality

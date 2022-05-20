@@ -15,13 +15,14 @@ latex   : false
 
 ## 요약
 
-1. Instruction Set Architecture as an ADT
-ADT(Abstract Data Type)을 정의하기 위한 두 가지
-1) State(레지스터와 메모리)
-ISA의 State는? 레지스터와 메모리의 내용
+- 1. Instruction Set Architecture as an ADT
 
-2) Operations(스테이트를 Transform)
-ISA의 Operation? Instruction
+ADT(Abstract Data Type)을 정의하기 위한 두 가지
+- 1) State(레지스터와 메모리)
+- ISA의 State는? 레지스터와 메모리의 내용
+
+- 2) Operations(스테이트를 Transform)
+- ISA의 Operation? Instruction
 
 예) 
 Jump는 어떤 State을 바꾸나? 프로그램 카운터 스테이트 1개만 바꾼다
@@ -44,9 +45,9 @@ Branch
 - 조건 만족하면 어디로 브랜치할 것인지 타겟 주소 지정
 - 조건이 맞지 않으면 시퀀셜한 인스트럭션 실행
 
-2. Engineering methodology
-Rule1: Common 케이스는 성능 최적화
-Rule2: Rare 케이스는 성능보다 Correct
+- 2. Engineering methodology
+- Rule1: Common 케이스는 성능 최적화
+- Rule2: Rare 케이스는 성능보다 Correct
 
 Rule1: Common 케이스는 성능 최적화
 - 메인메모리: DRAM으로 구성(캐시보다 훨씬 큰 규모)
@@ -81,11 +82,12 @@ Rule2: Rare 케이스는 성능보다 Correct
 - Ratio
 	- relative performance(both time and rate)
  
-# Introduction
-1. Interfaces
-− Instruction Set Architecture (“The Hardware/Software Interface”)
+## Introduction
 
-2. Engineering methodology/ Correctness criteria/ Evaluation methods/ Technology trends involved in the following design techniques
+- 1. Interfaces
+    − Instruction Set Architecture (“The Hardware/Software Interface”)
+
+- 2. Engineering methodology/ Correctness criteria/ Evaluation methods/ Technology trends involved in the following design techniques
 	- Pipelining
 	-  Cache
 	-  Multiprocessor  

@@ -32,6 +32,11 @@ regenerate: true
 
 ## programming-language
 
+## java
+
+* [[effective-java-1]]
+* [[effective-java-2]]
+
 ### python
 
 * [[python-django-useful-link]]
@@ -45,11 +50,7 @@ regenerate: true
 * [[data-structure]] 
 * [[first-data-structure-algorithm]]
 * [[data-model]]
-* [[sequence]]
-* [[first-class-functions]]
 * [[python-basic]]
-* [[closure-decorator]]
-* [[object-reference]]
 * [[concurrency]]
 * [[concurrency-parallelism]]
 * [[concurrency-threading]]
