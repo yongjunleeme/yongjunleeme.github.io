@@ -4,30 +4,17 @@
 body {
     margin: 0;
     height: 100%;
-}
-
-body {
-  font: 400 16px 'Roboto Slab',AppleSDGothicNeo,sans-serif;
-  color: rgba(0, 0, 0, 0.84);
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    font: 400 16px 'Roboto Slab',AppleSDGothicNeo,sans-serif;
 }
 
 body, th, td, div, p, li {
+    font-family: "Open Sans", arial, "Apple SD Gothic Neo", "Noto Sans CJK KR", 본고딕, "KoPubDotum Medium", 나눔바른고딕, 나눔고딕, NanumGothic, 맑은고딕, "Malgun Gothic", sans-serif;
+    line-height: 1.5;
     word-break: keep-all;
 }
 
-$main-font-color: #4D5667;
-
 p, li {
-    color: $main-font-color;
+    color: #404040;
 }
 
 a:link {
@@ -41,7 +28,6 @@ a:visited {
 }
 
 blockquote {
-    font-family: 'Noto Serif KR', serif;
     background: #FFFFFF;
     margin:0;
     padding: 1px 0px 1px 8px;
@@ -50,6 +36,27 @@ blockquote {
         line-height: 2;
         color: $second-font-color;
     }
+}
+code,pre {
+    font-family:  $coding-font;
+}
+code {
+    color: inherit;
+    background-color: #ebedf0;
+    padding: 1px 3px;
+    border-radius: 3px;
+}
+pre {
+    overflow-x: auto;
+    padding: 10px 10px;
+}
+pre, pre code {
+    color: #fafafa;
+    background-color: #223;
+    // font-weight: 600;
+}
+pre code {
+    padding: 0;
 }
 .hide {
     display: none;
@@ -67,14 +74,9 @@ blockquote {
 
 }
 
-h1 {
+h1,h2,h3,h4,h5,h6{
     font-weight: normal;
 }
-h2,h3,h4,h5,h6 {
-    font-weight: normal;
-    color: $main-font-color;
-}
-
 .post-content h1,h2,h3,h4,h5,h6 {
     &:before { color:$theme-color; }
 }
@@ -124,53 +126,4 @@ h6 {
 }
 .post-content h6 {
     &:before { content:"⠟"; }
-}
-
-.post-content .external-link {
-    &:after {
-        content: url("/resource/icon/external-link.svg");
-    }
-}
-
-.post-content .tagged-link {
-    &:before { content:"#"; }
-}
-
-.error-link {
-    &:after {
-        font-style: italic;
-        color: red;
-    }
-}
-
-.link-404 {
-    @extend .error-link;
-    &:after {
-        content: "[404 Not Found]"
-    }
-}
-
-.link-400 {
-    @extend .error-link;
-    &:after {
-        content: "[400 Bad Request]"
-    }
-}
-
-.link-408 {
-    @extend .error-link;
-    &:after {
-        content: "[408 Request Timeout]"
-    }
-}
-
-.link-500 {
-    @extend .error-link;
-    &:after {
-        content: "[500 Internal Server Error]"
-    }
-}
-
-.post-item:hover {
-  background-color: #FFF5FF;
 }
