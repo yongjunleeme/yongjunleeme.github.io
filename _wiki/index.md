@@ -26,7 +26,7 @@ regenerate: true
 
 ### computer architecture
 
-* CA-1-Introduction
+* [[CA-1-Introduction]]
 * CA-2-Virtualization
 * CA-3-Performance
 

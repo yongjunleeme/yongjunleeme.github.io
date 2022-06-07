@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:20:20 +0900
-updated : 2022-02-13 00:20:20 +0900
+updated : 2022-06-07 20:19:42 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,242 +12,94 @@ latex   : false
 ---
 * TOC
 {:toc}
+# 컴퓨터 추상화 및 관련 기술
 
-## 요약
+## 1.2 컴퓨터 구조 분야의 일곱 가지 위대한 아이디어
 
-- 1. Instruction Set Architecture as an ADT
+### 설계를 단순화하는 추상화
+하위 수준의 상세한 사항을 안 보이게 함으로써 상위 수준 모델을 단순화한다.
 
-ADT(Abstract Data Type)을 정의하기 위한 두 가지
-- 1) State(레지스터와 메모리)
-- ISA의 State는? 레지스터와 메모리의 내용
+### 자주 생기는 일을 빠르게(Common case fast)
+### 병렬성(parallelism)을 통한 성능 개선
+### 파이프라이닝을 통한 성능 개선
+### 예측을 통한 개선
+예측이 틀렸을 때 이를 복구하는 비용이 비싸지 않고 예측이 맞을 확률이 비교적 높을 경우, 확실해질 때까지 기다리는 것보다 추측해서 일단 시작하는 것이 평균적으로 빠를 수 있다.
 
-- 2) Operations(스테이트를 Transform)
-- ISA의 Operation? Instruction
+### 메모리 계층구조
+### 여유분을 이용한 신용도 개선
 
-예) 
-Jump는 어떤 State을 바꾸나? 프로그램 카운터 스테이트 1개만 바꾼다
-Store? 프로그램 카운터의 값, 메모리의 한 location의 값을 바꾼다.
+## 1.3 프로그램 밑의 세계
 
-Stack
-- State: 데이터와 오더링
-- Operation: pop, push.. 
+하드웨어 - 시스템 소프트웨어 - 애플리케이션 소프트웨어
 
-Instruction Set Architecture
-- State: 레지스터와 메모리의 내용
-- Operation: Instruction
+시스템 소프트웨어에는 운영체제와 컴파일러가 있다.
 
-Load Instruction
-- State: 타겟 레지스터의 값이 바뀌고 프로그램 카운터의 값이 바뀐다.
-- Operation: 메모리 내용을 레지스터로 옮긴다.
+컴파일러는 상위 수준언어로 작성된 프로그램을 하드웨어가 실행할 명령어(기계어)로 번역한다.
 
-Branch
-- State: 프로그램 카운터 
-- 조건 만족하면 어디로 브랜치할 것인지 타겟 주소 지정
-- 조건이 맞지 않으면 시퀀셜한 인스트럭션 실행
+어셈블러는 기호로 된 명령어를 이진수로 바꾸어 준다(예: `add A, B` --> `1001010100101110`)
 
-- 2. Engineering methodology
-- Rule1: Common 케이스는 성능 최적화
-- Rule2: Rare 케이스는 성능보다 Correct
+## 1.4 케이스를 열고
 
-Rule1: Common 케이스는 성능 최적화
-- 메인메모리: DRAM으로 구성(캐시보다 훨씬 큰 규모)
-- 캐시: SRAM(가격비싸고 속도 빠름)으로 구성
-- SRAM과 DRAM 사이의 Trade off: cost, performance
-- 목표: 새로운 메모리 소자가 성능은 SRAM이며 가격은 DRAM인 것 같은 일루젼
+### 상자를 열고
+모든 컴퓨터 하드웨어는 4가지 기본기능인 데이터 입력, 출력, 처리 저장을 수행한다.
 
-Spatial locality(공간적 지역성): 어떤 주소가 참조되면 가까운 미래에 그 주소가 또 참조될 확률이 높다.
-	- array의 index 시퀀셜
-Temporal locality(시간적 지역성): 가까운 과거에 참조되면 가까운 미래에 또 참조될 확률이 높다.
-	- for loop의 i 변수
+DRAM(Dynamic Random Access Memory): 어떤 위치든 임의로 접근할 수 있다. DRAM 여러 개를 한데 묶어서 프로그램의 명령어와 데이터를 기억하는 데 사용한다. DRAM에서 RAM이란 말은 자기 테이프 같은 순차 접근 메모리와는 반대로 메모리의 어떤 부분을 읽든지 같은 시간이 걸린다는 것을 의미한다.
 
-캐시와 메인메모리의 Common Case
-- Spatial locality: 요청된 워드로 움직이지 않고 그 주변에 있는 block 단위로 캐시에 올려 놓는다.
-- Temporal locality: 여태까지 참조된 블록을 줄을 세운다. 그 다음에 캐시에 집어넣을 수 있는 곳까지만 끊어서 올린다.
+캐시 메모리는 DRAM의 버퍼 역할을 하는 작고 빠른 메모리다(비전문적인 용어로 캐시는 물건을 숨겨 두기에 안전한 장소라는 뜻이다). 캐시는 SRAM(Static Random Access Memory)을 이용하는데 SRAM은 DRAM보다 빠르지만 집적도가 낮아서 가격이 비싸다.
 
-보통의 DRAM 2GB인데 캐시를 2MB만 써도 99% 참조가 캐시에서 hit가 나오는데 그 이유가 위 Common Case를 잡아냈기 때문
+명령어 집합(Instruction Set Architecture) 중 응용 프로그래머에게 제공되는 기본 명령어 집합과 운영체제 인터페이스를 합쳐서 ABI(Application Binary Interface)라 한다.
 
-Rule2: Rare 케이스는 성능보다 Correct
- I/O가 메인메모리(DRAM) 데이터 변경했는데 프로세서가 캐시에서 이전 데이터를 참조하는 잘못된 Rare 케이스
-- I/O Input작업이 끝나면 프로세서는 캐시가 아니라 메인메모리를 참조하고 캐시에 있는 이전 데이터는 지우도록 하여 해결
+여러 계층의 추상화 중에서 가장 중요한 것은 하드웨어와 하위 계층 소프트웨어 간의 인터페이스인 명령어 집합 구조(Instruction Set Architecture)다. 이렇게 인터페이스를 추상화함으로써 같은 소프트웨어를 실행하지만 가격과 성능이 다른 여러 가지 컴퓨터를 구현할 수 있다.
 
-3. Performance 측정 방법
-- Time
-	- 클라이언트측에서 본 퍼포먼스 메트릭(중국집 손님)
-	- response time
-	- execution time
-- Rate
-	- 서버측에서 본 퍼포먼스 메트릭(중국집 주인)
-	- throughput: MIPS, MFLOPS
-	- bandwidth: Mbps
-- Ratio
-	- relative performance(both time and rate)
- 
-## Introduction
+### 데이터의 안전한 저장소
+휘발성(Volatile) 메모리(=Main Memory, Primary Memory)
+비휘발성 메모리(Secondary Memory)
 
-- 1. Interfaces
-    − Instruction Set Architecture (“The Hardware/Software Interface”)
+플래시 메모리는 10만~100만번 쓰기를 한 후에는 못 쓰게 된다.
 
-- 2. Engineering methodology/ Correctness criteria/ Evaluation methods/ Technology trends involved in the following design techniques
-	- Pipelining
-	-  Cache
-	-  Multiprocessor  
-		- Cache Coherence  
-		- Synchronization  
-		- Interconnection Network
-		
-## Instruction Set Architecture as an ADT
-- ISA? 인터페이스다. 목적은 분업
-- **레지스터와 메모리로 정의된 스테이트, 그 스테이트를 Transform시킬 수 있는 명령어로 구성**
-- ADT(Abstract Data Type)	
-	- 무엇이 정의되어야 하나? **1 State**와 State를 변경하는 **2 Operation**
-	- ISA의 State는 무엇? **메모리와 레지스터의 내용** Operation은 무엇? **Instruction**
+### 컴퓨터 간의 통신
+이더넷은 근거리 네트워크(LAN)의 일종이다. 라우팅 서비스와 보안을 제공하는 스위치를 사용하면 LAN들을 서로 연결할 수 있다. 
 
-- 예:
-	- Jump는 어떤 State을 바꾸나? 프로그램 카운터 스테이트 1개만 바꾼다
-	- Store? 프로그램 카운터의 값, 메모리의 한 location의 값을 바꾼다.
-	- State는 레지스터의 집합 + 메모리로 정의, Operation은 Instruction으로 정의
+## 1.5 프로세서와 메모리 생산 기술
 
-## Design Techniques
+트랜지스터는 전기로 제어되는 온/오프 스위치다.
 
-Engineering methodology
-Correctness criteria  
-Evaluation methods  
-Technology trends
- 
-Pipelined execution : 한 명령어 실행 이후 끝마치기 전에 다음 명령어 실행
-out-of-order execution: 뒤죽박죽 실행
-Speculative Execution(추측에 근거한 실행): 브랜치를 만나면 결과를 보지 않고 예측을 해서 양쪽 중에 한 방향으로 가능 가버리는 것?
+집적회로는 수십, 수백 개의 트랜지스터를 칩 하나에 집적시킨 것이다.
 
-## Engineering methodology
+집적회로 칩의 생산은 모래의 구성 성분인 실리콘에서부터 출발한다. 실리콘은 전기가 통하기는 하는데 썩 잘 통하는 편은 아니어서 반도체라고 부른다.
 
-- Rule1: Common 케이스는 성능 최적화
-- Rule2: Rare 케이스는 성능보다 Correct 
+실리콘 결정 괴(silicon crystal ingot)을 0.1인치 이하 두께로 잘라 웨이퍼로 만든다.
 
-#### Rule1: Common 케이스는 성능 최적화
-메인메모리: DRAM으로 구성(캐시보다 훨씬 큰 규모)
-캐시: SRAM(가격비싸고 속도 빠름)으로 구성
-SRAM과 DRAM 사이의 Trade off: cost, performance
-목표: 새로운 메모리 소자가 성능은 SRAM이며 가격은 DRAM인 것 같은 일루젼 
+웨이퍼에 화학 물질을 첨가해 부분 부분을 도체, 절연체로 바꾼다.
 
-- **Spatial locality(공간적 지역성): 어떤 주소가 참조되면 가까운 미래에 그 주소가 또 참조될 확률이 높다.**
-- **Temporal locality(시간적 지역성): 가까운 과거에 참조되면 가까운 미래에 또 참조될 확률이 높다.**
-	- for loop의 i 변수
+웨이퍼를 컴포넌트별로 자르는데 이를 다이(die) 또는 칩이라 한다.
 
-캐시와 메인메모리의 Common Case
-Spatial locality: 요청된 워드로 움직이지 않고 그 주변에 있는 block 단위로 캐시에 올려 놓는다? Why? Spatial locality를 잘 이용하기 위해서
-Temporal locality: 여태까지 참조된 블록을 줄을 세운다. 그 다음에 캐시에 집어넣을 수 있는 곳까지만 끊어서 올린다? 
+여러 조각으로 나눠 웨이퍼 전체를 버리는 대신 다이만 버리면 된다.
 
-보통의 DRAM 2GB인데 캐시를 2MB만 써도 99% 참조가 캐시에서 hit가 나오는데 그 이유가 위 Common Case를 잡아냈기 때문
+트랜지스터와 연결선의 크기를 줄여서 다이를 축소시켜 원가 절감을 꾀하는데 2020년 최첨단 공정은 7nm다.
 
-#### Rule2: Rare 케이스는 성능보다 Correct
-CPU 캐시메모리에 정확성에 문제를 일으킬만한 Rare 케이스는 무엇?
-- I/O가 메인메모리(DRAM) 데이터 변경했는데 프로세서가 캐시에서 이전 데이터를 참조하는 잘못된 Rare 케이스
-- I/O Input작업이 끝나면 프로세서는 캐시가 아니라 메인메모리를 참조하고 캐시에 있는 이전 데이터는 지우도록 하여 해결 
+## 1.6 성능
 
-캐시 메모리 구현 Correctness 기준
-- 캐시 메모리가 없는 시스템에서 Instruction 실행한 것과 똑같은 결과	
-- 파이프라인 실행: 시퀀셜 실행과 똑같은 결과
+### 성능의 정의
 
-### Performance 측정 방법
+사용자 입장에서는 응답시간(작업 개시부터 종료까지의 시간), 데이터 관리자에게는 처리량 혹은 대역폭(일정한 시간 동안 처리하는 작업의 양)이 중요하다.
 
-엔지니어링 95%는 정말 쉽다. 마지막 5%가 정말 어렵다. 이게 5~10배 더 힘들다.
-정확성이 담보되었다면 성능을 최적화
+여기서는 성능을 논할 때 응답시간에 초점을 맞출 것이다.
 
-- Performance types
-- 1클라이언트가 중요하게 생각하는 메트릭
-- 2서버가 중요하게 생각하는 메트릭
+$$성능x = \frac{ 1}  { 실행시간x } $$
+### 성능의 측정
 
-- Time
-	- 클라이언트측에서 본 퍼포먼스 메트릭(중국집 손님)
-	- response time
-	- execution time
-- Rate
-	- 서버측에서 본 퍼포먼스 메트릭(중국집 주인)
-	- throughput: MIPS, MFLOPS
-	- bandwidth: Mbps
-- Ratio
-	- relative performance(both time and rate)
+경과시간(elapsed time)은 한 작업을 끝내는 데 필요한 전체 시간(디스크 접근, 메모리 적븐, 입출력 작업, 운영체제 오버헤드 등)인데 이와 구분해서 CPU 실행 시간(CPU execution time) 또는 CPU 시간에는 입출력이나 다른 프로그램 실행 시간은 포함되지 않는다.
 
-Load Instruction
-- State: 타겟 레지스터의 값이 바뀌고 프로그램 카운터의 값이 바뀐다.
-- Operation: 메모리 내용을 레지스터로 옮긴다.
+CPU 시간은 사용자 CPU 시간과 운영체제가 이 프로그램을 위한 작업을 수행하기 위해 소비한 시스템 CPU 시간으로 다시 나눌 수 있다.
 
-Branch
-- State: 프로그램 카운터 
-- 조건 만족하면 어디로 브랜치할 것인지 타겟 주소 지정
-- 조건이 맞지 않으면 시퀀셜한 인스트럭션 실행
+다른 부하가 없는 시스템에서의 경과시간으로 계산한 것을 시스템 성능, 사용자 CPU 시간으로 계산한 것을 CPU 성능이라고 부르기로 한다. 여기서는 CPU 성능에 초점을 맞춘다.
 
-## Technology Trends
- 
-1 MIPS(1초에 백만개 인스트럭션 실행)
-64KB : 메모리
-1M : 백만불 
-가격 / MIPS: MIPS당 가격
+### CPU 성능과 성능 인자
 
-익스포낸셜한 가격과 성능 상승
-그러나 그 흐름이 더뎌진다면?
+프로그램의 CPU 실행 시간 = 프로그램의 CPU 클럭 사이클 수 * 클럭 사이클 시간
 
-신뢰성을 높이는게 큰 챌린지
-- 소프트웨어는 가끔 죽는데 비행기나 자동차가 그런가?
-
-## Big Picture
-
-데이터센터--> 하나 크기가 축구장 정도
-왜 강 옆에 데이터센터가 있는가?
-강 옆에는 수력발전해서 전기료 절감 / 물로 쿨링
-
-블레이드 서버(CPU보드 낱장) 고장나면?
-그냥 빼오고 다른 스탠바이 유닛을 넣는다. 하나라도 다운타임이 생기면 안 되니깐
-
-SDK, 하드디스크 프로세서 몇 개? 1~2개
-자동차 프로세서 몇 개? 300개 이상
-동시에 부팅시키는 것만 해도 대단할 것이다.
-
-BMW 브레이크 밟으면 양쪽이 속도를 맞추기 위해 계속해서 한쪽을 조정한다.
-BMW 차 터는 법?
-천정에 올라가 밟으면 된다.
-전복됐을 때 대비
-
-평소에는 파워 스티어링
-Fault Function--> 이빨 꽉 깨물고 하면 핸들, 브레이크 동작한다.
- 
-실리콘 얇게 썰어 --> Black Wafer
-트랜지스터
-
-Infant Mortality --> 완성 되기 몇 
-태어난 후 이틀이 가장 위험하다.
-
- ## Processor Performance Trends
-
-익스포낸셜한 성능 향상
-전자측 기여
-- 한 다이 안에 들어가는 트랜지스터의 크기를 더 작게 
-	- 더 빠르게 스위칭 가능
-- Scalable CMOS
-	- 사이즈가 작아지더라도 다시 사용 가능하도록 애초에 심볼릭하게 디자인
-
-성장의 방향
-프로세서: 성능
-DRAM: 용량 capacity
-
-무슨 문제가 발생할까?
-스피드 갭 점점 커져
-싱글 레벨 캐시로 막아봤다.
-3단계 이상의 캐시까지
-
-컴퓨터 아키텍처
-클락 프리퀀시가 집적도를 따라가지 못하고 멀티코어로 선회 
-멀티코어로 프로그래밍을 하는 인간의 시퀀셜한 특징의 머리가 못 따라가서 발전속도 느림
-
-lithography 트랜지스터 계속 작게
-계속 작게 한계가 있으므로 10년 내 신뢰성 문제 대두될 것이다.
-
-더 큰 Mega-Trend
-- 창조주가 우리를 만드신 방법을 배우는 것
--  한 번 프로그래밍한 뒤에 자체적 evolve하도록 내버려둔 것
-- 프로그래밍을 한 번 해두고 냅두는 게 가장 좋지 않을까
-- 생물학에 키워드가 있을지도 모른다. 생물을 꼭 들으라.
-- 지금 눈 앞 트렌드가 아니라 10년 100년 1000년 뒤 트렌드에 도전과제를 삼으라. 
+$$프로그램의 CPU 실행시간 = \frac{프로그램의 CPU 클럭 사이클 수} {클럭 속도}  $$
 
 ## Source
 
