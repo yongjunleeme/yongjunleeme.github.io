@@ -40,6 +40,7 @@ regenerate: true
 
 * [[effective-java-1]]
 * [[effective-java-2]]
+* [[java-jungsuk-2]]
 
 ### python
 
