@@ -12,15 +12,15 @@ regenerate: true
 
 ### operating system
 
-* OS-1-Introduction-to-Operating-Systems
-* OS-2-System-Structure-Program-Execution
-* OS-3-Process
+* [[OS-1-Introduction-to-Operating-Systems]]
+* [[OS-2-System-Structure-Program-Execution]]
+* [[OS-3-Process]]
 * OS-4-Process-Management
 * OS-5-CPU-Scheduling
 
 ### network
 
-* NW-1-Introduction
+* [[NW-1-Introduction]]
 * NW-2-1-Application-layer
 * NW-2-2-Application-layer
 
@@ -38,9 +38,16 @@ regenerate: true
 
 ### java
 
-* [[effective-java-1]]
-* [[effective-java-2]]
-* [[java-jungsuk-2]]
+* [[effective-java-1-introduce]]
+* [[effective-java-2-creating-and-destroying-objects]]
+* [[effective-java-3-methods-common-to-all-objects]]
+* [[effective-java-4-class-andd-interfaces]]
+* [[effective-java-8-methods]]
+* [[java-puzzlers-2-expression]]
+* [[java-puzzlers-3-character]]
+* [[java-jungsuk-2-variable]]
+* [[java-jungsuk-3-operator]]
+* [[java-jungsuk-5-array]]
 
 ### python
 
