@@ -15,7 +15,7 @@ regenerate: true
 * [[OS-1-Introduction-to-Operating-Systems]]
 * [[OS-2-System-Structure-Program-Execution]]
 * [[OS-3-Process]]
-* OS-4-Process-Management
+* [[OS-4-Process-Management]]
 * OS-5-CPU-Scheduling
 
 ### network
