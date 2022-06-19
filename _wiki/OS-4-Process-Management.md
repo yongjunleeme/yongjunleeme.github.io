@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:07:21 +0900
-updated : 2022-06-19 23:47:28 +0900
+updated : 2022-06-19 23:56:03 +0900
 tags    : 
 toc     : true
 public  : true
@@ -13,7 +13,7 @@ latex   : false
 * TOC
 {:toc}
 
- ## 프로세스 생성(Process Creation)
+## 프로세스 생성(Process Creation)
 
 운영체제가 프로세스를 모두 생성하지 않는다. 부팅 후 최초 프로세스는 운영체제가 생성하지만 그 다음부터는 이미 존재하는 프로세스가 다른 프로세스를 복제 생성한다.
 
