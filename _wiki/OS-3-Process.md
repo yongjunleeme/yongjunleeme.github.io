@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:06:40 +0900
-updated : 2022-03-09 11:49:43 +0900
+updated : 2022-06-20 09:00:26 +0900
 tags    : 
 toc     : true
 public  : true
@@ -194,6 +194,6 @@ latex   : false
  
 ## Sources
 
-- [운영체제 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
+- [운영체제 - 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
 - [운영체제와 정보기술의 원리](http://www.yes24.com/Product/Goods/90124877)
 

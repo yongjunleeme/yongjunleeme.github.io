@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:07:21 +0900
-updated : 2022-06-19 23:56:03 +0900
+updated : 2022-06-20 09:00:26 +0900
 tags    : 
 toc     : true
 public  : true
@@ -166,6 +166,6 @@ IPC는 프로세스들 간 통신과 동기화를 이루기 위한 메커니즘�
 
 ## Sources
 
-- [운영체제 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
+- [운영체제 - 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
 - [운영체제와 정보기술의 원리](http://www.yes24.com/Product/Goods/90124877)
 

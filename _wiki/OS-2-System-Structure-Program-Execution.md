@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-12 00:43:32 +0900
-updated : 2022-06-18 17:42:12 +0900
+updated : 2022-06-20 09:00:21 +0900
 tags    : 
 toc     : true
 public  : true
@@ -241,6 +241,6 @@ CPU 내부에 모드 비트를 두어 사용자 프로그램이 운영체제의 
   
 ## Sources
 
-- [운영체제 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
+- [운영체제 - 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
 - [운영체제와 정보기술의 원리](http://www.yes24.com/Product/Goods/90124877)
 

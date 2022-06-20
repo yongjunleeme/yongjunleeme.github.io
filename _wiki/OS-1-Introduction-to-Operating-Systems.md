@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-12 00:41:29 +0900
-updated : 2022-05-23 22:01:01 +0900
+updated : 2022-06-20 09:00:26 +0900
 tags    : 
 toc     : true
 public  : true
@@ -159,5 +159,5 @@ latex   : false
 
 ## Source
 
-- [이화여대 반효경 교수님 운영체제 강의](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
+- [운영체제 - 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
 
