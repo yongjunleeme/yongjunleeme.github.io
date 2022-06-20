@@ -57,12 +57,9 @@ regenerate: true
 * [[effective-python-3]]
 * [[effective-python-4]]
 * [[algorithm]]
-* [[classic-algorithm]] 
 * [[class-advanced]]
 * [[data-structure]] 
 * [[first-data-structure-algorithm]]
-* [[data-model]]
-* [[python-basic]]
 * [[concurrency]]
 * [[concurrency-parallelism]]
 * [[concurrency-threading]]
@@ -73,7 +70,6 @@ regenerate: true
 
 ### aws
 
-* [[zeppelin-example]]
 * [[eks-background]]
 * [[eks-config]]
 * [[eks-creation]]
@@ -86,8 +82,9 @@ regenerate: true
 
 ## study
 
+* [[data-engineering-background]]
 * [[ad-fraud]]
+* [[zeppelin-example]]
 * [[redis-operation]]
 * [[redis-py]]
-* [[data-engineering-background]]
 
