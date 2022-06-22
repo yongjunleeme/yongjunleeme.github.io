@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-06-21 22:55:37 +0900
-updated : 2022-06-21 22:56:18 +0900
+updated : 2022-06-22 09:35:01 +0900
 tags    : 
 toc     : true
 public  : true
@@ -372,6 +372,7 @@ mysql> SELECT GROUP_CONCAT(DISTINCT dept_no ORDER BY emp_no DESC)
 
 `GROUP_CONCAT()`은 제한적인 메모리 버퍼 공간(기본 설정 1KB)을 사용한다. 자주 사용한다면 `group_concat_max_len` 시스템 변수로 크기를 조정할 수 있다.
 
+
 ### 11.3.3.9 값의 비교와 대체(CASE WHEN... THEN ... END)
 
 SWITCH 구문과 같은 역할이다. CASE로 시작하고 END로 끝나야 하며, WHEN ... THEN ... 은 필요한 만큼 반복해서 사용할 수 있다.
@@ -622,7 +623,24 @@ JSON에서 특정값을 추출한다. 첫 번째 인자는 JSON 데이터가 저
 `JSON_UNQUOTE()`를 사용하면 따옴표 없이 값만 가져올 수 있다.
 
 ```mysql
-SELECT emp_no, JSON_EXTRACT(doc, "$.first_name"     |
+SELECT emp_no, JSON_EXTRACT(doc, "$.first_name") FROM employee_docs;
+
++--------+-----------------------------------+
+| emp_no | JSON_EXTRACT(doc, "$.first_name") |
++--------+-----------------------------------+
+|  10001 | "Georgi"                          |
+|  10002 | "Bezalel"                         |
+|  10003 | "Parto"                           |
+|  10004 | "Chirstian"                       |
+|  10005 | "Kyoichi"                         |
++--------+-----------------------------------+
+
+SELECT emp_no, JSON_UNQUOTE(JSON_EXTRACT(doc, "$.first_name")) FROM employee_docs;
+
++--------+-------------------------------------------------+
+| emp_no | JSON_UNQUOTE(JSON_EXTRACT(doc, "$.first_name")) |
++--------+-------------------------------------------------+
+|  10001 | Georgi                                          |
 |  10002 | Bezalel                                         |
 |  10003 | Parto                                           |
 |  10004 | Chirstian                                       |
@@ -758,21 +776,4 @@ WHERE e1.emp_no IN (10001, 10002);
 # Source
 
 * [Real MySQL 8.0 2권](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791158392727&orderClick=JGJ)
-FROM employee_docs;
 
-+--------+-----------------------------------+
-| emp_no | JSON_EXTRACT(doc, "$.first_name") |
-+--------+-----------------------------------+
-|  10001 | "Georgi"                          |
-|  10002 | "Bezalel"                         |
-|  10003 | "Parto"                           |
-|  10004 | "Chirstian"                       |
-|  10005 | "Kyoichi"                         |
-+--------+-----------------------------------+
-
-SELECT emp_no, JSON_UNQUOTE(JSON_EXTRACT(doc, "$.first_name")) FROM employee_docs;
-
-+--------+-------------------------------------------------+
-| emp_no | JSON_UNQUOTE(JSON_EXTRACT(doc, "$.first_name")) |
-+--------+-------------------------------------------------+
-|  10001 | Georgi                                      )
