@@ -48,9 +48,9 @@ regenerate: true
 * [[effective-java-8-methods]]
 * [[java-puzzlers-2-expression]]
 * [[java-puzzlers-3-character]]
-* [[java-jungsuk-2-variable]]
-* [[java-jungsuk-3-operator]]
-* [[java-jungsuk-5-array]]
+* java-jungsuk-2-variable
+* java-jungsuk-3-operator
+* java-jungsuk-5-array
 
 ### python
 
