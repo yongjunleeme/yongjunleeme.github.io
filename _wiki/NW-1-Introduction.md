@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:10:25 +0900
-updated : 2022-05-26 21:08:30 +0900
+updated : 2022-06-25 22:02:14 +0900
 tags    : 
 toc     : true
 public  : true
@@ -67,7 +67,7 @@ latex   : false
 	- 대역폭(bits per second)
 	- Shared 여부(혼자 or 나눠쓰는가) 중요
 
- #### 가정 접속: DSL, 케이블, FTTH, 다이얼-업 그리고 위성
+#### 가정 접속: DSL, 케이블, FTTH, 다이얼-업 그리고 위성
 
 ##### digital subscriber line(DSL)
 
@@ -275,9 +275,8 @@ PoP는 단지 제공자의 네트워크 내에 있는 하나 혹은 그 이상�
 	- 1) delay
 	- 2) loss
 	- 3) throughput
-
-
- #### 노드 처리 지연 
+ 
+#### 노드 처리 지연 
 - 기본적인 네트워크 프로세싱에 걸리는 시간
 	- 에러체크
 	- 아웃고잉 링크 결정
@@ -312,10 +311,8 @@ PoP는 단지 제공자의 네트워크 내에 있는 하나 혹은 그 이상�
 - s: 전기신호가 전파되는 속도
 - Propagation delay: d/s
 - 일반적으로 2 * 10^8 m/sec 
-
-
-#### 전송 지연과 전파 지연 비교
-
+ 
+#### 전송 지연과 전파 지연 비교 
 전송 지연은 라우터가 패킷을 내보내는 데 필요한 시간이다(패킷 길이와 링크 전송률의 함수이며, 두 라우터 사이의 거리와는 관계 없다).
 
 반면, 전파 지연은 비트가 한 라우터에서 다음 라우터로 전파되는 데 걸리는 시간이다(두 라우터 사이의 거리에 대한 함수이며, 패킷 길이나 링크 전송률과는 관계 없다).
@@ -460,7 +457,7 @@ Host가 다른 Source인 척
 - 공중 와이파이, 4G 네트워크 통신
 - 구글, 마소 같은 서비스 제공자의 커다란 사설 네트워크가 전 세계 분산된 자신들의 데이터 센터를 연결할 뿐만 아니라 하위 ISP들까지 직접 연결
 
-## Sources 
+## Sources
 
 - [컴퓨터 네트워크 - 이화여대 이미정 교수님](http://kocw.net/home/search/kemView.do?kemId=1046412)
 - [컴퓨터 네트워킹 : 하향식 접근](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791185475318)
