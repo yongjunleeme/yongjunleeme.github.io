@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:12:30 +0900
-updated : 2022-06-25 23:02:20 +0900
+updated : 2022-06-25 23:04:46 +0900
 tags    : 
 toc     : true
 public  : true
@@ -12,8 +12,6 @@ latex   : false
 ---
 * TOC
 {:toc}
-
- # 애플리케이션 계층
 
 ## 2.1 네트워크 애플리케이션의 원리
 
