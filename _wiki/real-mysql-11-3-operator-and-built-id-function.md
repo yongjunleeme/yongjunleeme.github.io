@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-06-21 22:55:37 +0900
-updated : 2022-06-22 09:35:01 +0900
+updated : 2022-06-25 21:56:57 +0900
 tags    : 
 toc     : true
 public  : true
@@ -60,7 +60,7 @@ REGEXP는 비교 대상 문자열의 일부에 대해서만 일치해도 TRUE를
 
 와일드카드 문자인 `%`나 `_` 문자 자체를 비교한다면 `ESCAPE` 절을 `LIKE` 조건 뒤에 추가해 이스케이프 문자를 설정할 수 있다.
 
-```mysql
+```sql
 SELECT 'abc' LIKE 'a%';
 >> 1
 
@@ -89,13 +89,13 @@ WHERE first_name LIKE 'Christ%';
 
 BETWEEN 연산자는 다른 비교 조건과 결합해 하나의 인덱스를 사용할 때 주의해야 할 점이 있다.
 
-```mysql
+```sql
 SELECT dept_no BETWEEN 'd003' AND 'd005' AND emp_no = 10001;
 ```
 
 위 쿼리는 d003보다 크거나 같고 d005보다 작거나 같은 모든 인덱스 범위를 검색해야만 한다. emp_no=10001 조건은 비교 범위를 줄이는 역할을 하지 못한다.
 
-```mysql
+```sql
 SELECT * FROM dept_emp
 WHERE dept_no IN ('d003', 'd004', 'd005') 
 AND emp_no = 10001;
@@ -105,7 +105,7 @@ AND emp_no = 10001;
 
 MySQL 8.0 버전부터는 `IN (subquery)` 형태로 작성하면 옵티마이저가 세미 조인 최적화를 이용해 더 빠른 쿼리로 변환해서 실행한다.
 
-```mysql
+```sql
 SELECT *
 FROM dept_emp USE INDEX(PRIMARY)
 WHERE dept_no IN (
@@ -122,7 +122,7 @@ IN은 여러 개 값에 대해 동등 비교 연산을 수행하는 연산자다
 - 상수가 사용된 경우 - IN ( ?, ?, ?)
 - 서브쿼리가 사용된 경우 - IN ( SELECT .. FROM ..)
 
-```mysql
+```sql
 SELECT *
 FROM dept_emp
 WHERE (dept_no, emp_no) IN (('d001', 10017), ('d002', 10144));
@@ -143,7 +143,7 @@ NOT IN의 실행 계획은 인덱스 풀 스캔으로 표시되는데 동등이 
 
 `IFNULL()` 함수의 반환 값은 첫 번째 인자가 NULL이 아니면 첫 번째 인자의 값을, 첫 번째 인자의 값이 NULL이면 두 번째 인자의 값을 반환한다.
 
-```mysql
+```sql
 SELECT IFNULL(NULL, 1)
 >> 1
 
@@ -161,7 +161,7 @@ SELECT IFNULL(1/0)
 
 두 함수 모두 현재 시간을 반환하는 함수다. 하지만 하나의 SQL에서 `NOW()` 함수는 같은 값을 가지지만 `SYSDATE()` 함수는 호출되는 시점에 따라 결괏값이 달라진다.
 
-```mysql
+```sql
 SELECT NOW(), SLEEP(2), NOW();
 >>
 +---------------------+----------+---------------------+
@@ -189,7 +189,7 @@ SELECT SYSDATE(), SLEEP(2), SYSDATE();
 
 대소문자를 구분해서 사용해야 한다.
 
-```mysql
+```sql
 SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s') AS current_dttm;
 >>
 +---------------------+
@@ -209,7 +209,7 @@ SQL에서 표준 형태(년-월-일 시:분:초)로 입력된 문자열은 필�
 
 두 번째 인자의 형태는 `INTERVAL n [YEAR, MONTH, DAY...]`다
 
-```mysql
+```sql
 SELECT DATE_ADD(NOW(), INTERVAL -1 DAY) AS yesterday;
 >>
 +---------------------+
@@ -227,7 +227,7 @@ SELECT DATE_ADD(NOW(), INTERVAL -1 DAY) AS yesterday;
 
 `FROM_UNIXTIME()` 함수는 `UNIX_TIMESTAMP()`와 반대로 인자로 전달한 타임 스탬프 값을 DATETIME 타입으로 변환하는 함수다.
 
-```mysql
+```sql
 mysql> SELECT UNIX_TIMESTAMP();
 
 +------------------+
@@ -255,7 +255,7 @@ mysql> SELECT FROM_UNIXTIME(UNIX_TIMESTAMP('2020-08-23 15:06:45'));
 
 ### 11.3.3.6 문자열 처리(RPAD, LPAD / RTRIM, LTRIM, TRIM)
 
-```mysql
+```sql
 mysql> SELECT RPAD('Cloee', 10, '_');
 
 +------------------------+
@@ -305,7 +305,7 @@ mysql> SELECT TRIM('     Cloee    ') AS name;
 
 의도된 결과가 아닌 경우에는 명시적으로 `CAST()` 함수를 이용해 타입을 문자열로 변환하는 편이 안전하다.
 
-```mysql
+```sql
 mysql> SELECT CONCAT('Georgi', 'Christian', CAST(2 AS CHAR)) AS name;
 
 +------------------+
@@ -316,7 +316,7 @@ mysql> SELECT CONCAT('Georgi', 'Christian', CAST(2 AS CHAR)) AS name;
 ```
 비슷한 함수로 `CONCAT_WS()`는 각 문자열을 연결할 때 구분자를 넣어준다. With Separator의 약자.
 
-```mysql
+```sql
 mysql> SELECT CONCAT_WS(',', 'Georgi', 'Christian') AS name;
 
 +------------------+
@@ -330,7 +330,7 @@ mysql> SELECT CONCAT_WS(',', 'Georgi', 'Christian') AS name;
 
 `GROUP_CONCAT()` 함수는 값들을 먼저 정렬한 후 연결한다. 각 값의 구분자 설정도 가능하다. 여러 값 중에서 중복을 제거하고 연결할 수도 있다.
 
-```mysql
+```sql
 mysql> SELECT GROUP_CONCAT(dept_no) FROM departments;
 
 +----------------------------------------------+
@@ -372,12 +372,11 @@ mysql> SELECT GROUP_CONCAT(DISTINCT dept_no ORDER BY emp_no DESC)
 
 `GROUP_CONCAT()`은 제한적인 메모리 버퍼 공간(기본 설정 1KB)을 사용한다. 자주 사용한다면 `group_concat_max_len` 시스템 변수로 크기를 조정할 수 있다.
 
-
 ### 11.3.3.9 값의 비교와 대체(CASE WHEN... THEN ... END)
 
 SWITCH 구문과 같은 역할이다. CASE로 시작하고 END로 끝나야 하며, WHEN ... THEN ... 은 필요한 만큼 반복해서 사용할 수 있다.
 
-```mysql
+```sql
 SELECT emp_no, first_name,
 	CASE gender WHEN 'M' THEN 'Man'
                 WHEN 'F' THEN 'Woman'
@@ -428,7 +427,7 @@ SELECT emp_no, first_name,
 
 변환 가능 데이터 타입: DATE, TIME, DATETIME, BINARY, CHAR, DECIMAL, SIGNED INTEGER, UNSIGNED INTEGER
 
-```mysql
+```sql
 SELECT CAST('1234' AS SIGNED INTEGER) AS converted_integer;
 
 +-------------------+
@@ -448,7 +447,7 @@ SELECT CAST('2000-01-01' AS DATE) AS converted_date;
 
 `CONVERT()` 함수는 `CAST()` 함수와 같이 타입을 변환하는 요도와 문자열의 문자 집합을 변환하는 용도라는 두 가지로 사용할 수 있다.
 
-```mysql
+```sql
 SELECT CONVERT(1-2, UNSIGNED);
 
 +------------------------+
@@ -468,7 +467,7 @@ SELECT CONVERT('ABC' USING 'utf8mb4');
 
 ### 11.3.3.12 암호화 및 해시 함수(MD5, SHA, SHA2)
 
-```mysql
+```sql
 SELECT MD5('abc');
 
 +----------------------------------+
@@ -498,7 +497,7 @@ SELECT SHA2('abc', 256);
 
 첫 번째 인자는 반복해서 수행할 횟수이며, 두 번째 인자는 반복해서 실행할 표현식을 입력한다. 두 번째 인자는 반드시 스칼라값(하나의 칼럼을 가진 하나의 레코드)을 반환하는 표현식이어야 한다.
 
-```mysql
+```sql
 SELECT BENCHMARK(1000000, MD5('abc'));
 
 +--------------------------------+
@@ -535,7 +534,7 @@ SELECT BENCHMARK(1000000, (SELECT COUNT(*) FROM salaries));
 주소를 저장하려면 IPv4를 위해서는 `BINARY(4)` 타입을 IPv6를 위해서는 `BINARY(16)`
 타입을 사용하며 둘 다 저장해야 한다면 `VARBINARY(16)` 타입을 권장한다.
 
-```mysql
+```sql
 SELECT HEX(INET6_ATON('fdfe::5a55:caff:fefa:9089'));
 
 +----------------------------------------------+
@@ -574,7 +573,7 @@ SELECT INET6_NTOA(UNHEX('0A000509'));
 
 JSON 칼럼의 값을 읽기 쉬운 포맷으로 변환한다.
 
-```mysql
+```sql
 SELECT JSON_PRETTY(doc) FROM employee_docs WHERE emp_no=10005;
 
 | {
@@ -604,7 +603,7 @@ SELECT JSON_PRETTY(doc) FROM employee_docs WHERE emp_no=10005;
 
 JSON을 실제 디스크에 저장할 때 BSON(Binary JSON) 포맷을 사용하는데 저장 공간의 크기를 바이트 단위로 알려준다.
 
-```mysql
+```sql
 SELECT emp_no, JSON_STORAGE_SIZE(doc) FROM employee_docs LIMIT 2;
 
 +--------+------------------------+
@@ -622,7 +621,7 @@ JSON에서 특정값을 추출한다. 첫 번째 인자는 JSON 데이터가 저
 
 `JSON_UNQUOTE()`를 사용하면 따옴표 없이 값만 가져올 수 있다.
 
-```mysql
+```sql
 SELECT emp_no, JSON_EXTRACT(doc, "$.first_name") FROM employee_docs;
 
 +--------+-----------------------------------+
@@ -651,7 +650,7 @@ SELECT emp_no, JSON_UNQUOTE(JSON_EXTRACT(doc, "$.first_name")) FROM employee_doc
 
 MySQL 서버는 JSON 처리 편의성을 위해 아래와 같은 연산자도 제공한다.
 
-```mysql
+```sql
 SELECT emp_no, doc-> "$.first_name" FROM employee_docs LIMIT 2;
 
 +--------+----------------------+
@@ -675,7 +674,7 @@ SELECT emp_no, doc->> "$.first_name" FROM employee_docs LIMIT 2;
 
 첫 번째 인자의 JSON 도큐먼트에서 두 번째 인자의 JSON 오브젝트가 존재하는지 검사한다. 세 번째 인자는 선택적으로 부여 가능하며 JSON 경로를 명시한다.
 
-```mysql
+```sql
 SELECT emp_no FROM employee_docs WHERE JSON_CONTAINS(doc, '{"first_name": "Chirstian"}');
 
 +--------+
@@ -698,7 +697,7 @@ SELECT emp_no FROM employee_docs WHERE JSON_CONTAINS(doc, '"Chirstian"', '$.firs
 
 RDBMS의 값을 이용해 JSON 오브젝트를 생성한다.
 
-```mysql
+```sql
 SELECT 
 JSON_OBJECT("empNo", emp_no,
             "salary", salary,
@@ -722,7 +721,7 @@ FROM salaries LIMIT 3;
 `JSON_OBJECTAGG()`: 첫 번째 인자는 키, 두 번째는 값으로 JSON 도큐먼트를 반환한다.
 `JSON_ARRAYAGG()`: RDBMS 칼럼의 값을 이용해 JSON 배열을 반환한다.
 
-```mysql
+```sql
 SELECT dept_no, JSON_OBJECTAGG(emp_no, from_date) AS agg_manager
 FROM dept_manager
 WHERE dept_no IN ('d001', 'd002', 'd003')
@@ -756,7 +755,7 @@ GROUP BY dept_no;
 
 `JSON_TABLE()` 함수는 항상 내부 임시 테이블을 이용하므로 레코드가 많이 저장되지 않도록 주의하자.
 
-```mysql
+```sql
 SELECT e2.emp_no, e2.first_name, e2.gender
 FROM employee_docs e1,
 JSON_TABLE(doc, "$" COLUMNS (emp_no INT PATH "$.emp_no",
