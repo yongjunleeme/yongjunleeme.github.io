@@ -34,7 +34,7 @@ regenerate: true
 
 * real-mysql-4-architecture
 * [[real-mysql-8-index]]
-* [[real-mysql-11-3-operator-and-built-id-function]]
+* [[real-mysql-11-3-operator-and-built-in-function]]
 * [[real-mysql-11-4-select]]
 
 ## programming-language
