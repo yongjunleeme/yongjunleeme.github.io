@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-02-13 00:07:55 +0900
-updated : 2022-02-13 00:07:55 +0900
+updated : 2022-06-29 23:55:28 +0900
 tags    : 
 toc     : true
 public  : true
@@ -13,193 +13,240 @@ latex   : false
 * TOC
 {:toc}
 
-# CPU Scheduling
-
 ## CPU and I/O bursts in Program Execution
 
-어떤 프로그램이든 아래 두 과정을 반복하며 실행된다.
-1) CPU Burst: CPU만 연속적으로 쓰는 단계
-2) I/O Burst: I/O를 실행하는 단계 wait for I/O
+CPU 관리에 앞서 프로그램 실행과 관련된 몇 가지 기계어 명령에 대해 알아보자. 
 
-CPU Bound job: CPU Burst 비중 높다, 계산 위주 job
-I/O Bound job: I/O Burst 비중 높다
-보통 사람이 쓰는 프로그램(Interactive job)은 중간 단계의 비율이 가장 높다. 
-CPU 스케줄링으로 효율적인 job 배정해야는데 가능하면 사람이 기다리지 않도록 I/O bound job에게 CPU 스케줄링의 우선권을 준다.
+크게 CPU 내에서 수행되는 명령(예: Add), 메모리 접근을 필요로 하는 명령(예: Load, Store), 입출력을 동반하는 명령(예: 키보드 입출력, 디스크 파일 읽기)으로 나눌 수 있다.
 
-## CPU Scheduler & Dispatcher
+CPU 내 수행 명령, 메모리 접근 명령은 사용자 프로그램이 직접 CPU를 가지고 수행하는 비교적 빠른 명령으로 CPU 버스트(burst)라고 한다.
 
-CPU 스케줄러
-- 하드웨어? 소프트웨어? 프로그램?
-	- OS 안에 스케줄링 코드가 있는 것
-- Ready 상태의 프로세스 중 이번에 CPU를 줄 프로세스를 고른다. 
+반면 프로그램 수행 중 I/O를 요청하면 CPU의 제어권이 운영체제 커널로 넘어가며 상대적으로 매우 느린 입출력 장치의 접근이 필요한데 이를 I/O 버스트라고 한다.
 
-Dispatcher
-- CPU 제어권을 CPU Scheduler에 의해 선택된 프로세스에게 넘긴다.
-- 이 과정을  Context switch(문맥 교환)라고 한다.
+CPU 바운드 프로세스는 CPU 버스트가 I/O 버스트보다 길게 나타나는 프로세스로 계산 위주의 프로그램에 해당한다. I/O 바운드 프로세스는 사용자로부터 인터랙션(interaction)
+을 계속 받는 대화형 프로그램에 해당한다.
 
-CPU 반납 스케줄링이 필요한 경우는 프로세스에게 다음과 같은 상태 변화가 있는 경우이다.
-1) Running -> Blocked(예: I/O 요청하는 시스템 콜)
-2) Running -> Ready(예: 할당시간 만료로 timer interrupt)
-3) Blocked -> Ready(예: I/O 완료 후 인터럽트)
-4) Terminate
+CPU 스케쥴링은 이와 같이 CPU 사용 패턴이 상이한 여러 프로그램이 동일한 시스템에서 실행되므로 필요한 것이다.
 
-1, 4번 스케줄링은 **비선점형 nonpreemptive(=강제로 빼앗지 않고 자진 반납)**
-2, 3번은 **선점형 preemprive(=강제로 빼앗음)**
+- 어떤 프로그램이든 아래 두 과정을 반복하며 실행된다.
+- 1) CPU Burst: CPU만 연속적으로 쓰는 단계
+	- CPU Bound job: CPU Burst 비중 높다, 계산 위주 job
+- 2) I/O Burst: I/O를 실행하는 단계 wait for I/O
+	- I/O Bound job: I/O Burst 비중 높다
+- 보통 사람이 쓰는 프로그램(Interactive job)은 중간 단계의 비율이 가장 높다. 
+- 가능하면 사람이 기다리지 않도록 I/O bound job에게 CPU 스케줄링의 우선권을 준다.
 
-## Scheduling Criteria
-CPU 스케줄링 성능척도
+## CPU 스케줄러
 
-시스템입장 성능척도(중국집 사장 입장)
-1) CPU utilization(이용률): 주방장 고용했는데 얼마나 일했는가
-전체 시간 중에서 놀지 않고 CPU가 일한 시간
-2) Throughput(처리량): 단위 시간당 손님을 얼마나 받았는가
-주어진 시간 중에서 몇 개의 일을 처리했는지
+CPU 스케줄러는 준비 상태에 있는 프로세스들 중 어떠한 프로세스에게 CPU를 할당할지 결정하는 운영체제의 코드이다.
 
-프로세스입장 성능척도(고객 입장)
-1) Turnaround time(소요시간, 반환시간): 주문하고 먹고 나가기까지 걸린 시간, 코스 요리 먹으면 기다리고 먹고 하는 시간
-CPU를 쓰러 줄섰던 시간부터 다 사용하고 나간 시간까지
-2) Waiting time(대기 시간): 밥 먹은 시간이 아니라 기다린 시간 요리 기다리고 짜장면 기다리고
-CPU 쓰기 위해 줄서서 순수하게 기다렸던 시간
-3) Response time(응답 시간): 첫 번째 음식이 나오기까지 기다린 시간
-레디큐에 들어가서 처음으로 CPU를 얻기까지 기다렸던 시간
-타임 쉐어링에서 중요한 척도
+다음은 CPU 스케줄링이 필요한 경우들이다.
 
-Waiting Time과 Response Time 차이
-- Waiting Time: preemprive(선점형) 스케줄링은 CPU 썼다가 뺏겨서 줄서서 또 쓰다가 뺏길 수도 있는데 줄서서 기다린 시간만 합친 개념
-- Response Time: 한 번 CPU 쓰기위한 줄을 서서 얻기까지 기다린 시간
+- 1) 실행 상태에 있던 프로세스가 I/O 요청 등에 의해 봉쇄(blocked) 상태로 바뀌는 경우(Running -> Blocked)
+- 2) 실행 상태에 있던 프로세스가 타이머 인터럽트 발생에 의해 준비 상태로 바뀌는 경우(Running -> Ready)
+- 3) I/O 요청으로 봉쇄 상태에 있던 프로세스의 I/O 작업이 완료되어 인터럽트가 발생하고 그 결과 이 프로세스의 상태가 준비 상태로 바뀌는 경우(Blocked -> Ready)
+- 4) CPU에서 실행 상태에 있는 프로세스가 종료되는 경우(Terminate)
 
-## Secheduling Algorithms
+비선점형(nonpreemptive, 강제로 빼앗지 않고 자진 반납) 방식은 CPU를 획득한 프로세스가 스스로 CPU를 반납하기 전까지는 CPU를 빼앗기지 않는 방법을 말한다. 1, 4번이 그 예다.
 
-### FCFS(First-Come First-Served)
-먼저온 순서대로 처리(은행 번호표)
-비선점형 nonpreemptive 스케줄링
-CPU 오래 쓰는 잡이 처음 큐에 들어가는가 간발의 차이로 두 번째로 들어가는가만 따져도 큰 차이가 난다.
-Convoy(호의) effect: 짧은 프로세스인데 긴 프로세스 뒤에서 오래 기다림
-왜 호의? 1차세계대전 때 전쟁물자를 나르는데 뒤에서 기다리면 살 수 있는 가능성이 높아지므로.. 
+선점형(preemptive, 강제로 빼앗음) 방식은 프로세스가 CPU를 계속 사용하기를 원하더라고 강제로 빼앗을 수 있는 스케줄링 방법을 말한다. 2, 3번이 선점형 스케줄링 방식이다.
 
-### SJF(Shortest-Job-First)
-CPU 짧게 쓰는 잡 먼저 처리하므로 기다리는 평균 시간이 가장 짧아짐
-각 프로세스 다음번 CPU burst time을 가지고 스케줄링에 활용
-CPU burst time이 가장 짧은 프로세스를 제일 먼저 스케줄
-SJF is optimal: 주어진 프로세스들에 대해 minimum average waiting time을 보장
-	- 선점형 preemprive 버전에 해당 
+## 디스패처
 
-비선점형 nonpreemptive
-- 일단 CPU를 잡으면 더 짧은 프로세스가 나타나도 이번 CPU burst가 완료될 때까지 CPU를 선점(preemption) 당하지 않음
-- 프로세스 하나가 끝나면 스케줄링
-선점형 preemprive
-- 더 짧은 Burst time 프로세스가 도착하면 CPU를 빼앗김
-- 이를 SRTF(Shortest-Remaining-Time-First)라고 부름
-- 프로세스가 도착하면 언제든 스케줄링 
+CPU 스케줄러가 어떤 프로세스에게 할당할지 결정된 후 실제 CPU를 이양하는 작업이 이어진다.
 
-문제점
-- Stravation 기아 현상: CPU 사용시간 긴 프로세스는 계속 기다려야 한다.
-- CPU 시간을 매번 미리 가늠하기 어렵지만 예측은 가능
+새롭게 선택된 프로세스가 CPU를 할당받아 작업을 수행할 수 있도록 환경설정을 하는 운영체제의 코드를 디스패처라고 부른다.
 
-다음 CPU Burst Time 예측
-- 다음번 CPU burst time 확정이 아닌 추정
-- Exponential averaging
-	- t: 실제 CPU burst 시간 
-	- 타우: CPU 사용 예측 시간
-	- 알파: 가중치
+디스패처는 현재 수행 중이던 프로세스의 문맥(context)을 그 프로세스의 PCB에 저장하고 새롭게 선택된 프로세스의 문맥을 PCB로부터 복원한 후 그 프로세스에게 CPU를 넘기는 과정을 수행한다.
 
-![[OS_5_1.png]]
+새로운 프로세스의 문맥을 복원한 후에는 시스템의 상태를 사용자모드로 전환해 사용자 프로그램에게 CPU의 제어권을 넘긴다.
 
-### Priority Scheduling
-우선순위 높은 순서대로 할당
-우선순위가 높은 순서를 정수가 작은 순서대로 표현
-- Preemptive
-- nonpreemptive
-SJF도 일종의 우선순위 스케줄링(우선순위=CPU burst time)
-문제
-- Starvation: 낮은 우선순위 프로세스는 실행을 못한다.
-솔루션
-- Aging(노화): 우선순위가 낮더라도 우선순위를 조금씩 높여준다.
+그러면 사용자 프로그램은 복원된 문맥 중 프로그램 카운터로부터 현재 수행할 주소를 찾을 수 있다.
 
-### RR(Round Robin)
-현대 컴퓨터의 기반: 할당할 때 시간도 할당하여서 뺏는 구조
-각 프로세스는 동일한 크기의 할당 시간(time quantum)을 가짐(일반적으로 10~100 milliseconds)
-장점: 어떤 프로세스는 응답시간이 길어지지 않는다.
-단점: CPU 시간 길고 프로세스만 있다면 기다리는 시간이 길어지는 단점이 생길 수 있다.
+디스패처가 하나의 프로세스를 정지시키고 다른 프로세스에게 CPU를 전달하기까지 걸리는 시간을 디스패치 지연시간(dispatch latency)라고 하며 이는 대부분 문맥교환 오버헤드에 해당한다.
 
-할당 시간이 지나면 프로세스는 선점(preempted) 당하고 ready queue의 제일 뒤에 가서 다시 줄을 선다.
-n개의 프로세스가 ready queue에 있고 할당 시간이 q time인 경우 각 프로세스는 최대 q time unit 단위로 CPU 시간을 1/n 얻는다.
-	- 어떤 프로세스도 (n-1)q time unit 이상 기다리지 않는다.
-Performance
-- q large -> FCFS(First-Come First-Served)
-- q small -> context switch 오버헤드가 커진다
 
-### Multilevel Queue
+## 스케줄링 성능 평가
+
+스케줄링 성능 평가를 위해 시스템 관점 지표로는 CPU 이용률과 처리량이 있으며 사용자 관점 지표로는 소요시간, 대기시간, 응답시간 등이 있다.
+
+CPU 이용률(CPU utilization)은 전체 시간 중에서 CPU가 일을 한 시간의 비율을 나타낸다.
+
+처리량(throughput)은 주어진 시간 동안 준비 큐에서 기다리고 있는 프로세스 중 몇 개를 끝마쳤는지(CPU 버스트를 완료한 프로세스의 개수)를 나타낸다.
+
+소요시간(turnaround time)은 프로세스가 CPU를 요청한 시점부터 자신이 원하는 만큼 CPU를 다 쓰고 CPU 버스트가 끝날 때까지 걸린 시간, 즉 준비 큐에서 기다린 시간과 실제로 CPU를 사용한 시간의 합을 뜻한다.
+
+이때 해당 CPU 버스트가 완료될 때까지 소요된 시간으로 프로그램이 시작해 종료하는 데 까지 걸린 시간이 아님을 주의해야 한다.
+
+대기시간(waiting time)은 CPU 버스트 기간 중 프로세스가 준비 큐에서 CPU를 얻기 위해 기다린 시간의 합을 뜻한다. 
+
+시분할 시스템에서는 일반적으로 하나의 프로세스가 CPU를 연속으로 사용할 수 있는 시간을 제한한다. 따라서 한 번의 CPU 버스트 중에도 준비 큐에서 기다린 시간이 여러 번 발생할 수 있다.
+
+응답시간(response time)은 프로세스가 준비 큐에 들어온 후 첫 번째 CPU를 획득하기까지 기다린 시간이다. 응답시간은 준비 큐에 들어온 직후부터 첫 번째 CPU를 얻는 데 걸린 시간이지만 대기시간은 준비 큐에 들어온 후부터 이번 CPU 버스트가 끝날 때까지 준비 큐에서 기다린 시간들의 합을 나타낸다.
+
+### 시스템 입장 성능척도(중국집 사장 입장)
+- 1) CPU utilization(이용률)
+	- 주방장 고용했는데 얼마나 일했는가
+	- 전체 시간 중에서 놀지 않고 CPU가 일한 시간
+- 2) Throughput(처리량)
+	- 단위 시간당 손님을 얼마나 받았는가
+	- 주어진 시간 중에서 몇 개의 일을 처리했는지
+
+### 프로세스 입장 성능척도(고객 입장)
+- 1) Turnaround time(소요시간, 반환시간)
+	- CPU를 쓰러 줄섰던 시간부터 다 사용하고 나간 시간까지
+	- 주문하고 먹고 나가기까지 걸린 시간, 코스 요리 먹으면 기다리고 먹고 하는 시간을 더한다.
+2) Waiting time(대기 시간)
+	- CPU 쓰기 위해 줄서서 순수하게 기다렸던 시간
+	- 밥 먹은 시간이 아니라 기다린 시간(요리 기다리고 짜장면 기다리고)
+- 3) Response time(응답 시간)
+	- 레디큐에 들어가서 처음으로 CPU를 얻기까지 기다렸던 시간
+	- 타임 쉐어링에서 중요한 척도
+	- 첫 번째 음식이 나오기까지 기다린 시간
+
+- Waiting Time과 Response Time 차이
+	- Waiting Time: preemprive(선점형) 스케줄링은 CPU 썼다가 뺏겨서 줄서서 또 쓰다가 뺏길 수도 있는데 줄서서 기다린 시간만 합친 개념
+	- Response Time: 한 번 CPU 쓰기위한 줄을 서서 얻기까지 기다린 시간
+
+## 스케줄링 알고리즘
+
+### 선입선출 FCFS(First-Come First-Served)
+- 비선점형 nonpreemptive 스케줄링(먼저온 순서대로 처리, 예: 은행 번호표)
+- CPU 오래 쓰는 잡이 처음 큐에 들어가는가 간발의 차이로 두 번째로 들어가는가만 따져도 큰 차이가 난다.
+- Convoy(호의) effect: 짧은 프로세스인데 긴 프로세스 뒤에서 오래 기다림
+	- 왜 호의? 1차세계대전에서 유래. 전쟁물자를 나르는데 뒤에서 기다리면 살 수 있는 가능성이 높아지므로.
+
+### 최단작업 우선 스케줄링 SJF(Shortest-Job-First)
+
+평균 대기시간을 가장 짧게 하는 최적 알고리즘으로 CPU 버스트가 가장 짧은 프로세스에게 제일 먼저 CPU를 할당하는 방식이다.
+
+SJF 알고리즘은 보통 비선점형, 선점형 두 가지로 구현 가능하다.
+
+비선점형 방식이란 일단 CPU를 획득하면 그 프로세스가 CPU를 자진 반납하기 전까지는 CPU를 빼앗지 않는 방식이다.
+ 
+선점형 방식이란 준비 큐에서 CPU 버스트가 가장 짧은 프로세스에게 CPU를 할당했다 하더라도 CPU 버스트가 더 짧은 프로세스가 도착할 경우 CPU를 빼앗아 더 짧은 프로세스에게 부여하는 방식을 말한다. 이를 SRTF(Shortest-Remaining-Time-First)라고 부른다.
+
+SJF 스케줄링 구현의 현실적으로 어려운 점은 프로세스의 CPU 버스트 시간을 미리 알 수 없다는 점이다. 그래서 예측을 통해 예측치가 가장 짧은 프로세스에게 CPU를 할당한다.
+
+SJF 알고리즘이 평균 대기시간을 최소화하지만 평균을 줄이는 방식이 항상 좋다고 할 수 없다. CPU 버스트가 긴 프로세스는 준비 큐에서 줄 서서 무한정 기다려야 하는 문제가 발생할 수 있기 때문이다. 이러한 현상을  기아 현상(Stravation)이라고 한다.
+
+### 우선순위 스케줄링 Priority Scheduling
+
+우선순위는 우선순위값(priority number)이 작을수록 우선순위가 높은 것으로 가정한다. 
+
+우선순위를 결정하는 방식은 여러 가지가 가능하다(예 : CPU 버스트 시간으 우선순위값으로 정의하면 우선순위 스케줄링은 SJF 알고리즘과 동일한 의미)
+
+우선순위 스케줄링도 비선점형, 선점형 방식으로 각각 구현할 수 있다. 현재 CPU에서 수행 중인 프로세스보다 우선순위가 높은 프로세스가 도착하여 CPU를 선점해서 새롭게 도착한 프로세스에게 할당할 경우 선점형 방식이 된다.
+
+이와 달리 일단 CPU를 얻었으면 비록 우선순위가 더 높은 프로세스가 도착하더라도 CPU를 자진 반납하기 전까지 선점하지 않는다면 이는 비선점형 방식이 된다.
+
+우선순위 스케줄링 방식에서는 기아현상이 발생할 수 있다. 우선순위가 높은 프로세스만 계속 도착하면 순위가 낮은 프로세스가 CPU를 얻지 못하고 계속 기다려야 할 수도 있는 상황이다.
+
+이를 해결하기 위해 노화(aging) 기법을 사용한다. 기다리는 시간이 길어지면 우선순위를 조금씩 높여서 언젠가는 CPU를 할당받을 수 있게 하는 방법인데 일상생활의 경로사상이 컴퓨터에 반영된 형태라고 볼 수 있다.
+
+### 라운드 로빈 스케줄링 RR(Round Robin)
+라운드 로빈 스케줄링은 시분할 시스템을 화룡한 새로운 의미의 스케줄링 방식이다.
+
+각 프로세스가 CPU를 연속적으로 사용할 수 시간이 제한되고 각 프로세스는 동일한 크기의 할당 시간(time quantum)을 가진다(일반적으로 10~100 milliseconds).
+
+라운드 로빈 스케줄링은 여러 종류의 이질적인 프로세스가 같이 실행되는 환경에 효과적이다.
+
+예를 들어 n개의 프로세스가 준비 큐에 있고 할당시간이 q라고 할 때 모든 프로세스는 `(n - 1)q` 시간 이내에 적어도 한 번은 CPU를 할당받을 수 있게 된다.
+
+이는 n개의 프로세스 중 자기 자신을 제외한 프로세스 수가 `(n - 1)`개이고 이들이 한 번에 최대 q시간만큼 CPU를 사용할 수 있기 때문이다.
+
+이와 같은 방식은 대화형 프로세스의 빠른 응답시간을 보장할 수 있다는 장점이 있다. 또한 CPU를 많이 쓰는 프로세스는 대기시간이 그에 비례해서 길어지고 반대로 CPU를 적게 쓰는 프로세스는 대기시간도 짧아지므로 CPU 버스트가 긴 프로세스에게 불이익이 가는 것도 아니다.
+
+라운드 로빈 스케줄링에서 할당시간을 너무  짧게 설정하면 문맥교환의 오버헤드가 증가해 전체 시스템 성능을 저하시킬 수 있다.
+
+## 멀티레벨 큐 Multilevel Queue
+
+멀티레벨 큐(multi-level queue)란 준비 큐를 여러 개로 분할해 관리하는 스케줄링 기법을 말한다.
+
+즉 프로세스들이 CPU를 기다리기 위해 한 줄이 아닌 여러 줄로 서는 것이다.
+
+일반적으로 멀티레벨 큐에서 준비 큐는 대화형 작업을 담기 위한 전위 큐(foreground queue)와 계산 위주의 작업을 담기 위한 후위 큐(background queue)로 분할하여 운영된다.
+
+전위 큐에서는 응답시간을 짧게 하기 위해 라운드 로빈 스케줄링을 사용하는 반면, 계산 위주의 작업을 위한 후위 큐에서는 응답시간이 큰 의미를 가지지 않기 때문에 FCFS 스케줄링 기법을 사용해 문맥교환 오베헤드를 줄이도록 한다.
+
 Ready queue를 여러 개로 분할
-2개로 나눈다면
+
 - foreground(interactive)
 - background(batch - no human interaction)
+
 각 큐는 독립적인 스케줄링 알고리즘을 가짐
+
 - foreground - RR
 - background - FCFS
+
 큐에 대한 스케줄링이 필요
+
 - 문제: Fixed priority scheduling
 	- serve all from foreground then from background
 	- starvation 가능성
 - 해결: Time slice
 	- 각 큐에 CPU time을 적절한 비율로 할당
-	- 예) 80% RR 20% FCFS
+	- 예) 80% RR, 20% FCFS
 
-### Multilevel Feedback Queue
+## 멀티레벨 피드백 큐 Multilevel Feedback Queue
 
 프로세스가 다른 큐로 이동 가능
-에이징(aging)을 이와 같은 방식으로 구현할 수 있다
-Multilevel-feedback-queue scheduler를 정의하는 파라미터들
-- Queue의 수
-- 각 큐의 scheduling algorithm
-- Process를 상위 큐로 보내는 기준
-- Process를 하위 큐로 내쫓는 기준
-- 프로세스가 CPU 서비스를 받으려 할 때 들어갈 큐를 결정하는 기준
 
-## Multiple Processor Scheduling
+- 에이징(aging)을 이와 같은 방식으로 구현할 수 있다
+- Multilevel-feedback-queue scheduler를 정의하는 파라미터들
+	- Queue의 수
+	- 각 큐의 scheduling algorithm
+	- Process를 상위 큐로 보내는 기준
+	- Process를 하위 큐로 내쫓는 기준
+	- 프로세스가 CPU 서비스를 받으려 할 때 들어갈 큐를 결정하는 기준
+
+## 다중처리기 스케줄링 Multiple Processor Scheduling
 
 Homogeneous processor인 경우
-- queue에 한 줄로 세워서 각 프로세스가 알아서 꺼나가게 할 수 있다
+
+- queue에 한 줄로 세워서 각 프로세스가 알아서 꺼내가게 할 수 있다
 - 반드시 특정 프로세서에서 수행되어야 하는 프로세스가 있는 경우 문제가 복잡해짐
 	- 예: 미용실에서 내가 원하는 미용사에게 헤어컷해야만 함
+
 Load sharing
+
 - 일부 프로세서에 잡이 몰리지 않도록 부하를 적절히 공유하는 메커니즘 필요
 - 별개의 큐를 두는 방법 vs 공동 큐를 사용하는 방법
-Symmetric(대칭의) Multiprocessing(SMP)
-- (모든 CPU 대등하게) 각 프로세서가 각자 알아서 스케줄링 결정
-Asymmetric(비대칭의) Multiprocessing
-- 하나의 프로세서가 시스템 접근과 공유를 책임지고 나머지 프로세서는 거기에 따름
 
-## Real-Time Scheduling
+- Symmetric(대칭의) Multiprocessing(SMP)
+	- (모든 CPU 대등하게) 각 프로세서가 각자 알아서 스케줄링 결정
+- Asymmetric(비대칭의) Multiprocessing
+	- 하나의 프로세서가 시스템 접근과 공유를 책임지고 나머지 프로세서는 거기에 따름
 
-Hard real-time systems
-- 정해진 시간 안에 반드시 끝내도록 스케줄링
-Soft real-time computing
-- Soft real-time task는 데드라인을 반드시 지키기보다 일반 프로세스에 비해 높은 Priority를 갖도록 해야 함
+## 실시간 스케줄링 Real-Time Scheduling
 
-## Thread Scheduling
+- Hard real-time systems
+	- 정해진 시간 안에 반드시 끝내도록 스케줄링
+- Soft real-time computing
+	- Soft real-time task는 데드라인을 반드시 지키기보다 일반 프로세스에 비해 높은 Priority를 갖도록 해야 함
 
-Local Scheduling
-- User 레벨 스레드(OS는 스레드의 존재를 모르고 프로세스만 안다)의 경우 사용자 수준의 스레드 라이브러리에 의해 어떤 스레드를 스케줄할 지 결정
+## 스레드 스케줄링 Thread Scheduling
 
-Global Scheduling
-- 커널 레벨 스레드의 경우 일반 프로세스와 마찬가지로 커널의 단기 스케줄러가 어떤 스레드를 스케줄할 지 결정
+- Local Scheduling
+	- User 레벨 스레드(OS는 스레드의 존재를 모르고 프로세스만 안다)의 경우 사용자 수준의 스레드 라이브러리에 의해 어떤 스레드를 스케줄할 지 결정
+- Global Scheduling
+	- 커널 레벨 스레드의 경우 일반 프로세스와 마찬가지로 커널의 단기 스케줄러가 어떤 스레드를 스케줄할 지 결정
 
+## 알고리즘 평가 Algorithm Evaluation
 
-## Algorithm Evaluation
+- Queueing models
+	- 확률 분포로 주어지는 arrival rate와 service rate 등을 통해 각종 Performance index 값을 계산
+	- 이론적인 방법
 
-Queueing models
-- 확률 분포로 주어지는 arrival rate와 service rate 등을 통해 각종 Performance index 값을 계산
-- 이론적인 방법
+- Implementation(구현) & Measurement(성능 측정)
+	- 실제 시스템에 알고리즘을 구현하여 실제 직업(workload)에 대해서 성능을 측정 비료
+	- 리눅스 커널을 코드 바꿔서 측정하기는 쉽지 않을 수도 
 
-Implementation(구현) & Measurement(성능 측정)
-- 실제 시스템에 알고리즘을 구현하여 실제 직업(workload)에 대해서 성능을 측정 비료
-- 리눅스 커널을 코드 바꿔서 측정하기는 쉽지 않을 수도 
+- Simulation(모의 실험)
+	- 알고리즘을 모의 프로그램을 작성 후 Trace를 입력으로 하여 결과 비교
 
-Simulation(모의 실험)
-- 알고리즘을 모의 프로그램을 작성 후 Trace를 입력으로 하여 결과 비교
+## Sources
 
-## Source
-
-- [이화여대 반효경 교수님 운영체제 강의](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
+- [운영체제 이화여대 반효경 교수님](http://www.kocw.net/home/search/kemView.do?kemId=1046323)
+- [운영체제와 정보기술의 원리](http://www.yes24.com/Product/Goods/90124877)
 
