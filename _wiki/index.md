@@ -6,8 +6,6 @@ public  : true
 regenerate: true
 ---
 
-## diary
-
 ## cs
 
 ### operating system
