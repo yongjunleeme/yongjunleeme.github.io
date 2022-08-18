@@ -15,6 +15,8 @@ regenerate: true
 * [[OS-3-Process]]
 * [[OS-4-Process-Management]]
 * [[OS-5-CPU-Scheduling]]
+* [[OS-6-Process-Synchronization]]
+* [[OS-7-Deadlocks]]
 
 ### network
 
