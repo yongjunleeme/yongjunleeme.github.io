@@ -3,7 +3,7 @@ layout  : wiki
 title   : 
 summary : 
 date    : 2022-10-03 14:30:15 +0900
-updated : 2022-10-03 14:30:44 +0900
+updated : 2022-10-03 14:33:42 +0900
 tags    : 
 toc     : true
 public  : true
@@ -101,10 +101,8 @@ Merge made by the 'ort' strategy.
 
 # Pro Git에서는 Merge made by the 'recursive' strategy로 메시지가 나옴
 ```
+
 현재 브랜치가 가리키는 커밋이 Merge할 브랜치의 조상이 아니므로 Fast-forward가 아니라 3-way Merge를 한다. 이는 공통 조상 하나와 각 브랜치가 가리키는 두 개의 커밋을 사용한다. 
-
-
-<사진>
 
 Merge하는 두 브랜치에서 같은 파일을 수정하면 충돌이 난다.
 
@@ -197,7 +195,6 @@ $ git pull --rebase
 ```
 
 로컬 브랜치에서 작업할 때는 히스토리를 정리하기 위해 Rebase할 수도 있지만, 리모트 등 밖으로 Push한 커밋은 절대 Rebase하지 말아야 한다.
-
 
 ## Source
 
