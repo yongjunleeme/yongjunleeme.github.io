@@ -69,6 +69,10 @@ regenerate: true
 * [[concurrency-asyncio]]
 * [[nginx-uwsgi-django-docker]]
 
+#### openstack
+
+* [[debug-swift-file-transfer-error]]
+
 ## tool
 
 ### git
