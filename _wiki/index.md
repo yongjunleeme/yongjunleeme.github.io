@@ -18,18 +18,6 @@ regenerate: true
 * [[OS-6-Process-Synchronization]]
 * [[OS-7-Deadlocks]]
 
-### network
-
-* [[NW-1-Introduction]]
-* [[NW-2-1-Application-layer]]
-* NW-2-2-Application-layer
-
-### computer architecture
-
-* [[CA-1-Introduction]]
-* CA-2-Virtualization
-* CA-3-Performance
-
 ### database
 
 * real-mysql-4-architecture
@@ -48,9 +36,6 @@ regenerate: true
 * [[effective-java-8-methods]]
 * [[java-puzzlers-2-expression]]
 * [[java-puzzlers-3-character]]
-* java-jungsuk-2-variable
-* java-jungsuk-3-operator
-* java-jungsuk-5-array
 
 ### python
 
@@ -69,12 +54,16 @@ regenerate: true
 * [[concurrency-asyncio]]
 * [[nginx-uwsgi-django-docker]]
 
-#### openstack
-
-* [[debug-swift-file-transfer-error]]
-
 ## tool
 
+### kubernetes
+
+* [[컨테이너 인프라 환경 구축을 위한 쿠버네티스 도커 1]]
+
+### openstack
+
+* [[debug-swift-file-transfer-error]]
+ 
 ### git
 
 * [[git-branch]]
