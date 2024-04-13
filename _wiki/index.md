@@ -39,20 +39,14 @@ regenerate: true
 
 ### python
 
-* [[python-django-useful-link]]
 * [[effective-python-1]]
 * [[effective-python-2]]
 * [[effective-python-3]]
 * [[effective-python-4]]
-* [[algorithm]]
-* [[class-advanced]]
-* [[data-structure]] 
-* [[first-data-structure-algorithm]]
-* [[concurrency]]
-* [[concurrency-parallelism]]
-* [[concurrency-threading]]
-* [[concurrency-asyncio]]
-* [[nginx-uwsgi-django-docker]]
+
+### cpython
+
+* [[CPython 메모리관리 - 1 참조카운팅]]
 
 ## tool
 
@@ -65,10 +59,6 @@ regenerate: true
 ### docker
 
 * [[레지스트리 인증에 키클록 사용하기]]
-
-### openstack
-
-* [[debug-swift-file-transfer-error]]
  
 ### git
 
@@ -82,15 +72,13 @@ regenerate: true
 * [[eks-log]]
 * [[eks-operation]] 
 
-### vim
-
-* [[practical-vim-1]]
 
 ## study
 
+* [[practical-vim-1]]
 * [[data-engineering-background]]
 * [[ad-fraud]]
-* [[zeppelin-example]]
 * [[redis-operation]]
 * [[redis-py]]
-* [[한글테스트]]
+* [[debug-swift-file-transfer-error]]
+
