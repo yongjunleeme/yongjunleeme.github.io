@@ -1,14 +1,13 @@
 # Site settings
-title: BaeYongjun
+title: yongjunleeme
 url: "https://yongjunleeme.github.io"
 baseurl: ""
-description: >
-   인생풍요는 배움과 나눔에 
+description:
 
 # My information
 email: chesidyong@gmail.com
-author: BaeYongjun
-profile: 인생풍요는 배움과 나눔에
+author: yongjunleeme
+profile:
 twitter_username: 
 github_username: yongjunleeme
 comment-support: utterances
